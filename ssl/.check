@@ -1,4 +1,4 @@
 #!/bin/bash
 
 openssl x509 -in melify.local+5.pem -text -noout
-openssl x509 -in melify.local+5-key.pem -text -noout
+openssl x509 -in melify.com+5.pem -text -noout
