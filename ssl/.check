@@ -1,0 +1,3 @@
+#!/bin/bash
+
+openssl x509 -in emphora+11.pem -text -noout

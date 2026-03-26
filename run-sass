@@ -1,0 +1,3 @@
+#!/bin/zsh
+
+/usr/local/bin/node-sass --watch ./ --output ./ --sourcemap true
