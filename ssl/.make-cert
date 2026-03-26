@@ -1,9 +1,9 @@
 #!/bin/bash
 
 mkcert \
-melify.local www.melify.com \
-dropbox.local dropbox.melify.com \
-wc.local wc.melify.com \
-bookmarker.local bookmarker.melify.com \
-emphora.local emphora.melify.com \
-twitter.local twitter.melify.com
+	melify.local	 www.melify.com \
+	dropbox.local	 dropbox.melify.com \
+	wc.local	 wc.melify.com \
+	bookmarker.local bookmarker.melify.com \
+	emphora.local	 emphora.melify.com \
+	twitter.local	 twitter.melify.com
