@@ -1,0 +1,5 @@
+#!/bin/bash
+
+nodemon ./emphora.local/server.js > /tmp/emphora.log
+nodemon ./twitter.local/server.js > /tmp/twitter.log
+nodemon ./dropbox.local/server.js > /tmp/dropbox.log
