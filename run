@@ -3,3 +3,5 @@
 nodemon ./emphora.local/server.js > /tmp/emphora.log>&1 &
 nodemon ./twitter.local/server.js > /tmp/twitter.log>&1 &
 nodemon ./dropbox.local/server.js > /tmp/dropbox.log>&1 &
+
+/usr/local/bin/node-sass --watch ./ --output ./ --sourcemap true  > /tmp/sass.log>&1 &
