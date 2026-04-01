@@ -1,0 +1,216 @@
+$color_1: #333;
+$color_2: #2c3e50;
+$color_3: #34495e;
+$color_4: #004D40;
+$color_5: #6D4C41;
+$color_6: white;
+$color_7: #7f8c8d;
+$font-family_1: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+/* Reset and base styles */
+/* Container layout */
+/* Left sidebar */
+/* Typography */
+/* Navigation */
+/* Right content area */
+/* Sections */
+/* Portfolio */
+/* Buttons */
+/* Footer */
+/* Responsive design */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: $font-family_1;
+}
+body {
+    background: #FFF;
+    color: $color_1;
+    line-height: 1.6;
+}
+.container {
+    display: flex;
+    min-height: 100vh;
+    min-width: 100%;
+}
+.content {
+    min-width: 100%;
+    max-width: 800px;
+}
+#lhs {
+    width: 300px;
+    background: #f8f9fa;
+    padding: 30px;
+    position: fixed;
+    height: 100vh;
+    overflow-y: auto;
+}
+#lhs-container {
+    text-align: center;
+}
+.profile-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 20px 0;
+    border: 3px solid #ddd;
+}
+h1 {
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: $color_2;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+h2 {
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: $color_3;
+    font-size: 1.2rem;
+    font-weight: 400;
+    margin-bottom: 2rem;
+}
+h3 {
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: $color_2;
+    font-size: 1.8rem;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+h4 {
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: $color_4;
+    border-bottom: 1px #cecece dashed;
+    padding-bottom: 10px;
+    margin-bottom: 1rem;
+}
+h5 {
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: $color_5;
+}
+.nav-menu {
+    list-style: none;
+    margin-top: 2rem;
+    li {
+	margin-bottom: 1rem;
+    }
+    a {
+	color: $color_3;
+	text-decoration: none;
+	font-weight: 500;
+	padding: 0.5rem 1rem;
+	border-radius: 5px;
+	transition: all 0.3s ease;
+	display: block;
+	&:hover {
+	    background: #3498db;
+	    color: $color_6;
+	}
+    }
+}
+#rhs {
+    margin-left: 300px;
+    padding: 50px;
+    flex: 1;
+    width: 100%;
+}
+section {
+    margin-bottom: 3rem;
+    section {
+	margin-top: 2rem;
+	margin-left: 2rem;
+	padding-left: 1rem;
+	border-left: 3px solid #ecf0f1;
+    }
+    p {
+	margin-bottom: 1rem;
+	line-height: 1.8;
+    }
+    small {
+	font-size: 0.9rem;
+	font-style: italic;
+	color: $color_5;
+	display: block;
+	margin-bottom: 0.5rem;
+    }
+}
+#about {
+    p {
+	font-size: 1.1rem;
+	color: $color_2;
+    }
+}
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+.portfolio-item {
+    background: #f8f9fa;
+    padding: 2rem;
+    border-radius: 8px;
+    border-left: 4px solid #3498db;
+    transition: transform 0.3s ease;
+    &:hover {
+	transform: translateY(-5px);
+	box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+}
+.tech-icon {
+    width: 40px;
+    height: 40px;
+    margin-top: 1rem;
+}
+.btn {
+    display: inline-block;
+    background: #3498db;
+    color: $color_6;
+    padding: 0.8rem 2rem;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 500;
+    transition: background 0.3s ease;
+    margin-top: 1rem;
+    &:hover {
+	background: #2980b9;
+    }
+}
+.resources {
+    margin-top: 1.5rem;
+}
+footer {
+    margin-left: 300px;
+    padding: 2rem 50px;
+    border-top: 1px solid #ecf0f1;
+    text-align: center;
+    color: $color_7;
+}
+@media (max-width: 768px) {
+    .container {
+	flex-direction: column;
+    }
+    #lhs {
+	position: relative;
+	width: 100%;
+	height: auto;
+	padding: 2rem;
+    }
+    #rhs {
+	margin-left: 0;
+	padding: 2rem;
+    }
+    footer {
+	margin-left: 0;
+	padding: 2rem;
+    }
+    .portfolio-grid {
+	grid-template-columns: 1fr;
+    }
+}
