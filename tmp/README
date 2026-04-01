@@ -1,6 +1,7 @@
 RUN THIS COMMAND TO CREATE CERTIFICATES:
 
 sudo certbot certonly --apache \
+  -d mel.meify.com \
   -d melify.com \
   -d www.melify.com \
   -d twitter.melify.com \
@@ -8,8 +9,6 @@ sudo certbot certonly --apache \
   -d dropbox.melify.com \
   -d wc.melify.com \
   -d bookmarker.melify.com
-
-
 
 REPLACE MELIFY.SSL.CONF FILE WITH THESE:
 
