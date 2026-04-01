@@ -10,9 +10,9 @@
 fe80::1%lo0	localhost
 
 127.0.0.1 wc.local
+127.0.0.1 mel.local
 127.0.0.1 melify.local
 127.0.0.1 twitter.local
 127.0.0.1 dropbox.local
 127.0.0.1 emphora.local
 127.0.0.1 bookmarker.local
-127.0.0.1 mel.local
