@@ -1,7 +1,7 @@
 RUN THIS COMMAND TO CREATE CERTIFICATES:
 
 sudo certbot certonly --apache \
-  -d mel.meify.com \
+  -d mh.meify.com \
   -d melify.com \
   -d www.melify.com \
   -d twitter.melify.com \
