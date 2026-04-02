@@ -1,0 +1,1 @@
+PORT=8000 /usr/local/bin/node /usr/local/bin/serve
