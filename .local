@@ -2,6 +2,7 @@
 
 #STOP ALL SERVERS
 kill -9 $(pgrep -f nodemon)
+kill -9 $(pgrep -f "node .*local/server.js")
 
 #STOP node-sass
 ps aux | grep node-sass | grep -v grep | awk '{print $2}' | xargs kill
