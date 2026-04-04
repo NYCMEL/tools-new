@@ -1,16 +1,22 @@
 #!/usr/bin/python3
 
+import sys
 from docx import Document
 import re
 
-# Ask the user for the resume file name
-file_name = input("Enter the Word resume file name (with .docx): ").strip()
+# Check for command-line argument
+if len(sys.argv) != 2:
+    print("Usage: ./go.py <resume-file.docx>")
+    sys.exit(1)
 
+file_name = sys.argv[1]
+
+# Try to open the docx file
 try:
     doc = Document(file_name)
 except Exception as e:
     print(f"Error opening file '{file_name}': {e}")
-    exit(1)
+    sys.exit(1)
 
 skills = []
 collect = False  # Flag to know when to collect skills
