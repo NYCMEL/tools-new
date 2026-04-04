@@ -3,9 +3,16 @@
 from docx import Document
 import re
 
-doc = Document('_Mel.M.Heravi.docx')
-skills = []
+# Ask the user for the resume file name
+file_name = input("Enter the Word resume file name (with .docx): ").strip()
 
+try:
+    doc = Document(file_name)
+except Exception as e:
+    print(f"Error opening file '{file_name}': {e}")
+    exit(1)
+
+skills = []
 collect = False  # Flag to know when to collect skills
 
 for para in doc.paragraphs:
@@ -28,6 +35,9 @@ for para in doc.paragraphs:
 # Clean up whitespace
 skills = [s.strip() for s in skills if s.strip() != ""]
 
-print("Extracted skills:")
-for skill in skills:
-    print("-", skill)
+if skills:
+    print("\nExtracted skills:")
+    for skill in skills:
+        print("-", skill)
+else:
+    print("No skills found in the resume.")
