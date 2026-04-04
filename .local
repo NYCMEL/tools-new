@@ -7,10 +7,11 @@ kill -9 $(pgrep -f "node .*local/server.js")
 #STOP node-sass
 ps aux | grep node-sass | grep -v grep | awk '{print $2}' | xargs kill
 
+#START SASS COMPILER
+/usr/local/bin/node-sass --watch ./ --output ./ --sourcemap true  > /tmp/sass.log>&1 &
+
 #RUN THE SERVERS
 nodemon ./emphora.local/server.js > /tmp/emphora.log>&1 &
 nodemon ./twitter.local/server.js > /tmp/twitter.log>&1 &
 nodemon ./dropbox.local/server.js > /tmp/dropbox.log>&1 &
 
-#START SASS COMPILER
-/usr/local/bin/node-sass --watch ./ --output ./ --sourcemap true  > /tmp/sass.log>&1 &
