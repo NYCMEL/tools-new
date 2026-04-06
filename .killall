@@ -2,6 +2,6 @@
 
 sudo killall node
 
-#STOP node-sass
+#node-sass
 ps aux | grep node-sass | grep -v grep | awk '{print $2}' | xargs kill
 
