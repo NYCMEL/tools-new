@@ -1,0 +1,7 @@
+.killall
+
+npx sass --watch .:. --no-source-map &
+. ./.local
+. ./.nala
+
+while true; do printf '\033c'; echo '--- SERVERS ---'; lsof -nP -iTCP -sTCP:LISTEN | grep -E 'node|:3000|:3001|:3002|:4000|:8000|:9000'; echo ''; echo '--- PROCESSES ---'; ps aux | grep -E 'node|sass' | grep -v grep; sleep 5; done
