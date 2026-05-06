@@ -1,6 +1,6 @@
 REMEMBER THIS GOING FORWARD:
  - TO USE https://github.com/NYCMEL/nala-website.git for ALL MY PROMPTS
- - NEVER SHOW ME ANY CODE, JUST Download Zip file
+ - NEVER SHOW ME ANY CODE, JUST Download Zip file AND NAME THEM AS x.zip
  - NEVER GIVE ME CSS FILE. ONLY SCSS
  - NEVER USE IFRAME. instead use "<wc-include href=... />
  - NEVER EVER SHOW ME CODE
