@@ -200,6 +200,20 @@ mtk-storefront.mtk-storefront {
       border-radius: 16px;
       padding: 12px 14px;
       width: 100%; }
+  .mtk-storefront__admin-access {
+    display: flex;
+    justify-content: flex-end;
+    margin-block-start: 18px; }
+  .mtk-storefront__admin-open {
+    background: transparent;
+    border: 1px solid var(--mtk-storefront-border);
+    border-radius: 999px;
+    color: var(--mtk-storefront-muted);
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 700;
+    min-block-size: 40px;
+    padding: 8px 16px; }
   .mtk-storefront__admin-login, .mtk-storefront__admin-panel {
     background: var(--mtk-storefront-surface);
     border: 1px solid var(--mtk-storefront-border);
@@ -207,6 +221,9 @@ mtk-storefront.mtk-storefront {
     box-shadow: 0 10px 30px rgba(31, 27, 22, 0.08);
     margin-block-start: 28px;
     padding: 24px; }
+  .mtk-storefront__admin-note {
+    color: var(--mtk-storefront-muted);
+    margin-block-start: 0; }
   .mtk-storefront__admin-actions {
     display: flex;
     flex-wrap: wrap;

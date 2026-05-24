@@ -27,6 +27,8 @@ class MtkStorefront {
     this.detailMediaEl = this.root.querySelector(".mtk-storefront__detail-media");
     this.detailContentEl = this.root.querySelector(".mtk-storefront__detail-content");
     this.closeBtn = this.root.querySelector(".mtk-storefront__close");
+    this.adminOpen = this.root.querySelector(".mtk-storefront__admin-open");
+    this.adminLogin = this.root.querySelector(".mtk-storefront__admin-login");
     this.loginForm = this.root.querySelector(".mtk-storefront__login-form");
     this.loginMessage = this.root.querySelector(".mtk-storefront__login-message");
     this.adminPanel = this.root.querySelector(".mtk-storefront__admin-panel");
@@ -63,6 +65,7 @@ class MtkStorefront {
     });
 
     this.detailEl.addEventListener("submit", (event) => this.handleDetailSubmit(event));
+    this.adminOpen.addEventListener("click", () => this.openAdminLogin());
     this.loginForm.addEventListener("submit", (event) => this.handleLogin(event));
     this.adminForm.addEventListener("submit", (event) => this.handleAdminSave(event));
     this.adminReset.addEventListener("click", () => this.adminForm.reset());
@@ -189,11 +192,20 @@ class MtkStorefront {
     }
   }
 
+  openAdminLogin() {
+    this.adminLogin.hidden = false;
+    this.adminOpen.hidden = true;
+    const username = this.loginForm.querySelector("[name='username']");
+    if (username) username.focus();
+    this.publish("admin-login-open", {});
+  }
+
   handleLogin(event) {
     event.preventDefault();
     const data = Object.fromEntries(new FormData(this.loginForm).entries());
     if (data.username === "admin" && data.password === "test") {
       this.isAdmin = true;
+      this.adminLogin.hidden = true;
       this.adminPanel.hidden = false;
       this.loginMessage.textContent = "Logged in.";
       this.publish("admin-login", { username: data.username });
