@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 650" role="img" aria-label="Autumn River Light abstract painting">
+<rect width="900" height="650" fill="hsl(37, 45%, 48%)"/>
+<rect x="29" y="61" width="157" height="103" rx="20" fill="hsl(37, 45%, 48%)" opacity="0.18"/>
+<rect x="112" y="108" width="194" height="126" rx="36" fill="hsl(86, 57%, 56%)" opacity="0.27"/>
+<rect x="195" y="155" width="231" height="149" rx="52" fill="hsl(135, 69%, 64%)" opacity="0.36"/>
+<rect x="278" y="202" width="268" height="172" rx="68" fill="hsl(184, 45%, 72%)" opacity="0.45"/>
+<rect x="361" y="249" width="305" height="195" rx="20" fill="hsl(233, 57%, 48%)" opacity="0.54"/>
+<rect x="444" y="296" width="342" height="218" rx="36" fill="hsl(282, 69%, 56%)" opacity="0.18"/>
+<rect x="527" y="343" width="379" height="241" rx="52" fill="hsl(331, 45%, 64%)" opacity="0.27"/>
+<rect x="610" y="390" width="156" height="264" rx="68" fill="hsl(20, 57%, 72%)" opacity="0.36"/>
+<rect x="693" y="437" width="193" height="287" rx="20" fill="hsl(37, 45%, 48%)" opacity="0.45"/>
+<rect x="776" y="484" width="230" height="90" rx="36" fill="hsl(86, 57%, 56%)" opacity="0.54"/>
+<rect x="859" y="531" width="267" height="113" rx="52" fill="hsl(135, 69%, 64%)" opacity="0.18"/>
+<rect x="42" y="578" width="304" height="136" rx="68" fill="hsl(184, 45%, 72%)" opacity="0.27"/>
+<rect x="125" y="625" width="341" height="159" rx="20" fill="hsl(233, 57%, 48%)" opacity="0.36"/>
+<rect x="208" y="22" width="378" height="182" rx="36" fill="hsl(282, 69%, 56%)" opacity="0.45"/>
+<polyline points="0,305 100,330 200,301 300,235 400,172 500,150 600,183 700,250 800,311 900,329" fill="none" stroke="hsl(184, 45%, 72%)" stroke-width="12" opacity="0.48" stroke-linecap="round"/>
+<polyline points="0,372 100,343 200,277 300,214 400,192 500,225 600,292 700,353 800,371 900,335" fill="none" stroke="hsl(233, 57%, 48%)" stroke-width="16" opacity="0.48" stroke-linecap="round"/>
+<polyline points="0,385 100,319 200,256 300,234 400,267 500,334 600,395 700,413 800,377 900,308" fill="none" stroke="hsl(282, 69%, 56%)" stroke-width="20" opacity="0.48" stroke-linecap="round"/>
+<polyline points="0,361 100,298 200,276 300,309 400,376 500,437 600,455 700,419 800,350 900,291" fill="none" stroke="hsl(331, 45%, 64%)" stroke-width="24" opacity="0.48" stroke-linecap="round"/>
+<polyline points="0,340 100,318 200,351 300,418 400,479 500,497 600,461 700,392 800,333 900,320" fill="none" stroke="hsl(20, 57%, 72%)" stroke-width="28" opacity="0.48" stroke-linecap="round"/>
+<rect x="0" y="0" width="900" height="650" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="16"/>
+</svg>

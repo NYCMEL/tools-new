@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 650" role="img" aria-label="Winter Pine Reflection abstract painting">
+<rect width="900" height="650" fill="hsl(20, 45%, 48%)"/>
+<rect x="580" y="570" width="340" height="100" rx="20" fill="hsl(20, 45%, 48%)" opacity="0.18"/>
+<rect x="663" y="617" width="377" height="123" rx="36" fill="hsl(69, 57%, 56%)" opacity="0.27"/>
+<rect x="746" y="14" width="154" height="146" rx="52" fill="hsl(118, 69%, 64%)" opacity="0.36"/>
+<rect x="829" y="61" width="191" height="169" rx="68" fill="hsl(167, 45%, 72%)" opacity="0.45"/>
+<rect x="12" y="108" width="228" height="192" rx="20" fill="hsl(216, 57%, 48%)" opacity="0.54"/>
+<rect x="95" y="155" width="265" height="215" rx="36" fill="hsl(265, 69%, 56%)" opacity="0.18"/>
+<rect x="178" y="202" width="302" height="238" rx="52" fill="hsl(314, 45%, 64%)" opacity="0.27"/>
+<rect x="261" y="249" width="339" height="261" rx="68" fill="hsl(3, 57%, 72%)" opacity="0.36"/>
+<rect x="344" y="296" width="376" height="284" rx="20" fill="hsl(20, 45%, 48%)" opacity="0.45"/>
+<rect x="427" y="343" width="153" height="87" rx="36" fill="hsl(69, 57%, 56%)" opacity="0.54"/>
+<rect x="510" y="390" width="190" height="110" rx="52" fill="hsl(118, 69%, 64%)" opacity="0.18"/>
+<rect x="593" y="437" width="227" height="133" rx="68" fill="hsl(167, 45%, 72%)" opacity="0.27"/>
+<rect x="676" y="484" width="264" height="156" rx="20" fill="hsl(216, 57%, 48%)" opacity="0.36"/>
+<rect x="759" y="531" width="301" height="179" rx="36" fill="hsl(265, 69%, 56%)" opacity="0.45"/>
+<polyline points="0,214 100,160 200,155 300,201 400,271 500,322 600,324 700,274 800,204 900,156" fill="none" stroke="hsl(167, 45%, 72%)" stroke-width="12" opacity="0.48" stroke-linecap="round"/>
+<polyline points="0,202 100,197 200,243 300,313 400,364 500,366 600,316 700,246 800,198 900,200" fill="none" stroke="hsl(216, 57%, 48%)" stroke-width="16" opacity="0.48" stroke-linecap="round"/>
+<polyline points="0,239 100,285 200,355 300,406 400,408 500,358 600,288 700,240 800,242 900,295" fill="none" stroke="hsl(265, 69%, 56%)" stroke-width="20" opacity="0.48" stroke-linecap="round"/>
+<polyline points="0,327 100,397 200,448 300,450 400,400 500,330 600,282 700,284 800,337 900,407" fill="none" stroke="hsl(314, 45%, 64%)" stroke-width="24" opacity="0.48" stroke-linecap="round"/>
+<polyline points="0,439 100,490 200,492 300,442 400,372 500,324 600,326 700,379 800,449 900,494" fill="none" stroke="hsl(3, 57%, 72%)" stroke-width="28" opacity="0.48" stroke-linecap="round"/>
+<rect x="0" y="0" width="900" height="650" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="16"/>
+</svg>

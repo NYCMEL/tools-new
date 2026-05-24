@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 650" role="img" aria-label="Lavender City Walk abstract painting">
+<rect width="900" height="650" fill="hsl(306, 45%, 48%)"/>
+<rect x="522" y="448" width="266" height="274" rx="20" fill="hsl(306, 45%, 48%)" opacity="0.18"/>
+<rect x="605" y="495" width="303" height="297" rx="36" fill="hsl(355, 57%, 56%)" opacity="0.27"/>
+<rect x="688" y="542" width="340" height="100" rx="52" fill="hsl(44, 69%, 64%)" opacity="0.36"/>
+<rect x="771" y="589" width="377" height="123" rx="68" fill="hsl(93, 45%, 72%)" opacity="0.45"/>
+<rect x="854" y="636" width="154" height="146" rx="20" fill="hsl(142, 57%, 48%)" opacity="0.54"/>
+<rect x="37" y="33" width="191" height="169" rx="36" fill="hsl(191, 69%, 56%)" opacity="0.18"/>
+<rect x="120" y="80" width="228" height="192" rx="52" fill="hsl(240, 45%, 64%)" opacity="0.27"/>
+<rect x="203" y="127" width="265" height="215" rx="68" fill="hsl(289, 57%, 72%)" opacity="0.36"/>
+<rect x="286" y="174" width="302" height="238" rx="20" fill="hsl(306, 45%, 48%)" opacity="0.45"/>
+<rect x="369" y="221" width="339" height="261" rx="36" fill="hsl(355, 57%, 56%)" opacity="0.54"/>
+<rect x="452" y="268" width="376" height="284" rx="52" fill="hsl(44, 69%, 64%)" opacity="0.18"/>
+<rect x="535" y="315" width="153" height="87" rx="68" fill="hsl(93, 45%, 72%)" opacity="0.27"/>
+<rect x="618" y="362" width="190" height="110" rx="20" fill="hsl(142, 57%, 48%)" opacity="0.36"/>
+<rect x="701" y="409" width="227" height="133" rx="36" fill="hsl(191, 69%, 56%)" opacity="0.45"/>
+<polyline points="0,327 100,284 200,214 300,160 400,155 500,201 600,271 700,322 800,324 900,274" fill="none" stroke="hsl(93, 45%, 72%)" stroke-width="12" opacity="0.48" stroke-linecap="round"/>
+<polyline points="0,326 100,256 200,202 300,197 400,243 500,313 600,364 700,366 800,316 900,246" fill="none" stroke="hsl(142, 57%, 48%)" stroke-width="16" opacity="0.48" stroke-linecap="round"/>
+<polyline points="0,298 100,244 200,239 300,285 400,355 500,406 600,408 700,358 800,288 900,240" fill="none" stroke="hsl(191, 69%, 56%)" stroke-width="20" opacity="0.48" stroke-linecap="round"/>
+<polyline points="0,286 100,281 200,327 300,397 400,448 500,450 600,400 700,330 800,282 900,284" fill="none" stroke="hsl(240, 45%, 64%)" stroke-width="24" opacity="0.48" stroke-linecap="round"/>
+<polyline points="0,323 100,369 200,439 300,490 400,492 500,442 600,372 700,324 800,326 900,379" fill="none" stroke="hsl(289, 57%, 72%)" stroke-width="28" opacity="0.48" stroke-linecap="round"/>
+<rect x="0" y="0" width="900" height="650" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="16"/>
+</svg>

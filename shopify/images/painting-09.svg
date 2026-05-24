@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 650" role="img" aria-label="Moonlit Cedar Lake abstract painting">
+<rect width="900" height="650" fill="hsl(333, 45%, 48%)"/>
+<rect x="261" y="549" width="193" height="287" rx="20" fill="hsl(333, 45%, 48%)" opacity="0.18"/>
+<rect x="344" y="596" width="230" height="90" rx="36" fill="hsl(22, 57%, 56%)" opacity="0.27"/>
+<rect x="427" y="643" width="267" height="113" rx="52" fill="hsl(71, 69%, 64%)" opacity="0.36"/>
+<rect x="510" y="40" width="304" height="136" rx="68" fill="hsl(120, 45%, 72%)" opacity="0.45"/>
+<rect x="593" y="87" width="341" height="159" rx="20" fill="hsl(169, 57%, 48%)" opacity="0.54"/>
+<rect x="676" y="134" width="378" height="182" rx="36" fill="hsl(218, 69%, 56%)" opacity="0.18"/>
+<rect x="759" y="181" width="155" height="205" rx="52" fill="hsl(267, 45%, 64%)" opacity="0.27"/>
+<rect x="842" y="228" width="192" height="228" rx="68" fill="hsl(316, 57%, 72%)" opacity="0.36"/>
+<rect x="25" y="275" width="229" height="251" rx="20" fill="hsl(333, 45%, 48%)" opacity="0.45"/>
+<rect x="108" y="322" width="266" height="274" rx="36" fill="hsl(22, 57%, 56%)" opacity="0.54"/>
+<rect x="191" y="369" width="303" height="297" rx="52" fill="hsl(71, 69%, 64%)" opacity="0.18"/>
+<rect x="274" y="416" width="340" height="100" rx="68" fill="hsl(120, 45%, 72%)" opacity="0.27"/>
+<rect x="357" y="463" width="377" height="123" rx="20" fill="hsl(169, 57%, 48%)" opacity="0.36"/>
+<rect x="440" y="510" width="154" height="146" rx="36" fill="hsl(218, 69%, 56%)" opacity="0.45"/>
+<polyline points="0,311 100,329 200,293 300,224 400,165 500,152 600,192 700,261 800,317 900,327" fill="none" stroke="hsl(120, 45%, 72%)" stroke-width="12" opacity="0.48" stroke-linecap="round"/>
+<polyline points="0,371 100,335 200,266 300,207 400,194 500,234 600,303 700,359 800,369 900,326" fill="none" stroke="hsl(169, 57%, 48%)" stroke-width="16" opacity="0.48" stroke-linecap="round"/>
+<polyline points="0,377 100,308 200,249 300,236 400,276 500,345 600,401 700,411 800,368 900,298" fill="none" stroke="hsl(218, 69%, 56%)" stroke-width="20" opacity="0.48" stroke-linecap="round"/>
+<polyline points="0,350 100,291 200,278 300,318 400,387 500,443 600,453 700,410 800,340 900,286" fill="none" stroke="hsl(267, 45%, 64%)" stroke-width="24" opacity="0.48" stroke-linecap="round"/>
+<polyline points="0,333 100,320 200,360 300,429 400,485 500,495 600,452 700,382 800,328 900,323" fill="none" stroke="hsl(316, 57%, 72%)" stroke-width="28" opacity="0.48" stroke-linecap="round"/>
+<rect x="0" y="0" width="900" height="650" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="16"/>
+</svg>

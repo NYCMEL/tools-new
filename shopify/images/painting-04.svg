@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 650" role="img" aria-label="Silent Violet Ridge abstract painting">
+<rect width="900" height="650" fill="hsl(148, 45%, 48%)"/>
+<rect x="116" y="244" width="268" height="172" rx="20" fill="hsl(148, 45%, 48%)" opacity="0.18"/>
+<rect x="199" y="291" width="305" height="195" rx="36" fill="hsl(197, 57%, 56%)" opacity="0.27"/>
+<rect x="282" y="338" width="342" height="218" rx="52" fill="hsl(246, 69%, 64%)" opacity="0.36"/>
+<rect x="365" y="385" width="379" height="241" rx="68" fill="hsl(295, 45%, 72%)" opacity="0.45"/>
+<rect x="448" y="432" width="156" height="264" rx="20" fill="hsl(344, 57%, 48%)" opacity="0.54"/>
+<rect x="531" y="479" width="193" height="287" rx="36" fill="hsl(33, 69%, 56%)" opacity="0.18"/>
+<rect x="614" y="526" width="230" height="90" rx="52" fill="hsl(82, 45%, 64%)" opacity="0.27"/>
+<rect x="697" y="573" width="267" height="113" rx="68" fill="hsl(131, 57%, 72%)" opacity="0.36"/>
+<rect x="780" y="620" width="304" height="136" rx="20" fill="hsl(148, 45%, 48%)" opacity="0.45"/>
+<rect x="863" y="17" width="341" height="159" rx="36" fill="hsl(197, 57%, 56%)" opacity="0.54"/>
+<rect x="46" y="64" width="378" height="182" rx="52" fill="hsl(246, 69%, 64%)" opacity="0.18"/>
+<rect x="129" y="111" width="155" height="205" rx="68" fill="hsl(295, 45%, 72%)" opacity="0.27"/>
+<rect x="212" y="158" width="192" height="228" rx="20" fill="hsl(344, 57%, 48%)" opacity="0.36"/>
+<rect x="295" y="205" width="229" height="251" rx="36" fill="hsl(33, 69%, 56%)" opacity="0.45"/>
+<polyline points="0,235 100,172 200,150 300,183 400,250 500,311 600,329 700,293 800,224 900,165" fill="none" stroke="hsl(295, 45%, 72%)" stroke-width="12" opacity="0.48" stroke-linecap="round"/>
+<polyline points="0,214 100,192 200,225 300,292 400,353 500,371 600,335 700,266 800,207 900,194" fill="none" stroke="hsl(344, 57%, 48%)" stroke-width="16" opacity="0.48" stroke-linecap="round"/>
+<polyline points="0,234 100,267 200,334 300,395 400,413 500,377 600,308 700,249 800,236 900,276" fill="none" stroke="hsl(33, 69%, 56%)" stroke-width="20" opacity="0.48" stroke-linecap="round"/>
+<polyline points="0,309 100,376 200,437 300,455 400,419 500,350 600,291 700,278 800,318 900,387" fill="none" stroke="hsl(82, 45%, 64%)" stroke-width="24" opacity="0.48" stroke-linecap="round"/>
+<polyline points="0,418 100,479 200,497 300,461 400,392 500,333 600,320 700,360 800,429 900,485" fill="none" stroke="hsl(131, 57%, 72%)" stroke-width="28" opacity="0.48" stroke-linecap="round"/>
+<rect x="0" y="0" width="900" height="650" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="16"/>
+</svg>

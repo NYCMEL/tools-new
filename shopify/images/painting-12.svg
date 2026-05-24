@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 650" role="img" aria-label="Spring Orchard Air abstract painting">
+<rect width="900" height="650" fill="hsl(84, 45%, 48%)"/>
+<rect x="348" y="82" width="304" height="136" rx="20" fill="hsl(84, 45%, 48%)" opacity="0.18"/>
+<rect x="431" y="129" width="341" height="159" rx="36" fill="hsl(133, 57%, 56%)" opacity="0.27"/>
+<rect x="514" y="176" width="378" height="182" rx="52" fill="hsl(182, 69%, 64%)" opacity="0.36"/>
+<rect x="597" y="223" width="155" height="205" rx="68" fill="hsl(231, 45%, 72%)" opacity="0.45"/>
+<rect x="680" y="270" width="192" height="228" rx="20" fill="hsl(280, 57%, 48%)" opacity="0.54"/>
+<rect x="763" y="317" width="229" height="251" rx="36" fill="hsl(329, 69%, 56%)" opacity="0.18"/>
+<rect x="846" y="364" width="266" height="274" rx="52" fill="hsl(18, 45%, 64%)" opacity="0.27"/>
+<rect x="29" y="411" width="303" height="297" rx="68" fill="hsl(67, 57%, 72%)" opacity="0.36"/>
+<rect x="112" y="458" width="340" height="100" rx="20" fill="hsl(84, 45%, 48%)" opacity="0.45"/>
+<rect x="195" y="505" width="377" height="123" rx="36" fill="hsl(133, 57%, 56%)" opacity="0.54"/>
+<rect x="278" y="552" width="154" height="146" rx="52" fill="hsl(182, 69%, 64%)" opacity="0.18"/>
+<rect x="361" y="599" width="191" height="169" rx="68" fill="hsl(231, 45%, 72%)" opacity="0.27"/>
+<rect x="444" y="646" width="228" height="192" rx="20" fill="hsl(280, 57%, 48%)" opacity="0.36"/>
+<rect x="527" y="43" width="265" height="215" rx="36" fill="hsl(329, 69%, 56%)" opacity="0.45"/>
+<polyline points="0,224 100,165 200,152 300,192 400,261 500,317 600,327 700,284 800,214 900,160" fill="none" stroke="hsl(231, 45%, 72%)" stroke-width="12" opacity="0.48" stroke-linecap="round"/>
+<polyline points="0,207 100,194 200,234 300,303 400,359 500,369 600,326 700,256 800,202 900,197" fill="none" stroke="hsl(280, 57%, 48%)" stroke-width="16" opacity="0.48" stroke-linecap="round"/>
+<polyline points="0,236 100,276 200,345 300,401 400,411 500,368 600,298 700,244 800,239 900,285" fill="none" stroke="hsl(329, 69%, 56%)" stroke-width="20" opacity="0.48" stroke-linecap="round"/>
+<polyline points="0,318 100,387 200,443 300,453 400,410 500,340 600,286 700,281 800,327 900,397" fill="none" stroke="hsl(18, 45%, 64%)" stroke-width="24" opacity="0.48" stroke-linecap="round"/>
+<polyline points="0,429 100,485 200,495 300,452 400,382 500,328 600,323 700,369 800,439 900,490" fill="none" stroke="hsl(67, 57%, 72%)" stroke-width="28" opacity="0.48" stroke-linecap="round"/>
+<rect x="0" y="0" width="900" height="650" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="16"/>
+</svg>

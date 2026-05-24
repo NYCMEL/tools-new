@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 650" role="img" aria-label="Desert Bloom Trail abstract painting">
+<rect width="900" height="650" fill="hsl(121, 45%, 48%)"/>
+<rect x="377" y="143" width="341" height="159" rx="20" fill="hsl(121, 45%, 48%)" opacity="0.18"/>
+<rect x="460" y="190" width="378" height="182" rx="36" fill="hsl(170, 57%, 56%)" opacity="0.27"/>
+<rect x="543" y="237" width="155" height="205" rx="52" fill="hsl(219, 69%, 64%)" opacity="0.36"/>
+<rect x="626" y="284" width="192" height="228" rx="68" fill="hsl(268, 45%, 72%)" opacity="0.45"/>
+<rect x="709" y="331" width="229" height="251" rx="20" fill="hsl(317, 57%, 48%)" opacity="0.54"/>
+<rect x="792" y="378" width="266" height="274" rx="36" fill="hsl(6, 69%, 56%)" opacity="0.18"/>
+<rect x="875" y="425" width="303" height="297" rx="52" fill="hsl(55, 45%, 64%)" opacity="0.27"/>
+<rect x="58" y="472" width="340" height="100" rx="68" fill="hsl(104, 57%, 72%)" opacity="0.36"/>
+<rect x="141" y="519" width="377" height="123" rx="20" fill="hsl(121, 45%, 48%)" opacity="0.45"/>
+<rect x="224" y="566" width="154" height="146" rx="36" fill="hsl(170, 57%, 56%)" opacity="0.54"/>
+<rect x="307" y="613" width="191" height="169" rx="52" fill="hsl(219, 69%, 64%)" opacity="0.18"/>
+<rect x="390" y="10" width="228" height="192" rx="68" fill="hsl(268, 45%, 72%)" opacity="0.27"/>
+<rect x="473" y="57" width="265" height="215" rx="20" fill="hsl(317, 57%, 48%)" opacity="0.36"/>
+<rect x="556" y="104" width="302" height="238" rx="36" fill="hsl(6, 69%, 56%)" opacity="0.45"/>
+<polyline points="0,165 100,152 200,192 300,261 400,317 500,327 600,284 700,214 800,160 900,155" fill="none" stroke="hsl(268, 45%, 72%)" stroke-width="12" opacity="0.48" stroke-linecap="round"/>
+<polyline points="0,194 100,234 200,303 300,359 400,369 500,326 600,256 700,202 800,197 900,243" fill="none" stroke="hsl(317, 57%, 48%)" stroke-width="16" opacity="0.48" stroke-linecap="round"/>
+<polyline points="0,276 100,345 200,401 300,411 400,368 500,298 600,244 700,239 800,285 900,355" fill="none" stroke="hsl(6, 69%, 56%)" stroke-width="20" opacity="0.48" stroke-linecap="round"/>
+<polyline points="0,387 100,443 200,453 300,410 400,340 500,286 600,281 700,327 800,397 900,448" fill="none" stroke="hsl(55, 45%, 64%)" stroke-width="24" opacity="0.48" stroke-linecap="round"/>
+<polyline points="0,485 100,495 200,452 300,382 400,328 500,323 600,369 700,439 800,490 900,492" fill="none" stroke="hsl(104, 57%, 72%)" stroke-width="28" opacity="0.48" stroke-linecap="round"/>
+<rect x="0" y="0" width="900" height="650" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="16"/>
+</svg>

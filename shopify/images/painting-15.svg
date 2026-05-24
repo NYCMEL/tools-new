@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 650" role="img" aria-label="Red Lantern Alley abstract painting">
+<rect width="900" height="650" fill="hsl(195, 45%, 48%)"/>
+<rect x="435" y="265" width="155" height="205" rx="20" fill="hsl(195, 45%, 48%)" opacity="0.18"/>
+<rect x="518" y="312" width="192" height="228" rx="36" fill="hsl(244, 57%, 56%)" opacity="0.27"/>
+<rect x="601" y="359" width="229" height="251" rx="52" fill="hsl(293, 69%, 64%)" opacity="0.36"/>
+<rect x="684" y="406" width="266" height="274" rx="68" fill="hsl(342, 45%, 72%)" opacity="0.45"/>
+<rect x="767" y="453" width="303" height="297" rx="20" fill="hsl(31, 57%, 48%)" opacity="0.54"/>
+<rect x="850" y="500" width="340" height="100" rx="36" fill="hsl(80, 69%, 56%)" opacity="0.18"/>
+<rect x="33" y="547" width="377" height="123" rx="52" fill="hsl(129, 45%, 64%)" opacity="0.27"/>
+<rect x="116" y="594" width="154" height="146" rx="68" fill="hsl(178, 57%, 72%)" opacity="0.36"/>
+<rect x="199" y="641" width="191" height="169" rx="20" fill="hsl(195, 45%, 48%)" opacity="0.45"/>
+<rect x="282" y="38" width="228" height="192" rx="36" fill="hsl(244, 57%, 56%)" opacity="0.54"/>
+<rect x="365" y="85" width="265" height="215" rx="52" fill="hsl(293, 69%, 64%)" opacity="0.18"/>
+<rect x="448" y="132" width="302" height="238" rx="68" fill="hsl(342, 45%, 72%)" opacity="0.27"/>
+<rect x="531" y="179" width="339" height="261" rx="20" fill="hsl(31, 57%, 48%)" opacity="0.36"/>
+<rect x="614" y="226" width="376" height="284" rx="36" fill="hsl(80, 69%, 56%)" opacity="0.45"/>
+<polyline points="0,192 100,261 200,317 300,327 400,284 500,214 600,160 700,155 800,201 900,271" fill="none" stroke="hsl(342, 45%, 72%)" stroke-width="12" opacity="0.48" stroke-linecap="round"/>
+<polyline points="0,303 100,359 200,369 300,326 400,256 500,202 600,197 700,243 800,313 900,364" fill="none" stroke="hsl(31, 57%, 48%)" stroke-width="16" opacity="0.48" stroke-linecap="round"/>
+<polyline points="0,401 100,411 200,368 300,298 400,244 500,239 600,285 700,355 800,406 900,408" fill="none" stroke="hsl(80, 69%, 56%)" stroke-width="20" opacity="0.48" stroke-linecap="round"/>
+<polyline points="0,453 100,410 200,340 300,286 400,281 500,327 600,397 700,448 800,450 900,400" fill="none" stroke="hsl(129, 45%, 64%)" stroke-width="24" opacity="0.48" stroke-linecap="round"/>
+<polyline points="0,452 100,382 200,328 300,323 400,369 500,439 600,490 700,492 800,442 900,372" fill="none" stroke="hsl(178, 57%, 72%)" stroke-width="28" opacity="0.48" stroke-linecap="round"/>
+<rect x="0" y="0" width="900" height="650" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="16"/>
+</svg>

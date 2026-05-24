@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 650" role="img" aria-label="Coral Sky Garden abstract painting">
+<rect width="900" height="650" fill="hsl(185, 45%, 48%)"/>
+<rect x="145" y="305" width="305" height="195" rx="20" fill="hsl(185, 45%, 48%)" opacity="0.18"/>
+<rect x="228" y="352" width="342" height="218" rx="36" fill="hsl(234, 57%, 56%)" opacity="0.27"/>
+<rect x="311" y="399" width="379" height="241" rx="52" fill="hsl(283, 69%, 64%)" opacity="0.36"/>
+<rect x="394" y="446" width="156" height="264" rx="68" fill="hsl(332, 45%, 72%)" opacity="0.45"/>
+<rect x="477" y="493" width="193" height="287" rx="20" fill="hsl(21, 57%, 48%)" opacity="0.54"/>
+<rect x="560" y="540" width="230" height="90" rx="36" fill="hsl(70, 69%, 56%)" opacity="0.18"/>
+<rect x="643" y="587" width="267" height="113" rx="52" fill="hsl(119, 45%, 64%)" opacity="0.27"/>
+<rect x="726" y="634" width="304" height="136" rx="68" fill="hsl(168, 57%, 72%)" opacity="0.36"/>
+<rect x="809" y="31" width="341" height="159" rx="20" fill="hsl(185, 45%, 48%)" opacity="0.45"/>
+<rect x="892" y="78" width="378" height="182" rx="36" fill="hsl(234, 57%, 56%)" opacity="0.54"/>
+<rect x="75" y="125" width="155" height="205" rx="52" fill="hsl(283, 69%, 64%)" opacity="0.18"/>
+<rect x="158" y="172" width="192" height="228" rx="68" fill="hsl(332, 45%, 72%)" opacity="0.27"/>
+<rect x="241" y="219" width="229" height="251" rx="20" fill="hsl(21, 57%, 48%)" opacity="0.36"/>
+<rect x="324" y="266" width="266" height="274" rx="36" fill="hsl(70, 69%, 56%)" opacity="0.45"/>
+<polyline points="0,172 100,150 200,183 300,250 400,311 500,329 600,293 700,224 800,165 900,152" fill="none" stroke="hsl(332, 45%, 72%)" stroke-width="12" opacity="0.48" stroke-linecap="round"/>
+<polyline points="0,192 100,225 200,292 300,353 400,371 500,335 600,266 700,207 800,194 900,234" fill="none" stroke="hsl(21, 57%, 48%)" stroke-width="16" opacity="0.48" stroke-linecap="round"/>
+<polyline points="0,267 100,334 200,395 300,413 400,377 500,308 600,249 700,236 800,276 900,345" fill="none" stroke="hsl(70, 69%, 56%)" stroke-width="20" opacity="0.48" stroke-linecap="round"/>
+<polyline points="0,376 100,437 200,455 300,419 400,350 500,291 600,278 700,318 800,387 900,443" fill="none" stroke="hsl(119, 45%, 64%)" stroke-width="24" opacity="0.48" stroke-linecap="round"/>
+<polyline points="0,479 100,497 200,461 300,392 400,333 500,320 600,360 700,429 800,485 900,495" fill="none" stroke="hsl(168, 57%, 72%)" stroke-width="28" opacity="0.48" stroke-linecap="round"/>
+<rect x="0" y="0" width="900" height="650" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="16"/>
+</svg>

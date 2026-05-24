@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 650" role="img" aria-label="Emerald Rain Street abstract painting">
+<rect width="900" height="650" fill="hsl(222, 45%, 48%)"/>
+<rect x="174" y="366" width="342" height="218" rx="20" fill="hsl(222, 45%, 48%)" opacity="0.18"/>
+<rect x="257" y="413" width="379" height="241" rx="36" fill="hsl(271, 57%, 56%)" opacity="0.27"/>
+<rect x="340" y="460" width="156" height="264" rx="52" fill="hsl(320, 69%, 64%)" opacity="0.36"/>
+<rect x="423" y="507" width="193" height="287" rx="68" fill="hsl(9, 45%, 72%)" opacity="0.45"/>
+<rect x="506" y="554" width="230" height="90" rx="20" fill="hsl(58, 57%, 48%)" opacity="0.54"/>
+<rect x="589" y="601" width="267" height="113" rx="36" fill="hsl(107, 69%, 56%)" opacity="0.18"/>
+<rect x="672" y="648" width="304" height="136" rx="52" fill="hsl(156, 45%, 64%)" opacity="0.27"/>
+<rect x="755" y="45" width="341" height="159" rx="68" fill="hsl(205, 57%, 72%)" opacity="0.36"/>
+<rect x="838" y="92" width="378" height="182" rx="20" fill="hsl(222, 45%, 48%)" opacity="0.45"/>
+<rect x="21" y="139" width="155" height="205" rx="36" fill="hsl(271, 57%, 56%)" opacity="0.54"/>
+<rect x="104" y="186" width="192" height="228" rx="52" fill="hsl(320, 69%, 64%)" opacity="0.18"/>
+<rect x="187" y="233" width="229" height="251" rx="68" fill="hsl(9, 45%, 72%)" opacity="0.27"/>
+<rect x="270" y="280" width="266" height="274" rx="20" fill="hsl(58, 57%, 48%)" opacity="0.36"/>
+<rect x="353" y="327" width="303" height="297" rx="36" fill="hsl(107, 69%, 56%)" opacity="0.45"/>
+<polyline points="0,150 100,183 200,250 300,311 400,329 500,293 600,224 700,165 800,152 900,192" fill="none" stroke="hsl(9, 45%, 72%)" stroke-width="12" opacity="0.48" stroke-linecap="round"/>
+<polyline points="0,225 100,292 200,353 300,371 400,335 500,266 600,207 700,194 800,234 900,303" fill="none" stroke="hsl(58, 57%, 48%)" stroke-width="16" opacity="0.48" stroke-linecap="round"/>
+<polyline points="0,334 100,395 200,413 300,377 400,308 500,249 600,236 700,276 800,345 900,401" fill="none" stroke="hsl(107, 69%, 56%)" stroke-width="20" opacity="0.48" stroke-linecap="round"/>
+<polyline points="0,437 100,455 200,419 300,350 400,291 500,278 600,318 700,387 800,443 900,453" fill="none" stroke="hsl(156, 45%, 64%)" stroke-width="24" opacity="0.48" stroke-linecap="round"/>
+<polyline points="0,497 100,461 200,392 300,333 400,320 500,360 600,429 700,485 800,495 900,452" fill="none" stroke="hsl(205, 57%, 72%)" stroke-width="28" opacity="0.48" stroke-linecap="round"/>
+<rect x="0" y="0" width="900" height="650" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="16"/>
+</svg>
