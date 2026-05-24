@@ -22,6 +22,26 @@
     };
   }
 
+  // ---------- Minimal <wc-include> for local demos ----------
+  // Allows index.html to use <wc-include href="..." /> without inline JavaScript.
+  if (!customElements.get("wc-include")) {
+    customElements.define("wc-include", class WcInclude extends HTMLElement {
+      connectedCallback() {
+        const href = this.getAttribute("href");
+        if (!href || this.dataset.loaded === "true") return;
+        this.dataset.loaded = "true";
+        fetch(href)
+          .then((res) => {
+            if (!res.ok) throw new Error(`Could not include ${href}`);
+            return res.text();
+          })
+          .then((html) => { this.innerHTML = html; })
+          .catch((err) => window.wc.log("include error", err));
+      }
+    });
+  }
+
+
   class MtkMina {
     constructor(root, config) {
       this.root = root;
@@ -80,14 +100,30 @@
 
     // ---------- Data ----------
     async _loadItems() {
+      const fallbackItems = Array.isArray(this.cfg.items) ? this.cfg.items : [];
+
+      if (!this.cfg.api || this.cfg.api.enabled === false) {
+        this.items = fallbackItems;
+        this._renderGrid();
+        return;
+      }
+
       try {
         const res = await fetch(`${this.cfg.api.baseUrl}/items`, { credentials: "same-origin" });
+        if (!res.ok) throw new Error(`API returned ${res.status}`);
+
+        const contentType = res.headers.get("content-type") || "";
+        if (!contentType.includes("application/json")) {
+          throw new Error("API did not return JSON");
+        }
+
         const data = await res.json();
-        this.items = Array.isArray(data) ? data : [];
+        this.items = Array.isArray(data) ? data : fallbackItems;
         this._renderGrid();
       } catch (err) {
         window.wc.log("load error", err);
-        this.els.grid.innerHTML = '<p class="mtk-mina__error">Could not load paintings.</p>';
+        this.items = fallbackItems;
+        this._renderGrid();
       }
     }
 
@@ -257,11 +293,7 @@
           };
           this._publish(this.cfg.events.publish.counter, payload);
           try {
-            await fetch(`${this.cfg.api.baseUrl}/offers`, {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify(payload)
-            });
+            await this._postJson("/offers", payload);
             this._toast("Offer sent. We'll reply by email.");
             counterForm.reset();
             counterForm.hidden = true;
@@ -280,17 +312,33 @@
           };
           this._publish(this.cfg.events.publish.similar, payload);
           try {
-            await fetch(`${this.cfg.api.baseUrl}/similar-requests`, {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify(payload)
-            });
+            await this._postJson("/similar-requests", payload);
             this._toast("Request sent. We'll be in touch.");
             similarForm.reset();
             similarForm.hidden = true;
           } catch (err) { this._toast("Could not send request."); }
         });
       }
+    }
+
+
+    async _postJson(path, payload) {
+      if (!this.cfg.api || this.cfg.api.enabled === false) {
+        const key = `mtk-mina:${path.replace(/^\//, "")}`;
+        const current = JSON.parse(localStorage.getItem(key) || "[]");
+        const record = { ...payload, id: Date.now(), createdAt: new Date().toISOString() };
+        current.push(record);
+        localStorage.setItem(key, JSON.stringify(current));
+        return record;
+      }
+
+      const res = await fetch(`${this.cfg.api.baseUrl}${path}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+      if (!res.ok) throw new Error(`API returned ${res.status}`);
+      return res.json();
     }
 
     // ---------- PayPal ----------
@@ -318,11 +366,7 @@
             const order = await actions2.order.capture();
             this._publish("mtk-mina:order-status", { id: order.id, status: "paid", itemId: item.id });
             try {
-              await fetch(`${this.cfg.api.baseUrl}/orders`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ itemId: item.id, orderId: order.id, amount: item.price })
-              });
+              await this._postJson("/orders", { itemId: item.id, orderId: order.id, amount: item.price });
             } catch (e) {}
             this._toast("Thank you! Payment received.");
             this._closeDetail();
