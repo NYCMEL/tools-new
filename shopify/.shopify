@@ -1,0 +1,55 @@
+FORGET ALL PREVIOUS CONTEXT for mtk-mina and remember this as mtk-mina forever
+
+Create a shopify plugin named mtk-mina using:
+- HTML
+- SCSS
+- Vanilla JavaScript
+- Bootstrap 5 (layout only)
+- Modern Material Design, Material Design icons and styles
+- Always create a JS class for mtk-mina and initialize it inside the JS file itself
+
+Rules:
+- The mina is wrapped in a display:block element <mtk-mina class="mtk-mina">.
+- The root element uses .mtk-mina.
+- All styles must be scoped to .mtk-mina.
+- No global styles or IDs.
+- publish click events using wc.publish
+- subscribe to all 4-mtk-mina everns using wc.subscribe
+- create a onMessage function to be passed to wc.subscribe function
+
+Data:
+- The mina is JSON driven.
+  - any and all data must come from mtk-mina.config.js file
+
+Restrictions:
+- No inline styles. (All styles in  "*.scss" file)
+- No inline Javascript. (All scripts in "*.js" file)
+- No frameworks.
+- No Bootstrap.
+- No external libraries.
+- Vanilla Javascript
+
+Accessibility:
+- Use semantic HTML.
+- Keyboard accessible.
+- Visible focus states.
+- ADA compliant
+
+Output! Create exactly these files:
+- mtk-mina.config.js (JSON FILE)
+- mtk-mina.scss
+- mtk-mina.html
+- mtk-mina.js
+- A minimal index.html file
+
+Behavior:
+- MUST WAIT for element to be available inside DOM, since i will be using <wc-include> for dynamic inclusion
+- all published (wc.publish) messages should be logged using wc.log to console before being published
+
+What I want:
+- I will be selling hand paintings. could be a few or many
+- clients should be able to counter offer the price and wait for my reply
+- generate some 20 painting stock images for testing and allow me to download images in my zip file
+- I should be able to change my images, prices, availability etc.
+- if item is unavailable, allow users to place an order for similar (or same) painting
+- use a sqlite db to store picture details, prices etc.
