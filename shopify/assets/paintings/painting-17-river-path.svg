@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="620" viewBox="0 0 900 620" role="img" aria-label="River Path">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="hsl(269, 65%, 84%)"/>
+      <stop offset="52%" stop-color="hsl(349, 60%, 62%)"/>
+      <stop offset="100%" stop-color="hsl(69, 58%, 38%)"/>
+    </linearGradient>
+    <filter id="paper">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer><feFuncA type="table" tableValues="0 0.18"/></feComponentTransfer>
+      <feBlend mode="multiply" in2="SourceGraphic"/>
+    </filter>
+  </defs>
+  <rect width="900" height="620" fill="url(#g)"/>
+  <g filter="url(#paper)"><rect width="900" height="620" fill="#fff" opacity="0.25"/></g>
+  <g><circle cx="607" cy="563" r="37" fill="hsl(269, 68%, 55%)" opacity="0.12"/><circle cx="660" cy="84" r="44" fill="hsl(288, 68%, 55%)" opacity="0.18"/><circle cx="713" cy="125" r="51" fill="hsl(307, 68%, 55%)" opacity="0.24"/><circle cx="766" cy="166" r="58" fill="hsl(326, 68%, 55%)" opacity="0.30"/><circle cx="819" cy="207" r="65" fill="hsl(345, 68%, 55%)" opacity="0.36"/><circle cx="112" cy="248" r="72" fill="hsl(4, 68%, 55%)" opacity="0.12"/><circle cx="165" cy="289" r="79" fill="hsl(23, 68%, 55%)" opacity="0.18"/><circle cx="218" cy="330" r="86" fill="hsl(42, 68%, 55%)" opacity="0.24"/><circle cx="271" cy="371" r="23" fill="hsl(61, 68%, 55%)" opacity="0.30"/><circle cx="324" cy="412" r="30" fill="hsl(80, 68%, 55%)" opacity="0.36"/><circle cx="377" cy="453" r="37" fill="hsl(99, 68%, 55%)" opacity="0.12"/><circle cx="430" cy="494" r="44" fill="hsl(118, 68%, 55%)" opacity="0.18"/><circle cx="483" cy="535" r="51" fill="hsl(137, 68%, 55%)" opacity="0.24"/><circle cx="536" cy="576" r="58" fill="hsl(156, 68%, 55%)" opacity="0.30"/><circle cx="589" cy="97" r="65" fill="hsl(175, 68%, 55%)" opacity="0.36"/><circle cx="642" cy="138" r="72" fill="hsl(194, 68%, 55%)" opacity="0.12"/><circle cx="695" cy="179" r="79" fill="hsl(213, 68%, 55%)" opacity="0.18"/><circle cx="748" cy="220" r="86" fill="hsl(232, 68%, 55%)" opacity="0.24"/></g>
+  <g><path d="M40 81 C 220 1, 420 171, 860 51" fill="none" stroke="hsl(349, 70%, 42%)" stroke-width="8" opacity="0.34" stroke-linecap="round"/><path d="M40 129 C 220 49, 420 219, 860 99" fill="none" stroke="hsl(2, 70%, 42%)" stroke-width="12" opacity="0.34" stroke-linecap="round"/><path d="M40 177 C 220 97, 420 267, 860 147" fill="none" stroke="hsl(15, 70%, 42%)" stroke-width="16" opacity="0.34" stroke-linecap="round"/><path d="M40 225 C 220 145, 420 315, 860 195" fill="none" stroke="hsl(28, 70%, 42%)" stroke-width="20" opacity="0.34" stroke-linecap="round"/><path d="M40 273 C 220 193, 420 363, 860 243" fill="none" stroke="hsl(41, 70%, 42%)" stroke-width="8" opacity="0.34" stroke-linecap="round"/><path d="M40 321 C 220 241, 420 411, 860 291" fill="none" stroke="hsl(54, 70%, 42%)" stroke-width="12" opacity="0.34" stroke-linecap="round"/><path d="M40 369 C 220 289, 420 459, 860 339" fill="none" stroke="hsl(67, 70%, 42%)" stroke-width="16" opacity="0.34" stroke-linecap="round"/><path d="M40 417 C 220 337, 420 507, 860 387" fill="none" stroke="hsl(80, 70%, 42%)" stroke-width="20" opacity="0.34" stroke-linecap="round"/><path d="M40 465 C 220 385, 420 555, 860 435" fill="none" stroke="hsl(93, 70%, 42%)" stroke-width="8" opacity="0.34" stroke-linecap="round"/><path d="M40 513 C 220 433, 420 603, 860 483" fill="none" stroke="hsl(106, 70%, 42%)" stroke-width="12" opacity="0.34" stroke-linecap="round"/></g>
+  <rect x="42" y="42" width="816" height="536" fill="none" stroke="rgba(255,255,255,.75)" stroke-width="10"/>
+  <rect x="64" y="64" width="772" height="492" fill="none" stroke="rgba(20,20,20,.22)" stroke-width="2"/>
+  <text x="72" y="540" font-family="Georgia, serif" font-size="34" fill="rgba(20,20,20,.72)">River Path</text>
+</svg>

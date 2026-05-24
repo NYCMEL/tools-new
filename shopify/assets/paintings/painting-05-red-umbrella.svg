@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="620" viewBox="0 0 900 620" role="img" aria-label="Red Umbrella">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="hsl(185, 65%, 84%)"/>
+      <stop offset="52%" stop-color="hsl(265, 60%, 62%)"/>
+      <stop offset="100%" stop-color="hsl(345, 58%, 38%)"/>
+    </linearGradient>
+    <filter id="paper">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer><feFuncA type="table" tableValues="0 0.18"/></feComponentTransfer>
+      <feBlend mode="multiply" in2="SourceGraphic"/>
+    </filter>
+  </defs>
+  <rect width="900" height="620" fill="url(#g)"/>
+  <g filter="url(#paper)"><rect width="900" height="620" fill="#fff" opacity="0.25"/></g>
+  <g><circle cx="235" cy="215" r="25" fill="hsl(185, 68%, 55%)" opacity="0.12"/><circle cx="288" cy="256" r="32" fill="hsl(204, 68%, 55%)" opacity="0.18"/><circle cx="341" cy="297" r="39" fill="hsl(223, 68%, 55%)" opacity="0.24"/><circle cx="394" cy="338" r="46" fill="hsl(242, 68%, 55%)" opacity="0.30"/><circle cx="447" cy="379" r="53" fill="hsl(261, 68%, 55%)" opacity="0.36"/><circle cx="500" cy="420" r="60" fill="hsl(280, 68%, 55%)" opacity="0.12"/><circle cx="553" cy="461" r="67" fill="hsl(299, 68%, 55%)" opacity="0.18"/><circle cx="606" cy="502" r="74" fill="hsl(318, 68%, 55%)" opacity="0.24"/><circle cx="659" cy="543" r="81" fill="hsl(337, 68%, 55%)" opacity="0.30"/><circle cx="712" cy="584" r="88" fill="hsl(356, 68%, 55%)" opacity="0.36"/><circle cx="765" cy="105" r="25" fill="hsl(15, 68%, 55%)" opacity="0.12"/><circle cx="818" cy="146" r="32" fill="hsl(34, 68%, 55%)" opacity="0.18"/><circle cx="111" cy="187" r="39" fill="hsl(53, 68%, 55%)" opacity="0.24"/><circle cx="164" cy="228" r="46" fill="hsl(72, 68%, 55%)" opacity="0.30"/><circle cx="217" cy="269" r="53" fill="hsl(91, 68%, 55%)" opacity="0.36"/><circle cx="270" cy="310" r="60" fill="hsl(110, 68%, 55%)" opacity="0.12"/><circle cx="323" cy="351" r="67" fill="hsl(129, 68%, 55%)" opacity="0.18"/><circle cx="376" cy="392" r="74" fill="hsl(148, 68%, 55%)" opacity="0.24"/></g>
+  <g><path d="M40 95 C 220 15, 420 185, 860 65" fill="none" stroke="hsl(265, 70%, 42%)" stroke-width="8" opacity="0.34" stroke-linecap="round"/><path d="M40 143 C 220 63, 420 233, 860 113" fill="none" stroke="hsl(278, 70%, 42%)" stroke-width="12" opacity="0.34" stroke-linecap="round"/><path d="M40 191 C 220 111, 420 281, 860 161" fill="none" stroke="hsl(291, 70%, 42%)" stroke-width="16" opacity="0.34" stroke-linecap="round"/><path d="M40 239 C 220 159, 420 329, 860 209" fill="none" stroke="hsl(304, 70%, 42%)" stroke-width="20" opacity="0.34" stroke-linecap="round"/><path d="M40 287 C 220 207, 420 377, 860 257" fill="none" stroke="hsl(317, 70%, 42%)" stroke-width="8" opacity="0.34" stroke-linecap="round"/><path d="M40 335 C 220 255, 420 425, 860 305" fill="none" stroke="hsl(330, 70%, 42%)" stroke-width="12" opacity="0.34" stroke-linecap="round"/><path d="M40 383 C 220 303, 420 473, 860 353" fill="none" stroke="hsl(343, 70%, 42%)" stroke-width="16" opacity="0.34" stroke-linecap="round"/><path d="M40 431 C 220 351, 420 521, 860 401" fill="none" stroke="hsl(356, 70%, 42%)" stroke-width="20" opacity="0.34" stroke-linecap="round"/><path d="M40 479 C 220 399, 420 569, 860 449" fill="none" stroke="hsl(9, 70%, 42%)" stroke-width="8" opacity="0.34" stroke-linecap="round"/><path d="M40 527 C 220 447, 420 617, 860 497" fill="none" stroke="hsl(22, 70%, 42%)" stroke-width="12" opacity="0.34" stroke-linecap="round"/></g>
+  <rect x="42" y="42" width="816" height="536" fill="none" stroke="rgba(255,255,255,.75)" stroke-width="10"/>
+  <rect x="64" y="64" width="772" height="492" fill="none" stroke="rgba(20,20,20,.22)" stroke-width="2"/>
+  <text x="72" y="540" font-family="Georgia, serif" font-size="34" fill="rgba(20,20,20,.72)">Red Umbrella</text>
+</svg>

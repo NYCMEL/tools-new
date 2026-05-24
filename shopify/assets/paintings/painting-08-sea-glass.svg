@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="620" viewBox="0 0 900 620" role="img" aria-label="Sea Glass">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="hsl(296, 65%, 84%)"/>
+      <stop offset="52%" stop-color="hsl(16, 60%, 62%)"/>
+      <stop offset="100%" stop-color="hsl(96, 58%, 38%)"/>
+    </linearGradient>
+    <filter id="paper">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer><feFuncA type="table" tableValues="0 0.18"/></feComponentTransfer>
+      <feBlend mode="multiply" in2="SourceGraphic"/>
+    </filter>
+  </defs>
+  <rect width="900" height="620" fill="url(#g)"/>
+  <g filter="url(#paper)"><rect width="900" height="620" fill="#fff" opacity="0.25"/></g>
+  <g><circle cx="328" cy="302" r="28" fill="hsl(296, 68%, 55%)" opacity="0.12"/><circle cx="381" cy="343" r="35" fill="hsl(315, 68%, 55%)" opacity="0.18"/><circle cx="434" cy="384" r="42" fill="hsl(334, 68%, 55%)" opacity="0.24"/><circle cx="487" cy="425" r="49" fill="hsl(353, 68%, 55%)" opacity="0.30"/><circle cx="540" cy="466" r="56" fill="hsl(12, 68%, 55%)" opacity="0.36"/><circle cx="593" cy="507" r="63" fill="hsl(31, 68%, 55%)" opacity="0.12"/><circle cx="646" cy="548" r="70" fill="hsl(50, 68%, 55%)" opacity="0.18"/><circle cx="699" cy="589" r="77" fill="hsl(69, 68%, 55%)" opacity="0.24"/><circle cx="752" cy="110" r="84" fill="hsl(88, 68%, 55%)" opacity="0.30"/><circle cx="805" cy="151" r="21" fill="hsl(107, 68%, 55%)" opacity="0.36"/><circle cx="98" cy="192" r="28" fill="hsl(126, 68%, 55%)" opacity="0.12"/><circle cx="151" cy="233" r="35" fill="hsl(145, 68%, 55%)" opacity="0.18"/><circle cx="204" cy="274" r="42" fill="hsl(164, 68%, 55%)" opacity="0.24"/><circle cx="257" cy="315" r="49" fill="hsl(183, 68%, 55%)" opacity="0.30"/><circle cx="310" cy="356" r="56" fill="hsl(202, 68%, 55%)" opacity="0.36"/><circle cx="363" cy="397" r="63" fill="hsl(221, 68%, 55%)" opacity="0.12"/><circle cx="416" cy="438" r="70" fill="hsl(240, 68%, 55%)" opacity="0.18"/><circle cx="469" cy="479" r="77" fill="hsl(259, 68%, 55%)" opacity="0.24"/></g>
+  <g><path d="M40 104 C 220 24, 420 194, 860 74" fill="none" stroke="hsl(16, 70%, 42%)" stroke-width="8" opacity="0.34" stroke-linecap="round"/><path d="M40 152 C 220 72, 420 242, 860 122" fill="none" stroke="hsl(29, 70%, 42%)" stroke-width="12" opacity="0.34" stroke-linecap="round"/><path d="M40 200 C 220 120, 420 290, 860 170" fill="none" stroke="hsl(42, 70%, 42%)" stroke-width="16" opacity="0.34" stroke-linecap="round"/><path d="M40 248 C 220 168, 420 338, 860 218" fill="none" stroke="hsl(55, 70%, 42%)" stroke-width="20" opacity="0.34" stroke-linecap="round"/><path d="M40 296 C 220 216, 420 386, 860 266" fill="none" stroke="hsl(68, 70%, 42%)" stroke-width="8" opacity="0.34" stroke-linecap="round"/><path d="M40 344 C 220 264, 420 434, 860 314" fill="none" stroke="hsl(81, 70%, 42%)" stroke-width="12" opacity="0.34" stroke-linecap="round"/><path d="M40 392 C 220 312, 420 482, 860 362" fill="none" stroke="hsl(94, 70%, 42%)" stroke-width="16" opacity="0.34" stroke-linecap="round"/><path d="M40 440 C 220 360, 420 530, 860 410" fill="none" stroke="hsl(107, 70%, 42%)" stroke-width="20" opacity="0.34" stroke-linecap="round"/><path d="M40 488 C 220 408, 420 578, 860 458" fill="none" stroke="hsl(120, 70%, 42%)" stroke-width="8" opacity="0.34" stroke-linecap="round"/><path d="M40 536 C 220 456, 420 626, 860 506" fill="none" stroke="hsl(133, 70%, 42%)" stroke-width="12" opacity="0.34" stroke-linecap="round"/></g>
+  <rect x="42" y="42" width="816" height="536" fill="none" stroke="rgba(255,255,255,.75)" stroke-width="10"/>
+  <rect x="64" y="64" width="772" height="492" fill="none" stroke="rgba(20,20,20,.22)" stroke-width="2"/>
+  <text x="72" y="540" font-family="Georgia, serif" font-size="34" fill="rgba(20,20,20,.72)">Sea Glass</text>
+</svg>

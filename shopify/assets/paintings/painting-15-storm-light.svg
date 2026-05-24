@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="620" viewBox="0 0 900 620" role="img" aria-label="Storm Light">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="hsl(195, 65%, 84%)"/>
+      <stop offset="52%" stop-color="hsl(275, 60%, 62%)"/>
+      <stop offset="100%" stop-color="hsl(355, 58%, 38%)"/>
+    </linearGradient>
+    <filter id="paper">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer><feFuncA type="table" tableValues="0 0.18"/></feComponentTransfer>
+      <feBlend mode="multiply" in2="SourceGraphic"/>
+    </filter>
+  </defs>
+  <rect width="900" height="620" fill="url(#g)"/>
+  <g filter="url(#paper)"><rect width="900" height="620" fill="#fff" opacity="0.25"/></g>
+  <g><circle cx="545" cy="505" r="35" fill="hsl(195, 68%, 55%)" opacity="0.12"/><circle cx="598" cy="546" r="42" fill="hsl(214, 68%, 55%)" opacity="0.18"/><circle cx="651" cy="587" r="49" fill="hsl(233, 68%, 55%)" opacity="0.24"/><circle cx="704" cy="108" r="56" fill="hsl(252, 68%, 55%)" opacity="0.30"/><circle cx="757" cy="149" r="63" fill="hsl(271, 68%, 55%)" opacity="0.36"/><circle cx="810" cy="190" r="70" fill="hsl(290, 68%, 55%)" opacity="0.12"/><circle cx="103" cy="231" r="77" fill="hsl(309, 68%, 55%)" opacity="0.18"/><circle cx="156" cy="272" r="84" fill="hsl(328, 68%, 55%)" opacity="0.24"/><circle cx="209" cy="313" r="21" fill="hsl(347, 68%, 55%)" opacity="0.30"/><circle cx="262" cy="354" r="28" fill="hsl(6, 68%, 55%)" opacity="0.36"/><circle cx="315" cy="395" r="35" fill="hsl(25, 68%, 55%)" opacity="0.12"/><circle cx="368" cy="436" r="42" fill="hsl(44, 68%, 55%)" opacity="0.18"/><circle cx="421" cy="477" r="49" fill="hsl(63, 68%, 55%)" opacity="0.24"/><circle cx="474" cy="518" r="56" fill="hsl(82, 68%, 55%)" opacity="0.30"/><circle cx="527" cy="559" r="63" fill="hsl(101, 68%, 55%)" opacity="0.36"/><circle cx="580" cy="80" r="70" fill="hsl(120, 68%, 55%)" opacity="0.12"/><circle cx="633" cy="121" r="77" fill="hsl(139, 68%, 55%)" opacity="0.18"/><circle cx="686" cy="162" r="84" fill="hsl(158, 68%, 55%)" opacity="0.24"/></g>
+  <g><path d="M40 100 C 220 20, 420 190, 860 70" fill="none" stroke="hsl(275, 70%, 42%)" stroke-width="8" opacity="0.34" stroke-linecap="round"/><path d="M40 148 C 220 68, 420 238, 860 118" fill="none" stroke="hsl(288, 70%, 42%)" stroke-width="12" opacity="0.34" stroke-linecap="round"/><path d="M40 196 C 220 116, 420 286, 860 166" fill="none" stroke="hsl(301, 70%, 42%)" stroke-width="16" opacity="0.34" stroke-linecap="round"/><path d="M40 244 C 220 164, 420 334, 860 214" fill="none" stroke="hsl(314, 70%, 42%)" stroke-width="20" opacity="0.34" stroke-linecap="round"/><path d="M40 292 C 220 212, 420 382, 860 262" fill="none" stroke="hsl(327, 70%, 42%)" stroke-width="8" opacity="0.34" stroke-linecap="round"/><path d="M40 340 C 220 260, 420 430, 860 310" fill="none" stroke="hsl(340, 70%, 42%)" stroke-width="12" opacity="0.34" stroke-linecap="round"/><path d="M40 388 C 220 308, 420 478, 860 358" fill="none" stroke="hsl(353, 70%, 42%)" stroke-width="16" opacity="0.34" stroke-linecap="round"/><path d="M40 436 C 220 356, 420 526, 860 406" fill="none" stroke="hsl(6, 70%, 42%)" stroke-width="20" opacity="0.34" stroke-linecap="round"/><path d="M40 484 C 220 404, 420 574, 860 454" fill="none" stroke="hsl(19, 70%, 42%)" stroke-width="8" opacity="0.34" stroke-linecap="round"/><path d="M40 532 C 220 452, 420 622, 860 502" fill="none" stroke="hsl(32, 70%, 42%)" stroke-width="12" opacity="0.34" stroke-linecap="round"/></g>
+  <rect x="42" y="42" width="816" height="536" fill="none" stroke="rgba(255,255,255,.75)" stroke-width="10"/>
+  <rect x="64" y="64" width="772" height="492" fill="none" stroke="rgba(20,20,20,.22)" stroke-width="2"/>
+  <text x="72" y="540" font-family="Georgia, serif" font-size="34" fill="rgba(20,20,20,.72)">Storm Light</text>
+</svg>

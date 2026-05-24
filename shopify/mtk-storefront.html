@@ -1,0 +1,59 @@
+<mtk-storefront class="mtk-storefront">
+  <section class="mtk-storefront__shell" aria-labelledby="mtk-storefront-title">
+    <header class="mtk-storefront__hero">
+      <p class="mtk-storefront__eyebrow">Original Art Storefront</p>
+      <h1 id="mtk-storefront-title" class="mtk-storefront__title"></h1>
+      <p class="mtk-storefront__tagline"></p>
+    </header>
+
+    <main class="mtk-storefront__main" aria-live="polite">
+      <section class="mtk-storefront__grid" aria-label="Painting collection"></section>
+
+      <section class="mtk-storefront__detail" aria-hidden="true" tabindex="-1">
+        <article class="mtk-storefront__detail-card" role="dialog" aria-modal="true" aria-labelledby="mtk-storefront-detail-title">
+          <button class="mtk-storefront__close" type="button" aria-label="Close painting details">×</button>
+          <div class="mtk-storefront__detail-media"></div>
+          <div class="mtk-storefront__detail-content"></div>
+        </article>
+      </section>
+
+      <section class="mtk-storefront__admin-login" aria-labelledby="mtk-storefront-admin-title">
+        <h2 id="mtk-storefront-admin-title">Admin Login</h2>
+        <form class="mtk-storefront__login-form">
+          <label>
+            Username
+            <input name="username" autocomplete="username" required>
+          </label>
+          <label>
+            Password
+            <input name="password" type="password" autocomplete="current-password" required>
+          </label>
+          <button type="submit">Login</button>
+          <p class="mtk-storefront__login-message" role="status"></p>
+        </form>
+      </section>
+
+      <section class="mtk-storefront__admin-panel" hidden aria-labelledby="mtk-storefront-admin-panel-title">
+        <h2 id="mtk-storefront-admin-panel-title">Manage Paintings</h2>
+        <form class="mtk-storefront__admin-form">
+          <input type="hidden" name="id">
+          <label>Title <input name="title" required></label>
+          <label>Price <input name="price" type="number" min="0" step="1" required></label>
+          <label>Availability
+            <select name="availability">
+              <option value="available">Available</option>
+              <option value="unavailable">Unavailable</option>
+            </select>
+          </label>
+          <label>Image Path <input name="image" required></label>
+          <label>Description <textarea name="description" rows="3" required></textarea></label>
+          <div class="mtk-storefront__admin-actions">
+            <button type="submit">Save Item</button>
+            <button type="button" class="mtk-storefront__admin-reset">Clear</button>
+          </div>
+        </form>
+        <div class="mtk-storefront__admin-list" aria-label="Editable painting list"></div>
+      </section>
+    </main>
+  </section>
+</mtk-storefront>

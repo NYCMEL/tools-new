@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="620" viewBox="0 0 900 620" role="img" aria-label="Market Morning">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="hsl(333, 65%, 84%)"/>
+      <stop offset="52%" stop-color="hsl(53, 60%, 62%)"/>
+      <stop offset="100%" stop-color="hsl(133, 58%, 38%)"/>
+    </linearGradient>
+    <filter id="paper">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer><feFuncA type="table" tableValues="0 0.18"/></feComponentTransfer>
+      <feBlend mode="multiply" in2="SourceGraphic"/>
+    </filter>
+  </defs>
+  <rect width="900" height="620" fill="url(#g)"/>
+  <g filter="url(#paper)"><rect width="900" height="620" fill="#fff" opacity="0.25"/></g>
+  <g><circle cx="359" cy="331" r="29" fill="hsl(333, 68%, 55%)" opacity="0.12"/><circle cx="412" cy="372" r="36" fill="hsl(352, 68%, 55%)" opacity="0.18"/><circle cx="465" cy="413" r="43" fill="hsl(11, 68%, 55%)" opacity="0.24"/><circle cx="518" cy="454" r="50" fill="hsl(30, 68%, 55%)" opacity="0.30"/><circle cx="571" cy="495" r="57" fill="hsl(49, 68%, 55%)" opacity="0.36"/><circle cx="624" cy="536" r="64" fill="hsl(68, 68%, 55%)" opacity="0.12"/><circle cx="677" cy="577" r="71" fill="hsl(87, 68%, 55%)" opacity="0.18"/><circle cx="730" cy="98" r="78" fill="hsl(106, 68%, 55%)" opacity="0.24"/><circle cx="783" cy="139" r="85" fill="hsl(125, 68%, 55%)" opacity="0.30"/><circle cx="836" cy="180" r="22" fill="hsl(144, 68%, 55%)" opacity="0.36"/><circle cx="129" cy="221" r="29" fill="hsl(163, 68%, 55%)" opacity="0.12"/><circle cx="182" cy="262" r="36" fill="hsl(182, 68%, 55%)" opacity="0.18"/><circle cx="235" cy="303" r="43" fill="hsl(201, 68%, 55%)" opacity="0.24"/><circle cx="288" cy="344" r="50" fill="hsl(220, 68%, 55%)" opacity="0.30"/><circle cx="341" cy="385" r="57" fill="hsl(239, 68%, 55%)" opacity="0.36"/><circle cx="394" cy="426" r="64" fill="hsl(258, 68%, 55%)" opacity="0.12"/><circle cx="447" cy="467" r="71" fill="hsl(277, 68%, 55%)" opacity="0.18"/><circle cx="500" cy="508" r="78" fill="hsl(296, 68%, 55%)" opacity="0.24"/></g>
+  <g><path d="M40 82 C 220 2, 420 172, 860 52" fill="none" stroke="hsl(53, 70%, 42%)" stroke-width="8" opacity="0.34" stroke-linecap="round"/><path d="M40 130 C 220 50, 420 220, 860 100" fill="none" stroke="hsl(66, 70%, 42%)" stroke-width="12" opacity="0.34" stroke-linecap="round"/><path d="M40 178 C 220 98, 420 268, 860 148" fill="none" stroke="hsl(79, 70%, 42%)" stroke-width="16" opacity="0.34" stroke-linecap="round"/><path d="M40 226 C 220 146, 420 316, 860 196" fill="none" stroke="hsl(92, 70%, 42%)" stroke-width="20" opacity="0.34" stroke-linecap="round"/><path d="M40 274 C 220 194, 420 364, 860 244" fill="none" stroke="hsl(105, 70%, 42%)" stroke-width="8" opacity="0.34" stroke-linecap="round"/><path d="M40 322 C 220 242, 420 412, 860 292" fill="none" stroke="hsl(118, 70%, 42%)" stroke-width="12" opacity="0.34" stroke-linecap="round"/><path d="M40 370 C 220 290, 420 460, 860 340" fill="none" stroke="hsl(131, 70%, 42%)" stroke-width="16" opacity="0.34" stroke-linecap="round"/><path d="M40 418 C 220 338, 420 508, 860 388" fill="none" stroke="hsl(144, 70%, 42%)" stroke-width="20" opacity="0.34" stroke-linecap="round"/><path d="M40 466 C 220 386, 420 556, 860 436" fill="none" stroke="hsl(157, 70%, 42%)" stroke-width="8" opacity="0.34" stroke-linecap="round"/><path d="M40 514 C 220 434, 420 604, 860 484" fill="none" stroke="hsl(170, 70%, 42%)" stroke-width="12" opacity="0.34" stroke-linecap="round"/></g>
+  <rect x="42" y="42" width="816" height="536" fill="none" stroke="rgba(255,255,255,.75)" stroke-width="10"/>
+  <rect x="64" y="64" width="772" height="492" fill="none" stroke="rgba(20,20,20,.22)" stroke-width="2"/>
+  <text x="72" y="540" font-family="Georgia, serif" font-size="34" fill="rgba(20,20,20,.72)">Market Morning</text>
+</svg>

@@ -1,0 +1,318 @@
+mtk-storefront.mtk-storefront {
+  display: block;
+}
+
+.mtk-storefront {
+  --mtk-storefront-bg: #f8f5ef;
+  --mtk-storefront-surface: #ffffff;
+  --mtk-storefront-text: #1f1b16;
+  --mtk-storefront-muted: #6d6258;
+  --mtk-storefront-primary: #775a32;
+  --mtk-storefront-primary-dark: #4d3920;
+  --mtk-storefront-border: rgba(31, 27, 22, 0.14);
+  --mtk-storefront-shadow: 0 18px 48px rgba(31, 27, 22, 0.16);
+  background: var(--mtk-storefront-bg);
+  color: var(--mtk-storefront-text);
+  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100vh;
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  button,
+  input,
+  textarea,
+  select {
+    font: inherit;
+  }
+
+  button,
+  a,
+  input,
+  textarea,
+  select {
+    &:focus-visible {
+      outline: 3px solid #1a73e8;
+      outline-offset: 3px;
+    }
+  }
+
+  &__shell {
+    inline-size: 100%;
+    max-inline-size: 1180px;
+    width: calc(100% - 32px);
+    margin: 0 auto;
+    padding: 32px 0 56px;
+  }
+
+  &__hero {
+    background: linear-gradient(135deg, #fffaf0, #eadbc6);
+    border: 1px solid var(--mtk-storefront-border);
+    border-radius: 28px;
+    box-shadow: var(--mtk-storefront-shadow);
+    padding: clamp(24px, 5vw, 56px);
+  }
+
+  &__eyebrow {
+    color: var(--mtk-storefront-primary);
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    margin: 0 0 10px;
+    text-transform: uppercase;
+  }
+
+  &__title {
+    font-size: clamp(2rem, 6vw, 4.25rem);
+    line-height: 1;
+    margin: 0;
+  }
+
+  &__tagline {
+    color: var(--mtk-storefront-muted);
+    font-size: 1.15rem;
+    max-inline-size: 720px;
+  }
+
+  &__grid {
+    display: grid;
+    gap: 22px;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    margin-block-start: 28px;
+  }
+
+  &__card {
+    background: var(--mtk-storefront-surface);
+    border: 1px solid var(--mtk-storefront-border);
+    border-radius: 24px;
+    box-shadow: 0 10px 30px rgba(31, 27, 22, 0.09);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    text-align: left;
+    transition: transform 180ms ease, box-shadow 180ms ease;
+
+    &:hover {
+      box-shadow: var(--mtk-storefront-shadow);
+      transform: translateY(-3px);
+    }
+  }
+
+  &__image {
+    aspect-ratio: 4 / 3;
+    background: #eee7dc;
+    inline-size: 100%;
+    object-fit: cover;
+  }
+
+  &__card-body {
+    padding: 18px;
+  }
+
+  &__card-title {
+    font-size: 1.2rem;
+    margin: 0 0 6px;
+  }
+
+  &__meta {
+    color: var(--mtk-storefront-muted);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0;
+  }
+
+  &__badge {
+    border-radius: 999px;
+    display: inline-flex;
+    font-size: 0.82rem;
+    font-weight: 700;
+    padding: 6px 10px;
+
+    &--available {
+      background: #e7f4ea;
+      color: #137333;
+    }
+
+    &--unavailable {
+      background: #fce8e6;
+      color: #a50e0e;
+    }
+  }
+
+  &__detail {
+    background: rgba(31, 27, 22, 0.74);
+    display: none;
+    inset: 0;
+    overflow-y: auto;
+    padding: 24px;
+    position: fixed;
+    z-index: 50;
+
+    &[aria-hidden="false"] {
+      display: grid;
+      place-items: start center;
+    }
+  }
+
+  &__detail-card {
+    background: var(--mtk-storefront-surface);
+    border-radius: 28px;
+    box-shadow: var(--mtk-storefront-shadow);
+    display: grid;
+    gap: 24px;
+    grid-template-columns: minmax(280px, 1.1fr) minmax(280px, 0.9fr);
+    max-inline-size: 1080px;
+    min-block-size: 60vh;
+    padding: 22px;
+    position: relative;
+    width: 100%;
+  }
+
+  &__close {
+    align-items: center;
+    background: var(--mtk-storefront-primary-dark);
+    border: 0;
+    border-radius: 50%;
+    color: #fff;
+    cursor: pointer;
+    display: inline-flex;
+    font-size: 2rem;
+    font-weight: 400;
+    block-size: 48px;
+    inline-size: 48px;
+    justify-content: center;
+    line-height: 1;
+    position: absolute;
+    right: 18px;
+    top: 18px;
+  }
+
+  &__detail-media img {
+    border-radius: 22px;
+    inline-size: 100%;
+    object-fit: cover;
+  }
+
+  &__detail-content {
+    padding: 42px 8px 8px;
+  }
+
+  &__detail-title {
+    font-size: clamp(1.8rem, 4vw, 3.2rem);
+    line-height: 1;
+    margin: 0 56px 12px 0;
+  }
+
+  &__detail-description {
+    color: var(--mtk-storefront-muted);
+    font-size: 1.05rem;
+    line-height: 1.6;
+  }
+
+  &__actions {
+    display: grid;
+    gap: 12px;
+    margin-block-start: 20px;
+  }
+
+  &__actions button,
+  &__actions a,
+  &__login-form button,
+  &__admin-form button {
+    align-items: center;
+    background: var(--mtk-storefront-primary);
+    border: 0;
+    border-radius: 999px;
+    color: #fff;
+    cursor: pointer;
+    display: inline-flex;
+    font-weight: 700;
+    justify-content: center;
+    min-block-size: 46px;
+    padding: 12px 18px;
+    text-decoration: none;
+  }
+
+  &__offer-form,
+  &__request-form,
+  &__login-form,
+  &__admin-form {
+    display: grid;
+    gap: 14px;
+    margin-block-start: 18px;
+
+    label {
+      color: var(--mtk-storefront-muted);
+      display: grid;
+      gap: 6px;
+      font-weight: 700;
+    }
+
+    input,
+    textarea,
+    select {
+      border: 1px solid var(--mtk-storefront-border);
+      border-radius: 16px;
+      padding: 12px 14px;
+      width: 100%;
+    }
+  }
+
+  &__admin-login,
+  &__admin-panel {
+    background: var(--mtk-storefront-surface);
+    border: 1px solid var(--mtk-storefront-border);
+    border-radius: 24px;
+    box-shadow: 0 10px 30px rgba(31, 27, 22, 0.08);
+    margin-block-start: 28px;
+    padding: 24px;
+  }
+
+  &__admin-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  &__admin-list {
+    display: grid;
+    gap: 10px;
+    margin-block-start: 18px;
+  }
+
+  &__admin-item {
+    align-items: center;
+    border: 1px solid var(--mtk-storefront-border);
+    border-radius: 16px;
+    display: grid;
+    gap: 12px;
+    grid-template-columns: 1fr auto auto;
+    padding: 12px;
+  }
+
+  &__admin-item button {
+    border: 1px solid var(--mtk-storefront-border);
+    border-radius: 999px;
+    cursor: pointer;
+    padding: 8px 12px;
+  }
+
+  @media (max-width: 760px) {
+    &__detail-card {
+      grid-template-columns: 1fr;
+    }
+
+    &__detail-content {
+      padding-block-start: 8px;
+    }
+
+    &__admin-item {
+      grid-template-columns: 1fr;
+    }
+  }
+}

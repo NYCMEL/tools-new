@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="620" viewBox="0 0 900 620" role="img" aria-label="City Bloom">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="hsl(306, 65%, 84%)"/>
+      <stop offset="52%" stop-color="hsl(26, 60%, 62%)"/>
+      <stop offset="100%" stop-color="hsl(106, 58%, 38%)"/>
+    </linearGradient>
+    <filter id="paper">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer><feFuncA type="table" tableValues="0 0.18"/></feComponentTransfer>
+      <feBlend mode="multiply" in2="SourceGraphic"/>
+    </filter>
+  </defs>
+  <rect width="900" height="620" fill="url(#g)"/>
+  <g filter="url(#paper)"><rect width="900" height="620" fill="#fff" opacity="0.25"/></g>
+  <g><circle cx="638" cy="72" r="38" fill="hsl(306, 68%, 55%)" opacity="0.12"/><circle cx="691" cy="113" r="45" fill="hsl(325, 68%, 55%)" opacity="0.18"/><circle cx="744" cy="154" r="52" fill="hsl(344, 68%, 55%)" opacity="0.24"/><circle cx="797" cy="195" r="59" fill="hsl(3, 68%, 55%)" opacity="0.30"/><circle cx="90" cy="236" r="66" fill="hsl(22, 68%, 55%)" opacity="0.36"/><circle cx="143" cy="277" r="73" fill="hsl(41, 68%, 55%)" opacity="0.12"/><circle cx="196" cy="318" r="80" fill="hsl(60, 68%, 55%)" opacity="0.18"/><circle cx="249" cy="359" r="87" fill="hsl(79, 68%, 55%)" opacity="0.24"/><circle cx="302" cy="400" r="24" fill="hsl(98, 68%, 55%)" opacity="0.30"/><circle cx="355" cy="441" r="31" fill="hsl(117, 68%, 55%)" opacity="0.36"/><circle cx="408" cy="482" r="38" fill="hsl(136, 68%, 55%)" opacity="0.12"/><circle cx="461" cy="523" r="45" fill="hsl(155, 68%, 55%)" opacity="0.18"/><circle cx="514" cy="564" r="52" fill="hsl(174, 68%, 55%)" opacity="0.24"/><circle cx="567" cy="85" r="59" fill="hsl(193, 68%, 55%)" opacity="0.30"/><circle cx="620" cy="126" r="66" fill="hsl(212, 68%, 55%)" opacity="0.36"/><circle cx="673" cy="167" r="73" fill="hsl(231, 68%, 55%)" opacity="0.12"/><circle cx="726" cy="208" r="80" fill="hsl(250, 68%, 55%)" opacity="0.18"/><circle cx="779" cy="249" r="87" fill="hsl(269, 68%, 55%)" opacity="0.24"/></g>
+  <g><path d="M40 84 C 220 4, 420 174, 860 54" fill="none" stroke="hsl(26, 70%, 42%)" stroke-width="8" opacity="0.34" stroke-linecap="round"/><path d="M40 132 C 220 52, 420 222, 860 102" fill="none" stroke="hsl(39, 70%, 42%)" stroke-width="12" opacity="0.34" stroke-linecap="round"/><path d="M40 180 C 220 100, 420 270, 860 150" fill="none" stroke="hsl(52, 70%, 42%)" stroke-width="16" opacity="0.34" stroke-linecap="round"/><path d="M40 228 C 220 148, 420 318, 860 198" fill="none" stroke="hsl(65, 70%, 42%)" stroke-width="20" opacity="0.34" stroke-linecap="round"/><path d="M40 276 C 220 196, 420 366, 860 246" fill="none" stroke="hsl(78, 70%, 42%)" stroke-width="8" opacity="0.34" stroke-linecap="round"/><path d="M40 324 C 220 244, 420 414, 860 294" fill="none" stroke="hsl(91, 70%, 42%)" stroke-width="12" opacity="0.34" stroke-linecap="round"/><path d="M40 372 C 220 292, 420 462, 860 342" fill="none" stroke="hsl(104, 70%, 42%)" stroke-width="16" opacity="0.34" stroke-linecap="round"/><path d="M40 420 C 220 340, 420 510, 860 390" fill="none" stroke="hsl(117, 70%, 42%)" stroke-width="20" opacity="0.34" stroke-linecap="round"/><path d="M40 468 C 220 388, 420 558, 860 438" fill="none" stroke="hsl(130, 70%, 42%)" stroke-width="8" opacity="0.34" stroke-linecap="round"/><path d="M40 516 C 220 436, 420 606, 860 486" fill="none" stroke="hsl(143, 70%, 42%)" stroke-width="12" opacity="0.34" stroke-linecap="round"/></g>
+  <rect x="42" y="42" width="816" height="536" fill="none" stroke="rgba(255,255,255,.75)" stroke-width="10"/>
+  <rect x="64" y="64" width="772" height="492" fill="none" stroke="rgba(20,20,20,.22)" stroke-width="2"/>
+  <text x="72" y="540" font-family="Georgia, serif" font-size="34" fill="rgba(20,20,20,.72)">City Bloom</text>
+</svg>
