@@ -178,7 +178,7 @@ mtk-storefront.mtk-storefront {
     min-block-size: 46px;
     padding: 12px 18px;
     text-decoration: none; }
-  .mtk-storefront__offer-form[hidden], .mtk-storefront__request-form[hidden] {
+  .mtk-storefront__offer-form[hidden] {
     display: none !important; }
   .mtk-storefront__offer-wrapper {
     margin-block-start: 18px; }
@@ -192,28 +192,57 @@ mtk-storefront.mtk-storefront {
     padding: 0;
     text-align: left;
     text-decoration: underline; }
-  .mtk-storefront__offer-form, .mtk-storefront__request-form, .mtk-storefront__login-form, .mtk-storefront__admin-form {
+  .mtk-storefront__offer-form, .mtk-storefront__login-form, .mtk-storefront__admin-form {
     display: grid;
-    gap: 14px;
+    gap: 18px;
     margin-block-start: 18px; }
-    .mtk-storefront__offer-form label, .mtk-storefront__request-form label, .mtk-storefront__login-form label, .mtk-storefront__admin-form label {
-      color: var(--mtk-storefront-muted);
-      display: grid;
-      gap: 6px;
-      font-weight: 700; }
-    .mtk-storefront__offer-form input,
-    .mtk-storefront__offer-form textarea,
-    .mtk-storefront__offer-form select, .mtk-storefront__request-form input,
-    .mtk-storefront__request-form textarea,
-    .mtk-storefront__request-form select, .mtk-storefront__login-form input,
-    .mtk-storefront__login-form textarea,
-    .mtk-storefront__login-form select, .mtk-storefront__admin-form input,
-    .mtk-storefront__admin-form textarea,
-    .mtk-storefront__admin-form select {
+  .mtk-storefront__field {
+    display: block;
+    position: relative; }
+    .mtk-storefront__field input,
+    .mtk-storefront__field textarea,
+    .mtk-storefront__field select {
+      background: var(--mtk-storefront-surface);
       border: 1px solid var(--mtk-storefront-border);
       border-radius: 16px;
-      padding: 12px 14px;
+      color: var(--mtk-storefront-text);
+      min-block-size: 58px;
+      padding: 20px 14px 8px;
+      transition: border-color 160ms ease, box-shadow 160ms ease;
       width: 100%; }
+    .mtk-storefront__field textarea {
+      min-block-size: 118px;
+      resize: vertical; }
+    .mtk-storefront__field select {
+      appearance: auto;
+      padding-block-start: 22px; }
+    .mtk-storefront__field span {
+      background: var(--mtk-storefront-surface);
+      color: var(--mtk-storefront-muted);
+      font-size: 1rem;
+      font-weight: 700;
+      left: 14px;
+      line-height: 1;
+      padding: 0 4px;
+      pointer-events: none;
+      position: absolute;
+      top: 19px;
+      transform-origin: left top;
+      transition: color 160ms ease, top 160ms ease, transform 160ms ease; }
+    .mtk-storefront__field input:focus,
+    .mtk-storefront__field textarea:focus,
+    .mtk-storefront__field select:focus {
+      border-color: var(--mtk-storefront-primary);
+      box-shadow: 0 0 0 3px rgba(119, 90, 50, 0.16);
+      outline: 0; }
+    .mtk-storefront__field input:focus + span,
+    .mtk-storefront__field input:not(:placeholder-shown) + span,
+    .mtk-storefront__field textarea:focus + span,
+    .mtk-storefront__field textarea:not(:placeholder-shown) + span,
+    .mtk-storefront__field select + span {
+      color: var(--mtk-storefront-primary);
+      top: -7px;
+      transform: scale(0.78); }
   .mtk-storefront__admin-access {
     display: flex;
     justify-content: flex-end;

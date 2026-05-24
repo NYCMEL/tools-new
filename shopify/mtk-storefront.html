@@ -25,13 +25,13 @@
         <h2 id="mtk-storefront-admin-title">Admin Login</h2>
         <p class="mtk-storefront__admin-note">Login is only needed to add, edit, or remove paintings.</p>
         <form class="mtk-storefront__login-form">
-          <label>
-            Username
-            <input name="username" autocomplete="username" required>
+          <label class="mtk-storefront__field">
+            <input name="username" autocomplete="username" placeholder=" " required>
+            <span>Username</span>
           </label>
-          <label>
-            Password
-            <input name="password" type="password" autocomplete="current-password" required>
+          <label class="mtk-storefront__field">
+            <input name="password" type="password" autocomplete="current-password" placeholder=" " required>
+            <span>Password</span>
           </label>
           <button type="submit">Login</button>
           <p class="mtk-storefront__login-message" role="status"></p>
@@ -42,16 +42,29 @@
         <h2 id="mtk-storefront-admin-panel-title">Manage Paintings</h2>
         <form class="mtk-storefront__admin-form">
           <input type="hidden" name="id">
-          <label>Title <input name="title" required></label>
-          <label>Price <input name="price" type="number" min="0" step="1" required></label>
-          <label>Availability
-            <select name="availability">
+          <label class="mtk-storefront__field">
+            <input name="title" placeholder=" " required>
+            <span>Title</span>
+          </label>
+          <label class="mtk-storefront__field">
+            <input name="price" type="number" min="0" step="1" placeholder=" " required>
+            <span>Price</span>
+          </label>
+          <label class="mtk-storefront__field mtk-storefront__field--select">
+            <select name="availability" required>
               <option value="available">Available</option>
               <option value="unavailable">Unavailable</option>
             </select>
+            <span>Availability</span>
           </label>
-          <label>Image Path <input name="image" required></label>
-          <label>Description <textarea name="description" rows="3" required></textarea></label>
+          <label class="mtk-storefront__field">
+            <input name="image" placeholder=" " required>
+            <span>Image Path</span>
+          </label>
+          <label class="mtk-storefront__field mtk-storefront__field--textarea">
+            <textarea name="description" rows="3" placeholder=" " required></textarea>
+            <span>Description</span>
+          </label>
           <div class="mtk-storefront__admin-actions">
             <button type="submit">Save Item</button>
             <button type="button" class="mtk-storefront__admin-reset">Clear</button>

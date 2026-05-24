@@ -178,10 +178,22 @@ class MtkStorefront {
 
         <form class="mtk-storefront__offer-form" data-form-type="offer" hidden>
           <h3>${this.escape(this.store.messages?.offer || "Make an offer")}</h3>
-          <label>Your Name <input name="name" required></label>
-          <label>Email <input type="email" name="email" required></label>
-          <label>Offer Amount <input type="number" min="1" name="amount" required></label>
-          <label>Message <textarea name="message" rows="3"></textarea></label>
+          <label class="mtk-storefront__field">
+            <input name="name" placeholder=" " required>
+            <span>Your Name</span>
+          </label>
+          <label class="mtk-storefront__field">
+            <input type="email" name="email" placeholder=" " required>
+            <span>Email</span>
+          </label>
+          <label class="mtk-storefront__field">
+            <input type="number" min="1" name="amount" placeholder=" " required>
+            <span>Offer Amount</span>
+          </label>
+          <label class="mtk-storefront__field mtk-storefront__field--textarea">
+            <textarea name="message" rows="3" placeholder=" "></textarea>
+            <span>Message</span>
+          </label>
           <button type="submit">Send Offer</button>
         </form>
       </div>
