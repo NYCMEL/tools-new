@@ -1,15 +1,27 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Madam Mina</title>
-  <link rel="stylesheet" href="mtk-mina.css">
-</head>
-<body>
-  <wc-include href="mtk-mina.html"></wc-include>
-  <script src="js/_wc.js"></script>
-  <script src="mtk-mina.config.js"></script>
-  <script src="mtk-mina.js"></script>
-</body>
+    <head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>mtk-mina — Hand Paintings</title>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" />
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+	<link rel="stylesheet" href="/component/mtk-mina.css" />
+	<script src="/component/mtk-mina.config.js" defer></script>
+	<script src="/component/mtk-mina.js" defer></script>
+    </head>
+    <body>
+	<main>
+	    <!-- Inline include (no <wc-include> needed for this minimal demo).
+		 The JS waits for the element regardless of when it appears. -->
+	    <div id="mtk-mina-mount"></div>
+	</main>
+
+	<script>
+	 // Minimal include: fetch the HTML fragment and inject it.
+	 fetch("/component/mtk-mina.html")
+	     .then(r => r.text())
+	     .then(html => { document.getElementById("mtk-mina-mount").innerHTML = html; });
+	</script>
+    </body>
 </html>
