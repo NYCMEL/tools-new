@@ -1,26 +1,77 @@
-<mtk-mina class="mtk-mina" aria-label="Mina hand paintings shop">
-  <section class="mtk-mina__shell" aria-label="Mina hand paintings">
+<mtk-mina class="mtk-mina">
+  <section class="mtk-mina__shell" aria-label="Mina hand paintings shop">
     <header class="mtk-mina__hero">
-      <div>
-        <p class="mtk-mina__eyebrow" data-mina-field="eyebrow">Original art shop</p>
-        <h1 class="mtk-mina__title" data-mina-field="title">Mina Hand Paintings</h1>
-        <p class="mtk-mina__subtitle" data-mina-field="subtitle"></p>
+      <div class="mtk-mina__hero-copy">
+        <p class="mtk-mina__eyebrow">Original Art Shop</p>
+        <h1 class="mtk-mina__heading" data-mina-title>Mina Hand Paintings</h1>
+        <p class="mtk-mina__subheading" data-mina-subtitle></p>
       </div>
-      <div class="mtk-mina__stats" aria-label="Inventory summary"></div>
+      <dl class="mtk-mina__stats" aria-label="Shop summary">
+        <div class="mtk-mina__stat">
+          <dt data-mina-count-total>0</dt>
+          <dd>Paintings</dd>
+        </div>
+        <div class="mtk-mina__stat">
+          <dt data-mina-count-available>0</dt>
+          <dd>Available</dd>
+        </div>
+        <div class="mtk-mina__stat">
+          <dt data-mina-count-custom>0</dt>
+          <dd>Custom options</dd>
+        </div>
+      </dl>
     </header>
 
-    <nav class="mtk-mina__filters" aria-label="Painting filters"></nav>
+    <nav class="mtk-mina__filters" aria-label="Painting filters" data-mina-filters></nav>
 
-    <main class="mtk-mina__content">
-      <section class="mtk-mina__grid" aria-label="Paintings list"></section>
-      <p class="mtk-mina__empty" hidden></p>
-    </main>
+    <main class="mtk-mina__gallery" data-mina-gallery aria-live="polite"></main>
+
+    <section class="mtk-mina__detail" data-mina-detail aria-hidden="true" role="dialog" aria-modal="true" aria-label="Painting detail">
+      <div class="mtk-mina__detail-page">
+        <button class="mtk-mina__detail-close" type="button" data-mina-close aria-label="Close detail view">
+          <span aria-hidden="true">X</span>
+        </button>
+        <div class="mtk-mina__detail-grid">
+          <figure class="mtk-mina__detail-media">
+            <img class="mtk-mina__detail-image" data-mina-detail-image alt="">
+            <figcaption class="mtk-mina__detail-caption" data-mina-detail-caption></figcaption>
+          </figure>
+          <article class="mtk-mina__detail-content">
+            <p class="mtk-mina__detail-status" data-mina-detail-status></p>
+            <h2 class="mtk-mina__detail-title" data-mina-detail-title></h2>
+            <p class="mtk-mina__detail-description" data-mina-detail-description></p>
+            <div class="mtk-mina__detail-price" data-mina-detail-price></div>
+            <dl class="mtk-mina__detail-meta" data-mina-detail-meta></dl>
+            <ul class="mtk-mina__detail-list" data-mina-detail-list></ul>
+
+            <div class="mtk-mina__detail-actions" data-mina-detail-actions></div>
+
+            <form class="mtk-mina__offer-form" data-mina-offer-form>
+              <h3>Counter offer</h3>
+              <label>
+                <span>Your offer</span>
+                <input type="number" min="1" step="1" data-mina-offer-amount required>
+              </label>
+              <label>
+                <span>Your message</span>
+                <textarea data-mina-offer-message rows="4" placeholder="Add timing, shipping, or custom notes"></textarea>
+              </label>
+              <button class="mtk-mina__button mtk-mina__button--primary" type="submit">Submit Offer</button>
+            </form>
+
+            <form class="mtk-mina__similar-form" data-mina-similar-form>
+              <h3>Order similar painting</h3>
+              <label>
+                <span>Request details</span>
+                <textarea data-mina-similar-message rows="4" placeholder="Tell Mina what you want changed or repeated"></textarea>
+              </label>
+              <button class="mtk-mina__button mtk-mina__button--secondary" type="submit">Send Similar Request</button>
+            </form>
+
+            <p class="mtk-mina__notice" data-mina-notice aria-live="polite"></p>
+          </article>
+        </div>
+      </div>
+    </section>
   </section>
-
-  <dialog class="mtk-mina__dialog" aria-label="Painting request dialog">
-    <form class="mtk-mina__dialog-card" method="dialog">
-      <button class="mtk-mina__dialog-close" value="cancel" aria-label="Close dialog" type="submit">×</button>
-      <div class="mtk-mina__dialog-body"></div>
-    </form>
-  </dialog>
 </mtk-mina>
