@@ -240,6 +240,13 @@ mtk-storefront.mtk-storefront {
 
 
 
+
+
+  &__offer-form[hidden],
+  &__request-form[hidden] {
+    display: none !important;
+  }
+
   &__offer-wrapper {
     margin-block-start: 18px;
   }

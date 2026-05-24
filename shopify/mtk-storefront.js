@@ -185,13 +185,6 @@ class MtkStorefront {
           <button type="submit">Send Offer</button>
         </form>
       </div>
-      <form class="mtk-storefront__request-form" data-form-type="request">
-        <h3>${isAvailable ? "Ask a question" : this.escape(this.store.messages?.orderSimilar || "Request similar painting")}</h3>
-        <label>Your Name <input name="name" required></label>
-        <label>Email <input type="email" name="email" required></label>
-        <label>Request <textarea name="message" rows="3" required></textarea></label>
-        <button type="submit">${isAvailable ? "Send Request" : "Request Similar or Same Painting"}</button>
-      </form>
       <p class="mtk-storefront__detail-status" role="status"></p>
     `;
   }
@@ -203,17 +196,16 @@ class MtkStorefront {
 
     const formData = Object.fromEntries(new FormData(form).entries());
     const type = form.dataset.formType;
-    const endpoint = type === "offer" ? "/offers" : "/requests";
     const body = { ...formData, paintingId: this.activePainting.id, type };
     const status = this.detailContentEl.querySelector(".mtk-storefront__detail-status");
 
     try {
-      await this.api(endpoint, "POST", body);
-      status.textContent = type === "offer" ? "Offer sent. Please wait for a reply." : "Request sent. Please wait for a reply.";
+      await this.api("/offers", "POST", body);
+      status.textContent = "Offer sent. Please wait for a reply.";
       form.reset();
-      this.publish(type === "offer" ? "offer-submit" : "request-submit", body);
+      this.publish("offer-submit", body);
     } catch (error) {
-      status.textContent = "Saved locally for demo. Connect the Node server to persist this request.";
+      status.textContent = "Saved locally for demo. Connect the Node server to persist this offer.";
       this.publish("submit-fallback", body);
     }
   }
