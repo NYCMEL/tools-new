@@ -1,16 +1,91 @@
-body { font-family: Roboto, system-ui, sans-serif; margin: 0; background: #fafafa; color: #1f1f1f; }
-.admin { max-width: 1100px; margin: 0 auto; padding: 32px 20px; }
-.admin__login { max-width: 360px; margin: 80px auto; background: #fff; padding: 24px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,.08); }
-.admin__login form, #itemForm { display: grid; gap: 12px; }
-label { display: grid; gap: 4px; font-size: .9rem; color: #555; }
-input, textarea { font: inherit; padding: 8px 10px; border: 1px solid #ccc; border-radius: 6px; }
-button { font: inherit; padding: 10px 16px; border: 0; border-radius: 999px; background: #6750a4; color: #fff; cursor: pointer; }
-button:hover { background: #5a4593; }
-.admin__error { color: #b3261e; margin: 0; }
-.admin__dash header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
-table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,.06); margin-bottom: 32px; }
-th, td { padding: 12px; text-align: left; border-bottom: 1px solid #eee; font-size: .92rem; }
-th { background: #f3eefc; }
-dialog { border: 0; border-radius: 12px; padding: 24px; max-width: 480px; width: 90%; }
-dialog::backdrop { background: rgba(0,0,0,.4); }
-menu { display: flex; gap: 8px; justify-content: flex-end; padding: 0; margin: 16px 0 0; }
+body {
+  font-family: Roboto, system-ui, sans-serif;
+  margin: 0;
+  background: #fafafa;
+  color: #1f1f1f; }
+
+.admin {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 32px 20px; }
+
+.admin__login {
+  max-width: 360px;
+  margin: 80px auto;
+  background: #fff;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); }
+
+.admin__login form, #itemForm {
+  display: grid;
+  gap: 12px; }
+
+label {
+  display: grid;
+  gap: 4px;
+  font-size: .9rem;
+  color: #555; }
+
+input, textarea {
+  font: inherit;
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px; }
+
+button {
+  font: inherit;
+  padding: 10px 16px;
+  border: 0;
+  border-radius: 999px;
+  background: #6750a4;
+  color: #fff;
+  cursor: pointer; }
+
+button:hover {
+  background: #5a4593; }
+
+.admin__error {
+  color: #b3261e;
+  margin: 0; }
+
+.admin__dash header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px; }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  margin-bottom: 32px; }
+
+th, td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+  font-size: .92rem; }
+
+th {
+  background: #f3eefc; }
+
+dialog {
+  border: 0;
+  border-radius: 12px;
+  padding: 24px;
+  max-width: 480px;
+  width: 90%; }
+
+dialog::backdrop {
+  background: rgba(0, 0, 0, 0.4); }
+
+menu {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  padding: 0;
+  margin: 16px 0 0; }
