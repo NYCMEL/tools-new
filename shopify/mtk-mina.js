@@ -9,7 +9,22 @@
       this.activeFilter = "all";
       this.activePainting = null;
       this.lastFocused = null;
+      this.els = {};
+      this.onMessage = this.onMessage.bind(this);
+      this.init();
+    }
 
+    init() {
+      this.cache();
+      this.renderShell();
+      this.renderFilters();
+      this.renderGallery();
+      this.bindEvents();
+      this.subscribe();
+      this.publish("mtk-mina-ready", { count: this.paintings.length });
+    }
+
+    cache() {
       this.els = {
         title: this.root.querySelector("[data-mina-title]"),
         subtitle: this.root.querySelector("[data-mina-subtitle]"),
@@ -36,31 +51,15 @@
         offerMessage: this.root.querySelector("[data-mina-offer-message]"),
         similarMessage: this.root.querySelector("[data-mina-similar-message]")
       };
-
-      this.onMessage = this.onMessage.bind(this);
-      this.init();
-    }
-
-    init() {
-      this.renderShell();
-      this.renderFilters();
-      this.renderGallery();
-      this.bindEvents();
-      this.subscribe();
-      this.publish("mtk-mina-ready", { count: this.paintings.length });
     }
 
     renderShell() {
       const app = this.config.app || {};
-      if (this.els.title) this.els.title.textContent = app.name || "Mina Hand Paintings";
-      if (this.els.subtitle) this.els.subtitle.textContent = app.subtitle || "";
-      if (this.els.total) this.els.total.textContent = String(this.paintings.length);
-      if (this.els.available) {
-        this.els.available.textContent = String(this.paintings.filter((item) => item.status === "available").length);
-      }
-      if (this.els.custom) {
-        this.els.custom.textContent = String(this.paintings.filter((item) => item.similarOrderEnabled).length);
-      }
+      this.els.title.textContent = app.name || "Mina Hand Paintings";
+      this.els.subtitle.textContent = app.subtitle || "";
+      this.els.total.textContent = String(this.paintings.length);
+      this.els.available.textContent = String(this.paintings.filter((item) => item.status === "available").length);
+      this.els.custom.textContent = String(this.paintings.filter((item) => item.similarOrderEnabled).length);
     }
 
     renderFilters() {
@@ -111,9 +110,7 @@
       this.els.detail.addEventListener("click", (event) => {
         if (event.target === this.els.detail) this.closeDetail();
         const action = event.target.closest("[data-action]");
-        if (action && this.activePainting) {
-          this.handleAction(action.dataset.action, this.activePainting);
-        }
+        if (action && this.activePainting) this.handleAction(action.dataset.action, this.activePainting);
       });
 
       this.els.offerForm.addEventListener("submit", (event) => {
@@ -138,16 +135,13 @@
       });
 
       document.addEventListener("keydown", (event) => {
-        if (event.key === "Escape" && this.els.detail.classList.contains("is-open")) {
-          this.closeDetail();
-        }
+        if (event.key === "Escape" && this.els.detail.classList.contains("is-open")) this.closeDetail();
       });
     }
 
     openDetail(painting, trigger) {
       this.activePainting = painting;
       this.lastFocused = trigger || document.activeElement;
-
       this.els.detailImage.src = painting.image;
       this.els.detailImage.alt = painting.title;
       this.els.detailCaption.textContent = `${painting.title} by ${painting.artist || "Mina"}`;
@@ -171,7 +165,7 @@
       `;
 
       this.els.offerForm.hidden = true;
-      this.els.similarForm.hidden = available && !painting.similarOrderEnabled;
+      this.els.similarForm.hidden = true;
       this.els.notice.textContent = "";
       this.els.detail.classList.add("is-open");
       this.els.detail.setAttribute("aria-hidden", "false");
@@ -218,32 +212,26 @@
       }
     }
 
-    onMessage(message) {
-      this.publish("mtk-mina-message-received", { message });
-      if (message && message.filter) {
-        this.activeFilter = message.filter;
+    onMessage(message, data) {
+      const payload = data || message || {};
+      this.publish("mtk-mina-message-received", { message: payload });
+      if (payload.filter) {
+        this.activeFilter = payload.filter;
         this.renderFilters();
         this.renderGallery();
       }
     }
 
     publish(name, detail) {
-      if (window.wc && typeof window.wc.log === "function") {
-        window.wc.log(name, detail);
-      } else {
-        console.log(name, detail);
-      }
+      if (window.wc && typeof window.wc.log === "function") window.wc.log(name, detail);
+      else console.log(name, detail);
 
-      if (window.wc && typeof window.wc.publish === "function") {
-        window.wc.publish(name, detail);
-      } else {
-        this.root.dispatchEvent(new CustomEvent(name, { bubbles: true, detail }));
-      }
+      if (window.wc && typeof window.wc.publish === "function") window.wc.publish(name, detail);
+      else this.root.dispatchEvent(new CustomEvent(name, { bubbles: true, detail }));
     }
 
     money(value) {
-      const locale = (this.config.app || {}).currencyLocale || "en-US";
-      return new Intl.NumberFormat(locale, {
+      return new Intl.NumberFormat((this.config.app || {}).currencyLocale || "en-US", {
         style: "currency",
         currency: "USD"
       }).format(Number(value || 0));
@@ -259,30 +247,27 @@
       }[char]));
     }
 
-    static waitForElement(selector, callback) {
-      const existing = document.querySelector(selector);
-      if (existing) {
-        callback(existing);
-        return;
-      }
-
-      const observer = new MutationObserver(() => {
-        const element = document.querySelector(selector);
-        if (element) {
-          observer.disconnect();
-          callback(element);
-        }
-      });
-
-      observer.observe(document.documentElement, { childList: true, subtree: true });
-    }
-
     static boot() {
-      MtkMina.waitForElement("mtk-mina.mtk-mina", (element) => {
-        if (element.dataset.mtkMinaReady === "true") return;
-        element.dataset.mtkMinaReady = "true";
-        new MtkMina(element, window.mtkMinaConfig);
-      });
+      const start = () => {
+        const tryInit = () => {
+          const element = document.querySelector("mtk-mina.mtk-mina");
+          if (!element || element.dataset.mtkMinaReady === "true") return false;
+          element.dataset.mtkMinaReady = "true";
+          new MtkMina(element, window.mtkMinaConfig);
+          return true;
+        };
+
+        if (tryInit()) return;
+
+        const observer = new MutationObserver(() => {
+          if (tryInit()) observer.disconnect();
+        });
+
+        observer.observe(document.documentElement, { childList: true, subtree: true });
+      };
+
+      if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start, { once: true });
+      else start();
     }
   }
 

@@ -7,23 +7,13 @@
         <p class="mtk-mina__subheading" data-mina-subtitle></p>
       </div>
       <dl class="mtk-mina__stats" aria-label="Shop summary">
-        <div class="mtk-mina__stat">
-          <dt data-mina-count-total>0</dt>
-          <dd>Paintings</dd>
-        </div>
-        <div class="mtk-mina__stat">
-          <dt data-mina-count-available>0</dt>
-          <dd>Available</dd>
-        </div>
-        <div class="mtk-mina__stat">
-          <dt data-mina-count-custom>0</dt>
-          <dd>Custom options</dd>
-        </div>
+        <div class="mtk-mina__stat"><dt data-mina-count-total>0</dt><dd>Paintings</dd></div>
+        <div class="mtk-mina__stat"><dt data-mina-count-available>0</dt><dd>Available</dd></div>
+        <div class="mtk-mina__stat"><dt data-mina-count-custom>0</dt><dd>Custom options</dd></div>
       </dl>
     </header>
 
     <nav class="mtk-mina__filters" aria-label="Painting filters" data-mina-filters></nav>
-
     <main class="mtk-mina__gallery" data-mina-gallery aria-live="polite"></main>
 
     <section class="mtk-mina__detail" data-mina-detail aria-hidden="true" role="dialog" aria-modal="true" aria-label="Painting detail">
@@ -46,25 +36,16 @@
 
             <div class="mtk-mina__detail-actions" data-mina-detail-actions></div>
 
-            <form class="mtk-mina__offer-form" data-mina-offer-form>
+            <form class="mtk-mina__offer-form" data-mina-offer-form hidden>
               <h3>Counter offer</h3>
-              <label>
-                <span>Your offer</span>
-                <input type="number" min="1" step="1" data-mina-offer-amount required>
-              </label>
-              <label>
-                <span>Your message</span>
-                <textarea data-mina-offer-message rows="4" placeholder="Add timing, shipping, or custom notes"></textarea>
-              </label>
+              <label><span>Your offer</span><input type="number" min="1" step="1" data-mina-offer-amount required></label>
+              <label><span>Your message</span><textarea data-mina-offer-message rows="4" placeholder="Add timing, shipping, or custom notes"></textarea></label>
               <button class="mtk-mina__button mtk-mina__button--primary" type="submit">Submit Offer</button>
             </form>
 
-            <form class="mtk-mina__similar-form" data-mina-similar-form>
+            <form class="mtk-mina__similar-form" data-mina-similar-form hidden>
               <h3>Order similar painting</h3>
-              <label>
-                <span>Request details</span>
-                <textarea data-mina-similar-message rows="4" placeholder="Tell Mina what you want changed or repeated"></textarea>
-              </label>
+              <label><span>Request details</span><textarea data-mina-similar-message rows="4" placeholder="Tell Mina what you want changed or repeated"></textarea></label>
               <button class="mtk-mina__button mtk-mina__button--secondary" type="submit">Send Similar Request</button>
             </form>
 

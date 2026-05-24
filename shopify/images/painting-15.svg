@@ -1,23 +1,26 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 650" role="img" aria-label="Red Lantern Alley abstract painting">
-<rect width="900" height="650" fill="hsl(195, 45%, 48%)"/>
-<rect x="435" y="265" width="155" height="205" rx="20" fill="hsl(195, 45%, 48%)" opacity="0.18"/>
-<rect x="518" y="312" width="192" height="228" rx="36" fill="hsl(244, 57%, 56%)" opacity="0.27"/>
-<rect x="601" y="359" width="229" height="251" rx="52" fill="hsl(293, 69%, 64%)" opacity="0.36"/>
-<rect x="684" y="406" width="266" height="274" rx="68" fill="hsl(342, 45%, 72%)" opacity="0.45"/>
-<rect x="767" y="453" width="303" height="297" rx="20" fill="hsl(31, 57%, 48%)" opacity="0.54"/>
-<rect x="850" y="500" width="340" height="100" rx="36" fill="hsl(80, 69%, 56%)" opacity="0.18"/>
-<rect x="33" y="547" width="377" height="123" rx="52" fill="hsl(129, 45%, 64%)" opacity="0.27"/>
-<rect x="116" y="594" width="154" height="146" rx="68" fill="hsl(178, 57%, 72%)" opacity="0.36"/>
-<rect x="199" y="641" width="191" height="169" rx="20" fill="hsl(195, 45%, 48%)" opacity="0.45"/>
-<rect x="282" y="38" width="228" height="192" rx="36" fill="hsl(244, 57%, 56%)" opacity="0.54"/>
-<rect x="365" y="85" width="265" height="215" rx="52" fill="hsl(293, 69%, 64%)" opacity="0.18"/>
-<rect x="448" y="132" width="302" height="238" rx="68" fill="hsl(342, 45%, 72%)" opacity="0.27"/>
-<rect x="531" y="179" width="339" height="261" rx="20" fill="hsl(31, 57%, 48%)" opacity="0.36"/>
-<rect x="614" y="226" width="376" height="284" rx="36" fill="hsl(80, 69%, 56%)" opacity="0.45"/>
-<polyline points="0,192 100,261 200,317 300,327 400,284 500,214 600,160 700,155 800,201 900,271" fill="none" stroke="hsl(342, 45%, 72%)" stroke-width="12" opacity="0.48" stroke-linecap="round"/>
-<polyline points="0,303 100,359 200,369 300,326 400,256 500,202 600,197 700,243 800,313 900,364" fill="none" stroke="hsl(31, 57%, 48%)" stroke-width="16" opacity="0.48" stroke-linecap="round"/>
-<polyline points="0,401 100,411 200,368 300,298 400,244 500,239 600,285 700,355 800,406 900,408" fill="none" stroke="hsl(80, 69%, 56%)" stroke-width="20" opacity="0.48" stroke-linecap="round"/>
-<polyline points="0,453 100,410 200,340 300,286 400,281 500,327 600,397 700,448 800,450 900,400" fill="none" stroke="hsl(129, 45%, 64%)" stroke-width="24" opacity="0.48" stroke-linecap="round"/>
-<polyline points="0,452 100,382 200,328 300,323 400,369 500,439 600,490 700,492 800,442 900,372" fill="none" stroke="hsl(178, 57%, 72%)" stroke-width="28" opacity="0.48" stroke-linecap="round"/>
-<rect x="0" y="0" width="900" height="650" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="16"/>
+<rect width="900" height="650" fill="hsl(135, 48%, 50%)"/>
+<rect x="465" y="645" width="145" height="295" rx="18" fill="hsl(135, 48%, 50%)" opacity="0.18"/>
+<rect x="544" y="48" width="184" height="94" rx="34" fill="hsl(182, 60%, 57%)" opacity="0.26"/>
+<rect x="623" y="101" width="223" height="123" rx="50" fill="hsl(229, 72%, 64%)" opacity="0.34"/>
+<rect x="702" y="154" width="262" height="152" rx="66" fill="hsl(276, 48%, 71%)" opacity="0.42"/>
+<rect x="781" y="207" width="301" height="181" rx="18" fill="hsl(323, 60%, 50%)" opacity="0.50"/>
+<rect x="860" y="260" width="340" height="210" rx="34" fill="hsl(10, 72%, 57%)" opacity="0.18"/>
+<rect x="39" y="313" width="379" height="239" rx="50" fill="hsl(57, 48%, 64%)" opacity="0.26"/>
+<rect x="118" y="366" width="138" height="268" rx="66" fill="hsl(104, 60%, 71%)" opacity="0.34"/>
+<rect x="197" y="419" width="177" height="297" rx="18" fill="hsl(135, 48%, 50%)" opacity="0.42"/>
+<rect x="276" y="472" width="216" height="96" rx="34" fill="hsl(182, 60%, 57%)" opacity="0.50"/>
+<rect x="355" y="525" width="255" height="125" rx="50" fill="hsl(229, 72%, 64%)" opacity="0.18"/>
+<rect x="434" y="578" width="294" height="154" rx="66" fill="hsl(276, 48%, 71%)" opacity="0.26"/>
+<rect x="513" y="631" width="333" height="183" rx="18" fill="hsl(323, 60%, 50%)" opacity="0.34"/>
+<rect x="592" y="34" width="372" height="212" rx="34" fill="hsl(10, 72%, 57%)" opacity="0.42"/>
+<rect x="671" y="87" width="131" height="241" rx="50" fill="hsl(57, 48%, 64%)" opacity="0.50"/>
+<rect x="750" y="140" width="170" height="270" rx="66" fill="hsl(104, 60%, 71%)" opacity="0.18"/>
+<polyline points="0,138 90,174 180,236 270,288 360,304 450,275 540,216 630,159 720,135 810,156 900,212" fill="none" stroke="hsl(229, 72%, 64%)" stroke-width="10" opacity="0.5" stroke-linecap="round"/>
+<polyline points="0,222 90,284 180,336 270,352 360,323 450,264 540,207 630,183 720,204 810,260 900,319" fill="none" stroke="hsl(276, 48%, 71%)" stroke-width="13" opacity="0.5" stroke-linecap="round"/>
+<polyline points="0,332 90,384 180,400 270,371 360,312 450,255 540,231 630,252 720,308 810,367 900,400" fill="none" stroke="hsl(323, 60%, 50%)" stroke-width="16" opacity="0.5" stroke-linecap="round"/>
+<polyline points="0,432 90,448 180,419 270,360 360,303 450,279 540,300 630,356 720,415 810,448 900,435" fill="none" stroke="hsl(10, 72%, 57%)" stroke-width="19" opacity="0.5" stroke-linecap="round"/>
+<polyline points="0,496 90,467 180,408 270,351 360,327 450,348 540,404 630,463 720,496 810,483 900,432" fill="none" stroke="hsl(57, 48%, 64%)" stroke-width="22" opacity="0.5" stroke-linecap="round"/>
+<polyline points="0,515 90,456 180,399 270,375 360,396 450,452 540,511 630,544 720,531 810,480 900,419" fill="none" stroke="hsl(104, 60%, 71%)" stroke-width="25" opacity="0.5" stroke-linecap="round"/>
+<rect x="0" y="0" width="900" height="650" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="18"/>
 </svg>

@@ -1,23 +1,26 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 650" role="img" aria-label="Coral Sky Garden abstract painting">
-<rect width="900" height="650" fill="hsl(185, 45%, 48%)"/>
-<rect x="145" y="305" width="305" height="195" rx="20" fill="hsl(185, 45%, 48%)" opacity="0.18"/>
-<rect x="228" y="352" width="342" height="218" rx="36" fill="hsl(234, 57%, 56%)" opacity="0.27"/>
-<rect x="311" y="399" width="379" height="241" rx="52" fill="hsl(283, 69%, 64%)" opacity="0.36"/>
-<rect x="394" y="446" width="156" height="264" rx="68" fill="hsl(332, 45%, 72%)" opacity="0.45"/>
-<rect x="477" y="493" width="193" height="287" rx="20" fill="hsl(21, 57%, 48%)" opacity="0.54"/>
-<rect x="560" y="540" width="230" height="90" rx="36" fill="hsl(70, 69%, 56%)" opacity="0.18"/>
-<rect x="643" y="587" width="267" height="113" rx="52" fill="hsl(119, 45%, 64%)" opacity="0.27"/>
-<rect x="726" y="634" width="304" height="136" rx="68" fill="hsl(168, 57%, 72%)" opacity="0.36"/>
-<rect x="809" y="31" width="341" height="159" rx="20" fill="hsl(185, 45%, 48%)" opacity="0.45"/>
-<rect x="892" y="78" width="378" height="182" rx="36" fill="hsl(234, 57%, 56%)" opacity="0.54"/>
-<rect x="75" y="125" width="155" height="205" rx="52" fill="hsl(283, 69%, 64%)" opacity="0.18"/>
-<rect x="158" y="172" width="192" height="228" rx="68" fill="hsl(332, 45%, 72%)" opacity="0.27"/>
-<rect x="241" y="219" width="229" height="251" rx="20" fill="hsl(21, 57%, 48%)" opacity="0.36"/>
-<rect x="324" y="266" width="266" height="274" rx="36" fill="hsl(70, 69%, 56%)" opacity="0.45"/>
-<polyline points="0,172 100,150 200,183 300,250 400,311 500,329 600,293 700,224 800,165 900,152" fill="none" stroke="hsl(332, 45%, 72%)" stroke-width="12" opacity="0.48" stroke-linecap="round"/>
-<polyline points="0,192 100,225 200,292 300,353 400,371 500,335 600,266 700,207 800,194 900,234" fill="none" stroke="hsl(21, 57%, 48%)" stroke-width="16" opacity="0.48" stroke-linecap="round"/>
-<polyline points="0,267 100,334 200,395 300,413 400,377 500,308 600,249 700,236 800,276 900,345" fill="none" stroke="hsl(70, 69%, 56%)" stroke-width="20" opacity="0.48" stroke-linecap="round"/>
-<polyline points="0,376 100,437 200,455 300,419 400,350 500,291 600,278 700,318 800,387 900,443" fill="none" stroke="hsl(119, 45%, 64%)" stroke-width="24" opacity="0.48" stroke-linecap="round"/>
-<polyline points="0,479 100,497 200,461 300,392 400,333 500,320 600,360 700,429 800,485 900,495" fill="none" stroke="hsl(168, 57%, 72%)" stroke-width="28" opacity="0.48" stroke-linecap="round"/>
-<rect x="0" y="0" width="900" height="650" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="16"/>
+<rect width="900" height="650" fill="hsl(165, 48%, 50%)"/>
+<rect x="155" y="215" width="315" height="235" rx="18" fill="hsl(165, 48%, 50%)" opacity="0.18"/>
+<rect x="234" y="268" width="354" height="264" rx="34" fill="hsl(212, 60%, 57%)" opacity="0.26"/>
+<rect x="313" y="321" width="393" height="293" rx="50" fill="hsl(259, 72%, 64%)" opacity="0.34"/>
+<rect x="392" y="374" width="152" height="92" rx="66" fill="hsl(306, 48%, 71%)" opacity="0.42"/>
+<rect x="471" y="427" width="191" height="121" rx="18" fill="hsl(353, 60%, 50%)" opacity="0.50"/>
+<rect x="550" y="480" width="230" height="150" rx="34" fill="hsl(40, 72%, 57%)" opacity="0.18"/>
+<rect x="629" y="533" width="269" height="179" rx="50" fill="hsl(87, 48%, 64%)" opacity="0.26"/>
+<rect x="708" y="586" width="308" height="208" rx="66" fill="hsl(134, 60%, 71%)" opacity="0.34"/>
+<rect x="787" y="639" width="347" height="237" rx="18" fill="hsl(165, 48%, 50%)" opacity="0.42"/>
+<rect x="866" y="42" width="386" height="266" rx="34" fill="hsl(212, 60%, 57%)" opacity="0.50"/>
+<rect x="45" y="95" width="145" height="295" rx="50" fill="hsl(259, 72%, 64%)" opacity="0.18"/>
+<rect x="124" y="148" width="184" height="94" rx="66" fill="hsl(306, 48%, 71%)" opacity="0.26"/>
+<rect x="203" y="201" width="223" height="123" rx="18" fill="hsl(353, 60%, 50%)" opacity="0.34"/>
+<rect x="282" y="254" width="262" height="152" rx="34" fill="hsl(40, 72%, 57%)" opacity="0.42"/>
+<rect x="361" y="307" width="301" height="181" rx="50" fill="hsl(87, 48%, 64%)" opacity="0.50"/>
+<rect x="440" y="360" width="340" height="210" rx="66" fill="hsl(134, 60%, 71%)" opacity="0.18"/>
+<polyline points="0,171 90,137 180,147 270,196 360,258 450,300 540,298 630,255 720,193 810,145 900,138" fill="none" stroke="hsl(259, 72%, 64%)" stroke-width="10" opacity="0.5" stroke-linecap="round"/>
+<polyline points="0,185 90,195 180,244 270,306 360,348 450,346 540,303 630,241 720,193 810,186 900,222" fill="none" stroke="hsl(306, 48%, 71%)" stroke-width="13" opacity="0.5" stroke-linecap="round"/>
+<polyline points="0,243 90,292 180,354 270,396 360,394 450,351 540,289 630,241 720,234 810,270 900,332" fill="none" stroke="hsl(353, 60%, 50%)" stroke-width="16" opacity="0.5" stroke-linecap="round"/>
+<polyline points="0,340 90,402 180,444 270,442 360,399 450,337 540,289 630,282 720,318 810,380 900,432" fill="none" stroke="hsl(40, 72%, 57%)" stroke-width="19" opacity="0.5" stroke-linecap="round"/>
+<polyline points="0,450 90,492 180,490 270,447 360,385 450,337 540,330 630,366 720,428 810,480 900,496" fill="none" stroke="hsl(87, 48%, 64%)" stroke-width="22" opacity="0.5" stroke-linecap="round"/>
+<polyline points="0,540 90,538 180,495 270,433 360,385 450,378 540,414 630,476 720,528 810,544 900,515" fill="none" stroke="hsl(134, 60%, 71%)" stroke-width="25" opacity="0.5" stroke-linecap="round"/>
+<rect x="0" y="0" width="900" height="650" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="18"/>
 </svg>
