@@ -173,28 +173,39 @@ class MtkStorefront {
       </div>
       <div class="mtk-storefront__offer-wrapper">
         <button type="button" class="mtk-storefront__offer-link">
-          ${this.escape(this.store.messages?.offer || "Make a counter offer")}
+          ${isAvailable 
+            ? this.escape(this.store.messages?.offer || "Make a counter offer")
+            : this.escape(this.store.messages?.orderSimilar || "Request a similar painting")}
         </button>
 
-        <form class="mtk-storefront__offer-form" data-form-type="offer" hidden>
-          <h3>${this.escape(this.store.messages?.offer || "Make an offer")}</h3>
+        <form class="mtk-storefront__offer-form" data-form-type="${isAvailable ? "offer" : "request"}" hidden>
+          <h3>${isAvailable ? "Make a counter offer" : "Request a similar painting"}</h3>
+
           <label class="mtk-storefront__field">
             <input name="name" placeholder=" " required>
             <span>Your Name</span>
           </label>
+
           <label class="mtk-storefront__field">
             <input type="email" name="email" placeholder=" " required>
             <span>Email</span>
           </label>
+
+          ${isAvailable ? `
           <label class="mtk-storefront__field">
             <input type="number" min="1" name="amount" placeholder=" " required>
             <span>Offer Amount</span>
           </label>
+          ` : ""}
+
           <label class="mtk-storefront__field mtk-storefront__field--textarea">
-            <textarea name="message" rows="3" placeholder=" "></textarea>
-            <span>Message</span>
+            <textarea name="message" rows="3" placeholder=" " required></textarea>
+            <span>${isAvailable ? "Message" : "Describe the painting you want"}</span>
           </label>
-          <button type="submit">Send Offer</button>
+
+          <button type="submit">
+            ${isAvailable ? "Send Offer" : "Send Request"}
+          </button>
         </form>
       </div>
       <p class="mtk-storefront__detail-status" role="status"></p>
@@ -212,12 +223,21 @@ class MtkStorefront {
     const status = this.detailContentEl.querySelector(".mtk-storefront__detail-status");
 
     try {
-      await this.api("/offers", "POST", body);
-      status.textContent = "Offer sent. Please wait for a reply.";
+      const endpoint = type === "request" ? "/requests" : "/offers";
+      await this.api(endpoint, "POST", body);
+
+      status.textContent = type === "request"
+        ? "Request sent. Please wait for a reply."
+        : "Offer sent. Please wait for a reply.";
+
       form.reset();
-      this.publish("offer-submit", body);
+
+      this.publish(
+        type === "request" ? "request-submit" : "offer-submit",
+        body
+      );
     } catch (error) {
-      status.textContent = "Saved locally for demo. Connect the Node server to persist this offer.";
+      status.textContent = "Saved locally for demo. Connect the Node server to persist this submission.";
       this.publish("submit-fallback", body);
     }
   }
