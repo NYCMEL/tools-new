@@ -5,13 +5,21 @@
     constructor(root, config) {
       this.root = root;
       this.config = config || window.mtkMinaConfig || {};
-      this.paintings = this.config.paintings || [];
+      this.paintings = this.loadPaintings();
       this.activeFilter = "all";
       this.activePainting = null;
       this.lastFocused = null;
       this.els = {};
       this.onMessage = this.onMessage.bind(this);
       this.init();
+    }
+
+    loadPaintings() {
+      try {
+        const stored = localStorage.getItem("mtk-mina-paintings");
+        if (stored) return JSON.parse(stored);
+      } catch (ignore) {}
+      return this.config.paintings || [];
     }
 
     init() {
@@ -45,6 +53,11 @@
         detailMeta: this.root.querySelector("[data-mina-detail-meta]"),
         detailList: this.root.querySelector("[data-mina-detail-list]"),
         detailActions: this.root.querySelector("[data-mina-detail-actions]"),
+        paypalForm: this.root.querySelector("[data-mina-paypal-form]"),
+        paypalBusiness: this.root.querySelector("[data-paypal-business]"),
+        paypalItem: this.root.querySelector("[data-paypal-item]"),
+        paypalAmount: this.root.querySelector("[data-paypal-amount]"),
+        paypalCurrency: this.root.querySelector("[data-paypal-currency]"),
         offerForm: this.root.querySelector("[data-mina-offer-form]"),
         similarForm: this.root.querySelector("[data-mina-similar-form]"),
         notice: this.root.querySelector("[data-mina-notice]"),
@@ -70,6 +83,7 @@
 
     renderFilters() {
       const filters = ((this.config.app || {}).filters || ["all", "available", "sold", "reserved", "unavailable"]);
+      if (!this.els.filters) return;
       this.els.filters.innerHTML = filters.map((filter) => {
         const label = filter.charAt(0).toUpperCase() + filter.slice(1);
         return `<button class="mtk-mina__filter" type="button" data-filter="${filter}" aria-pressed="${filter === this.activeFilter}">${label}</button>`;
@@ -77,6 +91,7 @@
     }
 
     renderGallery() {
+      if (!this.els.gallery) return;
       const items = this.paintings.filter((painting) => this.activeFilter === "all" || painting.status === this.activeFilter);
       this.els.gallery.innerHTML = items.map((painting) => `
         <button class="mtk-mina__card" type="button" data-painting-id="${painting.id}" aria-label="Open details for ${this.escape(painting.title)}">
@@ -95,53 +110,63 @@
     }
 
     bindEvents() {
-      this.els.filters.addEventListener("click", (event) => {
-        const button = event.target.closest("[data-filter]");
-        if (!button) return;
-        this.activeFilter = button.dataset.filter;
-        this.renderFilters();
-        this.renderGallery();
-        this.publish("mtk-mina-filter", { filter: this.activeFilter });
-      });
-
-      this.els.gallery.addEventListener("click", (event) => {
-        const card = event.target.closest("[data-painting-id]");
-        if (!card) return;
-        const painting = this.paintings.find((item) => item.id === card.dataset.paintingId);
-        if (painting) this.openDetail(painting, card);
-      });
-
-      this.els.close.addEventListener("click", () => this.closeDetail());
-
-      this.els.detail.addEventListener("click", (event) => {
-        if (event.target === this.els.detail) this.closeDetail();
-        const action = event.target.closest("[data-action]");
-        if (action && this.activePainting) this.handleAction(action.dataset.action, this.activePainting);
-      });
-
-      this.els.offerForm.addEventListener("submit", (event) => {
-        event.preventDefault();
-        if (!this.activePainting) return;
-        this.publish("mtk-mina-counter-offer", {
-          paintingId: this.activePainting.id,
-          amount: this.els.offerAmount.value,
-          message: this.els.offerMessage.value
+      if (this.els.filters) {
+        this.els.filters.addEventListener("click", (event) => {
+          const button = event.target.closest("[data-filter]");
+          if (!button) return;
+          this.activeFilter = button.dataset.filter;
+          this.renderFilters();
+          this.renderGallery();
+          this.publish("mtk-mina-filter", { filter: this.activeFilter });
         });
-        this.showNotice("Counter offer sent. Please wait for Madam Mina’s reply.");
-      });
+      }
 
-      this.els.similarForm.addEventListener("submit", (event) => {
-        event.preventDefault();
-        if (!this.activePainting) return;
-        this.publish("mtk-mina-similar-order", {
-          paintingId: this.activePainting.id,
-          message: this.els.similarMessage.value
+      if (this.els.gallery) {
+        this.els.gallery.addEventListener("click", (event) => {
+          const card = event.target.closest("[data-painting-id]");
+          if (!card) return;
+          const painting = this.paintings.find((item) => item.id === card.dataset.paintingId);
+          if (painting) this.openDetail(painting, card);
         });
-        this.showNotice("Similar painting request sent.");
-      });
+      }
+
+      if (this.els.close) this.els.close.addEventListener("click", () => this.closeDetail());
+
+      if (this.els.detail) {
+        this.els.detail.addEventListener("click", (event) => {
+          if (event.target === this.els.detail) this.closeDetail();
+          const action = event.target.closest("[data-action]");
+          if (action && this.activePainting) this.handleAction(action.dataset.action, this.activePainting);
+        });
+      }
+
+      if (this.els.offerForm) {
+        this.els.offerForm.addEventListener("submit", (event) => {
+          event.preventDefault();
+          if (!this.activePainting) return;
+          this.publish("mtk-mina-counter-offer", {
+            paintingId: this.activePainting.id,
+            amount: this.els.offerAmount.value,
+            message: this.els.offerMessage.value
+          });
+          this.showNotice("Counter offer sent. Please wait for Madam Mina’s reply.");
+        });
+      }
+
+      if (this.els.similarForm) {
+        this.els.similarForm.addEventListener("submit", (event) => {
+          event.preventDefault();
+          if (!this.activePainting) return;
+          this.publish("mtk-mina-similar-order", {
+            paintingId: this.activePainting.id,
+            message: this.els.similarMessage.value
+          });
+          this.showNotice("Similar painting request sent.");
+        });
+      }
 
       document.addEventListener("keydown", (event) => {
-        if (event.key === "Escape" && this.els.detail.classList.contains("is-open")) this.closeDetail();
+        if (event.key === "Escape" && this.els.detail && this.els.detail.classList.contains("is-open")) this.closeDetail();
       });
     }
 
@@ -165,7 +190,7 @@
 
       const available = painting.status === "available";
       this.els.detailActions.innerHTML = `
-        ${available ? `<button class="mtk-mina__button" type="button" data-action="buy">Buy Now</button>` : ""}
+        ${available ? `<button class="mtk-mina__button" type="button" data-action="paypal">Buy with PayPal</button>` : ""}
         <button class="mtk-mina__button mtk-mina__button--secondary" type="button" data-action="offer">Make Counter Offer</button>
         ${!available || painting.similarOrderEnabled ? `<button class="mtk-mina__button mtk-mina__button--ghost" type="button" data-action="similar">Request Similar Painting</button>` : ""}
       `;
@@ -190,9 +215,8 @@
     }
 
     handleAction(action, painting) {
-      if (action === "buy") {
-        this.publish("mtk-mina-buy-now", { paintingId: painting.id });
-        this.showNotice("Buy request started.");
+      if (action === "paypal") {
+        this.startPayPal(painting);
       }
 
       if (action === "offer") {
@@ -208,8 +232,27 @@
       }
     }
 
+    startPayPal(painting) {
+      const paypal = ((this.config.app || {}).paypal || {});
+      const url = paypal.mode === "sandbox" ? paypal.sandboxCheckoutUrl : paypal.checkoutUrl;
+
+      if (!this.els.paypalForm || !url) {
+        this.showNotice("PayPal checkout is not configured.");
+        return;
+      }
+
+      this.els.paypalForm.action = url;
+      this.els.paypalBusiness.value = paypal.businessEmail || "";
+      this.els.paypalItem.value = painting.title;
+      this.els.paypalAmount.value = Number(painting.price || 0).toFixed(2);
+      this.els.paypalCurrency.value = paypal.currency || painting.currency || "USD";
+
+      this.publish("mtk-mina-paypal-start", { paintingId: painting.id, amount: painting.price });
+      this.els.paypalForm.submit();
+    }
+
     showNotice(message) {
-      this.els.notice.textContent = message;
+      if (this.els.notice) this.els.notice.textContent = message;
     }
 
     subscribe() {

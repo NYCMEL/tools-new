@@ -1,7 +1,7 @@
 window.mtkMinaConfig = {
   "app": {
     "name": "Madam Mina",
-    "subtitle": "Original hand paintings, counter offers, custom similar orders, and availability-driven buying.",
+    "subtitle": "Original hand paintings, PayPal checkout, counter offers, custom similar orders, and availability-driven buying.",
     "logo": "images/madam-mina-logo.png",
     "database": "db/mtk-mina.sqlite",
     "currencyLocale": "en-US",
@@ -11,7 +11,20 @@ window.mtkMinaConfig = {
       "sold",
       "reserved",
       "unavailable"
-    ]
+    ],
+    "paypal": {
+      "enabled": true,
+      "mode": "sandbox",
+      "businessEmail": "seller@example.com",
+      "currency": "USD",
+      "checkoutUrl": "https://www.paypal.com/cgi-bin/webscr",
+      "sandboxCheckoutUrl": "https://www.sandbox.paypal.com/cgi-bin/webscr"
+    },
+    "admin": {
+      "username": "admin",
+      "password": "test",
+      "sessionKey": "mtk-mina-admin-session"
+    }
   },
   "paintings": [
     {

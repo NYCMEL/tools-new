@@ -78,3 +78,150 @@
   .mtk-mina .mtk-mina__stats, .mtk-mina .mtk-mina__detail-meta { grid-template-columns: 1fr; }
   .mtk-mina .mtk-mina__detail-close { top: 14px; right: 14px; }
 }
+
+
+.mtk-mina .mtk-mina__admin-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  margin-top: 18px;
+  padding: 0 18px;
+  border-radius: 999px;
+  background: var(--mtk-mina-secondary);
+  color: var(--mtk-mina-primary);
+  font-weight: 900;
+  text-decoration: none;
+}
+.mtk-mina .mtk-mina__admin-link:focus-visible {
+  outline: 4px solid rgba(103,80,164,.35);
+  outline-offset: 3px;
+}
+.mtk-mina-admin {
+  --mtk-mina-primary: #6750a4;
+  --mtk-mina-secondary: #eaddff;
+  --mtk-mina-surface: #ffffff;
+  --mtk-mina-background: #fffbfe;
+  --mtk-mina-outline: #cac4d0;
+  --mtk-mina-text: #1d1b20;
+  --mtk-mina-muted: #5f5a66;
+  --mtk-mina-shadow: 0 10px 28px rgba(29, 27, 32, 0.12);
+  min-height: 100vh;
+  margin: 0;
+  background: var(--mtk-mina-background);
+  color: var(--mtk-mina-text);
+  font-family: Arial, Helvetica, sans-serif;
+}
+.mtk-mina-admin * {
+  box-sizing: border-box;
+}
+.mtk-mina-admin__shell {
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 32px;
+}
+.mtk-mina-admin__card,
+.mtk-mina-admin__panel {
+  margin-bottom: 24px;
+  padding: 24px;
+  border-radius: 28px;
+  background: var(--mtk-mina-surface);
+  box-shadow: var(--mtk-mina-shadow);
+}
+.mtk-mina-admin__logo {
+  display: block;
+  width: min(100%, 360px);
+  margin: 0 auto 18px;
+  border-radius: 20px;
+}
+.mtk-mina-admin h1,
+.mtk-mina-admin h2 {
+  margin: 0 0 16px;
+}
+.mtk-mina-admin form {
+  display: grid;
+  gap: 14px;
+}
+.mtk-mina-admin label {
+  display: grid;
+  gap: 8px;
+  color: var(--mtk-mina-muted);
+  font-weight: 800;
+}
+.mtk-mina-admin input,
+.mtk-mina-admin select,
+.mtk-mina-admin textarea {
+  width: 100%;
+  min-height: 46px;
+  padding: 12px 14px;
+  border: 1px solid var(--mtk-mina-outline);
+  border-radius: 16px;
+  background: #fff;
+  color: var(--mtk-mina-text);
+  font: inherit;
+}
+.mtk-mina-admin textarea {
+  min-height: 92px;
+}
+.mtk-mina-admin__button {
+  min-height: 48px;
+  padding: 0 20px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--mtk-mina-primary);
+  color: #fff;
+  cursor: pointer;
+  font-weight: 900;
+}
+.mtk-mina-admin__button--ghost {
+  border: 1px solid var(--mtk-mina-outline);
+  background: #fff;
+  color: var(--mtk-mina-text);
+}
+.mtk-mina-admin__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.mtk-mina-admin__toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+.mtk-mina-admin__list {
+  display: grid;
+  gap: 12px;
+}
+.mtk-mina-admin__item {
+  display: grid;
+  grid-template-columns: 72px 1fr auto;
+  gap: 14px;
+  align-items: center;
+  padding: 14px;
+  border: 1px solid var(--mtk-mina-outline);
+  border-radius: 20px;
+}
+.mtk-mina-admin__item img {
+  width: 72px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+.mtk-mina-admin__item-title {
+  font-weight: 900;
+}
+.mtk-mina-admin__item-meta {
+  color: var(--mtk-mina-muted);
+}
+.mtk-mina-admin__notice {
+  color: var(--mtk-mina-primary);
+  font-weight: 900;
+}
+@media (max-width: 760px) {
+  .mtk-mina-admin__grid,
+  .mtk-mina-admin__item {
+    grid-template-columns: 1fr;
+  }
+}

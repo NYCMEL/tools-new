@@ -5,6 +5,7 @@
         <img class="mtk-mina__brand-logo" data-mina-logo src="images/madam-mina-logo.png" alt="Madam Mina Painter Logo">
         <h1 class="mtk-mina__heading mtk-mina__sr-only" data-mina-title>Madam Mina</h1>
         <p class="mtk-mina__subheading" data-mina-subtitle></p>
+        <a class="mtk-mina__admin-link" href="admin.html">Admin Login</a>
       </div>
       <dl class="mtk-mina__stats" aria-label="Shop summary">
         <div class="mtk-mina__stat"><dt data-mina-count-total>0</dt><dd>Paintings</dd></div>
@@ -35,6 +36,14 @@
             <ul class="mtk-mina__detail-list" data-mina-detail-list></ul>
 
             <div class="mtk-mina__detail-actions" data-mina-detail-actions></div>
+
+            <form class="mtk-mina__paypal-form" data-mina-paypal-form method="post" target="_blank">
+              <input type="hidden" name="cmd" value="_xclick">
+              <input type="hidden" name="business" data-paypal-business>
+              <input type="hidden" name="item_name" data-paypal-item>
+              <input type="hidden" name="amount" data-paypal-amount>
+              <input type="hidden" name="currency_code" data-paypal-currency>
+            </form>
 
             <form class="mtk-mina__offer-form" data-mina-offer-form hidden>
               <h3>Counter offer</h3>
