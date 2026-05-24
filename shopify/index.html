@@ -6,9 +6,11 @@
 	<title>mtk-mina — Hand Paintings</title>
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" />
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-	<link rel="stylesheet" href="/component/mtk-mina.css" />
-	<script src="/component/mtk-mina.config.js" defer></script>
-	<script src="/component/mtk-mina.js" defer></script>
+
+	<link rel="stylesheet" href="./component/mtk-mina.css" />
+
+	<script src="./component/mtk-mina.config.js" defer></script>
+	<script src="./component/mtk-mina.js" defer></script>
     </head>
     <body>
 	<main>
@@ -19,7 +21,7 @@
 
 	<script>
 	 // Minimal include: fetch the HTML fragment and inject it.
-	 fetch("/component/mtk-mina.html")
+	 fetch("./component/mtk-mina.html")
 	     .then(r => r.text())
 	     .then(html => { document.getElementById("mtk-mina-mount").innerHTML = html; });
 	</script>
