@@ -59,4 +59,4 @@ What I want:
 - allow sales via paypal
 - allow admin to add/edit/remove items from DB. provide a login page
   username: admin, password: test
-- use node.js for backend and not php
+- use node.js for backend end name "server" and not php
