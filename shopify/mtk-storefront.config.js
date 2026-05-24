@@ -3,8 +3,9 @@ window.mtkStorefrontConfig = {
     "name": "MTK Storefront",
     "tagline": "Original hand paintings with flexible offers",
     "currency": "USD",
-    "paypalBusinessEmail": "seller@example.com",
+    "paypalBusinessEmail": "melheravi@gmail.com",
     "paypalCurrency": "USD",
+    "paypalMode": "live",
     "apiBaseUrl": "/api",
     "admin": {
       "username": "admin",

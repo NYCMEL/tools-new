@@ -160,7 +160,20 @@ class MtkStorefront {
 
   detailTemplate(painting) {
     const isAvailable = painting.availability === "available";
-    const paypalUrl = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=${encodeURIComponent(this.store.paypalBusinessEmail || "")}&item_name=${encodeURIComponent(painting.paypalItemName || painting.title)}&amount=${encodeURIComponent(painting.price)}&currency_code=${encodeURIComponent(this.store.paypalCurrency || "USD")}`;
+    const paypalBusinessEmail = this.store.paypalBusinessEmail || "";
+    const paypalBaseUrl = this.store.paypalMode === "sandbox"
+      ? "https://www.sandbox.paypal.com/cgi-bin/webscr"
+      : "https://www.paypal.com/cgi-bin/webscr";
+    const paypalParams = new URLSearchParams({
+      cmd: "_xclick",
+      business: paypalBusinessEmail,
+      item_name: painting.paypalItemName || painting.title,
+      amount: String(painting.price),
+      currency_code: this.store.paypalCurrency || "USD",
+      no_shipping: "2",
+      no_note: "0"
+    });
+    const paypalUrl = `${paypalBaseUrl}?${paypalParams.toString()}`;
     return `
       <h2 id="mtk-storefront-detail-title" class="mtk-storefront__detail-title">${this.escape(painting.title)}</h2>
       <p class="mtk-storefront__detail-description">${this.escape(painting.description)}</p>
@@ -169,7 +182,10 @@ class MtkStorefront {
       <p><strong>Price:</strong> $${Number(painting.price).toLocaleString()} ${this.escape(painting.currency || "USD")}</p>
       <p><span class="mtk-storefront__badge mtk-storefront__badge--${isAvailable ? "available" : "unavailable"}">${isAvailable ? this.escape(this.store.messages?.available || "Available") : this.escape(this.store.messages?.unavailable || "Unavailable")}</span></p>
       <div class="mtk-storefront__actions">
-        ${isAvailable ? `<a href="${paypalUrl}" target="_blank" rel="noopener">Buy with PayPal</a>` : ""}
+        ${isAvailable && paypalBusinessEmail
+          ? `<a href="${paypalUrl}" target="_blank" rel="noopener">Buy with PayPal</a>`
+          : ""}
+
       </div>
       <div class="mtk-storefront__offer-wrapper">
         <button type="button" class="mtk-storefront__offer-link">

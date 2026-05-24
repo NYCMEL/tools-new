@@ -32,7 +32,7 @@ mtk-storefront.mtk-storefront {
     outline-offset: 3px; }
   .mtk-storefront__shell {
     inline-size: 100%;
-    max-inline-size: 1180px;
+    max-inline-size: 1200px;
     width: calc(100% - 32px);
     margin: 0 auto;
     padding: 32px 0 56px; }
