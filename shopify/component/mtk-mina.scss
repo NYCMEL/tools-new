@@ -129,6 +129,11 @@
     color: var(--mtk-mina-primary);
   }
 
+  /* Keep hidden overlays, forms, and toasts hidden even when component classes set display styles. */
+  [hidden] {
+    display: none !important;
+  }
+
   /* Overlay / Detail */
   &__overlay {
     position: fixed;

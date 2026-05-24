@@ -21,6 +21,7 @@
   font-family: "Roboto", system-ui, -apple-system, "Segoe UI", sans-serif;
   padding: 24px 16px 64px;
   box-sizing: border-box;
+  /* Keep hidden overlays, forms, and toasts hidden even when component classes set display styles. */
   /* Overlay / Detail */
   /* Forms */
   /* Toast */ }
@@ -112,6 +113,8 @@
     font-size: 1.15rem;
     font-weight: 500;
     color: var(--mtk-mina-primary); }
+  .mtk-mina [hidden] {
+    display: none !important; }
   .mtk-mina__overlay {
     position: fixed;
     inset: 0;

@@ -22,26 +22,6 @@
     };
   }
 
-  // ---------- Minimal <wc-include> for local demos ----------
-  // Allows index.html to use <wc-include href="..." /> without inline JavaScript.
-  if (!customElements.get("wc-include")) {
-    customElements.define("wc-include", class WcInclude extends HTMLElement {
-      connectedCallback() {
-        const href = this.getAttribute("href");
-        if (!href || this.dataset.loaded === "true") return;
-        this.dataset.loaded = "true";
-        fetch(href)
-          .then((res) => {
-            if (!res.ok) throw new Error(`Could not include ${href}`);
-            return res.text();
-          })
-          .then((html) => { this.innerHTML = html; })
-          .catch((err) => window.wc.log("include error", err));
-      }
-    });
-  }
-
-
   class MtkMina {
     constructor(root, config) {
       this.root = root;
@@ -100,29 +80,27 @@
 
     // ---------- Data ----------
     async _loadItems() {
-      const fallbackItems = Array.isArray(this.cfg.items) ? this.cfg.items : [];
+      const localItems = Array.isArray(this.cfg.items) ? this.cfg.items : [];
+      const baseUrl = this.cfg.api && typeof this.cfg.api.baseUrl === "string" ? this.cfg.api.baseUrl.trim() : "";
 
-      if (!this.cfg.api || this.cfg.api.enabled === false) {
-        this.items = fallbackItems;
+      if (!baseUrl) {
+        this.items = localItems;
         this._renderGrid();
         return;
       }
 
       try {
-        const res = await fetch(`${this.cfg.api.baseUrl}/items`, { credentials: "same-origin" });
-        if (!res.ok) throw new Error(`API returned ${res.status}`);
-
-        const contentType = res.headers.get("content-type") || "";
-        if (!contentType.includes("application/json")) {
-          throw new Error("API did not return JSON");
+        const res = await fetch(`${baseUrl}/items`, { credentials: "same-origin" });
+        const type = res.headers.get("content-type") || "";
+        if (!res.ok || !type.includes("application/json")) {
+          throw new Error(`Items API failed: ${res.status} ${res.statusText}`);
         }
-
         const data = await res.json();
-        this.items = Array.isArray(data) ? data : fallbackItems;
+        this.items = Array.isArray(data) ? data : localItems;
         this._renderGrid();
       } catch (err) {
         window.wc.log("load error", err);
-        this.items = fallbackItems;
+        this.items = localItems;
         this._renderGrid();
       }
     }
@@ -293,8 +271,15 @@
           };
           this._publish(this.cfg.events.publish.counter, payload);
           try {
-            await this._postJson("/offers", payload);
-            this._toast("Offer sent. We'll reply by email.");
+            const baseUrl = this.cfg.api && typeof this.cfg.api.baseUrl === "string" ? this.cfg.api.baseUrl.trim() : "";
+            if (baseUrl) {
+              await fetch(`${baseUrl}/offers`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+              });
+            }
+            this._toast("Offer saved locally for demo. Connect the server to send it.");
             counterForm.reset();
             counterForm.hidden = true;
           } catch (err) { this._toast("Could not send offer."); }
@@ -312,33 +297,20 @@
           };
           this._publish(this.cfg.events.publish.similar, payload);
           try {
-            await this._postJson("/similar-requests", payload);
-            this._toast("Request sent. We'll be in touch.");
+            const baseUrl = this.cfg.api && typeof this.cfg.api.baseUrl === "string" ? this.cfg.api.baseUrl.trim() : "";
+            if (baseUrl) {
+              await fetch(`${baseUrl}/similar-requests`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+              });
+            }
+            this._toast("Request saved locally for demo. Connect the server to send it.");
             similarForm.reset();
             similarForm.hidden = true;
           } catch (err) { this._toast("Could not send request."); }
         });
       }
-    }
-
-
-    async _postJson(path, payload) {
-      if (!this.cfg.api || this.cfg.api.enabled === false) {
-        const key = `mtk-mina:${path.replace(/^\//, "")}`;
-        const current = JSON.parse(localStorage.getItem(key) || "[]");
-        const record = { ...payload, id: Date.now(), createdAt: new Date().toISOString() };
-        current.push(record);
-        localStorage.setItem(key, JSON.stringify(current));
-        return record;
-      }
-
-      const res = await fetch(`${this.cfg.api.baseUrl}${path}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-      });
-      if (!res.ok) throw new Error(`API returned ${res.status}`);
-      return res.json();
     }
 
     // ---------- PayPal ----------
@@ -366,7 +338,14 @@
             const order = await actions2.order.capture();
             this._publish("mtk-mina:order-status", { id: order.id, status: "paid", itemId: item.id });
             try {
-              await this._postJson("/orders", { itemId: item.id, orderId: order.id, amount: item.price });
+              const baseUrl = this.cfg.api && typeof this.cfg.api.baseUrl === "string" ? this.cfg.api.baseUrl.trim() : "";
+              if (baseUrl) {
+                await fetch(`${baseUrl}/orders`, {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({ itemId: item.id, orderId: order.id, amount: item.price })
+                });
+              }
             } catch (e) {}
             this._toast("Thank you! Payment received.");
             this._closeDetail();

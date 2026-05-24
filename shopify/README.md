@@ -51,3 +51,8 @@ The server compiles `mtk-mina.scss` to CSS on the fly at `/component/mtk-mina.cs
 - The component **waits for `<mtk-mina class="mtk-mina">` to appear in the DOM** (MutationObserver), so `<wc-include>` dynamic injection works.
 - All styles are scoped to `.mtk-mina`. No global styles, no IDs in the component.
 - For real PayPal sales replace `paypal.clientId` in `mtk-mina.config.js` with your live client ID and set `mode` to `live`.
+
+
+## Local index.html demo fix
+
+The root `index.html` now renders directly from `mtk-mina.config.js` local item data, so it displays when opened without the Node API. To use the SQLite backend, run the server and set `api.baseUrl` back to `/api`.
