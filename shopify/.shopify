@@ -1,25 +1,28 @@
-FORGET ALL PREVIOUS CONTEXT for mtk-mina and remember this as mtk-mina forever
+REMEMBER THIS GOING FORWARD:
+ - TO USE https://github.com/NYCMEL/nala-website.git for ALL MY PROMPTS
+ - NEVER SHOW ME ANY CODE, JUST Download Zip file AND NAME THEM AS x.zip
+   and subsequent files not as x1.zip x2.zip etc. but only x.zip
+ - NEVER COMPILE CSS FILES. ONLY PROVIDE SCSS
+ - NEVER USE IFRAME. instead use "<wc-include href=... />
+ - NEVER EVER SHOW ME CODE
+ - NEVER GIVE ME PATCH FILES. ONLY COMPLETE FILES
+ - MAKE SURE YOU DO NOT TOUCH or BREAK anyhing OUTSIDE of my prompts
+ - NEVER CREATE IMAGE unless I specifically ask for it
 
-Create a shopify plugin named mtk-mina using:
-- HTML
-- SCSS
-- Vanilla JavaScript
-- Bootstrap 5 (layout only)
-- Modern Material Design, Material Design icons and styles
-- Always create a JS class for mtk-mina and initialize it inside the JS file itself
+FORGET ALL PREVIOUS CONTEXT for mtk-storefront and remember this as mtk-storefront forever and start fresh
 
 Rules:
-- The mina is wrapped in a display:block element <mtk-mina class="mtk-mina">.
-- The root element uses .mtk-mina.
-- All styles must be scoped to .mtk-mina.
+- The storefront is wrapped in a display:block element <mtk-storefront class="mtk-storefront">.
+- The root element uses .mtk-storefront.
+- All styles must be scoped to .mtk-storefront.
 - No global styles or IDs.
 - publish click events using wc.publish
-- subscribe to all 4-mtk-mina everns using wc.subscribe
+- subscribe to all 4-mtk-storefront everns using wc.subscribe
 - create a onMessage function to be passed to wc.subscribe function
 
 Data:
-- The mina is JSON driven.
-  - any and all data must come from mtk-mina.config.js file
+- The storefront is JSON driven.
+- any and all data must come from mtk-storefront.config.js file
 
 Restrictions:
 - No inline styles. (All styles in  "*.scss" file)
@@ -36,10 +39,10 @@ Accessibility:
 - ADA compliant
 
 Output! Create exactly these files:
-- mtk-mina.config.js (JSON FILE)
-- mtk-mina.scss
-- mtk-mina.html
-- mtk-mina.js
+- mtk-storefront.config.js (JSON FILE)
+- mtk-storefront.scss
+- mtk-storefront.html
+- mtk-storefront.js
 - A minimal index.html file
 
 Behavior:
