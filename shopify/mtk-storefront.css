@@ -178,6 +178,18 @@ mtk-storefront.mtk-storefront {
     min-block-size: 46px;
     padding: 12px 18px;
     text-decoration: none; }
+  .mtk-storefront__offer-wrapper {
+    margin-block-start: 18px; }
+  .mtk-storefront__offer-link {
+    background: transparent;
+    border: 0;
+    color: var(--mtk-storefront-primary);
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 0;
+    text-align: left;
+    text-decoration: underline; }
   .mtk-storefront__offer-form, .mtk-storefront__request-form, .mtk-storefront__login-form, .mtk-storefront__admin-form {
     display: grid;
     gap: 14px;

@@ -65,6 +65,26 @@ class MtkStorefront {
     });
 
     this.detailEl.addEventListener("submit", (event) => this.handleDetailSubmit(event));
+
+    this.detailEl.addEventListener("click", (event) => {
+      const offerLink = event.target.closest(".mtk-storefront__offer-link");
+      if (!offerLink) return;
+
+      const wrapper = offerLink.closest(".mtk-storefront__offer-wrapper");
+      const form = wrapper ? wrapper.querySelector(".mtk-storefront__offer-form") : null;
+
+      if (!form) return;
+
+      form.hidden = false;
+      offerLink.hidden = true;
+
+      const firstInput = form.querySelector("input");
+      if (firstInput) firstInput.focus();
+
+      this.publish("offer-form-open", {
+        paintingId: this.activePainting ? this.activePainting.id : null
+      });
+    });
     this.adminOpen.addEventListener("click", () => this.openAdminLogin());
     this.loginForm.addEventListener("submit", (event) => this.handleLogin(event));
     this.adminForm.addEventListener("submit", (event) => this.handleAdminSave(event));
@@ -151,14 +171,20 @@ class MtkStorefront {
       <div class="mtk-storefront__actions">
         ${isAvailable ? `<a href="${paypalUrl}" target="_blank" rel="noopener">Buy with PayPal</a>` : ""}
       </div>
-      <form class="mtk-storefront__offer-form" data-form-type="offer">
-        <h3>${this.escape(this.store.messages?.offer || "Make an offer")}</h3>
-        <label>Your Name <input name="name" required></label>
-        <label>Email <input type="email" name="email" required></label>
-        <label>Offer Amount <input type="number" min="1" name="amount" required></label>
-        <label>Message <textarea name="message" rows="3"></textarea></label>
-        <button type="submit">Send Offer</button>
-      </form>
+      <div class="mtk-storefront__offer-wrapper">
+        <button type="button" class="mtk-storefront__offer-link">
+          ${this.escape(this.store.messages?.offer || "Make a counter offer")}
+        </button>
+
+        <form class="mtk-storefront__offer-form" data-form-type="offer" hidden>
+          <h3>${this.escape(this.store.messages?.offer || "Make an offer")}</h3>
+          <label>Your Name <input name="name" required></label>
+          <label>Email <input type="email" name="email" required></label>
+          <label>Offer Amount <input type="number" min="1" name="amount" required></label>
+          <label>Message <textarea name="message" rows="3"></textarea></label>
+          <button type="submit">Send Offer</button>
+        </form>
+      </div>
       <form class="mtk-storefront__request-form" data-form-type="request">
         <h3>${isAvailable ? "Ask a question" : this.escape(this.store.messages?.orderSimilar || "Request similar painting")}</h3>
         <label>Your Name <input name="name" required></label>
