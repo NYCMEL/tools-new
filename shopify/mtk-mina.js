@@ -171,7 +171,7 @@
       if (!item) return;
 
       this.dialogBody.innerHTML =
-        '<h2 id="mtk-mina-dialog-title">' + this.escape(item.title) + '</h2>' +
+        '<h2>' + this.escape(item.title) + '</h2>' +
         '<p>' + this.escape(item.description) + '</p>' +
         '<p><strong>Price:</strong> ' + this.escape(this.formatPrice(item.price, item.currency)) + '</p>' +
         '<p><strong>Status:</strong> ' + this.escape(item.status) + '</p>' +
@@ -189,12 +189,12 @@
       const amount = type === 'offer' ? item.price : '';
 
       this.dialogBody.innerHTML =
-        '<h2 id="mtk-mina-dialog-title">' + this.escape(title) + '</h2>' +
+        '<h2>' + this.escape(title) + '</h2>' +
         '<p>' + this.escape(item.title) + ' · ' + this.escape(this.formatPrice(item.price, item.currency)) + '</p>' +
-        '<div class="mtk-mina__field"><label for="mina-name">Name</label><input id="mina-name" name="name" autocomplete="name" required></div>' +
-        '<div class="mtk-mina__field"><label for="mina-email">Email</label><input id="mina-email" name="email" type="email" autocomplete="email" required></div>' +
-        '<div class="mtk-mina__field"><label for="mina-offer">Offer or budget</label><input id="mina-offer" name="amount" inputmode="decimal" value="' + this.escape(amount) + '"></div>' +
-        '<div class="mtk-mina__field"><label for="mina-note">Message</label><textarea id="mina-note" name="note">' + (type === 'similar' ? 'I am interested in a similar or same painting.' : '') + '</textarea></div>' +
+        '<label class="mtk-mina__field"><span>Name</span><input name="name" autocomplete="name" required></label>' +
+        '<label class="mtk-mina__field"><span>Email</span><input name="email" type="email" autocomplete="email" required></label>' +
+        '<label class="mtk-mina__field"><span>Offer or budget</span><input name="amount" inputmode="decimal" value="' + this.escape(amount) + '"></label>' +
+        '<label class="mtk-mina__field"><span>Message</span><textarea name="note">' + (type === 'similar' ? 'I am interested in a similar or same painting.' : '') + '</textarea></label>' +
         '<input type="hidden" name="id" value="' + this.escape(item.id) + '"><input type="hidden" name="type" value="' + this.escape(type) + '">' +
         '<button class="mtk-mina__button" type="button" data-mina-action="submit-request">Send Request</button>';
 
@@ -210,7 +210,7 @@
       payload.status = 'pending-owner-reply';
 
       this.publish('request-submit', payload);
-      this.dialogBody.innerHTML = '<h2 id="mtk-mina-dialog-title">Request Sent</h2><p>Your request is pending owner reply. Save this payload to SQLite from your Shopify app backend.</p>';
+      this.dialogBody.innerHTML = '<h2>Request Sent</h2><p>Your request is pending owner reply. Save this payload to SQLite from your Shopify app backend.</p>';
     }
 
     showDialog() {
