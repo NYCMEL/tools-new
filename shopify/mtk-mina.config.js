@@ -1,7 +1,8 @@
 window.mtkMinaConfig = {
   "app": {
-    "name": "Mina Hand Paintings",
+    "name": "Madam Mina",
     "subtitle": "Original hand paintings, counter offers, custom similar orders, and availability-driven buying.",
+    "logo": "images/madam-mina-logo.png",
     "database": "db/mtk-mina.sqlite",
     "currencyLocale": "en-US",
     "filters": [
@@ -16,7 +17,7 @@ window.mtkMinaConfig = {
     {
       "id": "mina-001",
       "title": "Autumn River Light",
-      "artist": "Mina",
+      "artist": "Madam Mina",
       "image": "images/painting-01.svg",
       "price": 414,
       "currency": "USD",
@@ -37,13 +38,13 @@ window.mtkMinaConfig = {
         "hand painting",
         "original art",
         "gallery",
-        "mina"
+        "madam mina"
       ]
     },
     {
       "id": "mina-002",
       "title": "Blue Harbor Morning",
-      "artist": "Mina",
+      "artist": "Madam Mina",
       "image": "images/painting-02.svg",
       "price": 508,
       "currency": "USD",
@@ -64,13 +65,13 @@ window.mtkMinaConfig = {
         "hand painting",
         "original art",
         "gallery",
-        "mina"
+        "madam mina"
       ]
     },
     {
       "id": "mina-003",
       "title": "Golden Field Path",
-      "artist": "Mina",
+      "artist": "Madam Mina",
       "image": "images/painting-03.svg",
       "price": 602,
       "currency": "USD",
@@ -91,13 +92,13 @@ window.mtkMinaConfig = {
         "hand painting",
         "original art",
         "gallery",
-        "mina"
+        "madam mina"
       ]
     },
     {
       "id": "mina-004",
       "title": "Silent Violet Ridge",
-      "artist": "Mina",
+      "artist": "Madam Mina",
       "image": "images/painting-04.svg",
       "price": 484,
       "currency": "USD",
@@ -118,13 +119,13 @@ window.mtkMinaConfig = {
         "hand painting",
         "original art",
         "gallery",
-        "mina"
+        "madam mina"
       ]
     },
     {
       "id": "mina-005",
       "title": "Coral Sky Garden",
-      "artist": "Mina",
+      "artist": "Madam Mina",
       "image": "images/painting-05.svg",
       "price": 578,
       "currency": "USD",
@@ -145,13 +146,13 @@ window.mtkMinaConfig = {
         "hand painting",
         "original art",
         "gallery",
-        "mina"
+        "madam mina"
       ]
     },
     {
       "id": "mina-006",
       "title": "Emerald Rain Street",
-      "artist": "Mina",
+      "artist": "Madam Mina",
       "image": "images/painting-06.svg",
       "price": 672,
       "currency": "USD",
@@ -172,13 +173,13 @@ window.mtkMinaConfig = {
         "hand painting",
         "original art",
         "gallery",
-        "mina"
+        "madam mina"
       ]
     },
     {
       "id": "mina-007",
       "title": "Amber Window Dream",
-      "artist": "Mina",
+      "artist": "Madam Mina",
       "image": "images/painting-07.svg",
       "price": 766,
       "currency": "USD",
@@ -199,13 +200,13 @@ window.mtkMinaConfig = {
         "hand painting",
         "original art",
         "gallery",
-        "mina"
+        "madam mina"
       ]
     },
     {
       "id": "mina-008",
       "title": "Rose Valley Mist",
-      "artist": "Mina",
+      "artist": "Madam Mina",
       "image": "images/painting-08.svg",
       "price": 648,
       "currency": "USD",
@@ -226,13 +227,13 @@ window.mtkMinaConfig = {
         "hand painting",
         "original art",
         "gallery",
-        "mina"
+        "madam mina"
       ]
     },
     {
       "id": "mina-009",
       "title": "Moonlit Cedar Lake",
-      "artist": "Mina",
+      "artist": "Madam Mina",
       "image": "images/painting-09.svg",
       "price": 742,
       "currency": "USD",
@@ -253,13 +254,13 @@ window.mtkMinaConfig = {
         "hand painting",
         "original art",
         "gallery",
-        "mina"
+        "madam mina"
       ]
     },
     {
       "id": "mina-010",
       "title": "Copper Hillside Song",
-      "artist": "Mina",
+      "artist": "Madam Mina",
       "image": "images/painting-10.svg",
       "price": 836,
       "currency": "USD",
@@ -280,13 +281,13 @@ window.mtkMinaConfig = {
         "hand painting",
         "original art",
         "gallery",
-        "mina"
+        "madam mina"
       ]
     },
     {
       "id": "mina-011",
       "title": "Indigo Market Evening",
-      "artist": "Mina",
+      "artist": "Madam Mina",
       "image": "images/painting-11.svg",
       "price": 930,
       "currency": "USD",
@@ -307,13 +308,13 @@ window.mtkMinaConfig = {
         "hand painting",
         "original art",
         "gallery",
-        "mina"
+        "madam mina"
       ]
     },
     {
       "id": "mina-012",
       "title": "Spring Orchard Air",
-      "artist": "Mina",
+      "artist": "Madam Mina",
       "image": "images/painting-12.svg",
       "price": 812,
       "currency": "USD",
@@ -334,13 +335,13 @@ window.mtkMinaConfig = {
         "hand painting",
         "original art",
         "gallery",
-        "mina"
+        "madam mina"
       ]
     },
     {
       "id": "mina-013",
       "title": "Desert Bloom Trail",
-      "artist": "Mina",
+      "artist": "Madam Mina",
       "image": "images/painting-13.svg",
       "price": 906,
       "currency": "USD",
@@ -361,13 +362,13 @@ window.mtkMinaConfig = {
         "hand painting",
         "original art",
         "gallery",
-        "mina"
+        "madam mina"
       ]
     },
     {
       "id": "mina-014",
       "title": "Silver Ocean Calm",
-      "artist": "Mina",
+      "artist": "Madam Mina",
       "image": "images/painting-14.svg",
       "price": 1000,
       "currency": "USD",
@@ -388,13 +389,13 @@ window.mtkMinaConfig = {
         "hand painting",
         "original art",
         "gallery",
-        "mina"
+        "madam mina"
       ]
     },
     {
       "id": "mina-015",
       "title": "Red Lantern Alley",
-      "artist": "Mina",
+      "artist": "Madam Mina",
       "image": "images/painting-15.svg",
       "price": 1094,
       "currency": "USD",
@@ -415,13 +416,13 @@ window.mtkMinaConfig = {
         "hand painting",
         "original art",
         "gallery",
-        "mina"
+        "madam mina"
       ]
     },
     {
       "id": "mina-016",
       "title": "Green Meadow Noon",
-      "artist": "Mina",
+      "artist": "Madam Mina",
       "image": "images/painting-16.svg",
       "price": 976,
       "currency": "USD",
@@ -442,13 +443,13 @@ window.mtkMinaConfig = {
         "hand painting",
         "original art",
         "gallery",
-        "mina"
+        "madam mina"
       ]
     },
     {
       "id": "mina-017",
       "title": "Cloud Break Horizon",
-      "artist": "Mina",
+      "artist": "Madam Mina",
       "image": "images/painting-17.svg",
       "price": 1070,
       "currency": "USD",
@@ -469,13 +470,13 @@ window.mtkMinaConfig = {
         "hand painting",
         "original art",
         "gallery",
-        "mina"
+        "madam mina"
       ]
     },
     {
       "id": "mina-018",
       "title": "Lavender City Walk",
-      "artist": "Mina",
+      "artist": "Madam Mina",
       "image": "images/painting-18.svg",
       "price": 1164,
       "currency": "USD",
@@ -496,13 +497,13 @@ window.mtkMinaConfig = {
         "hand painting",
         "original art",
         "gallery",
-        "mina"
+        "madam mina"
       ]
     },
     {
       "id": "mina-019",
       "title": "Sunset Cottage Glow",
-      "artist": "Mina",
+      "artist": "Madam Mina",
       "image": "images/painting-19.svg",
       "price": 1258,
       "currency": "USD",
@@ -523,13 +524,13 @@ window.mtkMinaConfig = {
         "hand painting",
         "original art",
         "gallery",
-        "mina"
+        "madam mina"
       ]
     },
     {
       "id": "mina-020",
       "title": "Winter Pine Reflection",
-      "artist": "Mina",
+      "artist": "Madam Mina",
       "image": "images/painting-20.svg",
       "price": 1140,
       "currency": "USD",
@@ -550,7 +551,7 @@ window.mtkMinaConfig = {
         "hand painting",
         "original art",
         "gallery",
-        "mina"
+        "madam mina"
       ]
     }
   ]

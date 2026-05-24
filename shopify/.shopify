@@ -56,3 +56,6 @@ What I want:
 - allow users to click on a paiting and open it in its own full page with "X" in a circle to close it (detail view)
   this page should include details and other stuff
 - remove all buttons from home screen and show them in detail view
+- allow sales via paypal
+- allow admin to add/remove items from DB. provide a login page
+  username: admin, password: test

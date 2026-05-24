@@ -26,6 +26,7 @@
 
     cache() {
       this.els = {
+        logo: this.root.querySelector("[data-mina-logo]"),
         title: this.root.querySelector("[data-mina-title]"),
         subtitle: this.root.querySelector("[data-mina-subtitle]"),
         total: this.root.querySelector("[data-mina-count-total]"),
@@ -53,13 +54,18 @@
       };
     }
 
+    setText(key, value) {
+      if (this.els[key]) this.els[key].textContent = value;
+    }
+
     renderShell() {
       const app = this.config.app || {};
-      this.els.title.textContent = app.name || "Mina Hand Paintings";
-      this.els.subtitle.textContent = app.subtitle || "";
-      this.els.total.textContent = String(this.paintings.length);
-      this.els.available.textContent = String(this.paintings.filter((item) => item.status === "available").length);
-      this.els.custom.textContent = String(this.paintings.filter((item) => item.similarOrderEnabled).length);
+      if (this.els.logo && app.logo) this.els.logo.src = app.logo;
+      this.setText("title", app.name || "Madam Mina");
+      this.setText("subtitle", app.subtitle || "");
+      this.setText("total", String(this.paintings.length));
+      this.setText("available", String(this.paintings.filter((item) => item.status === "available").length));
+      this.setText("custom", String(this.paintings.filter((item) => item.similarOrderEnabled).length));
     }
 
     renderFilters() {
@@ -121,7 +127,7 @@
           amount: this.els.offerAmount.value,
           message: this.els.offerMessage.value
         });
-        this.showNotice("Counter offer sent. Please wait for Mina’s reply.");
+        this.showNotice("Counter offer sent. Please wait for Madam Mina’s reply.");
       });
 
       this.els.similarForm.addEventListener("submit", (event) => {
@@ -144,7 +150,7 @@
       this.lastFocused = trigger || document.activeElement;
       this.els.detailImage.src = painting.image;
       this.els.detailImage.alt = painting.title;
-      this.els.detailCaption.textContent = `${painting.title} by ${painting.artist || "Mina"}`;
+      this.els.detailCaption.textContent = `${painting.title} by ${painting.artist || "Madam Mina"}`;
       this.els.detailStatus.textContent = painting.status;
       this.els.detailTitle.textContent = painting.title;
       this.els.detailDescription.textContent = painting.description;
