@@ -57,6 +57,6 @@ What I want:
   this page should include details and other stuff
 - remove all buttons from home screen and show them in detail view
 - allow sales via paypal
-- allow admin to add/remove items from DB. provide a login page
+- allow admin to add/edit/remove items from DB. provide a login page
   username: admin, password: test
 - use node.js for backend and not php
