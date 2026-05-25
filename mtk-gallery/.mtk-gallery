@@ -1,16 +1,262 @@
-Create a Shopify section named mtk-gallery.
+# MASTER PROMPT — MTK GALLERY BUILDER
+
+Act as a senior Vanilla JavaScript application architect and production UI/UX engineer.
+
+Build a complete gallery application named `mtk-gallery` for selling hand-painted artwork.
+
+Use this repository as the base: https://github.com/NYCMEL/nala-website.git
+Use all wc code for include, subscribe etc from this file: https://github.com/NYCMEL/melify-new/blob/main/js/wc.js 
+
+---
+# OUTPUT RULES
+
+* Return ONLY one downloadable ZIP file named exactly: `x.zip`
+* Never show code in chat
+* Never return patch files or diffs
+* Always return complete files only
+* Never modify anything outside the scope of this request
+* Never generate placeholder explanations instead of files
+* Never create images unless explicitly requested
+
+---
+
+# REQUIRED FILES
+
+Generate exactly these files:
+
+* mtk-gallery.config.js
+* mtk-gallery.scss
+* mtk-gallery.html
+* mtk-gallery.js
+* index.html
+* no server. all item information from mtk-gallery.config.js json file
+Only create additional files if absolutely required for functionality.
+
+---
+
+# CORE TECH RULES
+
+* Vanilla JavaScript only
+* No frameworks
+* No Bootstrap
+* No React
+* No Vue
+* No Angular
+* No external libraries
+* No inline JavaScript
+* No inline styles
+* SCSS only
+* Never compile CSS
+* Never use iframes
+* Use: `<wc-include href="..."></wc-include>`
+
+---
+
+# COMPONENT ARCHITECTURE
+
+Component wrapper:
+
+```html
+<mtk-gallery class="mtk-gallery"></mtk-gallery>
+```
+
+Rules:
+
+* Root class must be `.mtk-gallery`
+* Scope ALL styles under `.mtk-gallery`
+* No global styles
+* No global IDs
+* Use semantic HTML only
+* ADA compliant
+* Keyboard accessible
+* responsive design
+* Visible focus states required
+
+---
+
+# CONFIG + DATA RULES
+
+ALL UI-driven data MUST come from:
+`mtk-gallery.config.js`
+
+Paintings must support:
+
+* title
+* description
+* image
+* price
+* availability
+* dimensions
+* medium
+* category
+* PayPal data
+
+Store owner must be able to:
+
+* change paintings
+* change prices
+* change availability
+* change images
+* change details
+  from either:
+* config file
+* SQLite database
+
+---
+
+# EVENT SYSTEM RULES
+
+Wait for `<mtk-gallery>` to exist before initializing because it may load dynamically through `<wc-include>`.
 
 Requirements:
-- Liquid
-- SCSS only
-- Vanilla JS only
-- Material Design
-- Product cards
-- Lazy loading
-- Responsive
-- Keyboard accessible
-- No frameworks
-- Use Shopify product objects
-- Output complete files only
 
+* Subscribe to all `4-mtk-gallery` events using `wc.subscribe`
+* Create `onMessage()` handler
+* Publish actions using `wc.publish`
+* Log ALL payloads using `wc.log` BEFORE publishing
 
+---
+
+# GALLERY UI
+
+Header title:
+`Madam Mina's Artwork`
+
+Layout requirements:
+
+* `.mtk-gallery` background = `#FFF`
+* `.mtk-gallery__shell`
+
+  * `max-inline-size: 1200px`
+
+Home screen:
+
+* display painting cards only
+* NO buttons on cards
+
+Painting click behavior:
+
+* opens full-page detail view
+* detail view includes:
+
+  * image
+  * title
+  * description
+  * price
+  * availability
+  * dimensions
+  * medium
+  * actions
+* include circular close button with “X”
+
+---
+
+# SALES + REQUEST FLOWS
+
+## Available Paintings
+
+Show:
+
+* Buy with PayPal
+* “Make a counter offer” link
+
+Behavior:
+
+* clicking link reveals counter-offer form
+* form hidden by default
+
+## Unavailable Paintings
+
+Show:
+
+* “Request a similar painting” link
+
+Behavior:
+
+* clicking link reveals request form
+* form hidden by default
+
+---
+
+# FORM DESIGN RULES
+
+Use Material Design styling for:
+
+* floating labels
+* buttons
+* fields
+* spacing
+* focus states
+* hover states
+* accessibility states
+
+Forms must feel modern and production-ready.
+
+---
+
+# ADMIN FEATURES
+
+Customers:
+
+* NO login required
+
+Admin:
+
+* login visible ONLY when admin chooses to manage/edit
+
+Temporary credentials:
+
+* username: admin
+* password: test
+
+Admin capabilities:
+
+* add paintings
+* edit paintings
+* remove paintings
+* persist changes to SQLite
+
+---
+
+Required API endpoints:
+
+* paintings
+* offers
+* requests
+
+PayPal seller email MUST be configurable in:
+`mtk-gallery.config.js`
+
+---
+
+# FAILURE PREVENTION RULES
+
+DO NOT:
+
+* use placeholder code
+* omit required files
+* generate partial implementations
+* break existing requirements
+* replace Vanilla JS with frameworks
+* compile SCSS into CSS
+* expose passwords in UI
+* create empty SQLite DB structure without tables
+* create fake API routes
+
+Ensure ALL generated files are runnable together.
+
+---
+
+# FINAL DELIVERY RULES
+
+Return ONLY:
+
+* downloadable ZIP file
+* named exactly `x.zip`
+
+Do NOT:
+
+* explain code
+* summarize code
+* paste snippets
+* show partial implementations
