@@ -260,3 +260,6 @@ Do NOT:
 * summarize code
 * paste snippets
 * show partial implementations
+
+---
+clicking on "Manage artwork" should open in its own full screen window with "X" in circle and also allow "Editing" in addition to "Remove"
