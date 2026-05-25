@@ -1,6 +1,6 @@
 window.mtkStorefrontConfig = {
   "store": {
-    "name": "MTK Storefront",
+    "name": "Madam Mina's Artwork",
     "tagline": "Original hand paintings with flexible offers",
     "currency": "USD",
     "paypalBusinessEmail": "melheravi@gmail.com",
