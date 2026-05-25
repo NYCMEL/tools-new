@@ -4,8 +4,8 @@ Act as a senior Vanilla JavaScript component architect and production UI enginee
 
 Build a complete reusable storefront application named `mtk-storefront` for selling hand-painted artwork.
 
-Use this repository as the base:
-https://github.com/NYCMEL/nala-website.git
+Use this repository as the base: https://github.com/NYCMEL/nala-website.git
+Use all wc code for include, subscribe etc from this file: https://github.com/NYCMEL/melify-new/blob/main/js/wc.js 
 
 ---
 
@@ -52,8 +52,7 @@ Only create additional files if absolutely required for functionality.
 * SCSS only
 * Never compile CSS
 * Never use iframes
-* Use:
-  `<wc-include href="..."></wc-include>`
+* Use: `<wc-include href="..."></wc-include>`
 
 ---
 
