@@ -24,7 +24,6 @@ from this file:
 
 # OUTPUT RULES
 
-* Return ONLY one downloadable ZIP file named exactly: `x.zip`
 * Never show code in chat
 * Never return patch files or diffs
 * Always return complete files only
@@ -229,11 +228,10 @@ Customers:
 * NO login required
 
 Admin:
-
 * login visible ONLY when admin chooses to manage/edit
+* keep me logged-in 
 
-Temporary credentials:
-
+Temporary credentials: pre-fill the form with
 * username: admin
 * password: test
 
@@ -332,8 +330,9 @@ Ensure ALL generated files are runnable together.
 
 Return ONLY:
 
-* downloadable ZIP file
-* named exactly `x.zip`
+* create a single github.io
+* allow me to download it
+* name the file as gallery.html
 
 Do NOT:
 
@@ -341,3 +340,4 @@ Do NOT:
 * summarize code
 * paste snippets
 * show partial implementations
+
