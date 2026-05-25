@@ -1,64 +1,95 @@
-REMEMBER THIS GOING FORWARD:
- - TO USE https://github.com/NYCMEL/nala-website.git for ALL MY PROMPTS
- - NEVER SHOW ME ANY CODE, JUST Download Zip file AND NAME THEM AS x.zip
-   and subsequent files not as x1.zip x2.zip etc. but only x.zip
- - NEVER COMPILE CSS FILES. ONLY PROVIDE SCSS
- - NEVER USE IFRAME. instead use "<wc-include href=... />
- - NEVER EVER SHOW ME CODE
- - NEVER GIVE ME PATCH FILES. ONLY COMPLETE FILES
- - MAKE SURE YOU DO NOT TOUCH or BREAK anyhing OUTSIDE of my prompts
- - NEVER CREATE IMAGE unless I specifically ask for it
+Act as my expert Vanilla JS component builder.
 
-FORGET ALL PREVIOUS CONTEXT for mtk-storefront and remember this as mtk-storefront forever and start fresh
+Global rules:
+- Use https://github.com/NYCMEL/nala-website.git as the base repo.
+- Never show code in chat.
+- Always return one downloadable ZIP named exactly x.zip.
+- Include complete files only, never patch files.
+- Do not touch anything outside this prompt.
+- Use SCSS only. Do not compile CSS.
+- Never use iframes. Use <wc-include href="..."></wc-include>.
+- Never create images unless I specifically request them.
 
-Rules:
-- The storefront is wrapped in a display:block element <mtk-storefront class="mtk-storefront">.
-- The root element uses .mtk-storefront.
-- All styles must be scoped to .mtk-storefront.
-- No global styles or IDs.
-- publish click events using wc.publish
-- subscribe to all 4-mtk-storefront everns using wc.subscribe
-- create a onMessage function to be passed to wc.subscribe function
+Start fresh for mtk-storefront.
 
-Data:
-- The storefront is JSON driven.
-- any and all data must come from mtk-storefront.config.js file
+Create a reusable storefront component for selling hand paintings.
 
-Restrictions:
-- No inline styles. (All styles in  "*.scss" file)
-- No inline Javascript. (All scripts in "*.js" file)
-- No frameworks.
-- No Bootstrap.
-- No external libraries.
-- Vanilla Javascript
-
-Accessibility:
-- Use semantic HTML.
-- Keyboard accessible.
-- Visible focus states.
-- ADA compliant
-
-Output! Create exactly these files:
-- mtk-storefront.config.js (JSON FILE)
+Required files:
+- mtk-storefront.config.js
 - mtk-storefront.scss
 - mtk-storefront.html
 - mtk-storefront.js
-- A minimal index.html file
+- index.html
+- server/server.js
+- server/package.json
+- server/mtk-storefront.sqlite
+
+Component rules:
+- Wrapper: <mtk-storefront class="mtk-storefront">
+- Root class: .mtk-storefront
+- All styles scoped under .mtk-storefront
+- No global styles or IDs
+- No inline styles
+- No inline JavaScript
+- No frameworks
+- No Bootstrap
+- No external libraries
+- Vanilla JavaScript only
+- Semantic HTML
+- Keyboard accessible
+- Visible focus states
+- ADA compliant
+
+Data rules:
+- All UI data must come from mtk-storefront.config.js.
+- Store paintings with title, description, price, image, availability, dimensions, medium, category, and PayPal data.
+- User should be able to change images, prices, availability, and painting details from config or DB.
 
 Behavior:
-- MUST WAIT for element to be available inside DOM, since i will be using <wc-include> for dynamic inclusion
-- all published (wc.publish) messages should be logged using wc.log to console before being published
+- Wait for <mtk-storefront> to exist in the DOM because it may load through <wc-include>.
+- Subscribe to all 4-mtk-storefront events using wc.subscribe.
+- Create an onMessage function and pass it to wc.subscribe.
+- Publish click/actions with wc.publish.
+- Log every wc.publish payload with wc.log before publishing.
 
-What I want:
-- I will be selling hand paintings. could be a few or many
-- clients should be able to counter offer the price and wait for my reply
-- generate some 20 painting stock images for testing and allow me to download images in my zip file
-- I should be able to change my images, prices, availability etc.
-- if item is unavailable, allow users to place an order for similar (or same) painting
-- use a sqlite db to store picture details, prices etc.
-- allow users to click on a paiting and open it in its own full page with "X" in a circle to close it (detail view)
-  this page should include details and other stuff
-- remove all buttons from home screen and show them in detail view
-- allow sales via paypal
-- allow admin to add/edit/remove items from DB. provide a login page and fill with  username: admin, password: test for now
-- use node.js for backend end name "server" and not php
+Storefront UI:
+- Header title: Madam Mina’s Artwork
+- .mtk-storefront background: #FFF
+- .mtk-storefront__shell max-inline-size: 1200px
+- Home screen shows painting cards only. No action buttons on cards.
+- Clicking a painting opens a full-page detail view.
+- Detail view has a circular X close button.
+- Detail view shows image, title, description, price, availability, medium, dimensions, and actions.
+
+Sales and request actions:
+- Available paintings show:
+  - Buy with PayPal
+  - “Make a counter offer” link
+  - Counter-offer form hidden by default and shown only when the link is clicked
+- Unavailable paintings show:
+  - “Request a similar painting” link
+  - Request form hidden by default and shown only when the link is clicked
+- Use Material Design-style floating labels for all forms.
+- Use Material Design-style buttons, spacing, focus states, and form fields.
+
+Admin:
+- No login required for customers.
+- Admin login appears only when admin chooses to manage/edit.
+- Temporary credentials:
+  - username: admin
+  - password: test
+- Admin can add, edit, and remove paintings from the SQLite DB.
+
+Backend:
+- Use Node.js, not PHP.
+- Backend folder must be named server.
+- Use SQLite to store paintings, prices, availability, offers, and similar-painting requests.
+- Include API endpoints for paintings, offers, and requests.
+- PayPal seller email must be configurable in mtk-storefront.config.js.
+
+Testing assets:
+- Include 20 test painting images in the ZIP only if I explicitly ask for generated test images.
+
+Output:
+- Return only a downloadable ZIP named x.zip.
+- Do not show code in chat.
