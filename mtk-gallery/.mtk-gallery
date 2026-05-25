@@ -1,0 +1,16 @@
+Create a Shopify section named mtk-gallery.
+
+Requirements:
+- Liquid
+- SCSS only
+- Vanilla JS only
+- Material Design
+- Product cards
+- Lazy loading
+- Responsive
+- Keyboard accessible
+- No frameworks
+- Use Shopify product objects
+- Output complete files only
+
+
