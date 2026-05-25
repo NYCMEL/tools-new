@@ -6,7 +6,7 @@ Build a complete gallery application named `mtk-gallery` for selling hand-painte
 
 Use this repository as the base:
 
-[NYCMEL/nala-website](https://github.com/NYCMEL/nala-website.git?utm_source=chatgpt.com)
+https://github.com/NYCMEL/nala-website.git
 
 Use ALL wc utility functionality including:
 
@@ -18,12 +18,13 @@ Use ALL wc utility functionality including:
 
 from this file:
 
-[_wc.js](https://github.com/NYCMEL/nala-website/blob/main/js/_wc.js?utm_source=chatgpt.com)
+https://github.com/NYCMEL/nala-website/blob/main/js/_wc.js
 
 ---
 
 # OUTPUT RULES
 
+* Return ONLY one downloadable ZIP file named exactly: `x.zip`
 * Never show code in chat
 * Never return patch files or diffs
 * Always return complete files only
@@ -37,13 +38,45 @@ from this file:
 
 Generate exactly these files:
 
-* mtk-gallery.config.js
-* mtk-gallery.scss
-* mtk-gallery.html
-* mtk-gallery.js
 * index.html
 
-Only create additional files if absolutely required for functionality.
+Single-file GitHub Pages deployment only.
+
+Everything must exist inside:
+
+* HTML
+* CSS
+* JavaScript
+* config JSON
+* admin logic
+* gallery rendering
+
+inside ONE standalone file.
+
+---
+
+# GITHUB.IO RULES
+
+Application MUST run directly from:
+
+* GitHub Pages
+* local browser
+* static hosting
+* file://
+
+DO NOT:
+
+* require a server
+* require Node.js
+* require PHP
+* require SQLite runtime
+* require npm
+* require webpack
+* require build tools
+
+Application must work immediately by opening:
+
+index.html
 
 ---
 
@@ -56,17 +89,15 @@ Only create additional files if absolutely required for functionality.
 * No Vue
 * No Angular
 * No external libraries
-* No inline JavaScript
-* No inline styles
-* SCSS only
-* Never compile SCSS globally except local runtime CSS file for browser loading
-* index.html MUST load CSS and NEVER SCSS directly
+* No inline event handlers
+* No SCSS loading in browser
+* CSS must be embedded directly in `<style>`
+* JavaScript must be embedded directly in `<script>`
 * Never use iframes
-* Use:
-
-```html
-<wc-include href="..."></wc-include>
-```
+* No recursive rendering
+* No DOM wipe loops
+* No blinking screen behavior
+* Prevent double initialization
 
 ---
 
@@ -74,15 +105,12 @@ Only create additional files if absolutely required for functionality.
 
 Component wrapper:
 
-```html
 <mtk-gallery class="mtk-gallery"></mtk-gallery>
-```
 
 Rules:
 
 * Root class must be `.mtk-gallery`
 * Scope ALL styles under `.mtk-gallery`
-* No global styles
 * No global IDs
 * Use semantic HTML only
 * ADA compliant
@@ -94,12 +122,11 @@ Rules:
 
 # CONFIG + DATA RULES
 
-ALL UI-driven data MUST come from:
-
-`mtk-gallery.config.js`
+ALL UI-driven data MUST come from embedded config JSON.
 
 Paintings must support:
 
+* id
 * title
 * description
 * image
@@ -118,16 +145,34 @@ Store owner must be able to:
 * change images
 * change details
 
-from either:
+Data persistence must use:
 
-* config file
-* SQLite database
+* localStorage
+
+for GitHub Pages compatibility.
+
+---
+
+# IMAGE REQUIREMENTS
+
+Include:
+
+* original starter paintings
+* PLUS 20 additional random artwork images
+
+Requirements:
+
+* high-quality artwork images
+* use remote image URLs
+* responsive image handling
+* object-fit cover
+* gallery-ready presentation
 
 ---
 
 # EVENT SYSTEM RULES
 
-Wait for `<mtk-gallery>` to exist before initializing because it may load dynamically through `<wc-include>`.
+Wait for `<mtk-gallery>` to exist before initializing.
 
 Requirements:
 
@@ -137,8 +182,7 @@ Requirements:
 * Log ALL payloads using `wc.log` BEFORE publishing
 * Prevent duplicate initialization
 * Prevent recursive render loops
-* Never wipe the DOM after initialization
-* Prevent blinking screen behavior
+* Prevent blank screen behavior
 * Ensure render happens once unless explicitly refreshed
 
 ---
@@ -153,7 +197,6 @@ Layout requirements:
 
 * `.mtk-gallery` background = `#FFF`
 * `.mtk-gallery__shell`
-
   * `max-inline-size: 1200px`
 
 Home screen:
@@ -161,20 +204,46 @@ Home screen:
 * display painting cards only
 * NO buttons on cards
 
+Painting card requirements:
+
+* image
+* title
+* category
+* price
+* status badge
+
+Status badge text:
+
+* Available
+* Sold
+
+DO NOT use:
+
+* Unavailable!
+
+---
+
+# DETAIL VIEW
+
 Painting click behavior:
 
-* opens full-page detail view
-* detail view includes:
-
-  * image
-  * title
-  * description
-  * price
-  * availability
-  * dimensions
-  * medium
-  * actions
+* opens FULL-SCREEN detail overlay
+* overlay covers entire application
 * include circular close button with “X”
+* support ESC key close
+
+Detail view includes:
+
+* image
+* title
+* description
+* price
+* availability
+* dimensions
+* medium
+* category
+* artwork ID
+* actions
 
 ---
 
@@ -185,18 +254,18 @@ Painting click behavior:
 Show:
 
 * Buy with PayPal
-* “Make a counter offer” link
+* “Make me a counter offer”
 
 Behavior:
 
 * clicking link reveals counter-offer form
 * form hidden by default
 
-## Unavailable Paintings
+## Sold Paintings
 
 Show:
 
-* “Request a similar painting” link
+* “Request a similar painting”
 
 Behavior:
 
@@ -228,12 +297,11 @@ Customers:
 * NO login required
 
 Admin:
-* login visible ONLY when admin chooses to manage/edit
-* keep me logged-in 
-* in Manage Artwork, allow create a fresh addition and auto-add "Artwork ID"
-  and make this field uneditable
 
-Temporary credentials: pre-fill the form with
+* login visible ONLY when admin chooses to manage/edit
+
+Temporary credentials:
+
 * username: admin
 * password: test
 
@@ -242,7 +310,7 @@ Admin capabilities:
 * add paintings
 * edit paintings
 * remove paintings
-* persist changes to SQLite
+* save paintings locally
 
 ---
 
@@ -254,54 +322,90 @@ Clicking:
 
 must:
 
-* open a FULL-SCREEN admin management window
+* open FULL-SCREEN admin management overlay
 * overlay entire application
 * include circular close button with “X”
-* support keyboard escape close
-* include:
+* support keyboard ESC close
 
-  * Add Artwork
-  * Edit Artwork
-  * Remove Artwork
-  * Save Artwork
-* Editing mode must allow:
+Admin UI must include:
 
-  * image changes
-  * title changes
-  * description changes
-  * price changes
-  * availability changes
-  * PayPal data changes
-  * dimensions
-  * medium
-  * category
-* Remove must include confirmation flow
-* Prevent accidental deletion
+* Add New Artwork
+* Edit Artwork
+* Remove Artwork
+* Save Artwork
+* Logout
 
 ---
 
-# API + STORAGE REQUIREMENTS
+# NEW ARTWORK RULES
 
-Required API endpoints:
+Admin must be able to:
+
+* create fresh artwork additions
+
+Artwork ID requirements:
+
+* auto-generate Artwork ID
+* admin should NEVER type Artwork ID manually
+* ID examples:
+  * ART-1001
+  * ART-1002
+  * ART-1003
+
+Artwork ID field must be:
+
+* visible
+* read-only
+* auto-generated
+
+---
+
+# EDITING RULES
+
+Editing mode must allow:
+
+* image changes
+* title changes
+* description changes
+* price changes
+* availability changes
+* category changes
+* dimensions changes
+* medium changes
+* PayPal item changes
+* PayPal SKU changes
+
+---
+
+# REMOVE RULES
+
+Remove flow must:
+
+* require confirmation
+* prevent accidental deletion
+
+---
+
+# PAYPAL RULES
+
+PayPal seller email must be configurable.
+
+Use direct PayPal payment links.
+
+---
+
+# STORAGE RULES
+
+Persist locally using:
+
+* localStorage
+
+Persist:
 
 * paintings
 * offers
 * requests
-
-PayPal seller email MUST be configurable in:
-
-`mtk-gallery.config.js`
-
-SQLite requirements:
-
-* real tables required
-* no empty placeholder DB
-* persist:
-
-  * paintings
-  * offers
-  * requests
-  * admin edits
+* admin edits
 
 ---
 
@@ -310,21 +414,20 @@ SQLite requirements:
 DO NOT:
 
 * use placeholder code
-* omit required files
+* omit required features
 * generate partial implementations
-* break existing requirements
-* replace Vanilla JS with frameworks
-* compile SCSS globally
-* load SCSS directly in browser
-* expose passwords in UI
-* create empty SQLite DB structure without tables
-* create fake API routes
+* break GitHub Pages compatibility
+* require build tools
+* require backend APIs
+* require SQLite runtime
+* create fake server routes
+* create blinking screens
 * create recursive rendering
 * create DOM replacement loops
 * create blank screen behavior
-* create blinking render loops
+* expose passwords in visible UI
 
-Ensure ALL generated files are runnable together.
+Ensure ALL functionality runs together in ONE standalone file.
 
 ---
 
@@ -332,9 +435,8 @@ Ensure ALL generated files are runnable together.
 
 Return ONLY:
 
-* create a single github.io
-* allow me to download it
-* name the file as gallery.html
+* downloadable ZIP file
+* named exactly `x.zip`
 
 Do NOT:
 
@@ -342,4 +444,3 @@ Do NOT:
 * summarize code
 * paste snippets
 * show partial implementations
-
