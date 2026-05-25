@@ -4,10 +4,24 @@ Act as a senior Vanilla JavaScript application architect and production UI/UX en
 
 Build a complete gallery application named `mtk-gallery` for selling hand-painted artwork.
 
-Use this repository as the base: https://github.com/NYCMEL/nala-website.git
-Use all wc code for include, subscribe etc from this file: https://github.com/NYCMEL/nala-website/js/_wc.js
+Use this repository as the base:
+
+[NYCMEL/nala-website](https://github.com/NYCMEL/nala-website.git?utm_source=chatgpt.com)
+
+Use ALL wc utility functionality including:
+
+* `wc-include`
+* `wc.publish`
+* `wc.subscribe`
+* `wc.log`
+* event helpers
+
+from this file:
+
+[_wc.js](https://github.com/NYCMEL/nala-website/blob/main/js/_wc.js?utm_source=chatgpt.com)
 
 ---
+
 # OUTPUT RULES
 
 * Return ONLY one downloadable ZIP file named exactly: `x.zip`
@@ -29,7 +43,7 @@ Generate exactly these files:
 * mtk-gallery.html
 * mtk-gallery.js
 * index.html
-* no server. all item information from mtk-gallery.config.js json file
+
 Only create additional files if absolutely required for functionality.
 
 ---
@@ -46,9 +60,14 @@ Only create additional files if absolutely required for functionality.
 * No inline JavaScript
 * No inline styles
 * SCSS only
-* Never compile CSS
+* Never compile SCSS globally except local runtime CSS file for browser loading
+* index.html MUST load CSS and NEVER SCSS directly
 * Never use iframes
-* Use: `<wc-include href="..."></wc-include>`
+* Use:
+
+```html
+<wc-include href="..."></wc-include>
+```
 
 ---
 
@@ -77,6 +96,7 @@ Rules:
 # CONFIG + DATA RULES
 
 ALL UI-driven data MUST come from:
+
 `mtk-gallery.config.js`
 
 Paintings must support:
@@ -98,7 +118,9 @@ Store owner must be able to:
 * change availability
 * change images
 * change details
-  from either:
+
+from either:
+
 * config file
 * SQLite database
 
@@ -114,12 +136,18 @@ Requirements:
 * Create `onMessage()` handler
 * Publish actions using `wc.publish`
 * Log ALL payloads using `wc.log` BEFORE publishing
+* Prevent duplicate initialization
+* Prevent recursive render loops
+* Never wipe the DOM after initialization
+* Prevent blinking screen behavior
+* Ensure render happens once unless explicitly refreshed
 
 ---
 
 # GALLERY UI
 
 Header title:
+
 `Madam Mina's Artwork`
 
 Layout requirements:
@@ -180,7 +208,7 @@ Behavior:
 
 # FORM DESIGN RULES
 
-Use Material Design styling for:
+Use Modern Material Design styling for:
 
 * floating labels
 * buttons
@@ -218,6 +246,42 @@ Admin capabilities:
 
 ---
 
+# ADMIN WINDOW REQUIREMENTS
+
+Clicking:
+
+`Manage Artwork`
+
+must:
+
+* open a FULL-SCREEN admin management window
+* overlay entire application
+* include circular close button with “X”
+* support keyboard escape close
+* include:
+
+  * Add Artwork
+  * Edit Artwork
+  * Remove Artwork
+  * Save Artwork
+* Editing mode must allow:
+
+  * image changes
+  * title changes
+  * description changes
+  * price changes
+  * availability changes
+  * PayPal data changes
+  * dimensions
+  * medium
+  * category
+* Remove must include confirmation flow
+* Prevent accidental deletion
+
+---
+
+# API + STORAGE REQUIREMENTS
+
 Required API endpoints:
 
 * paintings
@@ -225,7 +289,19 @@ Required API endpoints:
 * requests
 
 PayPal seller email MUST be configurable in:
+
 `mtk-gallery.config.js`
+
+SQLite requirements:
+
+* real tables required
+* no empty placeholder DB
+* persist:
+
+  * paintings
+  * offers
+  * requests
+  * admin edits
 
 ---
 
@@ -238,10 +314,15 @@ DO NOT:
 * generate partial implementations
 * break existing requirements
 * replace Vanilla JS with frameworks
-* compile SCSS into CSS
+* compile SCSS globally
+* load SCSS directly in browser
 * expose passwords in UI
 * create empty SQLite DB structure without tables
 * create fake API routes
+* create recursive rendering
+* create DOM replacement loops
+* create blank screen behavior
+* create blinking render loops
 
 Ensure ALL generated files are runnable together.
 
@@ -260,6 +341,3 @@ Do NOT:
 * summarize code
 * paste snippets
 * show partial implementations
-
----
-clicking on "Manage artwork" should open in its own full screen window with a circular X close control. also allow "Editing" in addition to "Remove"
