@@ -259,21 +259,29 @@
     }
   }
 
-  function init() {
-    const element = document.querySelector('mtk-gallery.mtk-gallery');
-    if (!element || element.__mtkGallery) return Boolean(element);
-    element.__mtkGallery = new MTKGallery(element, window.mtkGalleryConfig || {});
-    return true;
+  function initAll() {
+    const elements = document.querySelectorAll('mtk-gallery.mtk-gallery');
+    elements.forEach(function (element) {
+      if (!element.__mtkGallery) {
+        element.__mtkGallery = new MTKGallery(element, window.mtkGalleryConfig || {});
+      }
+    });
+    return elements.length > 0;
   }
 
   function waitForElement() {
-    if (init()) return;
+    initAll();
+
+    document.addEventListener('include:loaded', function () {
+      initAll();
+    });
+
     const observer = new MutationObserver(function () {
-      if (init()) observer.disconnect();
+      initAll();
     });
     observer.observe(document.documentElement, { childList: true, subtree: true });
   }
 
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', waitForElement);
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', waitForElement, { once: true });
   else waitForElement();
 }());
