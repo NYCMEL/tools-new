@@ -1,95 +1,284 @@
-Act as my expert Vanilla JS component builder.
+# MASTER PROMPT — MTK STOREFRONT BUILDER
 
-Global rules:
-- Use https://github.com/NYCMEL/nala-website.git as the base repo.
-- Never show code in chat.
-- Always return one downloadable ZIP named exactly x.zip.
-- Include complete files only, never patch files.
-- Do not touch anything outside this prompt.
-- Use SCSS only. Do not compile CSS.
-- Never use iframes. Use <wc-include href="..."></wc-include>.
-- Never create images unless I specifically request them.
+Act as a senior Vanilla JavaScript component architect and production UI engineer.
 
-Start fresh for mtk-storefront.
+Build a complete reusable storefront application named `mtk-storefront` for selling hand-painted artwork.
 
-Create a reusable storefront component for selling hand paintings.
+Use this repository as the base:
+https://github.com/NYCMEL/nala-website.git
 
-Required files:
-- mtk-storefront.config.js
-- mtk-storefront.scss
-- mtk-storefront.html
-- mtk-storefront.js
-- index.html
-- server/server.js
-- server/package.json
-- server/mtk-storefront.sqlite
+---
 
-Component rules:
-- Wrapper: <mtk-storefront class="mtk-storefront">
-- Root class: .mtk-storefront
-- All styles scoped under .mtk-storefront
-- No global styles or IDs
-- No inline styles
-- No inline JavaScript
-- No frameworks
-- No Bootstrap
-- No external libraries
-- Vanilla JavaScript only
-- Semantic HTML
-- Keyboard accessible
-- Visible focus states
-- ADA compliant
+# OUTPUT RULES
 
-Data rules:
-- All UI data must come from mtk-storefront.config.js.
-- Store paintings with title, description, price, image, availability, dimensions, medium, category, and PayPal data.
-- User should be able to change images, prices, availability, and painting details from config or DB.
+* Return ONLY one downloadable ZIP file named exactly: `x.zip`
+* Never show code in chat
+* Never return patch files or diffs
+* Always return complete files only
+* Never modify anything outside the scope of this request
+* Never generate placeholder explanations instead of files
+* Never create images unless explicitly requested
+
+---
+
+# REQUIRED FILES
+
+Generate exactly these files:
+
+* mtk-storefront.config.js
+* mtk-storefront.scss
+* mtk-storefront.html
+* mtk-storefront.js
+* index.html
+* server/server.js
+* server/package.json
+* server/mtk-storefront.sqlite
+
+Only create additional files if absolutely required for functionality.
+
+---
+
+# CORE TECH RULES
+
+* Vanilla JavaScript only
+* No frameworks
+* No Bootstrap
+* No React
+* No Vue
+* No Angular
+* No external libraries
+* No inline JavaScript
+* No inline styles
+* SCSS only
+* Never compile CSS
+* Never use iframes
+* Use:
+  `<wc-include href="..."></wc-include>`
+
+---
+
+# COMPONENT ARCHITECTURE
+
+Component wrapper:
+
+```html
+<mtk-storefront class="mtk-storefront"></mtk-storefront>
+```
+
+Rules:
+
+* Root class must be `.mtk-storefront`
+* Scope ALL styles under `.mtk-storefront`
+* No global styles
+* No global IDs
+* Use semantic HTML only
+* ADA compliant
+* Keyboard accessible
+* Visible focus states required
+
+---
+
+# CONFIG + DATA RULES
+
+ALL UI-driven data MUST come from:
+`mtk-storefront.config.js`
+
+Paintings must support:
+
+* title
+* description
+* image
+* price
+* availability
+* dimensions
+* medium
+* category
+* PayPal data
+
+Store owner must be able to:
+
+* change paintings
+* change prices
+* change availability
+* change images
+* change details
+  from either:
+* config file
+* SQLite database
+
+---
+
+# EVENT SYSTEM RULES
+
+Wait for `<mtk-storefront>` to exist before initializing because it may load dynamically through `<wc-include>`.
+
+Requirements:
+
+* Subscribe to all `4-mtk-storefront` events using `wc.subscribe`
+* Create `onMessage()` handler
+* Publish actions using `wc.publish`
+* Log ALL payloads using `wc.log` BEFORE publishing
+
+---
+
+# STOREFRONT UI
+
+Header title:
+`Madam Mina's Artwork`
+
+Layout requirements:
+
+* `.mtk-storefront` background = `#FFF`
+* `.mtk-storefront__shell`
+
+  * `max-inline-size: 1200px`
+
+Home screen:
+
+* display painting cards only
+* NO buttons on cards
+
+Painting click behavior:
+
+* opens full-page detail view
+* detail view includes:
+
+  * image
+  * title
+  * description
+  * price
+  * availability
+  * dimensions
+  * medium
+  * actions
+* include circular close button with “X”
+
+---
+
+# SALES + REQUEST FLOWS
+
+## Available Paintings
+
+Show:
+
+* Buy with PayPal
+* “Make a counter offer” link
 
 Behavior:
-- Wait for <mtk-storefront> to exist in the DOM because it may load through <wc-include>.
-- Subscribe to all 4-mtk-storefront events using wc.subscribe.
-- Create an onMessage function and pass it to wc.subscribe.
-- Publish click/actions with wc.publish.
-- Log every wc.publish payload with wc.log before publishing.
 
-Storefront UI:
-- Header title: Madam Mina’s Artwork
-- .mtk-storefront background: #FFF
-- .mtk-storefront__shell max-inline-size: 1200px
-- Home screen shows painting cards only. No action buttons on cards.
-- Clicking a painting opens a full-page detail view.
-- Detail view has a circular X close button.
-- Detail view shows image, title, description, price, availability, medium, dimensions, and actions.
+* clicking link reveals counter-offer form
+* form hidden by default
 
-Sales and request actions:
-- Available paintings show:
-  - Buy with PayPal
-  - “Make a counter offer” link
-  - Counter-offer form hidden by default and shown only when the link is clicked
-- Unavailable paintings show:
-  - “Request a similar painting” link
-  - Request form hidden by default and shown only when the link is clicked
-- Use Material Design-style floating labels for all forms.
-- Use Material Design-style buttons, spacing, focus states, and form fields.
+## Unavailable Paintings
+
+Show:
+
+* “Request a similar painting” link
+
+Behavior:
+
+* clicking link reveals request form
+* form hidden by default
+
+---
+
+# FORM DESIGN RULES
+
+Use Material Design styling for:
+
+* floating labels
+* buttons
+* fields
+* spacing
+* focus states
+* hover states
+* accessibility states
+
+Forms must feel modern and production-ready.
+
+---
+
+# ADMIN FEATURES
+
+Customers:
+
+* NO login required
 
 Admin:
-- No login required for customers.
-- Admin login appears only when admin chooses to manage/edit.
-- Temporary credentials:
-  - username: admin
-  - password: test
-- Admin can add, edit, and remove paintings from the SQLite DB.
 
-Backend:
-- Use Node.js, not PHP.
-- Backend folder must be named server.
-- Use SQLite to store paintings, prices, availability, offers, and similar-painting requests.
-- Include API endpoints for paintings, offers, and requests.
-- PayPal seller email must be configurable in mtk-storefront.config.js.
+* login visible ONLY when admin chooses to manage/edit
 
-Testing assets:
-- Include 20 test painting images in the ZIP only if I explicitly ask for generated test images.
+Temporary credentials:
 
-Output:
-- Return only a downloadable ZIP named x.zip.
-- Do not show code in chat.
+* username: admin
+* password: test
+
+Admin capabilities:
+
+* add paintings
+* edit paintings
+* remove paintings
+* persist changes to SQLite
+
+---
+
+# BACKEND RULES
+
+Use:
+
+* Node.js ONLY
+* NEVER PHP
+
+Backend folder MUST be:
+`server`
+
+Use SQLite to store:
+
+* paintings
+* prices
+* availability
+* offers
+* similar-painting requests
+
+Required API endpoints:
+
+* paintings
+* offers
+* requests
+
+PayPal seller email MUST be configurable in:
+`mtk-storefront.config.js`
+
+---
+
+# FAILURE PREVENTION RULES
+
+DO NOT:
+
+* use placeholder code
+* omit required files
+* generate partial implementations
+* break existing requirements
+* replace Vanilla JS with frameworks
+* compile SCSS into CSS
+* expose passwords in UI
+* create empty SQLite DB structure without tables
+* create fake API routes
+
+Ensure ALL generated files are runnable together.
+
+---
+
+# FINAL DELIVERY RULES
+
+Return ONLY:
+
+* downloadable ZIP file
+* named exactly `x.zip`
+
+Do NOT:
+
+* explain code
+* summarize code
+* paste snippets
+* show partial implementations
