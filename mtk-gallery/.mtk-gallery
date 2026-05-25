@@ -230,6 +230,8 @@ Customers:
 Admin:
 * login visible ONLY when admin chooses to manage/edit
 * keep me logged-in 
+* in Manage Artwork, allow create a fresh addition and auto-add "Artwork ID"
+  and make this field uneditable
 
 Temporary credentials: pre-fill the form with
 * username: admin
