@@ -262,4 +262,4 @@ Do NOT:
 * show partial implementations
 
 ---
-clicking on "Manage artwork" should open in its own full screen window with "X" in circle and also allow "Editing" in addition to "Remove"
+clicking on "Manage artwork" should open in its own full screen window with a circular X close control. also allow "Editing" in addition to "Remove"
