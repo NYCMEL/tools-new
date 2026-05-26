@@ -399,7 +399,7 @@ openAdmin(){const o=this.root.querySelector("[data-admin-overlay]");o.setAttribu
 closeAdmin(){const o=this.root.querySelector("[data-admin-overlay]");if(o)o.setAttribute("aria-hidden","true")}
 login(form){const d=Object.fromEntries(new FormData(form).entries());if(d.username===this.config.admin.username&&d.password===this.config.admin.password){this.isAdmin=true;this.startNewPainting();this.publish("admin:login",{})}else{const n=form.querySelector("[data-login-error]");if(n)n.textContent="Invalid login."}}
 logout(){this.isAdmin=false;this.editingId=null;this.renderAdmin()}
-renderAdmin(){const c=this.root.querySelector("[data-admin-content]");if(!c)return;if(!this.isAdmin){c.innerHTML=`<div class="mtk-gallery__admin-head"><div><h2>Manage Artwork</h2><p>Login to add, edit, or remove paintings.</p></div></div><form class="mtk-gallery__login" data-form="login">${this.field("username","Username","text",true)}${this.field("password","Password","password",true)}<button class="mtk-gallery__primary" type="submit">Login</button><p class="mtk-gallery__notice" data-login-error></p></form>`;return}c.innerHTML=`<div class="mtk-gallery__admin-head"><div><h2>Manage Artwork</h2><p>Create fresh artwork additions with automatic Artwork IDs, edit existing artwork, or remove items.</p></div><div class="mtk-gallery__actions"><button class="mtk-gallery__primary" type="button" data-action="new-painting">Add New Artwork</button><button class="mtk-gallery__secondary" type="button" data-action="export-gallery">Export Gallery</button><button class="mtk-gallery__secondary" type="button" data-action="logout">Logout</button></div></div><div class="mtk-gallery__editor"><h3>${this.editingId?"Edit Artwork":"Add New Artwork"}</h3>${this.paintingForm()}</div><div class="mtk-gallery__admin-list"><h3>Artwork List</h3>${this.paintings.map(p=>`<div class="mtk-gallery__admin-item"><img src="${this.escape(p.image)}" alt="${this.escape(p.title)}"><div><strong>${this.escape(p.title)}</strong><div>${this.escape(p.id)} · ${this.money(p.price)} · ${this.escape(p.availability)}</div></div><div class="mtk-gallery__admin-actions"><button class="mtk-gallery__secondary" type="button" data-action="edit-painting" data-id="${this.escape(p.id)}">Edit</button><button class="mtk-gallery__danger" type="button" data-action="remove-painting" data-id="${this.escape(p.id)}">Remove</button></div></div>`).join("")}</div>`}
+renderAdmin(){const c=this.root.querySelector("[data-admin-content]");if(!c)return;if(!this.isAdmin){c.innerHTML=`<div class="mtk-gallery__admin-head"><div><h2>Manage Artwork</h2><p>Login to add, edit, or remove paintings.</p></div></div><form class="mtk-gallery__login" data-form="login">${this.field("username","Username","text",true,"admin")}${this.field("password","Password","password",true,"test")}<button class="mtk-gallery__primary" type="submit">Login</button><p class="mtk-gallery__notice" data-login-error></p></form>`;return}c.innerHTML=`<div class="mtk-gallery__admin-head"><div><h2>Manage Artwork</h2><p>Create fresh artwork additions with automatic Artwork IDs, edit existing artwork, or remove items.</p></div><div class="mtk-gallery__actions"><button class="mtk-gallery__primary" type="button" data-action="new-painting">Add New Artwork</button><button class="mtk-gallery__secondary" type="button" data-action="export-gallery">Export Gallery</button><button class="mtk-gallery__secondary" type="button" data-action="logout">Logout</button></div></div><div class="mtk-gallery__editor"><h3>${this.editingId?"Edit Artwork":"Add New Artwork"}</h3>${this.paintingForm()}</div><div class="mtk-gallery__admin-list"><h3>Artwork List</h3>${this.paintings.map(p=>`<div class="mtk-gallery__admin-item"><img src="${this.escape(p.image)}" alt="${this.escape(p.title)}"><div><strong>${this.escape(p.title)}</strong><div>${this.escape(p.id)} · ${this.money(p.price)} · ${this.escape(p.availability)}</div></div><div class="mtk-gallery__admin-actions"><button class="mtk-gallery__secondary" type="button" data-action="edit-painting" data-id="${this.escape(p.id)}">Edit</button><button class="mtk-gallery__danger" type="button" data-action="remove-painting" data-id="${this.escape(p.id)}">Remove</button></div></div>`).join("")}</div>`}
 paintingForm(){const isEditing=Boolean(this.editingId),p=isEditing?this.paintings.find(item=>item.id===this.editingId):{id:this.generateArtworkId(),title:"",description:"",image:"",price:"",availability:"available",dimensions:"",medium:"",category:"",paypal:{itemName:"",sku:""}};return`<form data-form="painting"><input type="hidden" name="originalId" value="${this.escape(this.editingId||"")}"><div class="mtk-gallery__editor-grid"><div class="mtk-gallery__field"><label for="field-id">Artwork ID</label><input id="field-id" name="id" type="text" required readonly value="${this.escape(p.id)}"></div>${this.field("title","Title","text",true,p.title)}<div class="mtk-gallery__field mtk-gallery__field--wide"><label for="image">Image URL or uploaded image data</label><input id="image" name="image" type="text" required value="${this.escape(p.image)}"><p class="mtk-gallery__upload-note">Use a relative image path from the ./img/ folder.</p><img class="mtk-gallery__image-preview" data-image-preview src="${this.escape(p.image)}" alt=""></div><div class="mtk-gallery__field mtk-gallery__field--wide"><label>Upload Image</label><div class="mtk-gallery__upload-wrap"><label class="mtk-gallery__upload-button"></label></div></div>${this.field("price","Price","number",true,p.price)}<div class="mtk-gallery__field"><label for="availability">Availability</label><select id="availability" name="availability" required><option value="available" ${p.availability==="available"?"selected":""}>Available</option><option value="sold" ${p.availability==="sold"?"selected":""}>Sold</option></select></div>${this.field("dimensions","Dimensions","text",true,p.dimensions)}${this.field("medium","Medium","text",true,p.medium)}${this.field("category","Category","text",true,p.category)}${this.field("paypalItemName","PayPal Item Name","text",true,p.paypal?.itemName||p.title)}${this.field("paypalSku","PayPal SKU","text",true,p.paypal?.sku||p.id)}<div class="mtk-gallery__field mtk-gallery__field--wide"><label for="description">Description</label><textarea id="description" name="description" required>${this.escape(p.description)}</textarea></div></div><div class="mtk-gallery__actions"><button class="mtk-gallery__primary" type="submit">${isEditing?"Save Artwork":"Create Artwork"}</button>${isEditing?`<button class="mtk-gallery__secondary" type="button" data-action="cancel-edit">Cancel Editing</button>`:""}</div></form>`}
 generateArtworkId(){const nums=this.paintings.map(p=>String(p.id||"").match(/ART-(\d+)/)).filter(Boolean).map(m=>Number(m[1]));return"ART-"+((nums.length?Math.max(...nums):1000)+1)}
 savePainting(form){const d=Object.fromEntries(new FormData(form).entries()),painting={id:d.id,title:d.title,description:d.description,image:d.image,price:Number(d.price),availability:d.availability,dimensions:d.dimensions,medium:d.medium,category:d.category,paypal:{itemName:d.paypalItemName,sku:d.paypalSku}};if(d.originalId)this.paintings=this.paintings.map(item=>item.id===d.originalId?painting:item);else this.paintings.push(painting);this.editingId=null;this.savePaintings();this.renderHome();this.renderAdmin();this.publish(d.originalId?"painting:updated":"painting:created",{id:painting.id})}
@@ -408,16 +408,26 @@ editPainting(id){this.editingId=id;this.renderAdmin();this.publish("painting:edi
 cancelEdit(){this.editingId=null;this.renderAdmin()}
 removePainting(id){const p=this.paintings.find(item=>item.id===id);if(!p)return;if(!confirm(`Remove "${p.title}"? This cannot be undone.`))return;this.paintings=this.paintings.filter(item=>item.id!==id);this.savePaintings();this.renderHome();this.renderAdmin();this.publish("painting:remove",{id})}
 exportGallery(){
-const source=document.documentElement.outerHTML;
-const escapedPaintings=JSON.stringify(this.paintings,null,2).replace(/</g,"\\u003c");
-let exported=source.replace(/const config = \{[\s\S]*?\};\nconst STORAGE_KEY=/,`const config = {
-  "store": ${JSON.stringify(this.config.store,null,2)},
-  "admin": ${JSON.stringify(this.config.admin,null,2)},
-  "paintings": ${escapedPaintings}
+const clean=document.documentElement.cloneNode(true);
+const gallery=clean.querySelector("mtk-gallery.mtk-gallery");
+if(gallery){
+gallery.removeAttribute("data-initialized");
+gallery.innerHTML="";
+}
+clean.querySelectorAll(".mtk-gallery__overlay").forEach((overlay)=>{
+overlay.setAttribute("aria-hidden","true");
+});
+const cleanConfig={
+store:this.config.store,
+admin:this.config.admin,
+paintings:this.paintings
 };
-const STORAGE_KEY=`);
-exported=exported.replace(/localStorage\.getItem\(STORAGE_KEY\);return s\?JSON\.parse\(s\):JSON\.parse\(JSON\.stringify\(this\.config\.paintings\)\)/,'localStorage.getItem(STORAGE_KEY);return JSON.parse(JSON.stringify(this.config.paintings))');
-const blob=new Blob(["<!DOCTYPE html>\\n"+exported],{type:"text/html;charset=utf-8"});
+let exported="<!DOCTYPE html>\n"+clean.outerHTML;
+const configBlock=`const config = ${JSON.stringify(cleanConfig,null,2)};
+const STORAGE_KEY="mtk-gallery-paintings-v3",OFFERS_KEY="mtk-gallery-offers-v3",REQUESTS_KEY="mtk-gallery-requests-v3";`;
+exported=exported.replace(/const config = [\s\S]*?const STORAGE_KEY="mtk-gallery-paintings-v3",OFFERS_KEY="mtk-gallery-offers-v3",REQUESTS_KEY="mtk-gallery-requests-v3";/,configBlock);
+exported=exported.replace(/<mtk-gallery class="mtk-gallery"[\s\S]*?<\/mtk-gallery>/,'<mtk-gallery class="mtk-gallery"></mtk-gallery>');
+const blob=new Blob([exported],{type:"text/html;charset=utf-8"});
 const url=URL.createObjectURL(blob);
 const a=document.createElement("a");
 a.href=url;
@@ -426,6 +436,7 @@ document.body.appendChild(a);
 a.click();
 a.remove();
 URL.revokeObjectURL(url);
+this.closeAdmin();
 this.publish("gallery:exported",{count:this.paintings.length});
 }
 field(name,label,type,required,value=""){const id="field-"+name;return`<div class="mtk-gallery__field"><label for="${this.escape(id)}">${this.escape(label)}</label><input id="${this.escape(id)}" name="${this.escape(name)}" type="${this.escape(type)}" ${required?"required":""} value="${this.escape(String(value??""))}"></div>`}
@@ -433,7 +444,7 @@ textarea(name,label,required){const id="field-"+name;return`<div class="mtk-gall
 money(v){return new Intl.NumberFormat("en-US",{style:"currency",currency:this.config.store.currency||"USD",maximumFractionDigits:0}).format(Number(v||0))}
 escape(v){return String(v??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;")}
 }
-function init(){const root=document.querySelector("mtk-gallery.mtk-gallery");if(!root||root.dataset.initialized==="true")return;root.dataset.initialized="true";new MTKGallery(root,config)}
+function init(){const root=document.querySelector("mtk-gallery.mtk-gallery");if(!root)return;if(window.__mtkGalleryInitialized)return;window.__mtkGalleryInitialized=true;root.removeAttribute("data-initialized");root.innerHTML="";root.dataset.initialized="true";new MTKGallery(root,config)}
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});else init();
 })();
 </script>
