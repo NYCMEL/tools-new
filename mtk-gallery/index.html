@@ -175,13 +175,16 @@ margin-top:32px!important;
 
 .mtk-gallery__logo{
 display:block;
-width:min(100%,780px);
+width:250px;
 height:auto;
 object-fit:contain;
+background:transparent!important;
+mix-blend-mode:multiply;
 }
 @media(max-width:760px){
 .mtk-gallery__logo{
-width:min(100%,420px)!important;
+width:180px!important;
+}
 }
 }
 
@@ -609,7 +612,7 @@ this.root.innerHTML=`<section class="mtk-gallery__shell" aria-label="Artwork gal
 <header class="mtk-gallery__topbar">
 <div class="mtk-gallery__topbar-inner">
 <div>
-<img class="mtk-gallery__logo" src="./img/madam-mina-logo.png" alt="Madam Mina Artwork logo">
+<img class="mtk-gallery__logo" src="./img/madam-mina-logo.png" alt="Madam Mina Artwork logo" style="background:transparent">
 
 <p class="mtk-gallery__header-description">${this.escape(this.config.store.headerDescription||"")}</p>
 </div>
