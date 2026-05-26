@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en"><head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Madam Mina's Artwork</title>
@@ -19,362 +18,347 @@ window.wc.publish=window.wc.publish||function(name,payload){document.dispatchEve
 window.wc.subscribe=window.wc.subscribe||function(name,handler){document.addEventListener(name,handler);return function(){document.removeEventListener(name,handler)}};
 const config = {
   "store": {
-    "title": "Madam Mina's Artwork",
-    "subtitle": "Original hand-painted artwork for collectors, gifts, homes, offices, and personal spaces.",
-    "paypalSellerEmail": "seller@example.com",
-    "currency": "USD"
-  },
+  "title": "Madam Mina's Artwork",
+  "subtitle": "Original hand-painted artwork for collectors, gifts, homes, offices, and personal spaces.",
+  "paypalSellerEmail": "seller@example.com",
+  "currency": "USD"
+},
   "admin": {
-    "username": "admin",
-    "password": "test"
-  },
+  "username": "admin",
+  "password": "test"
+},
   "paintings": [
-    {
-      "id": "ART-1001",
-      "title": "Golden Garden",
-      "description": "Warm floral movement with soft gold tones and layered painterly texture.",
-      "image": "https://images.unsplash.com/photo-1578301978018-3005759f48f7?auto=format&fit=crop&w=1200&q=80",
-      "price": 450,
-      "availability": "available",
-      "dimensions": "24 x 30 in",
-      "medium": "Acrylic on canvas",
-      "category": "Floral",
-      "paypal": {
-        "itemName": "Golden Garden",
-        "sku": "ART-1001"
-      }
-    },
-    {
-      "id": "ART-1002",
-      "title": "Blue Evening",
-      "description": "A calming abstract composition inspired by evening light and water.",
-      "image": "https://images.unsplash.com/photo-1547891654-e66ed7ebb968?auto=format&fit=crop&w=1200&q=80",
-      "price": 520,
-      "availability": "available",
-      "dimensions": "30 x 40 in",
-      "medium": "Oil on canvas",
-      "category": "Abstract",
-      "paypal": {
-        "itemName": "Blue Evening",
-        "sku": "ART-1002"
-      }
-    },
-    {
-      "id": "ART-1003",
-      "title": "Quiet Village",
-      "description": "A cozy village scene with hand-painted architectural details.",
-      "image": "https://images.unsplash.com/photo-1579783928621-7a13d66a62d1?auto=format&fit=crop&w=1200&q=80",
-      "price": 610,
-      "availability": "sold",
-      "dimensions": "28 x 36 in",
-      "medium": "Mixed media",
-      "category": "Landscape",
-      "paypal": {
-        "itemName": "Quiet Village",
-        "sku": "ART-1003"
-      }
-    },
-    {
-      "id": "ART-1004",
-      "title": "Crimson Field",
-      "description": "Original hand-painted artwork with expressive detail, layered texture, and gallery-ready presentation.",
-      "image": "https://images.unsplash.com/photo-1504198453319-5ce911bafcde?auto=format&fit=crop&w=1200&q=80",
-      "price": 325,
-      "availability": "available",
-      "dimensions": "24 x 30 in",
-      "medium": "Acrylic on canvas",
-      "category": "Abstract",
-      "paypal": {
-        "itemName": "Crimson Field",
-        "sku": "ART-1004"
-      }
-    },
-    {
-      "id": "ART-1005",
-      "title": "Ocean Memory",
-      "description": "Original hand-painted artwork with expressive detail, layered texture, and gallery-ready presentation.",
-      "image": "https://images.unsplash.com/photo-1515405295579-ba7b45403062?auto=format&fit=crop&w=1200&q=80",
-      "price": 360,
-      "availability": "sold",
-      "dimensions": "24 x 30 in",
-      "medium": "Acrylic on canvas",
-      "category": "Landscape",
-      "paypal": {
-        "itemName": "Ocean Memory",
-        "sku": "ART-1005"
-      }
-    },
-    {
-      "id": "ART-1006",
-      "title": "Sunset Window",
-      "description": "Original hand-painted artwork with expressive detail, layered texture, and gallery-ready presentation.",
-      "image": "https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=1200&q=80",
-      "price": 395,
-      "availability": "available",
-      "dimensions": "24 x 30 in",
-      "medium": "Acrylic on canvas",
-      "category": "Floral",
-      "paypal": {
-        "itemName": "Sunset Window",
-        "sku": "ART-1006"
-      }
-    },
-    {
-      "id": "ART-1007",
-      "title": "Lilac Path",
-      "description": "Original hand-painted artwork with expressive detail, layered texture, and gallery-ready presentation.",
-      "image": "https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?auto=format&fit=crop&w=1200&q=80",
-      "price": 430,
-      "availability": "available",
-      "dimensions": "24 x 30 in",
-      "medium": "Acrylic on canvas",
-      "category": "Seascape",
-      "paypal": {
-        "itemName": "Lilac Path",
-        "sku": "ART-1007"
-      }
-    },
-    {
-      "id": "ART-1008",
-      "title": "Amber Room",
-      "description": "Original hand-painted artwork with expressive detail, layered texture, and gallery-ready presentation.",
-      "image": "https://images.unsplash.com/photo-1579783928621-7a13d66a62d1?auto=format&fit=crop&w=1200&q=80",
-      "price": 465,
-      "availability": "available",
-      "dimensions": "24 x 30 in",
-      "medium": "Acrylic on canvas",
-      "category": "Still Life",
-      "paypal": {
-        "itemName": "Amber Room",
-        "sku": "ART-1008"
-      }
-    },
-    {
-      "id": "ART-1009",
-      "title": "Forest Rain",
-      "description": "Original hand-painted artwork with expressive detail, layered texture, and gallery-ready presentation.",
-      "image": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80",
-      "price": 500,
-      "availability": "available",
-      "dimensions": "24 x 30 in",
-      "medium": "Acrylic on canvas",
-      "category": "Abstract",
-      "paypal": {
-        "itemName": "Forest Rain",
-        "sku": "ART-1009"
-      }
-    },
-    {
-      "id": "ART-1010",
-      "title": "Moonlit Table",
-      "description": "Original hand-painted artwork with expressive detail, layered texture, and gallery-ready presentation.",
-      "image": "https://images.unsplash.com/photo-1541961017774-22349e4a1262?auto=format&fit=crop&w=1200&q=80",
-      "price": 535,
-      "availability": "sold",
-      "dimensions": "24 x 30 in",
-      "medium": "Acrylic on canvas",
-      "category": "Landscape",
-      "paypal": {
-        "itemName": "Moonlit Table",
-        "sku": "ART-1010"
-      }
-    },
-    {
-      "id": "ART-1011",
-      "title": "Quiet Coast",
-      "description": "Original hand-painted artwork with expressive detail, layered texture, and gallery-ready presentation.",
-      "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80",
-      "price": 570,
-      "availability": "available",
-      "dimensions": "24 x 30 in",
-      "medium": "Acrylic on canvas",
-      "category": "Floral",
-      "paypal": {
-        "itemName": "Quiet Coast",
-        "sku": "ART-1011"
-      }
-    },
-    {
-      "id": "ART-1012",
-      "title": "Spring Orchard",
-      "description": "Original hand-painted artwork with expressive detail, layered texture, and gallery-ready presentation.",
-      "image": "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?auto=format&fit=crop&w=1200&q=80",
-      "price": 605,
-      "availability": "available",
-      "dimensions": "24 x 30 in",
-      "medium": "Acrylic on canvas",
-      "category": "Seascape",
-      "paypal": {
-        "itemName": "Spring Orchard",
-        "sku": "ART-1012"
-      }
-    },
-    {
-      "id": "ART-1013",
-      "title": "Velvet Sky",
-      "description": "Original hand-painted artwork with expressive detail, layered texture, and gallery-ready presentation.",
-      "image": "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1200&q=80",
-      "price": 640,
-      "availability": "available",
-      "dimensions": "24 x 30 in",
-      "medium": "Acrylic on canvas",
-      "category": "Still Life",
-      "paypal": {
-        "itemName": "Velvet Sky",
-        "sku": "ART-1013"
-      }
-    },
-    {
-      "id": "ART-1014",
-      "title": "Desert Song",
-      "description": "Original hand-painted artwork with expressive detail, layered texture, and gallery-ready presentation.",
-      "image": "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=1200&q=80",
-      "price": 675,
-      "availability": "available",
-      "dimensions": "24 x 30 in",
-      "medium": "Acrylic on canvas",
-      "category": "Abstract",
-      "paypal": {
-        "itemName": "Desert Song",
-        "sku": "ART-1014"
-      }
-    },
-    {
-      "id": "ART-1015",
-      "title": "Silver Vase",
-      "description": "Original hand-painted artwork with expressive detail, layered texture, and gallery-ready presentation.",
-      "image": "https://images.unsplash.com/photo-1580136579312-94651dfd596d?auto=format&fit=crop&w=1200&q=80",
-      "price": 710,
-      "availability": "sold",
-      "dimensions": "24 x 30 in",
-      "medium": "Acrylic on canvas",
-      "category": "Landscape",
-      "paypal": {
-        "itemName": "Silver Vase",
-        "sku": "ART-1015"
-      }
-    },
-    {
-      "id": "ART-1016",
-      "title": "Garden Wall",
-      "description": "Original hand-painted artwork with expressive detail, layered texture, and gallery-ready presentation.",
-      "image": "https://images.unsplash.com/photo-1493612276216-ee3925520721?auto=format&fit=crop&w=1200&q=80",
-      "price": 745,
-      "availability": "available",
-      "dimensions": "24 x 30 in",
-      "medium": "Acrylic on canvas",
-      "category": "Floral",
-      "paypal": {
-        "itemName": "Garden Wall",
-        "sku": "ART-1016"
-      }
-    },
-    {
-      "id": "ART-1017",
-      "title": "Blue Iris",
-      "description": "Original hand-painted artwork with expressive detail, layered texture, and gallery-ready presentation.",
-      "image": "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=1200&q=80",
-      "price": 780,
-      "availability": "available",
-      "dimensions": "24 x 30 in",
-      "medium": "Acrylic on canvas",
-      "category": "Seascape",
-      "paypal": {
-        "itemName": "Blue Iris",
-        "sku": "ART-1017"
-      }
-    },
-    {
-      "id": "ART-1018",
-      "title": "Small Harbor",
-      "description": "Original hand-painted artwork with expressive detail, layered texture, and gallery-ready presentation.",
-      "image": "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1200&q=80",
-      "price": 815,
-      "availability": "available",
-      "dimensions": "24 x 30 in",
-      "medium": "Acrylic on canvas",
-      "category": "Still Life",
-      "paypal": {
-        "itemName": "Small Harbor",
-        "sku": "ART-1018"
-      }
-    },
-    {
-      "id": "ART-1019",
-      "title": "Evening Rose",
-      "description": "Original hand-painted artwork with expressive detail, layered texture, and gallery-ready presentation.",
-      "image": "https://images.unsplash.com/photo-1493246507139-91e8fad9978e?auto=format&fit=crop&w=1200&q=80",
-      "price": 850,
-      "availability": "available",
-      "dimensions": "24 x 30 in",
-      "medium": "Acrylic on canvas",
-      "category": "Abstract",
-      "paypal": {
-        "itemName": "Evening Rose",
-        "sku": "ART-1019"
-      }
-    },
-    {
-      "id": "ART-1020",
-      "title": "Mountain Air",
-      "description": "Original hand-painted artwork with expressive detail, layered texture, and gallery-ready presentation.",
-      "image": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1200&q=80",
-      "price": 885,
-      "availability": "sold",
-      "dimensions": "24 x 30 in",
-      "medium": "Acrylic on canvas",
-      "category": "Landscape",
-      "paypal": {
-        "itemName": "Mountain Air",
-        "sku": "ART-1020"
-      }
-    },
-    {
-      "id": "ART-1021",
-      "title": "Wild Meadow",
-      "description": "Original hand-painted artwork with expressive detail, layered texture, and gallery-ready presentation.",
-      "image": "https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&w=1200&q=80",
-      "price": 920,
-      "availability": "available",
-      "dimensions": "24 x 30 in",
-      "medium": "Acrylic on canvas",
-      "category": "Floral",
-      "paypal": {
-        "itemName": "Wild Meadow",
-        "sku": "ART-1021"
-      }
-    },
-    {
-      "id": "ART-1022",
-      "title": "City Light",
-      "description": "Original hand-painted artwork with expressive detail, layered texture, and gallery-ready presentation.",
-      "image": "https://images.unsplash.com/photo-1499092346589-b9b6be3e94b2?auto=format&fit=crop&w=1200&q=80",
-      "price": 955,
-      "availability": "available",
-      "dimensions": "24 x 30 in",
-      "medium": "Acrylic on canvas",
-      "category": "Seascape",
-      "paypal": {
-        "itemName": "City Light",
-        "sku": "ART-1022"
-      }
-    },
-    {
-      "id": "ART-1023",
-      "title": "Soft Horizon",
-      "description": "Original hand-painted artwork with expressive detail, layered texture, and gallery-ready presentation.",
-      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80",
-      "price": 990,
-      "availability": "available",
-      "dimensions": "24 x 30 in",
-      "medium": "Acrylic on canvas",
-      "category": "Still Life",
-      "paypal": {
-        "itemName": "Soft Horizon",
-        "sku": "ART-1023"
-      }
+  {
+    "id": "ART-1001",
+    "title": "Golden Garden",
+    "description": "Warm floral movement with soft gold tones and layered painterly texture.",
+    "image": "https://images.unsplash.com/photo-1578301978018-3005759f48f7?auto=format&fit=crop&w=1200&q=80",
+    "price": 450,
+    "availability": "available",
+    "dimensions": "24 x 30 in",
+    "medium": "Acrylic on canvas",
+    "category": "Floral",
+    "paypal": {
+      "itemName": "Golden Garden",
+      "sku": "ART-1001"
     }
-  ]
+  },
+  {
+    "id": "ART-1002",
+    "title": "Blue Evening",
+    "description": "A calming abstract composition inspired by evening light and water.",
+    "image": "https://images.unsplash.com/photo-1547891654-e66ed7ebb968?auto=format&fit=crop&w=1200&q=80",
+    "price": 520,
+    "availability": "available",
+    "dimensions": "30 x 40 in",
+    "medium": "Oil on canvas",
+    "category": "Abstract",
+    "paypal": {
+      "itemName": "Blue Evening",
+      "sku": "ART-1002"
+    }
+  },
+  {
+    "id": "ART-1003",
+    "title": "Quiet Village",
+    "description": "A cozy village scene with hand-painted architectural details.",
+    "image": "https://images.unsplash.com/photo-1579783928621-7a13d66a62d1?auto=format&fit=crop&w=1200&q=80",
+    "price": 610,
+    "availability": "sold",
+    "dimensions": "28 x 36 in",
+    "medium": "Mixed media",
+    "category": "Landscape",
+    "paypal": {
+      "itemName": "Quiet Village",
+      "sku": "ART-1003"
+    }
+  },
+  {
+    "id": "ART-1005",
+    "title": "Ocean Memory",
+    "description": "Original hand-painted artwork with expressive detail, layered texture, and gallery-ready presentation.",
+    "image": "https://images.unsplash.com/photo-1515405295579-ba7b45403062?auto=format&fit=crop&w=1200&q=80",
+    "price": 360,
+    "availability": "sold",
+    "dimensions": "24 x 30 in",
+    "medium": "Acrylic on canvas",
+    "category": "Landscape",
+    "paypal": {
+      "itemName": "Ocean Memory",
+      "sku": "ART-1005"
+    }
+  },
+  {
+    "id": "ART-1006",
+    "title": "Sunset Window",
+    "description": "Original hand-painted artwork with expressive detail, layered texture, and gallery-ready presentation.",
+    "image": "https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=1200&q=80",
+    "price": 395,
+    "availability": "available",
+    "dimensions": "24 x 30 in",
+    "medium": "Acrylic on canvas",
+    "category": "Floral",
+    "paypal": {
+      "itemName": "Sunset Window",
+      "sku": "ART-1006"
+    }
+  },
+  {
+    "id": "ART-1007",
+    "title": "Lilac Path",
+    "description": "Original hand-painted artwork with expressive detail, layered texture, and gallery-ready presentation.",
+    "image": "https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?auto=format&fit=crop&w=1200&q=80",
+    "price": 430,
+    "availability": "available",
+    "dimensions": "24 x 30 in",
+    "medium": "Acrylic on canvas",
+    "category": "Seascape",
+    "paypal": {
+      "itemName": "Lilac Path",
+      "sku": "ART-1007"
+    }
+  },
+  {
+    "id": "ART-1008",
+    "title": "Amber Room",
+    "description": "Original hand-painted artwork with expressive detail, layered texture, and gallery-ready presentation.",
+    "image": "https://images.unsplash.com/photo-1579783928621-7a13d66a62d1?auto=format&fit=crop&w=1200&q=80",
+    "price": 465,
+    "availability": "available",
+    "dimensions": "24 x 30 in",
+    "medium": "Acrylic on canvas",
+    "category": "Still Life",
+    "paypal": {
+      "itemName": "Amber Room",
+      "sku": "ART-1008"
+    }
+  },
+  {
+    "id": "ART-1009",
+    "title": "Forest Rain",
+    "description": "Original hand-painted artwork with expressive detail, layered texture, and gallery-ready presentation.",
+    "image": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80",
+    "price": 500,
+    "availability": "available",
+    "dimensions": "24 x 30 in",
+    "medium": "Acrylic on canvas",
+    "category": "Abstract",
+    "paypal": {
+      "itemName": "Forest Rain",
+      "sku": "ART-1009"
+    }
+  },
+  {
+    "id": "ART-1010",
+    "title": "Moonlit Table",
+    "description": "Original hand-painted artwork with expressive detail, layered texture, and gallery-ready presentation.",
+    "image": "https://images.unsplash.com/photo-1541961017774-22349e4a1262?auto=format&fit=crop&w=1200&q=80",
+    "price": 535,
+    "availability": "sold",
+    "dimensions": "24 x 30 in",
+    "medium": "Acrylic on canvas",
+    "category": "Landscape",
+    "paypal": {
+      "itemName": "Moonlit Table",
+      "sku": "ART-1010"
+    }
+  },
+  {
+    "id": "ART-1011",
+    "title": "Quiet Coast",
+    "description": "Original hand-painted artwork with expressive detail, layered texture, and gallery-ready presentation.",
+    "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80",
+    "price": 570,
+    "availability": "available",
+    "dimensions": "24 x 30 in",
+    "medium": "Acrylic on canvas",
+    "category": "Floral",
+    "paypal": {
+      "itemName": "Quiet Coast",
+      "sku": "ART-1011"
+    }
+  },
+  {
+    "id": "ART-1012",
+    "title": "Spring Orchard",
+    "description": "Original hand-painted artwork with expressive detail, layered texture, and gallery-ready presentation.",
+    "image": "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?auto=format&fit=crop&w=1200&q=80",
+    "price": 605,
+    "availability": "available",
+    "dimensions": "24 x 30 in",
+    "medium": "Acrylic on canvas",
+    "category": "Seascape",
+    "paypal": {
+      "itemName": "Spring Orchard",
+      "sku": "ART-1012"
+    }
+  },
+  {
+    "id": "ART-1013",
+    "title": "Velvet Sky",
+    "description": "Original hand-painted artwork with expressive detail, layered texture, and gallery-ready presentation.",
+    "image": "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1200&q=80",
+    "price": 640,
+    "availability": "available",
+    "dimensions": "24 x 30 in",
+    "medium": "Acrylic on canvas",
+    "category": "Still Life",
+    "paypal": {
+      "itemName": "Velvet Sky",
+      "sku": "ART-1013"
+    }
+  },
+  {
+    "id": "ART-1014",
+    "title": "Desert Song",
+    "description": "Original hand-painted artwork with expressive detail, layered texture, and gallery-ready presentation.",
+    "image": "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=1200&q=80",
+    "price": 675,
+    "availability": "available",
+    "dimensions": "24 x 30 in",
+    "medium": "Acrylic on canvas",
+    "category": "Abstract",
+    "paypal": {
+      "itemName": "Desert Song",
+      "sku": "ART-1014"
+    }
+  },
+  {
+    "id": "ART-1015",
+    "title": "Silver Vase",
+    "description": "Original hand-painted artwork with expressive detail, layered texture, and gallery-ready presentation.",
+    "image": "https://images.unsplash.com/photo-1580136579312-94651dfd596d?auto=format&fit=crop&w=1200&q=80",
+    "price": 710,
+    "availability": "sold",
+    "dimensions": "24 x 30 in",
+    "medium": "Acrylic on canvas",
+    "category": "Landscape",
+    "paypal": {
+      "itemName": "Silver Vase",
+      "sku": "ART-1015"
+    }
+  },
+  {
+    "id": "ART-1016",
+    "title": "Garden Wall",
+    "description": "Original hand-painted artwork with expressive detail, layered texture, and gallery-ready presentation.",
+    "image": "https://images.unsplash.com/photo-1493612276216-ee3925520721?auto=format&fit=crop&w=1200&q=80",
+    "price": 745,
+    "availability": "available",
+    "dimensions": "24 x 30 in",
+    "medium": "Acrylic on canvas",
+    "category": "Floral",
+    "paypal": {
+      "itemName": "Garden Wall",
+      "sku": "ART-1016"
+    }
+  },
+  {
+    "id": "ART-1017",
+    "title": "Blue Iris",
+    "description": "Original hand-painted artwork with expressive detail, layered texture, and gallery-ready presentation.",
+    "image": "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=1200&q=80",
+    "price": 780,
+    "availability": "available",
+    "dimensions": "24 x 30 in",
+    "medium": "Acrylic on canvas",
+    "category": "Seascape",
+    "paypal": {
+      "itemName": "Blue Iris",
+      "sku": "ART-1017"
+    }
+  },
+  {
+    "id": "ART-1018",
+    "title": "Small Harbor",
+    "description": "Original hand-painted artwork with expressive detail, layered texture, and gallery-ready presentation.",
+    "image": "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1200&q=80",
+    "price": 815,
+    "availability": "available",
+    "dimensions": "24 x 30 in",
+    "medium": "Acrylic on canvas",
+    "category": "Still Life",
+    "paypal": {
+      "itemName": "Small Harbor",
+      "sku": "ART-1018"
+    }
+  },
+  {
+    "id": "ART-1019",
+    "title": "Evening Rose",
+    "description": "Original hand-painted artwork with expressive detail, layered texture, and gallery-ready presentation.",
+    "image": "https://images.unsplash.com/photo-1493246507139-91e8fad9978e?auto=format&fit=crop&w=1200&q=80",
+    "price": 850,
+    "availability": "available",
+    "dimensions": "24 x 30 in",
+    "medium": "Acrylic on canvas",
+    "category": "Abstract",
+    "paypal": {
+      "itemName": "Evening Rose",
+      "sku": "ART-1019"
+    }
+  },
+  {
+    "id": "ART-1020",
+    "title": "Mountain Air",
+    "description": "Original hand-painted artwork with expressive detail, layered texture, and gallery-ready presentation.",
+    "image": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1200&q=80",
+    "price": 885,
+    "availability": "sold",
+    "dimensions": "24 x 30 in",
+    "medium": "Acrylic on canvas",
+    "category": "Landscape",
+    "paypal": {
+      "itemName": "Mountain Air",
+      "sku": "ART-1020"
+    }
+  },
+  {
+    "id": "ART-1021",
+    "title": "Wild Meadow",
+    "description": "Original hand-painted artwork with expressive detail, layered texture, and gallery-ready presentation.",
+    "image": "https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&w=1200&q=80",
+    "price": 920,
+    "availability": "available",
+    "dimensions": "24 x 30 in",
+    "medium": "Acrylic on canvas",
+    "category": "Floral",
+    "paypal": {
+      "itemName": "Wild Meadow",
+      "sku": "ART-1021"
+    }
+  },
+  {
+    "id": "ART-1022",
+    "title": "City Light",
+    "description": "Original hand-painted artwork with expressive detail, layered texture, and gallery-ready presentation.",
+    "image": "https://images.unsplash.com/photo-1499092346589-b9b6be3e94b2?auto=format&fit=crop&w=1200&q=80",
+    "price": 955,
+    "availability": "available",
+    "dimensions": "24 x 30 in",
+    "medium": "Acrylic on canvas",
+    "category": "Seascape",
+    "paypal": {
+      "itemName": "City Light",
+      "sku": "ART-1022"
+    }
+  },
+  {
+    "id": "ART-1023",
+    "title": "Soft Horizon",
+    "description": "Original hand-painted artwork with expressive detail, layered texture, and gallery-ready presentation.",
+    "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80",
+    "price": 990,
+    "availability": "available",
+    "dimensions": "24 x 30 in",
+    "medium": "Acrylic on canvas",
+    "category": "Still Life",
+    "paypal": {
+      "itemName": "Soft Horizon",
+      "sku": "ART-1023"
+    }
+  }
+]
 };
 const STORAGE_KEY="mtk-gallery-paintings-v3",OFFERS_KEY="mtk-gallery-offers-v3",REQUESTS_KEY="mtk-gallery-requests-v3";
 class MTKGallery{
@@ -470,5 +454,7 @@ function init(){const root=document.querySelector("mtk-gallery.mtk-gallery");if(
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});else init();
 })();
 </script>
-</body>
-</html>
+
+
+
+</body></html>
