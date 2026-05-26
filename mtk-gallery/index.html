@@ -15,9 +15,9 @@ button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-vis
 .mtk-gallery__topbar{position:fixed;top:0;left:0;right:0;z-index:100;inline-size:100vw;margin:0 0 42px 0;padding:16px 40px 18px;background:#55efc4;border-bottom:1px solid rgba(17,24,39,.12);box-shadow:0 8px 24px rgba(15,23,42,.12);--mtk-header-desc-opacity:1;--mtk-header-desc-max:180px}
 .mtk-gallery__topbar-inner{inline-size:100%;max-inline-size:1200px;margin:0 auto;display:flex;align-items:flex-start;justify-content:space-between;gap:24px}
 .mtk-gallery__title{margin:0;font-size:clamp(2rem,5vw,4.5rem);line-height:.95;font-weight:900;letter-spacing:-.05em;color:#111827}
-.mtk-gallery__subtitle{margin:12px 0 0;color:#4b5563;font-size:clamp(.92rem,1.6vw,1.15rem);line-height:1.45;max-width:880px;opacity:var(--mtk-header-desc-opacity);max-height:var(--mtk-header-desc-max);overflow:hidden;transition:opacity .18s linear,max-height .18s linear,margin .18s linear,padding .18s linear;will-change:opacity,max-height}
-.mtk-gallery__header-description{margin:12px 0 0;padding-top:12px;border-top:1px solid rgba(17,24,39,.18);color:#1f2937;font-size:.92rem;line-height:1.6;max-width:880px;opacity:var(--mtk-header-desc-opacity);max-height:var(--mtk-header-desc-max);overflow:hidden;transition:opacity .18s linear,max-height .18s linear,margin .18s linear,padding .18s linear;will-change:opacity,max-height}
-.mtk-gallery__topbar[data-scrolled="true"] .mtk-gallery__subtitle,.mtk-gallery__topbar[data-scrolled="true"] .mtk-gallery__header-description{margin-top:0!important;padding-top:0!important}
+
+.mtk-gallery__header-description{margin:16px 0 0;padding-top:0;color:#1f2937;font-size:.92rem;line-height:1.6;max-width:880px;opacity:var(--mtk-header-desc-opacity);max-height:var(--mtk-header-desc-max);overflow:hidden;transition:opacity .18s linear,max-height .18s linear,margin .18s linear,padding .18s linear;will-change:opacity,max-height}
+.mtk-gallery__topbar[data-scrolled="true"] .mtk-gallery__header-description{margin-top:0!important;padding-top:0!important}
 .mtk-gallery__manage,.mtk-gallery__primary{border:0;background:#1a73e8;color:#fff;padding:12px 18px;border-radius:999px;cursor:pointer;font-weight:800;box-shadow:0 2px 8px rgba(26,115,232,.24);white-space:nowrap}
 .mtk-gallery__manage:hover,.mtk-gallery__primary:hover{background:#1558b0}
 .mtk-gallery__secondary,.mtk-gallery__danger{border:1px solid #dadce0;background:#fff;color:#202124;padding:10px 14px;border-radius:12px;cursor:pointer;font-weight:800}
@@ -129,9 +129,7 @@ padding-top:180px!important;
 .mtk-gallery__title{
 font-size:clamp(1.7rem,8vw,3rem)!important;
 }
-.mtk-gallery__subtitle{
-font-size:.95rem!important;
-}
+
 .mtk-gallery__header-description{
 font-size:.85rem!important;
 line-height:1.5!important;
@@ -573,7 +571,7 @@ this.root.innerHTML=`<section class="mtk-gallery__shell" aria-label="Artwork gal
 <div class="mtk-gallery__topbar-inner">
 <div>
 <h1 class="mtk-gallery__title">${this.escape(this.config.store.title)}</h1>
-<p class="mtk-gallery__subtitle">${this.escape(this.config.store.subtitle)}</p>
+
 <p class="mtk-gallery__header-description">${this.escape(this.config.store.headerDescription||"")}</p>
 </div>
 <button class="mtk-gallery__manage" type="button" data-action="open-admin">Manage Artwork</button>
