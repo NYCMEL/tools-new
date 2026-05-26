@@ -43,7 +43,7 @@ button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-vis
 .mtk-gallery__fact{display:flex;justify-content:space-between;gap:18px;padding:13px 0;border-bottom:1px solid #e8eaed}
 .mtk-gallery__actions{display:grid;grid-template-columns:max-content max-content;align-items:center;gap:12px 20px;margin-top:24px}
 .mtk-gallery__link{border:0;background:transparent;color:#1a73e8;padding:8px 0;cursor:pointer;text-align:left;font-weight:800;text-decoration:underline}
-.mtk-gallery__form{display:none;grid-column:1/-1;width:min(100%,520px);margin-top:18px;padding:28px;border:1px solid #e8eaed;border-radius:24px;background:#f8fafd;box-shadow:0 2px 10px rgba(60,64,67,.08)}
+.mtk-gallery__form{display:none;grid-column:1/-1;width:100%;max-width:100%;margin-top:18px;padding:28px;border:1px solid #e8eaed;border-radius:24px;background:#f8fafd;box-shadow:0 2px 10px rgba(60,64,67,.08)}
 .mtk-gallery__form.is-open{display:grid;gap:18px}
 .mtk-gallery__field{position:relative}
 .mtk-gallery__field input,.mtk-gallery__field textarea,.mtk-gallery__field select{width:100%;border:1px solid #dadce0;border-radius:12px;padding:22px 14px 8px;background:#fff;color:#202124}
@@ -144,6 +144,14 @@ padding-top:220px!important;
 .mtk-gallery__grid{
 margin-top:20px!important;
 }
+}
+
+
+.mtk-gallery__detail .mtk-gallery__form{
+justify-self:stretch;
+}
+.mtk-gallery__detail .mtk-gallery__form .mtk-gallery__primary{
+max-width:320px;
 }
 
 </style>
