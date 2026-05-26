@@ -1,0 +1,1 @@
+yes | unzip ~/Downloads/x.zip && yes | mv ~/Downloads/index.html . && yes | rm -rf ~/Downloads/*

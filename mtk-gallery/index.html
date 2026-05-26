@@ -6,12 +6,12 @@
 <title>Madam Mina's Artwork</title>
 <style>
 *{box-sizing:border-box}
-html,body{margin:0;padding:0}
+html,body{margin:0!important;padding:0!important;font-family:Arial,Helvetica,sans-serif;background:#fff;color:#202124;overflow-x:hidden}
 body{font-family:Arial,Helvetica,sans-serif;background:#fff;color:#202124}
 button,input,textarea,select{font:inherit}
 button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,a:focus-visible{outline:3px solid #fbbc04;outline-offset:3px}
-.mtk-gallery{display:block;min-height:100vh;background:#fff;margin:0;padding:0}
-.mtk-gallery__shell{max-width:1200px;margin:0 auto;padding:0 24px 24px}
+.mtk-gallery{display:flex;flex-direction:column;min-height:100vh;background:#fff;margin:0!important;padding:0!important}
+.mtk-gallery__shell{max-width:1200px;margin:0 auto;padding:0 24px 0;display:flex;flex-direction:column;flex:1;width:100%}
 .mtk-gallery__topbar{position:sticky;top:0;z-index:100;inline-size:100vw;margin-inline:calc(50% - 50vw);margin-top:0;margin-bottom:25px;padding:24px 48px 32px;background:#55efc4;border-bottom:1px solid rgba(17,24,39,.12);box-shadow:0 8px 24px rgba(15,23,42,.12);--mtk-header-desc-opacity:1;--mtk-header-desc-max:260px}
 .mtk-gallery__topbar-inner{inline-size:100%;max-inline-size:1200px;margin:0 auto;display:flex;align-items:flex-start;justify-content:space-between;gap:24px}
 .mtk-gallery__title{margin:0;font-size:clamp(2.6rem,7vw,6rem);line-height:1;font-weight:900;letter-spacing:-.06em;color:#111827}
@@ -22,7 +22,7 @@ button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-vis
 .mtk-gallery__manage:hover,.mtk-gallery__primary:hover{background:#1558b0}
 .mtk-gallery__secondary,.mtk-gallery__danger{border:1px solid #dadce0;background:#fff;color:#202124;padding:10px 14px;border-radius:12px;cursor:pointer;font-weight:800}
 .mtk-gallery__danger{border-color:#d93025;color:#d93025}
-.mtk-gallery__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px}
+.mtk-gallery__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px;flex:1}
 .mtk-gallery__card{border:1px solid #e8eaed;border-radius:24px;overflow:hidden;background:#fff;cursor:pointer;box-shadow:0 2px 10px rgba(60,64,67,.12);text-align:left;padding:0;color:inherit;transition:transform .16s ease,box-shadow .16s ease}
 .mtk-gallery__card:hover{transform:translateY(-3px);box-shadow:0 8px 26px rgba(60,64,67,.18)}
 .mtk-gallery__card img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:#f1f3f4}
@@ -41,10 +41,10 @@ button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-vis
 .mtk-gallery__detail-desc{font-size:1.05rem;line-height:1.65;color:#3c4043}
 .mtk-gallery__facts{display:grid;gap:10px;margin:22px 0}
 .mtk-gallery__fact{display:flex;justify-content:space-between;gap:18px;padding:13px 0;border-bottom:1px solid #e8eaed}
-.mtk-gallery__actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+.mtk-gallery__actions{display:grid;grid-template-columns:max-content max-content;align-items:center;gap:12px 20px;margin-top:24px}
 .mtk-gallery__link{border:0;background:transparent;color:#1a73e8;padding:8px 0;cursor:pointer;text-align:left;font-weight:800;text-decoration:underline}
-.mtk-gallery__form{display:none;margin-top:16px;padding:18px;border:1px solid #e8eaed;border-radius:20px;background:#f8fafd}
-.mtk-gallery__form.is-open{display:grid;gap:16px}
+.mtk-gallery__form{display:none;grid-column:1/-1;width:min(100%,520px);margin-top:18px;padding:28px;border:1px solid #e8eaed;border-radius:24px;background:#f8fafd;box-shadow:0 2px 10px rgba(60,64,67,.08)}
+.mtk-gallery__form.is-open{display:grid;gap:18px}
 .mtk-gallery__field{position:relative}
 .mtk-gallery__field input,.mtk-gallery__field textarea,.mtk-gallery__field select{width:100%;border:1px solid #dadce0;border-radius:12px;padding:22px 14px 8px;background:#fff;color:#202124}
 .mtk-gallery__field input[readonly]{background:#f1f3f4;color:#5f6368}
@@ -65,13 +65,35 @@ button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-vis
 .mtk-gallery__admin-item img{width:80px;height:64px;object-fit:cover;border-radius:12px;background:#f1f3f4}
 .mtk-gallery__admin-actions{display:flex;gap:10px;flex-wrap:wrap}
 .mtk-gallery__notice{margin:12px 0 0;color:#137333;font-weight:800}
-.mtk-gallery__footer{inline-size:100vw;margin-inline:calc(50% - 50vw);margin-top:24px;padding:10px 28px;background:#55efc4;border-top:1px solid rgba(17,24,39,.12)}
+.mtk-gallery__footer{inline-size:100vw;margin-inline:calc(50% - 50vw);margin-top:24px;margin-bottom:0!important;padding:10px 28px;background:#55efc4;border-top:1px solid rgba(17,24,39,.12);line-height:1}
 .mtk-gallery__footer-inner{max-inline-size:1200px;margin:0 auto;display:flex;align-items:center;gap:8px;min-height:20px}
 .mtk-gallery__footer small{font-size:.8rem;line-height:1.2;color:#1f2937;margin:0}
 .mtk-gallery__footer a{color:#111827;font-weight:700;text-decoration:none}
 .mtk-gallery__footer a:hover{text-decoration:underline}
-@media(max-width:920px){.mtk-gallery__editor-layout{grid-template-columns:1fr}.mtk-gallery__editor-preview{position:relative;top:auto}}
+.mtk-gallery__form .mtk-gallery__primary{width:100%;justify-content:center}.mtk-gallery__form .mtk-gallery__field{width:100%}@media(max-width:920px){.mtk-gallery__editor-layout{grid-template-columns:1fr}.mtk-gallery__editor-preview{position:relative;top:auto}}
 @media(max-width:760px){.mtk-gallery__topbar-inner,.mtk-gallery__admin-head{display:grid}.mtk-gallery__topbar{padding:20px 24px}.mtk-gallery__detail{grid-template-columns:1fr}.mtk-gallery__editor-grid{grid-template-columns:1fr}.mtk-gallery__admin-item{grid-template-columns:64px 1fr}.mtk-gallery__admin-actions{grid-column:1/-1}}
+@media(max-width:640px){.mtk-gallery__actions{grid-template-columns:1fr}.mtk-gallery__form{width:100%}.mtk-gallery__primary,.mtk-gallery__link{text-align:center}}
+
+html,body{
+margin:0;
+padding:0;
+}
+body{
+padding-bottom:0!important;
+margin-bottom:0!important;
+}
+.mtk-gallery{
+padding-bottom:0!important;
+margin-bottom:0!important;
+}
+
+
+html,body{margin:0!important;padding:0!important}
+body::after{content:none!important;display:none!important}
+.mtk-gallery,.mtk-gallery__shell{margin-bottom:0!important;padding-bottom:0!important}
+.mtk-gallery__footer{margin-bottom:0!important}
+.mtk-gallery__footer-inner{min-height:0!important}
+
 </style>
 </head>
 <body>
