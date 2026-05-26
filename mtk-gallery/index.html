@@ -384,8 +384,31 @@ savePaintings(){localStorage.setItem(STORAGE_KEY,JSON.stringify(this.paintings))
 publish(action,payload){const message={component:"mtk-gallery",action,date:new Date().toISOString(),...(payload||{})};wc.log("mtk-gallery publish",message);wc.publish("mtk-gallery",message)}
 onMessage(event){const detail=event.detail||{};wc.log("mtk-gallery received",detail);if(detail.action==="refresh"){this.paintings=this.loadPaintings();this.renderHome()}}
 render(){this.root.innerHTML=`<section class="mtk-gallery__shell" aria-label="Artwork gallery"><header class="mtk-gallery__topbar"><div><h1 class="mtk-gallery__title">${this.escape(this.config.store.title)}</h1><p class="mtk-gallery__subtitle">${this.escape(this.config.store.subtitle)}</p></div><button class="mtk-gallery__manage" type="button" data-action="open-admin">Manage Artwork</button></header><main class="mtk-gallery__grid" data-gallery-grid></main></section><section class="mtk-gallery__overlay" aria-hidden="true" data-detail-overlay><button class="mtk-gallery__close" type="button" data-action="close-detail" aria-label="Close artwork detail">×</button><div data-detail-content></div></section><section class="mtk-gallery__overlay" aria-hidden="true" data-admin-overlay><button class="mtk-gallery__close" type="button" data-action="close-admin" aria-label="Close admin management">×</button><div class="mtk-gallery__admin" data-admin-content></div></section>`;this.bindEvents();this.renderHome();this.renderAdmin()}
-bindEvents(){this.root.addEventListener("click",e=>{const action=e.target.closest("[data-action]");const card=e.target.closest("[data-painting-id]");if(action){this.handleAction(action.dataset.action,action.dataset.id);return}if(card)this.openDetail(card.dataset.paintingId)});this.root.addEventListener("submit",e=>{e.preventDefault();const form=e.target,type=form.dataset.form;if(type==="offer")this.submitRecord(form,OFFERS_KEY,"offer:created","Offer saved locally.");if(type==="request")this.submitRecord(form,REQUESTS_KEY,"request:created","Request saved locally.");if(type==="login")this.login(form);if(type==="painting")this.savePainting(form)});document.addEventListener("keydown",e=>{if(e.key==="Escape"){this.closeDetail();this.closeAdmin()}})}
-handleAction(action,id){if(action==="open-admin")this.openAdmin();if(action==="close-admin")this.closeAdmin();if(action==="close-detail")this.closeDetail();if(action==="toggle-offer")this.toggleForm("offer-form");if(action==="toggle-request")this.toggleForm("request-form");if(action==="paypal")this.buyWithPayPal(id);if(action==="new-painting")this.startNewPainting();if(action==="edit-painting")this.editPainting(id);if(action==="remove-painting")this.removePainting(id);if(action==="cancel-edit")this.cancelEdit();if(action==="export-gallery")this.exportGallery();if(action==="logout")this.logout()}
+bindEvents(){this.root.addEventListener("click",e=>{
+const action=e.target.closest("[data-action]");
+if(action){
+e.preventDefault();
+e.stopPropagation();
+this.handleAction(action.getAttribute("data-action"),action.getAttribute("data-id"));
+return;
+}
+const card=e.target.closest("[data-painting-id]");
+if(card)this.openDetail(card.getAttribute("data-painting-id"));
+});this.root.addEventListener("submit",e=>{e.preventDefault();const form=e.target,type=form.dataset.form;if(type==="offer")this.submitRecord(form,OFFERS_KEY,"offer:created","Offer saved locally.");if(type==="request")this.submitRecord(form,REQUESTS_KEY,"request:created","Request saved locally.");if(type==="login")this.login(form);if(type==="painting")this.savePainting(form)});document.addEventListener("keydown",e=>{if(e.key==="Escape"){this.closeDetail();this.closeAdmin()}})}
+handleAction(action,id){
+if(action==="open-admin")this.openAdmin();
+if(action==="close-admin")this.closeAdmin();
+if(action==="close-detail")this.closeDetail();
+if(action==="toggle-offer")this.toggleForm("offer-form");
+if(action==="toggle-request")this.toggleForm("request-form");
+if(action==="paypal")this.buyWithPayPal(id);
+if(action==="new-painting")this.startNewPainting();
+if(action==="edit-painting")this.editPainting(id);
+if(action==="remove-painting")this.removePainting(id);
+if(action==="cancel-edit")this.cancelEdit();
+if(action==="export-gallery")this.exportGallery();
+if(action==="logout")this.logout();
+}
 renderHome(){const grid=this.root.querySelector("[data-gallery-grid]");grid.innerHTML=this.paintings.map(p=>`<button class="mtk-gallery__card" type="button" data-painting-id="${this.escape(p.id)}"><img src="${this.escape(p.image)}" alt="${this.escape(p.title)}"><span class="mtk-gallery__card-body"><span class="mtk-gallery__card-title">${this.escape(p.title)}</span><span class="mtk-gallery__card-meta">${this.money(p.price)} · ${this.escape(p.category)}</span><span class="mtk-gallery__badge ${p.availability!=="available"?"mtk-gallery__badge--off":""}">${p.availability==="available"?"Available":"Sold"}</span></span></button>`).join("")}
 openDetail(id){const p=this.paintings.find(item=>item.id===id);if(!p)return;const overlay=this.root.querySelector("[data-detail-overlay]"),content=this.root.querySelector("[data-detail-content]");content.innerHTML=`<article class="mtk-gallery__detail"><div><img src="${this.escape(p.image)}" alt="${this.escape(p.title)}"></div><div><h2 class="mtk-gallery__detail-title">${this.escape(p.title)}</h2><p class="mtk-gallery__detail-desc">${this.escape(p.description)}</p><div class="mtk-gallery__facts">${this.fact("Artwork ID",p.id)}${this.fact("Price",this.money(p.price))}${this.fact("Availability",p.availability==="available"?"Available":"Sold")}${this.fact("Dimensions",p.dimensions)}${this.fact("Medium",p.medium)}${this.fact("Category",p.category)}</div><div class="mtk-gallery__actions">${p.availability==="available"?`<button class="mtk-gallery__primary" type="button" data-action="paypal" data-id="${this.escape(p.id)}">Buy with PayPal</button><button class="mtk-gallery__link" type="button" data-action="toggle-offer">Make me a counter offer</button>${this.offerForm(p)}`:`<button class="mtk-gallery__link" type="button" data-action="toggle-request">Request a similar painting</button>${this.requestForm(p)}`}</div></div></article>`;overlay.setAttribute("aria-hidden","false");overlay.querySelector(".mtk-gallery__close").focus();this.publish("detail:open",{id})}
 closeDetail(){const o=this.root.querySelector("[data-detail-overlay]");if(o)o.setAttribute("aria-hidden","true")}
