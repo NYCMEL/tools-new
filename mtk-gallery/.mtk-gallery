@@ -5,24 +5,14 @@ Act as a senior Vanilla JavaScript application architect and production UI/UX en
 Build a complete gallery application named `mtk-gallery` for selling hand-painted artwork.
 
 Use this repository as the base:
-
 https://github.com/NYCMEL/nala-website.git
 
-Use ALL wc utility functionality including:
+Use all wc code for include, subscribe, publish, wc-include, etc from:
+https://github.com/NYCMEL/nala-website/js/_wc.js
 
-* `wc-include`
-* `wc.publish`
-* `wc.subscribe`
-* `wc.log`
-* event helpers
-
-from this file:
-
-https://github.com/NYCMEL/nala-website/blob/main/js/_wc.js
-
----
-
+--------------------------------------------------
 # OUTPUT RULES
+--------------------------------------------------
 
 * Return ONLY one downloadable ZIP file named exactly: `x.zip`
 * Never show code in chat
@@ -32,55 +22,27 @@ https://github.com/NYCMEL/nala-website/blob/main/js/_wc.js
 * Never generate placeholder explanations instead of files
 * Never create images unless explicitly requested
 
----
-
+--------------------------------------------------
 # REQUIRED FILES
+--------------------------------------------------
 
 Generate exactly these files:
 
+* mtk-gallery.config.js
+* mtk-gallery.scss
+* mtk-gallery.html
+* mtk-gallery.js
 * index.html
 
-Single-file GitHub Pages deployment only.
+No server.
+All item information must come from:
+`mtk-gallery.config.js`
 
-Everything must exist inside:
+Only create additional files if absolutely required for functionality.
 
-* HTML
-* CSS
-* JavaScript
-* config JSON
-* admin logic
-* gallery rendering
-
-inside ONE standalone file.
-
----
-
-# GITHUB.IO RULES
-
-Application MUST run directly from:
-
-* GitHub Pages
-* local browser
-* static hosting
-* file://
-
-DO NOT:
-
-* require a server
-* require Node.js
-* require PHP
-* require SQLite runtime
-* require npm
-* require webpack
-* require build tools
-
-Application must work immediately by opening:
-
-index.html
-
----
-
+--------------------------------------------------
 # CORE TECH RULES
+--------------------------------------------------
 
 * Vanilla JavaScript only
 * No frameworks
@@ -89,19 +51,18 @@ index.html
 * No Vue
 * No Angular
 * No external libraries
-* No inline event handlers
-* No SCSS loading in browser
-* CSS must be embedded directly in `<style>`
-* JavaScript must be embedded directly in `<script>`
+* No inline JavaScript
+* No inline styles
+* SCSS only
+* Never compile CSS except:
+  * index.html may use CSS directly
 * Never use iframes
-* No recursive rendering
-* No DOM wipe loops
-* No blinking screen behavior
-* Prevent double initialization
+* Use:
+  <wc-include href="..."></wc-include>
 
----
-
+--------------------------------------------------
 # COMPONENT ARCHITECTURE
+--------------------------------------------------
 
 Component wrapper:
 
@@ -111,22 +72,24 @@ Rules:
 
 * Root class must be `.mtk-gallery`
 * Scope ALL styles under `.mtk-gallery`
+* No global styles
 * No global IDs
 * Use semantic HTML only
 * ADA compliant
 * Keyboard accessible
-* responsive design
+* Responsive design
 * Visible focus states required
 
----
-
+--------------------------------------------------
 # CONFIG + DATA RULES
+--------------------------------------------------
 
-ALL UI-driven data MUST come from embedded config JSON.
+ALL UI-driven data MUST come from:
+`mtk-gallery.config.js`
 
 Paintings must support:
 
-* id
+* artwork ID
 * title
 * description
 * image
@@ -145,34 +108,16 @@ Store owner must be able to:
 * change images
 * change details
 
-Data persistence must use:
+from either:
 
-* localStorage
+* config file
+* SQLite database
 
-for GitHub Pages compatibility.
-
----
-
-# IMAGE REQUIREMENTS
-
-Include:
-
-* original starter paintings
-* PLUS 20 additional random artwork images
-
-Requirements:
-
-* high-quality artwork images
-* use remote image URLs
-* responsive image handling
-* object-fit cover
-* gallery-ready presentation
-
----
-
+--------------------------------------------------
 # EVENT SYSTEM RULES
+--------------------------------------------------
 
-Wait for `<mtk-gallery>` to exist before initializing.
+Wait for `<mtk-gallery>` to exist before initializing because it may load dynamically through `<wc-include>`.
 
 Requirements:
 
@@ -180,57 +125,46 @@ Requirements:
 * Create `onMessage()` handler
 * Publish actions using `wc.publish`
 * Log ALL payloads using `wc.log` BEFORE publishing
-* Prevent duplicate initialization
-* Prevent recursive render loops
-* Prevent blank screen behavior
-* Ensure render happens once unless explicitly refreshed
 
----
-
+--------------------------------------------------
 # GALLERY UI
+--------------------------------------------------
 
 Header title:
-
 `Madam Mina's Artwork`
 
-Layout requirements:
+Header requirements:
 
-* `.mtk-gallery` background = `#FFF`
-* `.mtk-gallery__shell`
-  * `max-inline-size: 1200px`
+* Full page width
+* Sticky header
+* Material Design style
+* Mint background color: `#55efc4`
+* Drop shadow
+* Margin-bottom: 25px
+* Smooth fade-out of subtitle/description on scroll
+* NO flickering on scroll
+* Remove top padding/margin gaps
 
-Home screen:
+Header content:
 
-* display painting cards only
+* Title
+* Subtitle
+* Config-driven description
+
+Description:
+
+Madam Mina’s Artwork showcases original hand-painted creations inspired by emotion, culture, texture, and timeless artistic expression. Each piece is thoughtfully crafted to bring warmth, elegance, and personality into modern living spaces, offering collectors unique artwork designed to inspire conversation and lasting visual impact.
+
+--------------------------------------------------
+# HOME SCREEN
+--------------------------------------------------
+
+* Display painting cards only
 * NO buttons on cards
-
-Painting card requirements:
-
-* image
-* title
-* category
-* price
-* status badge
-
-Status badge text:
-
-* Available
-* Sold
-
-DO NOT use:
-
-* Unavailable!
-
----
-
-# DETAIL VIEW
 
 Painting click behavior:
 
-* opens FULL-SCREEN detail overlay
-* overlay covers entire application
-* include circular close button with “X”
-* support ESC key close
+* Opens full-page detail view
 
 Detail view includes:
 
@@ -241,27 +175,26 @@ Detail view includes:
 * availability
 * dimensions
 * medium
-* category
-* artwork ID
 * actions
 
----
+Include circular close button with “X”
 
+--------------------------------------------------
 # SALES + REQUEST FLOWS
+--------------------------------------------------
 
-## Available Paintings
+Available paintings:
 
 Show:
 
 * Buy with PayPal
 * “Make me a counter offer”
 
-Behavior:
+Unavailable paintings:
 
-* clicking link reveals counter-offer form
-* form hidden by default
+Show status as:
 
-## Sold Paintings
+* Sold
 
 Show:
 
@@ -269,14 +202,14 @@ Show:
 
 Behavior:
 
-* clicking link reveals request form
-* form hidden by default
+* Clicking links reveals forms
+* Forms hidden by default
 
----
-
+--------------------------------------------------
 # FORM DESIGN RULES
+--------------------------------------------------
 
-Use Modern Material Design styling for:
+Use Material Design styling for:
 
 * floating labels
 * buttons
@@ -288,9 +221,9 @@ Use Modern Material Design styling for:
 
 Forms must feel modern and production-ready.
 
----
-
+--------------------------------------------------
 # ADMIN FEATURES
+--------------------------------------------------
 
 Customers:
 
@@ -298,140 +231,142 @@ Customers:
 
 Admin:
 
-* login visible ONLY when admin chooses to manage/edit
+* Login visible ONLY when admin chooses to manage/edit
 
 Temporary credentials:
 
 * username: admin
 * password: test
 
-Admin capabilities:
+Admin requirements:
 
-* add paintings
-* edit paintings
-* remove paintings
-* save paintings locally
+* Login fields auto-filled with:
+  * admin
+  * test
 
----
+* Add paintings
+* Edit paintings
+* Remove paintings
+* Export gallery
+* Persist changes to SQLite
 
-# ADMIN WINDOW REQUIREMENTS
+--------------------------------------------------
+# ADMIN SCREEN RULES
+--------------------------------------------------
 
-Clicking:
+VERY IMPORTANT:
 
-`Manage Artwork`
+Admin screen must ONLY display ONE MODE at a time:
 
-must:
+--------------------------------------------------
+LIST MODE
+--------------------------------------------------
 
-* open FULL-SCREEN admin management overlay
-* overlay entire application
-* include circular close button with “X”
-* support keyboard ESC close
+Show ONLY:
 
-Admin UI must include:
+* Artwork list
+* New Artwork button
+* Export Gallery button
+* Logout button
 
-* Add New Artwork
-* Edit Artwork
-* Remove Artwork
-* Save Artwork
-* Logout
+Do NOT show form in list mode.
 
----
+--------------------------------------------------
+FORM MODE
+--------------------------------------------------
 
-# NEW ARTWORK RULES
+Show ONLY:
 
-Admin must be able to:
+* Artwork form
+* Cancel button
+* Logout button
 
-* create fresh artwork additions
+Do NOT show artwork list in form mode.
 
-Artwork ID requirements:
+--------------------------------------------------
+NEW ARTWORK MODE
+--------------------------------------------------
 
-* auto-generate Artwork ID
-* admin should NEVER type Artwork ID manually
-* ID examples:
-  * ART-1001
-  * ART-1002
-  * ART-1003
+When creating a new artwork:
 
-Artwork ID field must be:
+* Show black placeholder image panel on LEFT
+* Center text:
+  "NO IMAGE YET!"
 
-* visible
-* read-only
-* auto-generated
+--------------------------------------------------
+EDIT MODE
+--------------------------------------------------
 
----
+When editing artwork:
 
-# EDITING RULES
+* Show artwork image on LEFT
+* Show form on RIGHT
 
-Editing mode must allow:
+--------------------------------------------------
+IMAGE PATH RULES
+--------------------------------------------------
 
-* image changes
-* title changes
-* description changes
-* price changes
-* availability changes
-* category changes
-* dimensions changes
-* medium changes
-* PayPal item changes
-* PayPal SKU changes
+DO NOT:
 
----
+* Convert images to data:image base64
 
-# REMOVE RULES
+ONLY use:
 
-Remove flow must:
+* Relative paths from:
+  ./img/
 
-* require confirmation
-* prevent accidental deletion
+Examples:
 
----
+* ./img/mel.png
+* ./img/art-1001.jpg
 
-# PAYPAL RULES
+Image field:
 
-PayPal seller email must be configurable.
+* Must accept relative image paths
+* Must NOT use HTML input type=url
+* Must allow:
+  * ./img/file.jpg
+  * img/file.jpg
+  * https://...
 
-Use direct PayPal payment links.
+--------------------------------------------------
+FOOTER
+--------------------------------------------------
 
----
+Footer requirements:
 
-# STORAGE RULES
+* Full width
+* Same mint color as header
+* Compact height
+* Small text only
 
-Persist locally using:
+Footer content:
 
-* localStorage
+Contact me: MadamMinaArts@gmail.com
 
-Persist:
+Email must be clickable.
 
-* paintings
-* offers
-* requests
-* admin edits
-
----
-
-# FAILURE PREVENTION RULES
+--------------------------------------------------
+FAILURE PREVENTION RULES
+--------------------------------------------------
 
 DO NOT:
 
 * use placeholder code
-* omit required features
+* omit required files
 * generate partial implementations
-* break GitHub Pages compatibility
-* require build tools
-* require backend APIs
-* require SQLite runtime
-* create fake server routes
-* create blinking screens
-* create recursive rendering
-* create DOM replacement loops
-* create blank screen behavior
-* expose passwords in visible UI
+* break existing requirements
+* replace Vanilla JS with frameworks
+* compile SCSS into CSS
+* expose passwords in UI
+* create empty SQLite DB structure without tables
+* create fake API routes
 
-Ensure ALL functionality runs together in ONE standalone file.
+Ensure ALL generated files are runnable together.
 
----
-
+--------------------------------------------------
 # FINAL DELIVERY RULES
+--------------------------------------------------
 
 Return ONLY:
 

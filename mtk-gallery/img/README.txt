@@ -1,8 +1,1 @@
-ALL artwork images must be placed inside this ./img/ folder.
-
-Example:
-./img/art-1001.jpg
-./img/my-painting.png
-
-The gallery now uses ONLY relative image URLs.
-It does NOT use Base64 or data:image storage.
+Put artwork images here. Use paths like ./img/art-1001.jpg in the gallery.
