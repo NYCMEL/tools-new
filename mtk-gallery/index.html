@@ -708,7 +708,7 @@ if(n)n.textContent="Invalid login.";
 }
 }
 
-logout(){this.isAdmin=false;this.editingId=null;this.adminMode="list";this.renderAdmin();}
+logout(){this.isAdmin=false;this.editingId=null;this.adminMode="list";this.renderAdmin();this.closeAdmin();window.scrollTo({top:0,behavior:"smooth"});this.publish("admin:logout",{});}
 
 renderAdmin(){
 const c=this.root.querySelector("[data-admin-content]");
