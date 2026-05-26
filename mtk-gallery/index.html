@@ -56,9 +56,17 @@ text-decoration:none;
 text-decoration:underline;
 }
 
-.mtk-gallery__topbar.is-compact .mtk-gallery__subtitle,
-.mtk-gallery__topbar.is-compact .mtk-gallery__header-description{display:none}
+.mtk-gallery__topbar.is-compact .mtk-gallery__subtitle,.mtk-gallery__topbar.is-compact .mtk-gallery__header-description{opacity:0;max-height:0;margin-top:0;padding-top:0;overflow:hidden;pointer-events:none}
 .mtk-gallery__topbar.is-compact{padding-block:16px}
+
+.mtk-gallery__subtitle,
+.mtk-gallery__header-description{
+transition:opacity .28s ease,max-height .28s ease,margin .28s ease,padding .28s ease;
+max-height:220px;
+opacity:1;
+overflow:hidden;
+}
+
 @media(max-width:760px){.mtk-gallery__topbar-inner,.mtk-gallery__admin-head{display:grid}.mtk-gallery__detail{grid-template-columns:1fr}.mtk-gallery__editor-grid{grid-template-columns:1fr}.mtk-gallery__admin-item{grid-template-columns:64px 1fr}.mtk-gallery__admin-actions{grid-column:1/-1}}
 </style>
 </head>
@@ -450,8 +458,17 @@ bindScrollHeader(){
 const topbar=this.root.querySelector(".mtk-gallery__topbar");
 if(!topbar||this._scrollHeaderBound)return;
 this._scrollHeaderBound=true;
+let compact=false;
 const update=()=>{
-topbar.classList.toggle("is-compact",window.scrollY>40);
+const y=window.scrollY||0;
+if(!compact&&y>70){
+compact=true;
+topbar.classList.add("is-compact");
+}
+if(compact&&y<20){
+compact=false;
+topbar.classList.remove("is-compact");
+}
 };
 update();
 window.addEventListener("scroll",update,{passive:true});
