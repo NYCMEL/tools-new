@@ -56,8 +56,8 @@ text-decoration:none;
 text-decoration:underline;
 }
 
-.mtk-gallery__topbar.is-compact .mtk-gallery__subtitle,.mtk-gallery__topbar.is-compact .mtk-gallery__header-description{opacity:0;max-height:0;margin-top:0;padding-top:0;overflow:hidden;pointer-events:none}
-.mtk-gallery__topbar.is-compact{padding-block:16px}
+
+
 
 .mtk-gallery__subtitle,
 .mtk-gallery__header-description{
@@ -65,6 +65,25 @@ transition:opacity .28s ease,max-height .28s ease,margin .28s ease,padding .28s 
 max-height:220px;
 opacity:1;
 overflow:hidden;
+}
+
+
+.mtk-gallery__topbar{
+--mtk-header-desc-opacity:1;
+--mtk-header-desc-max:260px;
+}
+.mtk-gallery__subtitle,
+.mtk-gallery__header-description{
+opacity:var(--mtk-header-desc-opacity);
+max-height:var(--mtk-header-desc-max);
+overflow:hidden;
+transition:opacity .18s linear,max-height .18s linear,margin .18s linear,padding .18s linear;
+will-change:opacity,max-height;
+}
+.mtk-gallery__topbar[data-scrolled="true"] .mtk-gallery__subtitle,
+.mtk-gallery__topbar[data-scrolled="true"] .mtk-gallery__header-description{
+margin-top:0!important;
+padding-top:0!important;
 }
 
 @media(max-width:760px){.mtk-gallery__topbar-inner,.mtk-gallery__admin-head{display:grid}.mtk-gallery__detail{grid-template-columns:1fr}.mtk-gallery__editor-grid{grid-template-columns:1fr}.mtk-gallery__admin-item{grid-template-columns:64px 1fr}.mtk-gallery__admin-actions{grid-column:1/-1}}
@@ -458,20 +477,32 @@ bindScrollHeader(){
 const topbar=this.root.querySelector(".mtk-gallery__topbar");
 if(!topbar||this._scrollHeaderBound)return;
 this._scrollHeaderBound=true;
-let compact=false;
+let ticking=false;
+
 const update=()=>{
 const y=window.scrollY||0;
-if(!compact&&y>70){
-compact=true;
-topbar.classList.add("is-compact");
-}
-if(compact&&y<20){
-compact=false;
-topbar.classList.remove("is-compact");
+const start=8;
+const end=120;
+const progress=Math.min(1,Math.max(0,(y-start)/(end-start)));
+const opacity=Math.max(0,1-progress);
+const maxHeight=Math.round(260*(1-progress));
+
+topbar.style.setProperty("--mtk-header-desc-opacity",opacity.toFixed(3));
+topbar.style.setProperty("--mtk-header-desc-max",maxHeight+"px");
+topbar.dataset.scrolled=progress>0.98?"true":"false";
+
+ticking=false;
+};
+
+const requestUpdate=()=>{
+if(!ticking){
+ticking=true;
+window.requestAnimationFrame(update);
 }
 };
+
 update();
-window.addEventListener("scroll",update,{passive:true});
+window.addEventListener("scroll",requestUpdate,{passive:true});
 }
 bindEvents(){this.root.addEventListener("click",e=>{const action=e.target.closest("[data-action]");const card=e.target.closest("[data-painting-id]");if(action){this.handleAction(action.dataset.action,action.dataset.id);return}if(card)this.openDetail(card.dataset.paintingId)});this.root.addEventListener("submit",e=>{e.preventDefault();const form=e.target,type=form.dataset.form;if(type==="offer")this.submitRecord(form,OFFERS_KEY,"offer:created","Offer saved locally.");if(type==="request")this.submitRecord(form,REQUESTS_KEY,"request:created","Request saved locally.");if(type==="login")this.login(form);if(type==="painting")this.savePainting(form)});document.addEventListener("keydown",e=>{if(e.key==="Escape"){this.closeDetail();this.closeAdmin()}})}
 handleAction(action,id){if(action==="open-admin")this.openAdmin();if(action==="close-admin")this.closeAdmin();if(action==="close-detail")this.closeDetail();if(action==="toggle-offer")this.toggleForm("offer-form");if(action==="toggle-request")this.toggleForm("request-form");if(action==="paypal")this.buyWithPayPal(id);if(action==="new-painting")this.startNewPainting();if(action==="edit-painting")this.editPainting(id);if(action==="remove-painting")this.removePainting(id);if(action==="cancel-edit")this.cancelEdit();if(action==="logout")this.logout()}
