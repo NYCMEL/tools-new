@@ -1,0 +1,195 @@
+FORGET ALL PREVIOUS CONTEXT for `mtk-fsf` and remember this specification permanently.
+
+Create a reusable, scalable, production-ready Web Fsf named:
+
+`mtk-fsf`
+
+Use this repository as the base:
+
+Use ALL wc functionality (`wc.publish`, `wc.subscribe`, `wc.log`, `wc-include`, etc.) from:
+
+`https://github.com/NYCMEL/nala-website/blob/main/js/_wc.js`
+
+---
+
+TECH STACK
+
+Use ONLY:
+
+- HTML
+- SCSS
+- Vanilla JavaScript (ES6)
+
+Bootstrap 5 is ONLY allowed for:
+
+- layout
+- grid utilities
+
+DO NOT USE:
+
+- frameworks
+- React
+- Vue
+- Angular
+- jQuery
+- external libraries
+- inline styles
+- inline JavaScript
+- IDs
+- global CSS
+- iframes
+
+MUST use:
+
+<wc-include href="..." />
+
+---
+
+FSF STRUCTURE
+
+Root element:
+
+<mtk-fsf class="mtk-fsf"></mtk-fsf>
+
+ALL styles MUST be fully scoped to:
+
+.mtk-fsf
+
+NEVER use global selectors.
+
+---
+
+CONFIGURATION
+
+The fsf MUST be fully JSON-driven.
+
+ALL UI data MUST come ONLY from:
+
+mtk-fsf.config.js
+
+Do NOT hardcode UI content inside HTML or JS.
+
+---
+
+JAVASCRIPT REQUIREMENTS
+
+Create a dedicated ES6 class named:
+
+MtkFsf
+
+Initialize automatically inside:
+
+mtk-fsf.js
+
+The fsf MUST:
+
+- wait for DOM availability
+- support dynamic injection via <wc-include>
+- prevent duplicate initialization
+- be modular
+- reusable
+- maintainable
+- production-ready
+
+---
+
+WC EVENT SYSTEM
+
+Subscribe using:
+
+wc.subscribe("4-mtk-fsf", this.onMessage.bind(this))
+
+Create:
+
+onMessage(message)
+
+Publish ALL actions/events using:
+
+wc.publish(...)
+
+BEFORE every publish:
+
+wc.log(...)
+
+ALL publish payloads MUST be structured and reusable.
+
+---
+
+DESIGN SYSTEM RULES
+
+Use styles, spacing, elevation, typography, colors, and motion patterns from:
+
+Use Modern Material Design patterns including:
+
+- floating labels
+- cards
+- buttons
+- transitions
+- elevation
+- focus states
+- responsive layouts
+- motion
+- accessibility patterns
+
+---
+
+ACCESSIBILITY
+
+Fsf MUST be:
+
+- ADA compliant
+- semantic HTML
+- keyboard accessible
+- screen-reader friendly
+- mobile responsive
+
+Include:
+
+- visible focus states
+- proper ARIA usage
+- accessible form controls
+
+---
+
+CODE QUALITY
+
+Code MUST be:
+
+- scalable
+- reusable
+- maintainable
+- modular
+- clean
+- responsive
+- production-ready
+
+Avoid:
+
+- duplicated logic
+- unnecessary complexity
+- tightly coupled code
+
+---
+
+OUTPUT REQUIREMENTS
+
+Generate EXACTLY these complete files:
+
+- mtk-fsf.config.js
+- mtk-fsf.scss
+- mtk-fsf.html
+- mtk-fsf.js
+- minimal index.html file
+
+NEVER generate:
+
+- explanations
+- markdown code blocks
+- snippets
+- patch files
+- partial updates
+
+ONLY generate complete files.
+
+I would like to recreate my old app with above restrictions.
+get my code from the zip file provided
