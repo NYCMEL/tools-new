@@ -1,0 +1,23 @@
+HTTrack3.49-2 launched on Wed, 03 Jun 2026 07:18:05 at https://tympanus.net/Development/FullscreenForm
+(httrack https://tympanus.net/Development/FullscreenForm )
+
+Information, Warnings and Errors reported for this mirror:
+note:	the hts-log.txt file, and hts-cache folder, may contain sensitive information,
+	such as username/password authentication for websites mirrored in this project
+	do not share these files/folders if you want these information to remain private
+
+07:18:30	Warning: 	Moved Permanently for tympanus.net/robots.txt
+07:18:30	Warning: 	Redirected link is identical because of 'URL Hack' option: tympanus.net/robots.txt and https://tympanus.net/robots.txt
+07:18:30	Warning: 	Warning moved treated for tympanus.net/robots.txt (real one is https://tympanus.net/robots.txt)
+07:18:30	Warning: 	Moved Permanently for tympanus.net/Development/NotificationStyles/
+07:18:30	Warning: 	Redirected link is identical because of 'URL Hack' option: tympanus.net/Development/NotificationStyles/ and https://tympanus.net/Development/NotificationStyles/
+07:18:30	Warning: 	File has moved from tympanus.net/Development/NotificationStyles/ to https://tympanus.net/Development/NotificationStyles/
+07:18:30	Warning: 	Moved Permanently for tympanus.net/Development/MinimalForm/
+07:18:30	Warning: 	Redirected link is identical because of 'URL Hack' option: tympanus.net/Development/MinimalForm/ and https://tympanus.net/Development/MinimalForm/
+07:18:30	Warning: 	File has moved from tympanus.net/Development/MinimalForm/ to https://tympanus.net/Development/MinimalForm/
+07:18:30	Warning: 	Moved Permanently for tympanus.net/Development/ButtonComponentMorph/
+07:18:30	Warning: 	Redirected link is identical because of 'URL Hack' option: tympanus.net/Development/ButtonComponentMorph/ and https://tympanus.net/Development/ButtonComponentMorph/
+07:18:30	Warning: 	File has moved from tympanus.net/Development/ButtonComponentMorph/ to https://tympanus.net/Development/ButtonComponentMorph/
+
+HTTrack Website Copier/3.49-2 mirror complete in 25 seconds : 28 links scanned, 23 files written (148792 bytes overall) [97143 bytes received at 3885 bytes/sec], 89607 bytes transferred using HTTP compression in 17 files, ratio 31%, 4.8 requests per connection
+(No errors, 12 warnings, 0 messages)
