@@ -1,1 +1,4 @@
-window.quizConfig={screens:[]};
+window.quizConfig={
+    screens:[
+    ]
+};
