@@ -70,14 +70,15 @@ button {
   display: block;
   border-top: 3px solid #241409;
   border-bottom: 3px solid #241409; }
-  .menu-icon::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 5px;
-    width: 23px;
-    height: 3px;
-    background: #241409; }
+
+.menu-icon::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 5px;
+  width: 23px;
+  height: 3px;
+  background: #241409; }
 
 .progress-bar {
   height: 5px;
