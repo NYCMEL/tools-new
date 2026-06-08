@@ -1,3 +1,12 @@
+html,
+body {
+  margin: 0;
+  padding: 0; }
+
+.betterme {
+  margin: 0;
+  padding: 0; }
+
 .betterme {
   --betterme-bg: #fbf8f1;
   --betterme-surface: #fffdf9;
@@ -14,29 +23,24 @@
   background: var(--betterme-bg);
   color: var(--betterme-text);
   font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-}
+  -webkit-font-smoothing: antialiased; }
 
 .betterme,
 .betterme * {
-  box-sizing: border-box;
-}
+  box-sizing: border-box; }
 
 .betterme button,
 .betterme input {
-  font: inherit;
-}
+  font: inherit; }
 
 .betterme img {
   display: block;
-  max-width: 100%;
-}
+  max-width: 100%; }
 
 .betterme__app {
   min-height: 100vh;
   display: flex;
-  flex-direction: column;
-}
+  flex-direction: column; }
 
 .betterme .app-header {
   min-height: 94px;
@@ -45,37 +49,31 @@
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  gap: 24px;
-}
+  gap: 24px; }
 
 .betterme .app-header__left,
 .betterme .app-header__right {
   display: flex;
-  align-items: center;
-}
+  align-items: center; }
 
 .betterme .app-header__left {
-  gap: 34px;
-}
+  gap: 34px; }
 
 .betterme .app-header__right {
-  justify-content: flex-end;
-}
+  justify-content: flex-end; }
 
 .betterme .app-brand {
   font-size: 31px;
   line-height: 1;
   font-weight: 700;
-  letter-spacing: -1.5px;
-}
+  letter-spacing: -1.5px; }
 
 .betterme .app-header__title {
   margin: 0;
   font-size: 20px;
   line-height: 1;
   font-weight: 700;
-  letter-spacing: -0.5px;
-}
+  letter-spacing: -0.5px; }
 
 .betterme .app-action {
   width: 56px;
@@ -88,36 +86,30 @@
   display: grid;
   place-items: center;
   cursor: pointer;
-  transition: background-color 180ms ease, border-color 180ms ease, transform 180ms ease;
-}
+  transition: background-color 180ms ease, border-color 180ms ease, transform 180ms ease; }
 
 .betterme .app-action:hover {
-  background: var(--betterme-surface-soft);
-}
+  background: var(--betterme-surface-soft); }
 
 .betterme .app-action:focus-visible,
 .betterme .app-primary:focus-visible,
 .betterme .screen-option:focus-visible,
 .betterme .form-field__control:focus-visible {
   outline: 3px solid var(--betterme-focus);
-  outline-offset: 4px;
-}
+  outline-offset: 4px; }
 
 .betterme .app-action:active,
 .betterme .screen-option:active,
 .betterme .app-primary:active {
-  transform: scale(0.98);
-}
+  transform: scale(0.98); }
 
 .betterme .app-action:disabled {
   opacity: 0;
-  pointer-events: none;
-}
+  pointer-events: none; }
 
 .betterme .app-action__icon {
   font-size: 28px;
-  line-height: 1;
-}
+  line-height: 1; }
 
 .betterme .app-menu {
   width: 22px;
@@ -125,8 +117,7 @@
   position: relative;
   display: block;
   border-top: 3px solid var(--betterme-text);
-  border-bottom: 3px solid var(--betterme-text);
-}
+  border-bottom: 3px solid var(--betterme-text); }
 
 .betterme .app-menu::before {
   content: "";
@@ -135,52 +126,43 @@
   top: 4px;
   width: 22px;
   height: 3px;
-  background: var(--betterme-text);
-}
+  background: var(--betterme-text); }
 
 .betterme .app-progress {
   height: 5px;
-  background: var(--betterme-line);
-}
+  background: var(--betterme-line); }
 
 .betterme .app-progress__bar {
   display: block;
   width: 0;
   height: 5px;
   background: var(--betterme-dark);
-  transition: width 260ms ease;
-}
+  transition: width 260ms ease; }
 
 .betterme .app-main {
   width: 100%;
   flex: 1;
-  padding: 72px 20px 42px;
-}
+  padding: 72px 20px 42px; }
 
 .betterme .app-main:focus {
-  outline: none;
-}
+  outline: none; }
 
 .betterme .screen {
   width: 100%;
   max-width: 635px;
   margin: 0 auto;
-  animation: betterme-screen-enter 220ms ease both;
-}
+  animation: betterme-screen-enter 220ms ease both; }
 
 .betterme .screen--info {
-  max-width: 520px;
-}
+  max-width: 520px; }
 
 .betterme .screen-intro {
   text-align: center;
-  margin-bottom: 44px;
-}
+  margin-bottom: 44px; }
 
 .betterme .screen--info .screen-intro {
   text-align: left;
-  margin-bottom: 18px;
-}
+  margin-bottom: 18px; }
 
 .betterme .screen-intro__eyebrow {
   margin: 0 0 12px;
@@ -188,38 +170,32 @@
   font-size: 15px;
   font-weight: 700;
   letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
+  text-transform: uppercase; }
 
 .betterme .screen-intro__title {
   margin: 0;
   font-size: 43px;
   line-height: 1.1;
   font-weight: 700;
-  letter-spacing: -1.7px;
-}
+  letter-spacing: -1.7px; }
 
 .betterme .screen-intro__description {
   max-width: 520px;
   margin: 18px auto 0;
   color: var(--betterme-muted);
   font-size: 19px;
-  line-height: 1.5;
-}
+  line-height: 1.5; }
 
 .betterme .screen--info .screen-intro__description {
-  margin-left: 0;
-}
+  margin-left: 0; }
 
 .betterme .option-list,
 .betterme .image-grid {
   display: grid;
-  gap: 18px;
-}
+  gap: 18px; }
 
 .betterme .image-grid {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
+  grid-template-columns: repeat(2, minmax(0, 1fr)); }
 
 .betterme .screen-option {
   width: 100%;
@@ -227,18 +203,15 @@
   background: transparent;
   color: var(--betterme-text);
   cursor: pointer;
-  transition: background-color 180ms ease, border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
-}
+  transition: background-color 180ms ease, border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease; }
 
 .betterme .screen-option:hover {
   border-color: #cbbcae;
-  box-shadow: var(--betterme-shadow);
-}
+  box-shadow: var(--betterme-shadow); }
 
 .betterme .screen-option.is-selected {
   background: var(--betterme-surface-soft);
-  border-color: transparent;
-}
+  border-color: transparent; }
 
 .betterme .text-option {
   min-height: 84px;
@@ -247,16 +220,14 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  text-align: left;
-}
+  text-align: left; }
 
 .betterme .text-option__label,
 .betterme .image-card__label {
   font-size: 22px;
   line-height: 1.2;
   font-weight: 700;
-  letter-spacing: -0.6px;
-}
+  letter-spacing: -0.6px; }
 
 .betterme .text-option__radio,
 .betterme .image-card__radio {
@@ -270,15 +241,13 @@
   font-size: 16px;
   line-height: 1;
   font-weight: 700;
-  flex: 0 0 auto;
-}
+  flex: 0 0 auto; }
 
 .betterme .screen-option.is-selected .text-option__radio,
 .betterme .screen-option.is-selected .image-card__radio {
   background: var(--betterme-dark);
   border-color: var(--betterme-dark);
-  color: #fff;
-}
+  color: #fff; }
 
 .betterme .image-card {
   min-height: 310px;
@@ -286,21 +255,18 @@
   border-radius: 24px;
   overflow: hidden;
   text-align: left;
-  background: var(--betterme-surface);
-}
+  background: var(--betterme-surface); }
 
 .betterme .image-card__media {
   display: block;
   aspect-ratio: 1.28 / 1;
   overflow: hidden;
-  background: var(--betterme-surface-soft);
-}
+  background: var(--betterme-surface-soft); }
 
 .betterme .image-card__media img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-}
+  object-fit: cover; }
 
 .betterme .image-card__content {
   min-height: 84px;
@@ -308,12 +274,10 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
-}
+  gap: 16px; }
 
 .betterme .info-card {
-  padding-top: 4px;
-}
+  padding-top: 4px; }
 
 .betterme .info-card__icon {
   width: 48px;
@@ -323,29 +287,24 @@
   background: var(--betterme-surface-soft);
   display: grid;
   place-items: center;
-  font-size: 22px;
-}
+  font-size: 22px; }
 
 .betterme .info-card__copy p {
   margin: 0 0 14px;
   color: var(--betterme-muted);
   font-size: 19px;
-  line-height: 1.5;
-}
+  line-height: 1.5; }
 
 .betterme .info-card__copy strong {
-  color: var(--betterme-text);
-}
+  color: var(--betterme-text); }
 
 .betterme .form-card {
   display: grid;
-  gap: 20px;
-}
+  gap: 20px; }
 
 .betterme .form-field {
   position: relative;
-  display: block;
-}
+  display: block; }
 
 .betterme .form-field__control {
   width: 100%;
@@ -356,13 +315,11 @@
   background: var(--betterme-surface);
   color: var(--betterme-text);
   font-size: 20px;
-  transition: border-color 180ms ease, box-shadow 180ms ease;
-}
+  transition: border-color 180ms ease, box-shadow 180ms ease; }
 
 .betterme .form-field__control:focus {
   border-color: var(--betterme-focus);
-  box-shadow: 0 0 0 4px rgba(124, 74, 46, 0.12);
-}
+  box-shadow: 0 0 0 4px rgba(124, 74, 46, 0.12); }
 
 .betterme .form-field__label {
   position: absolute;
@@ -372,15 +329,13 @@
   font-size: 18px;
   line-height: 1;
   pointer-events: none;
-  transition: transform 160ms ease, font-size 160ms ease, color 160ms ease;
-}
+  transition: transform 160ms ease, font-size 160ms ease, color 160ms ease; }
 
 .betterme .form-field__control:focus + .form-field__label,
 .betterme .form-field__control:not(:placeholder-shown) + .form-field__label {
   transform: translateY(-13px);
   font-size: 13px;
-  color: var(--betterme-focus);
-}
+  color: var(--betterme-focus); }
 
 .betterme .app-footer {
   min-height: 88px;
@@ -389,12 +344,10 @@
   display: none;
   justify-content: center;
   align-items: center;
-  background: rgba(251, 248, 241, 0.92);
-}
+  background: rgba(251, 248, 241, 0.92); }
 
 .betterme .app-footer.is-visible {
-  display: flex;
-}
+  display: flex; }
 
 .betterme .app-primary {
   width: 340px;
@@ -408,80 +361,51 @@
   font-weight: 700;
   letter-spacing: 0.02em;
   cursor: pointer;
-  transition: transform 180ms ease, box-shadow 180ms ease, opacity 180ms ease;
-}
+  transition: transform 180ms ease, box-shadow 180ms ease, opacity 180ms ease; }
 
 .betterme .app-primary:hover {
-  box-shadow: 0 14px 30px rgba(50, 29, 19, 0.18);
-}
+  box-shadow: 0 14px 30px rgba(50, 29, 19, 0.18); }
 
 .betterme .app-primary:disabled {
   opacity: 0.5;
-  cursor: not-allowed;
-}
+  cursor: not-allowed; }
 
 @keyframes betterme-screen-enter {
   from {
     opacity: 0;
-    transform: translateY(8px);
-  }
-
+    transform: translateY(8px); }
   to {
     opacity: 1;
-    transform: translateY(0);
-  }
-}
+    transform: translateY(0); } }
 
 @media (max-width: 760px) {
   .betterme .app-header {
     min-height: 78px;
     padding: 0 18px;
-    gap: 14px;
-  }
-
+    gap: 14px; }
   .betterme .app-header__left {
-    gap: 16px;
-  }
-
+    gap: 16px; }
   .betterme .app-brand {
-    font-size: 25px;
-  }
-
+    font-size: 25px; }
   .betterme .app-header__title {
-    display: none;
-  }
-
+    display: none; }
   .betterme .app-action {
     width: 48px;
-    height: 48px;
-  }
-
+    height: 48px; }
   .betterme .app-main {
-    padding-top: 48px;
-  }
-
+    padding-top: 48px; }
   .betterme .screen-intro__title {
-    font-size: 34px;
-  }
-
+    font-size: 34px; }
   .betterme .screen-intro__description,
   .betterme .info-card__copy p {
-    font-size: 17px;
-  }
-
+    font-size: 17px; }
   .betterme .image-grid {
-    grid-template-columns: 1fr;
-  }
-
+    grid-template-columns: 1fr; }
   .betterme .image-card {
-    min-height: 0;
-  }
-
+    min-height: 0; }
   .betterme .text-option__label,
   .betterme .image-card__label {
-    font-size: 19px;
-  }
-}
+    font-size: 19px; } }
 
 @media (prefers-reduced-motion: reduce) {
   .betterme .screen,
@@ -492,6 +416,4 @@
   .betterme .form-field__label,
   .betterme .form-field__control {
     transition: none;
-    animation: none;
-  }
-}
+    animation: none; } }

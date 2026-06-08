@@ -1,451 +1,388 @@
-(function () {
-  "use strict";
-
-  class MtkBetterme {
-    constructor(root, config) {
-      if (!root || root.dataset.mtkBettermeReady === "true") {
-        return;
-      }
-
-      this.root = root;
-      this.config = config;
-      this.index = 0;
-      this.history = [];
-      this.answers = this.loadAnswers();
-      this.namespace = "4-betterme";
-      this.selectors = {
-        appMain: ".app-main",
-        appFooter: ".app-footer",
-        continueButton: ".app-action--continue",
-        backButton: ".app-action--back",
-        progressBar: ".app-progress__bar"
-      };
-
-      this.root.dataset.mtkBettermeReady = "true";
-      this.onMessage = this.onMessage.bind(this);
-      this.handleRootClick = this.handleRootClick.bind(this);
-      this.handleRootInput = this.handleRootInput.bind(this);
-      this.handleKeydown = this.handleKeydown.bind(this);
-
-      wc.subscribe(this.namespace, this.onMessage.bind(this));
-      this.init();
+class MtkBetterme {
+  constructor(root, config) {
+    if (!root || root.dataset.bettermeInitialized === "true") {
+      return;
     }
 
-    init() {
-      this.renderShell();
-      this.cacheElements();
-      this.bindEvents();
-      this.renderScreen();
-      this.publishEvent("ready", {
-        screenIndex: this.index,
-        screen: this.currentScreen()
-      });
+    this.root = root;
+    this.config = config;
+    this.state = {
+      current: 0,
+      history: [],
+      answers: {}
+    };
+
+    this.selectors = {
+      brand: "[data-betterme-brand]",
+      title: "[data-betterme-header-title]",
+      back: "[data-betterme-back]",
+      menu: "[data-betterme-menu]",
+      main: "[data-betterme-main]",
+      footer: "[data-betterme-footer]",
+      continue: "[data-betterme-continue]",
+      progress: "[data-betterme-progress-bar]"
+    };
+
+    this.root.dataset.bettermeInitialized = "true";
+    this.cache();
+    this.bind();
+    wc.subscribe("4-betterme", this.onMessage.bind(this));
+    this.render();
+  }
+
+  cache() {
+    this.brand = this.root.querySelector(this.selectors.brand);
+    this.headerTitle = this.root.querySelector(this.selectors.title);
+    this.backBtn = this.root.querySelector(this.selectors.back);
+    this.menuBtn = this.root.querySelector(this.selectors.menu);
+    this.main = this.root.querySelector(this.selectors.main);
+    this.footer = this.root.querySelector(this.selectors.footer);
+    this.continueBtn = this.root.querySelector(this.selectors.continue);
+    this.progressBar = this.root.querySelector(this.selectors.progress);
+  }
+
+  bind() {
+    this.backBtn.addEventListener("click", this.previous.bind(this));
+    this.continueBtn.addEventListener("click", this.next.bind(this));
+  }
+
+  onMessage(message) {
+    const payload = message && message.payload ? message.payload : {};
+
+    if (payload.action === "next") {
+      this.next();
     }
 
-    renderShell() {
-      const app = this.config.app;
-
-      this.root.innerHTML = `
-        <section class="betterme__app" aria-label="${this.escape(app.brand)} quiz">
-          <header class="app-header">
-            <div class="app-header__left">
-              <button class="app-action app-action--back" type="button" aria-label="${this.escape(app.backLabel)}">
-                <span class="app-action__icon" aria-hidden="true">←</span>
-              </button>
-              <span class="app-brand" aria-label="${this.escape(app.brand)}">${this.escape(app.brand)}</span>
-            </div>
-            <p class="app-header__title">${this.escape(app.headerTitle)}</p>
-            <div class="app-header__right">
-              <button class="app-action app-action--menu" type="button" aria-label="${this.escape(app.menuLabel)}">
-                <span class="app-menu" aria-hidden="true"></span>
-              </button>
-            </div>
-          </header>
-          <div class="app-progress" role="progressbar" aria-label="${this.escape(app.progressLabel)}" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-            <span class="app-progress__bar"></span>
-          </div>
-          <main class="app-main" tabindex="-1"></main>
-          <footer class="app-footer" aria-label="Screen actions">
-            <button class="app-primary app-action--continue" type="button">${this.escape(app.continueLabel)}</button>
-          </footer>
-        </section>
-      `;
+    if (payload.action === "back") {
+      this.previous();
     }
 
-    cacheElements() {
-      this.appMain = this.root.querySelector(this.selectors.appMain);
-      this.appFooter = this.root.querySelector(this.selectors.appFooter);
-      this.continueButton = this.root.querySelector(this.selectors.continueButton);
-      this.backButton = this.root.querySelector(this.selectors.backButton);
-      this.progressBar = this.root.querySelector(this.selectors.progressBar);
-      this.progress = this.root.querySelector(".app-progress");
+    if (payload.action === "goTo" && Number.isInteger(payload.index)) {
+      this.goTo(payload.index);
+    }
+  }
+
+  getScreen() {
+    return this.config.screens[this.state.current];
+  }
+
+  render() {
+    const screen = this.getScreen();
+
+    this.brand.textContent = this.config.app.brand;
+    this.headerTitle.textContent = this.state.current === 0 ? "" : this.config.app.headerTitle;
+    this.backBtn.textContent = this.config.app.backText;
+    this.backBtn.setAttribute("aria-label", this.config.app.backLabel);
+    this.backBtn.disabled = this.state.current === 0;
+    this.backBtn.setAttribute("aria-disabled", String(this.state.current === 0));
+    this.menuBtn.setAttribute("aria-label", this.config.app.menuLabel);
+    this.continueBtn.textContent = this.config.app.continueText;
+
+    this.updateProgress();
+
+    if (screen.type === 0) {
+      this.renderImageChoice(screen);
     }
 
-    bindEvents() {
-      this.root.addEventListener("click", this.handleRootClick);
-      this.root.addEventListener("input", this.handleRootInput);
-      this.root.addEventListener("keydown", this.handleKeydown);
+    if (screen.type === 1) {
+      this.renderSelection(screen);
     }
 
-    onMessage(message) {
-      if (!message || !message.action) {
-        return;
-      }
-
-      const actions = {
-        next: () => this.next(),
-        back: () => this.back(),
-        reset: () => this.reset(),
-        goTo: () => this.goTo(Number(message.index || 0))
-      };
-
-      if (actions[message.action]) {
-        actions[message.action]();
-      }
+    if (screen.type === 3) {
+      this.renderContent(screen);
     }
 
-    handleRootClick(event) {
-      const action = event.target.closest("button");
-      if (!action || !this.root.contains(action)) {
-        return;
-      }
-
-      if (action.classList.contains("app-action--back")) {
-        this.back();
-        return;
-      }
-
-      if (action.classList.contains("app-action--continue")) {
-        this.next();
-        return;
-      }
-
-      if (action.classList.contains("screen-option")) {
-        this.selectOption(action);
-      }
+    if (screen.type === 4) {
+      this.renderForm(screen);
     }
 
-    handleRootInput(event) {
-      const field = event.target.closest(".form-field__control");
-      if (!field) {
-        return;
-      }
+    this.updateFooter(screen);
 
-      const screen = this.currentScreen();
-      const values = this.answers[screen.key] || {};
-      values[field.name] = field.value;
-      this.answers[screen.key] = values;
-      this.saveAnswers();
-      this.updateFooter();
-    }
+    wc.log("betterme rendered", {
+      index: this.state.current,
+      type: screen.type,
+      key: screen.key
+    });
+  }
 
-    handleKeydown(event) {
-      if (event.key !== "Enter" && event.key !== " ") {
-        return;
-      }
+  updateProgress() {
+    const total = this.config.screens.length - 1;
+    const percent = total <= 0 ? 0 : Math.round((this.state.current / total) * 100);
+    this.progressBar.className = "betterme__progress-bar betterme__progress-bar--" + percent;
+    this.progressBar.setAttribute("aria-valuenow", String(percent));
+  }
 
-      const option = event.target.closest(".screen-option");
-      if (!option) {
-        return;
-      }
-
-      event.preventDefault();
-      this.selectOption(option);
-    }
-
-    selectOption(option) {
-      const screen = this.currentScreen();
-      const value = option.dataset.value;
-
-      this.answers[screen.key] = value;
-      this.saveAnswers();
-
-      this.publishEvent("selected", {
-        screenKey: screen.key,
-        value: value,
-        screenIndex: this.index
-      });
-
-      this.renderScreen();
-
-      if (screen.autoNextOnSelect || screen.type === 0) {
-        window.setTimeout(() => this.next(), 220);
-      }
-    }
-
-    currentScreen() {
-      return this.config.screens[this.index];
-    }
-
-    renderScreen() {
-      const screen = this.currentScreen();
-      const renderers = {
-        0: () => this.renderImageChoice(screen),
-        1: () => this.renderChoice(screen),
-        3: () => this.renderInfo(screen),
-        4: () => this.renderForm(screen)
-      };
-
-      this.updateChrome();
-      this.appMain.innerHTML = renderers[screen.type] ? renderers[screen.type]() : this.renderInfo(screen);
-      this.updateFooter();
-      this.focusMain();
-    }
-
-    renderImageChoice(screen) {
-      return `
-        <section class="screen screen--image-choice" aria-label="Screen">
-          ${this.renderIntro(screen)}
-          <div class="image-grid" role="list">
-            ${screen.options.map((option) => this.renderImageOption(screen, option)).join("")}
-          </div>
-        </section>
-      `;
-    }
-
-    renderImageOption(screen, option) {
-      const selected = this.answers[screen.key] === option.value;
-      return `
-        <button class="screen-option image-card${selected ? " is-selected" : ""}" type="button" data-value="${this.escape(option.value)}" aria-pressed="${selected ? "true" : "false"}">
-          <span class="image-card__media"><img src="${this.escape(option.image)}" alt="${this.escape(option.alt || option.label)}" /></span>
-          <span class="image-card__content">
-            <span class="image-card__label">${this.escape(option.label)}</span>
-            <span class="image-card__radio" aria-hidden="true">${selected ? "✓" : ""}</span>
-          </span>
-        </button>
-      `;
-    }
-
-    renderChoice(screen) {
-      return `
-        <section class="screen screen--choice" aria-label="Screen">
-          ${this.renderIntro(screen)}
-          <div class="option-list" role="list">
-            ${screen.options.map((option) => this.renderOption(screen, option)).join("")}
-          </div>
-        </section>
-      `;
-    }
-
-    renderOption(screen, option) {
-      const selected = this.answers[screen.key] === option.value;
-      return `
-        <button class="screen-option text-option${selected ? " is-selected" : ""}" type="button" data-value="${this.escape(option.value)}" aria-pressed="${selected ? "true" : "false"}">
-          <span class="text-option__label">${this.escape(option.label)}</span>
-          <span class="text-option__radio" aria-hidden="true">${selected ? "✓" : ""}</span>
-        </button>
-      `;
-    }
-
-    renderInfo(screen) {
-      const paragraphs = Array.isArray(screen.paragraphs) ? screen.paragraphs : [];
-      return `
-        <section class="screen screen--info" aria-label="Screen">
-          <div class="info-card">
-            ${screen.icon ? `<span class="info-card__icon" aria-hidden="true">${this.escape(screen.icon)}</span>` : ""}
-            ${this.renderIntro(screen)}
-            <div class="info-card__copy">
-              ${paragraphs.map((item) => `<p>${this.emphasize(item, screen.emphasis || [])}</p>`).join("")}
-            </div>
-          </div>
-        </section>
-      `;
-    }
-
-    renderForm(screen) {
-      return `
-        <section class="screen screen--form" aria-label="Screen">
-          ${this.renderIntro(screen)}
-          <form class="form-card" novalidate>
-            ${screen.fields.map((field) => this.renderField(screen, field)).join("")}
-          </form>
-        </section>
-      `;
-    }
-
-    renderField(screen, field) {
-      const values = this.answers[screen.key] || {};
-      const value = values[field.name] || "";
-      return `
-        <label class="form-field">
-          <input class="form-field__control" name="${this.escape(field.name)}" type="${this.escape(field.type)}" value="${this.escape(value)}" autocomplete="${this.escape(field.autocomplete || "off")}" inputmode="${this.escape(field.inputmode || "text")}" ${field.required ? "required" : ""} placeholder=" " />
-          <span class="form-field__label">${this.escape(field.label)}</span>
-        </label>
-      `;
-    }
-
-    renderIntro(screen) {
-      return `
-        <div class="screen-intro">
-          ${screen.eyebrow ? `<p class="screen-intro__eyebrow">${this.escape(screen.eyebrow)}</p>` : ""}
-          <h1 class="screen-intro__title">${this.escape(screen.title)}</h1>
-          ${screen.description ? `<p class="screen-intro__description">${this.escape(screen.description)}</p>` : ""}
+  renderImageChoice(screen) {
+    this.main.innerHTML = `
+      <section class="betterme__screen betterme__screen--images" aria-label="${this.escape(screen.title)}">
+        ${this.renderEyebrow(screen)}
+        <h1 class="betterme__title">${this.escape(screen.title)}</h1>
+        ${this.renderDescription(screen)}
+        <div class="betterme__image-grid">
+          ${screen.options.map((option) => `
+            <button class="betterme__image-card" type="button" data-value="${this.escape(option.value)}">
+              <img class="betterme__image-card-img" src="${this.escape(option.image)}" alt="${this.escape(option.alt)}" />
+              <span class="betterme__image-card-label">${this.escape(option.label)}</span>
+            </button>
+          `).join("")}
         </div>
-      `;
+      </section>
+    `;
+
+    this.main.querySelectorAll(".betterme__image-card").forEach((button) => {
+      button.addEventListener("click", () => {
+        this.state.answers[screen.key] = button.dataset.value;
+        this.publishSelection(screen, button.dataset.value);
+        this.next();
+      });
+    });
+  }
+
+  renderSelection(screen) {
+    const selected = this.state.answers[screen.key];
+    const isCheckbox = screen.inputType === "checkbox";
+    const groupRole = isCheckbox ? "group" : "radiogroup";
+
+    this.main.innerHTML = `
+      <section class="betterme__screen betterme__screen--selection" aria-label="${this.escape(screen.title)}">
+        <h1 class="betterme__title">${this.escape(screen.title)}</h1>
+        ${this.renderDescription(screen)}
+        <div class="betterme__choice-list" role="${groupRole}" aria-label="${this.escape(screen.title)}">
+          ${screen.options.map((option) => {
+            const isSelected = isCheckbox
+              ? Array.isArray(selected) && selected.includes(option.value)
+              : selected === option.value;
+
+            return `
+              <button
+                class="betterme__choice ${isSelected ? "is-selected" : ""}"
+                type="button"
+                data-value="${this.escape(option.value)}"
+                role="${isCheckbox ? "checkbox" : "radio"}"
+                aria-checked="${String(isSelected)}"
+              >
+                <span class="betterme__choice-label">${this.escape(option.label)}</span>
+                <span class="betterme__choice-control" aria-hidden="true">${isSelected ? "✓" : ""}</span>
+              </button>
+            `;
+          }).join("")}
+        </div>
+      </section>
+    `;
+
+    this.main.querySelectorAll(".betterme__choice").forEach((button) => {
+      button.addEventListener("click", () => {
+        this.selectOption(screen, button.dataset.value);
+      });
+    });
+  }
+
+  renderContent(screen) {
+    this.main.innerHTML = `
+      <section class="betterme__screen betterme__screen--content" aria-label="${this.escape(screen.title)}">
+        <div class="betterme__content-card">
+          <div class="betterme__content-icon" aria-hidden="true">${this.escape(screen.icon || "✓")}</div>
+          <h1 class="betterme__title">${this.escape(screen.title)}</h1>
+          ${(screen.paragraphs || []).map((text) => `<p class="betterme__paragraph">${this.escape(text)}</p>`).join("")}
+        </div>
+      </section>
+    `;
+  }
+
+  renderForm(screen) {
+    this.main.innerHTML = `
+      <section class="betterme__screen betterme__screen--form" aria-label="${this.escape(screen.title)}">
+        <h1 class="betterme__title">${this.escape(screen.title)}</h1>
+        ${this.renderDescription(screen)}
+        <form class="betterme__form" novalidate>
+          ${(screen.fields || []).map((field) => `
+            <label class="betterme__field">
+              <input
+                class="betterme__field-input"
+                name="${this.escape(field.name)}"
+                type="${this.escape(field.type)}"
+                autocomplete="${this.escape(field.autocomplete || "off")}"
+                placeholder=" "
+              />
+              <span class="betterme__field-label">${this.escape(field.label)}</span>
+            </label>
+          `).join("")}
+        </form>
+      </section>
+    `;
+  }
+
+  renderEyebrow(screen) {
+    if (!screen.eyebrow) {
+      return "";
     }
 
-    updateChrome() {
-      const percent = Math.round((this.index / (this.config.screens.length - 1)) * 100);
-      this.progressBar.style.width = percent + "%";
-      this.progress.setAttribute("aria-valuenow", String(percent));
-      this.backButton.disabled = this.index === 0;
-      this.backButton.setAttribute("aria-hidden", this.index === 0 ? "true" : "false");
+    return `<p class="betterme__eyebrow">${this.escape(screen.eyebrow)}</p>`;
+  }
+
+  renderDescription(screen) {
+    if (!screen.description) {
+      return "";
     }
 
-    updateFooter() {
-      const screen = this.currentScreen();
-      const show = this.canContinue(screen);
-      this.appFooter.classList.toggle("is-visible", show);
-      this.continueButton.disabled = !show;
+    return `<p class="betterme__description">${this.escape(screen.description)}</p>`;
+  }
+
+  selectOption(screen, value) {
+    if (screen.inputType === "checkbox") {
+      const current = Array.isArray(this.state.answers[screen.key]) ? this.state.answers[screen.key] : [];
+      const exists = current.includes(value);
+      this.state.answers[screen.key] = exists
+        ? current.filter((item) => item !== value)
+        : current.concat(value);
+    } else {
+      this.state.answers[screen.key] = value;
     }
 
-    canContinue(screen) {
-      if (screen.type === 3) {
-        return true;
-      }
+    this.publishSelection(screen, value);
+    this.render();
+  }
 
-      if (screen.type === 4) {
-        const values = this.answers[screen.key] || {};
-        return screen.fields.every((field) => !field.required || String(values[field.name] || "").trim().length > 0);
-      }
+  hasValidSelection(screen) {
+    const value = this.state.answers[screen.key];
 
-      if (screen.selectionRequired) {
-        return Boolean(this.answers[screen.key]);
-      }
-
-      return false;
+    if (screen.inputType === "checkbox") {
+      return Array.isArray(value) && value.length > 0;
     }
 
-    next() {
-      const screen = this.currentScreen();
-      if (!this.canContinue(screen) && screen.type !== 0) {
-        return;
-      }
+    if (screen.inputType === "radio") {
+      return typeof value === "string" && value.length > 0;
+    }
 
-      if (this.index < this.config.screens.length - 1) {
-        this.history.push(this.index);
-        this.index += 1;
-        this.renderScreen();
-        this.publishEvent("screenChanged", {
-          direction: "next",
-          screenIndex: this.index,
-          screen: this.currentScreen()
+    return false;
+  }
+
+  updateFooter(screen) {
+    if (screen.type === 1) {
+      const valid = this.hasValidSelection(screen);
+      this.footer.classList.toggle("is-visible", valid);
+      this.continueBtn.disabled = !valid;
+      this.continueBtn.setAttribute("aria-disabled", String(!valid));
+      return;
+    }
+
+    if (screen.type === 3 || screen.type === 4) {
+      this.footer.classList.add("is-visible");
+      this.continueBtn.disabled = false;
+      this.continueBtn.setAttribute("aria-disabled", "false");
+      return;
+    }
+
+    this.footer.classList.remove("is-visible");
+    this.continueBtn.disabled = true;
+    this.continueBtn.setAttribute("aria-disabled", "true");
+  }
+
+  next() {
+    if (this.state.current >= this.config.screens.length - 1) {
+      wc.log("betterme complete", { answers: this.state.answers });
+      wc.publish("betterme:complete", { answers: this.state.answers });
+      this.renderComplete();
+      return;
+    }
+
+    const current = this.getScreen();
+
+    if (current.type === 1 && !this.hasValidSelection(current)) {
+      this.updateFooter(current);
+      return;
+    }
+
+    this.state.history.push(this.state.current);
+    this.state.current += 1;
+    wc.log("betterme next", { index: this.state.current });
+    wc.publish("betterme:navigation", { action: "next", index: this.state.current });
+    this.render();
+  }
+
+  previous() {
+    if (!this.state.history.length) {
+      return;
+    }
+
+    this.state.current = this.state.history.pop();
+    wc.log("betterme back", { index: this.state.current });
+    wc.publish("betterme:navigation", { action: "back", index: this.state.current });
+    this.render();
+  }
+
+  goTo(index) {
+    if (index < 0 || index >= this.config.screens.length) {
+      return;
+    }
+
+    this.state.history.push(this.state.current);
+    this.state.current = index;
+    wc.log("betterme goTo", { index: index });
+    wc.publish("betterme:navigation", { action: "goTo", index: index });
+    this.render();
+  }
+
+  renderComplete() {
+    this.main.innerHTML = `
+      <section class="betterme__screen betterme__screen--content" aria-label="${this.escape(this.config.app.completedTitle)}">
+        <div class="betterme__content-card">
+          <div class="betterme__content-icon" aria-hidden="true">✓</div>
+          <h1 class="betterme__title">${this.escape(this.config.app.completedTitle)}</h1>
+          <p class="betterme__paragraph">${this.escape(this.config.app.completedText)}</p>
+        </div>
+      </section>
+    `;
+
+    this.footer.classList.remove("is-visible");
+  }
+
+  publishSelection(screen, value) {
+    const payload = {
+      key: screen.key,
+      value: value,
+      inputType: screen.inputType || "image",
+      answers: this.state.answers
+    };
+
+    wc.log("betterme selection", payload);
+    wc.publish("betterme:selection", payload);
+  }
+
+  escape(value) {
+    return String(value || "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
+  static boot() {
+    const start = function () {
+      wc.waitForElement("betterme.betterme")
+        .then(function (root) {
+          if (!window.bettermeConfig) {
+            wc.log("betterme config missing");
+            return;
+          }
+
+          new MtkBetterme(root, window.bettermeConfig);
+        })
+        .catch(function (error) {
+          wc.log("betterme boot failed", { error: error.message });
         });
-        return;
-      }
+    };
 
-      this.publishEvent("completed", {
-        answers: this.answers,
-        completedAt: new Date().toISOString()
-      });
-    }
-
-    back() {
-      if (this.index === 0) {
-        return;
-      }
-
-      this.index = this.history.length ? this.history.pop() : Math.max(0, this.index - 1);
-      this.renderScreen();
-      this.publishEvent("screenChanged", {
-        direction: "back",
-        screenIndex: this.index,
-        screen: this.currentScreen()
-      });
-    }
-
-    goTo(index) {
-      if (index < 0 || index >= this.config.screens.length) {
-        return;
-      }
-      this.history.push(this.index);
-      this.index = index;
-      this.renderScreen();
-    }
-
-    reset() {
-      this.index = 0;
-      this.history = [];
-      this.answers = {};
-      this.saveAnswers();
-      this.renderScreen();
-      this.publishEvent("reset", {});
-    }
-
-    publishEvent(type, payload) {
-      const message = {
-        app: this.config.app.name,
-        type: type,
-        payload: payload
-      };
-      wc.log("betterme publish", message);
-      wc.publish("betterme." + type, message);
-    }
-
-    focusMain() {
-      window.setTimeout(() => {
-        this.appMain.focus({ preventScroll: true });
-      }, 0);
-    }
-
-    loadAnswers() {
-      try {
-        return JSON.parse(localStorage.getItem("betterme.answers") || "{}");
-      } catch (error) {
-        wc.warn("betterme answers could not be loaded", error);
-        return {};
-      }
-    }
-
-    saveAnswers() {
-      localStorage.setItem("betterme.answers", JSON.stringify(this.answers));
-    }
-
-    emphasize(text, phrases) {
-      let output = this.escape(text);
-      phrases.forEach((phrase) => {
-        const safe = this.escape(phrase);
-        output = output.replace(safe, `<strong>${safe}</strong>`);
-      });
-      return output;
-    }
-
-    escape(value) {
-      return String(value || "")
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-    }
-
-    static initAll() {
-      const config = window.bettermeConfig;
-      if (!config) {
-        wc.warn("bettermeConfig not found");
-        return;
-      }
-
-      document.querySelectorAll("betterme.betterme").forEach((root) => {
-        if (root.dataset.mtkBettermeReady !== "true") {
-          new MtkBetterme(root, config);
-        }
-      });
+    if (window.wc && typeof window.wc.ready === "function") {
+      window.wc.ready(start);
+    } else if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", start, { once: true });
+    } else {
+      start();
     }
   }
+}
 
-  window.MtkBetterme = MtkBetterme;
-
-  function boot() {
-    MtkBetterme.initAll();
-  }
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", boot, { once: true });
-  } else {
-    boot();
-  }
-
-  document.addEventListener("include:loaded", boot);
-  wc.subscribe("wc.include.loaded", boot);
-}());
+window.MtkBetterme = MtkBetterme;
+MtkBetterme.boot();

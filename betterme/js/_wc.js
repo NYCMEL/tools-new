@@ -1,144 +1,140 @@
 (function () {
   "use strict";
 
-  window.wc = window.wc || {};
+  const topics = Object.create(null);
 
-  const topics = {};
+  function log(label, payload) {
+    if (window.console && typeof window.console.log === "function") {
+      window.console.log("[wc]", label, payload || "");
+    }
+  }
 
-  wc.log = function (...data) {
-    return console.log(...data);
-  };
+  function publish(topic, payload) {
+    const message = {
+      topic: topic,
+      payload: payload || {},
+      timestamp: new Date().toISOString()
+    };
 
-  wc.info = function (...data) {
-    return console.info(...data);
-  };
-
-  wc.warn = function (...data) {
-    return console.warn(...data);
-  };
-
-  wc.error = function (...data) {
-    return console.error(...data);
-  };
-
-  wc.publish = function (topic, payload) {
-    const subscriptions = topics[topic] || [];
-    subscriptions.forEach((callback) => {
-      window.setTimeout(() => callback(payload), 0);
+    (topics[topic] || []).forEach(function (handler) {
+      try {
+        handler(message);
+      } catch (error) {
+        log("subscriber error", { topic: topic, error: error });
+      }
     });
-    return subscriptions.length > 0;
-  };
 
-  wc.publishSync = function (topic, payload) {
-    const subscriptions = topics[topic] || [];
-    subscriptions.forEach((callback) => callback(payload));
-    return subscriptions.length > 0;
-  };
+    return message;
+  }
 
-  wc.subscribe = function (topic, callback) {
-    if (typeof callback !== "function") {
-      return false;
+  function subscribe(topic, handler) {
+    if (!topics[topic]) {
+      topics[topic] = [];
     }
-    topics[topic] = topics[topic] || [];
-    topics[topic].push(callback);
-    return topic + ":" + topics[topic].length;
-  };
 
-  wc.unsubscribe = function (token) {
-    if (!token || token.indexOf(":") === -1) {
-      return false;
+    topics[topic].push(handler);
+
+    return function unsubscribe() {
+      topics[topic] = topics[topic].filter(function (item) {
+        return item !== handler;
+      });
+    };
+  }
+
+  function query(selector, root) {
+    return (root || document).querySelector(selector);
+  }
+
+  function queryAll(selector, root) {
+    return Array.prototype.slice.call((root || document).querySelectorAll(selector));
+  }
+
+  function ready(callback) {
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", callback, { once: true });
+      return;
     }
-    const topic = token.split(":").slice(0, -1).join(":");
-    const index = Number(token.split(":").pop()) - 1;
-    if (!topics[topic] || !topics[topic][index]) {
-      return false;
-    }
-    topics[topic].splice(index, 1);
-    return true;
-  };
 
-  wc.getAttributes = function (node) {
-    return Array.from(node.attributes || []).reduce((attrs, attr) => {
-      attrs[attr.name] = attr.value;
-      return attrs;
-    }, {});
-  };
+    callback();
+  }
 
-  wc.waitForElement = function (selector, root = document, timeout = 8000) {
-    return new Promise((resolve, reject) => {
-      const found = root.querySelector(selector);
+  function waitForElement(selector, root, timeout) {
+    const scope = root || document;
+    const maxWait = typeof timeout === "number" ? timeout : 8000;
+
+    return new Promise(function (resolve, reject) {
+      const found = scope.querySelector(selector);
+
       if (found) {
         resolve(found);
         return;
       }
 
-      const observer = new MutationObserver(() => {
-        const node = root.querySelector(selector);
-        if (node) {
+      const observer = new MutationObserver(function () {
+        const element = scope.querySelector(selector);
+
+        if (element) {
           observer.disconnect();
-          resolve(node);
+          resolve(element);
         }
       });
 
-      observer.observe(document.documentElement, {
+      observer.observe(scope === document ? document.documentElement : scope, {
         childList: true,
         subtree: true
       });
 
-      window.setTimeout(() => {
+      window.setTimeout(function () {
         observer.disconnect();
         reject(new Error("Element not found: " + selector));
-      }, timeout);
+      }, maxWait);
     });
-  };
-
-  wc.fetch = async function (url) {
-    wc.log("wc.fetch", { url: url });
-    const response = await fetch(url, { cache: "no-cache" });
-    if (!response.ok) {
-      throw new Error("HTTP error " + response.status);
-    }
-    return response.json();
-  };
-
-  class WcInclude extends HTMLElement {
-    connectedCallback() {
-      const href = this.getAttribute("href");
-      if (!href) {
-        return;
-      }
-
-      this.dispatchEvent(new CustomEvent("include:before-load", {
-        bubbles: true,
-        composed: true,
-        detail: { href: href, include: this }
-      }));
-
-      fetch(href, { cache: "no-cache" })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error("Page not found: " + href);
-          }
-          return response.text();
-        })
-        .then((html) => {
-          this.innerHTML = html;
-          this.dispatchEvent(new CustomEvent("include:loaded", {
-            bubbles: true,
-            composed: true,
-            detail: { href: href, include: this }
-          }));
-          wc.log("wc-include loaded", { href: href });
-          wc.publish("wc.include.loaded", { href: href, include: this });
-        })
-        .catch((error) => {
-          wc.error("wc-include error", error);
-          this.textContent = "wc-include: " + error.message;
-        });
-    }
   }
 
-  if (!customElements.get("wc-include")) {
-    customElements.define("wc-include", WcInclude);
+  function includeOne(element) {
+    const href = element.getAttribute("href");
+
+    if (!href) {
+      return Promise.resolve();
+    }
+
+    return fetch(href, { cache: "no-cache" })
+      .then(function (response) {
+        if (!response.ok) {
+          throw new Error("Unable to include " + href);
+        }
+
+        return response.text();
+      })
+      .then(function (html) {
+        const template = document.createElement("template");
+        template.innerHTML = html.trim();
+        element.replaceWith(template.content.cloneNode(true));
+        log("wc-include loaded", { href: href });
+        publish("wc:include:loaded", { href: href });
+      });
   }
+
+  function include(root) {
+    const includes = queryAll("wc-include", root || document);
+    return Promise.all(includes.map(includeOne)).then(function () {
+      publish("wc:includes:ready", { count: includes.length });
+    });
+  }
+
+  window.wc = window.wc || {};
+  window.wc.log = window.wc.log || log;
+  window.wc.publish = window.wc.publish || publish;
+  window.wc.subscribe = window.wc.subscribe || subscribe;
+  window.wc.query = window.wc.query || query;
+  window.wc.queryAll = window.wc.queryAll || queryAll;
+  window.wc.ready = window.wc.ready || ready;
+  window.wc.waitForElement = window.wc.waitForElement || waitForElement;
+  window.wc.include = window.wc.include || include;
+
+  ready(function () {
+    include(document).catch(function (error) {
+      log("wc-include error", { error: error.message });
+    });
+  });
 }());
