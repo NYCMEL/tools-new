@@ -1,0 +1,370 @@
+FORGET ALL PREVIOUS CONTEXT for `betterme` and remember this specification permanently.
+
+Act as a Senior UI/UX Designer and Front-End Developer.
+
+Create a production-ready application named:
+
+betterme
+
+BASE REPOSITORIES
+
+Use:
+
+https://github.com/NYCMEL/betterme.git
+
+Use ALL wc functionality from:
+
+https://github.com/NYCMEL/nala-website/blob/main/js/_wc.js
+
+including:
+
+* wc.publish()
+* wc.subscribe()
+* wc.log()
+* wc-include
+* all reusable wc utilities
+
+TECH STACK
+
+Use ONLY:
+
+* HTML
+* SCSS
+* Vanilla JavaScript ES6
+
+Bootstrap 5 is ONLY allowed for:
+
+* layout
+* grid utilities
+
+DO NOT USE:
+
+* React
+* Vue
+* Angular
+* jQuery
+* external libraries
+* inline styles
+* inline JavaScript
+* IDs
+* global CSS
+* iframes
+
+MUST USE:
+
+<wc-include href="..." />
+
+APP STRUCTURE
+
+Root element:
+
+<betterme class="betterme"></betterme>
+
+All styles MUST be fully scoped to:
+
+.betterme
+
+Never use global selectors.
+
+CONFIGURATION
+
+Application MUST be fully JSON-driven.
+
+All UI content MUST come from:
+
+betterme.config.js
+
+Do NOT hardcode content in HTML or JavaScript.
+
+JAVASCRIPT
+
+Create a dedicated ES6 class:
+
+MtkBetterme
+
+Initialize automatically inside:
+
+betterme.js
+
+Requirements:
+
+* wait for DOM availability
+* support dynamic injection via wc-include
+* prevent duplicate initialization
+* modular
+* reusable
+* maintainable
+* production-ready
+
+WC EVENT SYSTEM
+
+Subscribe using:
+
+wc.subscribe("4-betterme", this.onMessage.bind(this))
+
+Create:
+
+onMessage(message)
+
+Before every publish:
+
+wc.log(...)
+
+Publish using:
+
+wc.publish(...)
+
+All payloads must be structured and reusable.
+
+DESIGN SYSTEM
+
+Use styles and patterns from:
+
+css/nala.scss
+
+Use Modern Material Design patterns:
+
+* floating labels
+* transitions
+* motion
+* accessibility
+* focus states
+* responsive layouts
+* typography
+* spacing
+* elevation
+
+ACCESSIBILITY
+
+Application must be:
+
+* ADA compliant
+* keyboard accessible
+* semantic HTML
+* screen-reader friendly
+* responsive
+
+Include:
+
+* visible focus states
+* proper ARIA usage
+* accessible controls
+
+QUIZ EXPERIENCE
+
+The application is a multi-step questionnaire.
+
+QUESTIONS
+
+* 10 questions
+* JSON-driven
+* each question displayed one at a time
+* large bold Arial font
+* left aligned
+* aligned with answer container
+
+QUESTION IMAGES
+
+Images are located in:
+
+assets/question_1.png
+assets/question_2.png
+assets/question_3.png
+assets/question_4.png
+assets/question_5.png
+assets/question_6.png
+assets/question_7.png
+assets/question_8.png
+assets/question_9.png
+assets/question_10.png
+
+Display image above each question.
+
+Mapping:
+
+question-01 -> question_1.png
+question-02 -> question_2.png
+question-03 -> question_3.png
+question-04 -> question_4.png
+question-05 -> question_5.png
+question-06 -> question_6.png
+question-07 -> question_7.png
+question-08 -> question_8.png
+question-09 -> question_9.png
+question-10 -> question_10.png
+
+Image requirements:
+
+* width: 12rem
+* height: auto
+* left aligned
+* aligned with question and answers
+* no borders
+* no shadows
+* max border radius 5px
+
+THEMES
+
+Support:
+
+* Light Mode
+* Dark Mode
+
+Hide the visible "Theme" label.
+
+Keep only theme buttons.
+
+PROGRESS BAR
+
+Progress bar must:
+
+* always remain visible
+* fixed to top of viewport
+* never disappear during transitions
+* height: 20px
+* full browser width
+* not be inside animated content
+* progress updates as questions advance
+
+index.html owns the top offset:
+
+<body style="margin:0;padding:0;padding-top:20px;">
+
+QUIZ TRANSITION
+
+Use:
+
+Fade + Lift
+
+Animation:
+
+* fade in
+* slight vertical lift
+* smooth easing
+* duration: 650ms
+
+Do NOT use:
+
+* horizontal slides
+* push transitions
+* carousels
+
+ANSWERS
+
+Each answer:
+
+* full width
+* single column layout
+* stable width during animation
+* 2px transparent border
+
+Hover:
+
+* border becomes lime
+
+Selected:
+
+* border becomes lime
+
+Checkbox:
+
+* large checkbox left of answer text
+* answer text remains in place
+* no layout shift
+
+BUTTONS
+
+Remove:
+
+* Skip button
+
+Keep:
+
+* Previous
+* Next
+
+Button requirements:
+
+* width: 180px
+* height: 56px minimum
+* bold Arial
+* large text
+
+Previous button:
+
+‹ Previous
+
+Next button:
+
+Next ›
+
+Chevron requirements:
+
+* large
+* prominent
+* visually heavier than text
+
+STYLE RULES
+
+Use:
+
+* Arial throughout
+* bold question typography
+* max border radius: 5px everywhere
+
+Do NOT use:
+
+* rounded pills
+* large radii
+* shadows around quiz cards
+
+LAYOUT
+
+Quiz card:
+
+* full width
+* no max-width shell constraint
+* no borders
+* no shadows
+
+Answer container:
+
+* max-width: 1280px
+* centered
+
+Question:
+
+* left aligned
+* same left edge as answers
+
+SUMMARY PAGE
+
+After final question:
+
+Display all questions and answers on a single page.
+
+Summary requirements:
+
+* small text
+* 14px
+* readable
+* printable
+
+OUTPUT
+
+Generate complete files only:
+
+* index.html
+* betterme.html
+* betterme.js
+* betterme.scss
+* betterme.config.js
+
+Never generate:
+
+* explanations
+* snippets
+* partial updates
+* markdown code blocks
+
+Always generate complete production-ready files.
