@@ -146,3 +146,8 @@ Include:
 * visible focus states
 * proper ARIA usage
 * accessible controls
+
+TEMPLATE
+* all pages MUST use the same header, back button, etc. action buttons etc as seen in images.
+
+
