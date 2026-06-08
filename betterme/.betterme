@@ -157,6 +157,8 @@ there are different types of screens that pop inside ".app-main" section (see in
       on all screens:
 	- "Back Arrow" in .app-header: clicking revert to previous screen
 	- "Continue" in .app-footer: clicking move to next screen
+	- if radio or checkboxes appear, initially they should be "Unselected"
+	  - once selected, the "Continue" button should appear or enabled
 
       screens look like: 
         type:0
