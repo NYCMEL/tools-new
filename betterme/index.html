@@ -6,39 +6,42 @@
 	<title>BetterMe Profile</title>
 	<link rel="stylesheet" href="styles.css" />
     </head>
-
     <body>
 	<div class="app">
 	    <header class="topbar">
-		<div class="brand-wrap">
-		    <button class="circle-btn" aria-label="Go back">
-			<span class="arrow">←</span>
+		<div class="topbar-left">
+		    <button class="circle-btn" type="button" aria-label="Back">
+			<span class="back-icon">←</span>
 		    </button>
 
-		    <div class="brand">BetterMe</div>
+		    <div class="logo">BetterMe</div>
 		</div>
 
 		<div class="page-title">My Profile</div>
 
-		<div class="menu-wrap">
-		    <button class="circle-btn" aria-label="Open menu">
-			<span class="menu-icon">☰</span>
+		<div class="topbar-right">
+		    <button class="circle-btn" type="button" aria-label="Menu">
+			<span class="menu-icon"></span>
 		    </button>
 		</div>
 	    </header>
 
+	    <div class="progress-bar">
+		<div class="progress-active"></div>
+	    </div>
+
 	    <main class="main">
-		<section class="goal-card">
+		<section class="goal-panel">
 		    <h1>What’s your main goal?</h1>
 
 		    <div class="choices">
 			<button class="choice is-selected" type="button">
-			    <span>Lose weight</span>
+			    <span class="choice-text">Lose weight</span>
 			    <span class="radio">✓</span>
 			</button>
 
 			<button class="choice" type="button">
-			    <span>Gain muscle mass</span>
+			    <span class="choice-text">Gain muscle mass</span>
 			    <span class="radio"></span>
 			</button>
 		    </div>
