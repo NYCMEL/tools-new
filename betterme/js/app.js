@@ -1,0 +1,1 @@
+console.log('BetterMe quiz app');
