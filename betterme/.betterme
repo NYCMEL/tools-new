@@ -151,3 +151,27 @@ TEMPLATE
 * all pages MUST use the same header, back button, etc. action buttons etc as seen in images.
 
 
+ABOUT THE APP:
+
+there are different types of screens that pop inside ".app-main" section (see index.html)
+      on all screens:
+	- "Back Arrow" in .app-header: clicking revert to previous screen
+	- "Continue" in .app-footer: clicking move to next screen
+
+      screens look like: 
+        type:0
+	   0.png: there can be 2 or more images (clickable) 
+	     - clicking on an image should navigate to next screen
+
+        type:1
+	  1.png: on selection, "Continue" button in .app.footer should show
+
+        type:3
+	  2.png: "Continue" button in .app.footer should show
+
+	type:4
+	  4.png: "Continue" button in .app.footer should show
+
+create sample JSON types inside config.js file. Where needed create random stock images
+
+use sample images in tmp folder
