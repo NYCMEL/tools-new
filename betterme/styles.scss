@@ -1,0 +1,177 @@
+$bg: #fcf8f1;
+$text: #241206;
+$dark: #321b11;
+$line: #f0ebe3;
+$border: #e8dfd3;
+$selected: #f1ebe3;
+$muted: #d6ccc0;
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+  background: $bg;
+  color: $text;
+}
+
+.app {
+  min-height: 100vh;
+}
+
+.topbar {
+  height: 94px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: 0 54px;
+  border-bottom: 5px solid $line;
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 87px;
+    height: 5px;
+    background: $dark;
+    border-radius: 0 4px 4px 0;
+  }
+}
+
+.brand-wrap {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+}
+
+.brand {
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: -1.7px;
+}
+
+.page-title {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.4px;
+}
+
+.menu-wrap {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.circle-btn {
+  width: 56px;
+  height: 56px;
+  border: 1px solid $muted;
+  border-radius: 50%;
+  background: transparent;
+  color: $text;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  padding: 0;
+}
+
+.arrow {
+  font-size: 34px;
+  line-height: 1;
+  font-weight: 300;
+  transform: translateY(-2px);
+}
+
+.menu-icon {
+  font-size: 28px;
+  line-height: 1;
+  font-weight: 400;
+  transform: translateY(-1px);
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+  padding-top: 74px;
+}
+
+.goal-card {
+  width: min(635px, calc(100% - 40px));
+  text-align: center;
+}
+
+h1 {
+  margin: 0 0 44px;
+  font-size: 43px;
+  line-height: 1.1;
+  font-weight: 700;
+  letter-spacing: -1.6px;
+}
+
+.choices {
+  display: grid;
+  gap: 18px;
+}
+
+.choice {
+  width: 100%;
+  min-height: 84px;
+  border: 1px solid $border;
+  border-radius: 16px;
+  background: transparent;
+  color: $text;
+  padding: 0 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 23px;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  text-align: left;
+  cursor: pointer;
+
+  &.is-selected {
+    background: $selected;
+    border-color: transparent;
+
+    .radio {
+      background: $dark;
+      border-color: $dark;
+      color: #fff;
+      font-size: 18px;
+    }
+  }
+}
+
+.radio {
+  width: 28px;
+  height: 28px;
+  border: 1.4px solid $muted;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: transparent;
+  font-size: 0;
+  flex: 0 0 auto;
+}
+
+@media (max-width: 700px) {
+  .topbar {
+    padding: 0 20px;
+  }
+
+  .brand {
+    font-size: 27px;
+  }
+
+  h1 {
+    font-size: 34px;
+  }
+
+  .choice {
+    font-size: 20px;
+  }
+}
