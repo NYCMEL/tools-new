@@ -2,31 +2,44 @@ tunnel: 27a20ec7-041b-4c6e-b1c1-7368a598bb4d
 credentials-file: /Users/melify/.cloudflared/27a20ec7-041b-4c6e-b1c1-7368a598bb4d.json
 
 ingress:
-  - hostname: wc.melify.com
-    service: http://localhost:80
-
-  - hostname: mel.melify.com
-    service: http://localhost:80
-
-  - hostname: melify.melify.com
-    service: http://localhost:80
-
-  - hostname: twitter.melify.com
-    service: http://localhost:80
-
-  - hostname: dropbox.melify.com
-    service: http://localhost:80
-
-  - hostname: emphora.melify.com
-    service: http://localhost:80
-
-  - hostname: bookmarker.melify.com
-    service: http://localhost:80
-
   - hostname: melify.com
     service: http://localhost:80
+    originRequest:
+      httpHostHeader: melify.local
 
   - hostname: www.melify.com
     service: http://localhost:80
+    originRequest:
+      httpHostHeader: melify.local
+
+  - hostname: mel.melify.com
+    service: http://localhost:80
+    originRequest:
+      httpHostHeader: mel.local
+
+  - hostname: wc.melify.com
+    service: http://localhost:80
+    originRequest:
+      httpHostHeader: wc.local
+
+  - hostname: bookmarker.melify.com
+    service: http://localhost:80
+    originRequest:
+      httpHostHeader: bookmarker.local
+
+  - hostname: dropbox.melify.com
+    service: http://localhost:80
+    originRequest:
+      httpHostHeader: dropbox.local
+
+  - hostname: emphora.melify.com
+    service: http://localhost:80
+    originRequest:
+      httpHostHeader: emphora.local
+
+  - hostname: twitter.melify.com
+    service: http://localhost:80
+    originRequest:
+      httpHostHeader: twitter.local
 
   - service: http_status:404
