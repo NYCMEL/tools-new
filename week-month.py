@@ -80,6 +80,6 @@ if not week_buys and not month_buys:
     print("NOTHING TO REPORT!")
 else:
     if week_buys:
-        print("WEEK BUY:", ",".join(week_buys))
+        print("WEEK:", ",".join(week_buys))
     if month_buys:
-        print("MONTH BUY:", ",".join(month_buys))
+        print("MONTH:", ",".join(month_buys))
