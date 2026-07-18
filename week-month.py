@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 
 import yfinance as yf
-import pandas as pd
 
 WATCHLIST = [
     "AAPL","AMD","AMZN","BLK","JPM","META","MRVL","MSFT","MU","NVDA",
@@ -9,36 +8,50 @@ WATCHLIST = [
     "V","GOOG","UNH","CAT"
 ]
 
-def previous_week_low(hist):
-    hist = hist.copy()
-    hist["Date"] = hist.index.tz_localize(None)
-    hist["Week"] = hist["Date"].dt.to_period("W-FRI")
-    weeks = sorted(hist["Week"].unique())
+def scalar(value):
+    """Return a Python scalar from pandas/NumPy objects."""
+    try:
+        return value.item()
+    except Exception:
+        try:
+            return value.iloc[0]
+        except Exception:
+            return value
+
+def previous_week_low(df):
+    x = df.copy()
+    x["Date"] = x.index.tz_localize(None)
+    x["Week"] = x["Date"].dt.to_period("W-FRI")
+    weeks = sorted(x["Week"].unique())
     if len(weeks) < 2:
         return None
-    prev = weeks[-2]
-    return float(hist.loc[hist["Week"] == prev, "Low"].min())
+    return scalar(x.loc[x["Week"] == weeks[-2], "Low"].min())
 
-def previous_month_low(hist):
-    hist = hist.copy()
-    hist["Date"] = hist.index.tz_localize(None)
-    hist["Month"] = hist["Date"].dt.to_period("M")
-    months = sorted(hist["Month"].unique())
+def previous_month_low(df):
+    x = df.copy()
+    x["Date"] = x.index.tz_localize(None)
+    x["Month"] = x["Date"].dt.to_period("M")
+    months = sorted(x["Month"].unique())
     if len(months) < 2:
         return None
-    prev = months[-2]
-    return float(hist.loc[hist["Month"] == prev, "Low"].min())
+    return scalar(x.loc[x["Month"] == months[-2], "Low"].min())
 
 signals = []
 
 for symbol in WATCHLIST:
     try:
-        h = yf.download(symbol, period="4mo", interval="1d",
-                        auto_adjust=False, progress=False)
+        h = yf.download(
+            symbol,
+            period="4mo",
+            interval="1d",
+            auto_adjust=False,
+            progress=False
+        )
+
         if h.empty:
             continue
 
-        current = float(h["Close"].iloc[-1])
+        current = scalar(h["Close"].iloc[-1])
         week_low = previous_week_low(h)
         month_low = previous_month_low(h)
 
@@ -48,8 +61,8 @@ for symbol in WATCHLIST:
         if month_low is not None and current < month_low:
             signals.append(f"MONTH BUY {symbol}")
 
-    except Exception:
-        pass
+    except Exception as e:
+        print(f"{symbol}: {e}")
 
 if signals:
     print("\n".join(signals))
