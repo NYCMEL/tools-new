@@ -1,6 +1,15 @@
 #!/usr/bin/python3
 
+import warnings
+
+try:
+    from urllib3.exceptions import NotOpenSSLWarning
+    warnings.filterwarnings("ignore", category=NotOpenSSLWarning)
+except Exception:
+    pass
+
 import yfinance as yf
+import pandas as pd
 
 WATCHLIST = [
     "AAPL","AMD","AMZN","BLK","JPM","META","MRVL","MSFT","MU","NVDA",
@@ -9,7 +18,7 @@ WATCHLIST = [
 ]
 
 def scalar(value):
-    """Return a Python scalar from pandas/NumPy objects."""
+    """Return a native Python scalar."""
     try:
         return value.item()
     except Exception:
@@ -20,8 +29,8 @@ def scalar(value):
 
 def previous_week_low(df):
     x = df.copy()
-    x["Date"] = x.index.tz_localize(None)
-    x["Week"] = x["Date"].dt.to_period("W-FRI")
+    x.index = pd.to_datetime(x.index).tz_localize(None)
+    x["Week"] = x.index.to_period("W-FRI")
     weeks = sorted(x["Week"].unique())
     if len(weeks) < 2:
         return None
@@ -29,14 +38,15 @@ def previous_week_low(df):
 
 def previous_month_low(df):
     x = df.copy()
-    x["Date"] = x.index.tz_localize(None)
-    x["Month"] = x["Date"].dt.to_period("M")
+    x.index = pd.to_datetime(x.index).tz_localize(None)
+    x["Month"] = x.index.to_period("M")
     months = sorted(x["Month"].unique())
     if len(months) < 2:
         return None
     return scalar(x.loc[x["Month"] == months[-2], "Low"].min())
 
-signals = []
+week_buys = []
+month_buys = []
 
 for symbol in WATCHLIST:
     try:
@@ -45,10 +55,12 @@ for symbol in WATCHLIST:
             period="4mo",
             interval="1d",
             auto_adjust=False,
-            progress=False
+            progress=False,
+            threads=False
         )
 
         if h.empty:
+            print(f"{symbol}: no data")
             continue
 
         current = scalar(h["Close"].iloc[-1])
@@ -56,15 +68,18 @@ for symbol in WATCHLIST:
         month_low = previous_month_low(h)
 
         if week_low is not None and current < week_low:
-            signals.append(f"WEEK BUY {symbol}")
+            week_buys.append(symbol)
 
         if month_low is not None and current < month_low:
-            signals.append(f"MONTH BUY {symbol}")
+            month_buys.append(symbol)
 
     except Exception as e:
         print(f"{symbol}: {e}")
 
-if signals:
-    print("\n".join(signals))
-else:
+if not week_buys and not month_buys:
     print("NOTHING TO REPORT!")
+else:
+    if week_buys:
+        print("WEEK BUY:", ",".join(week_buys))
+    if month_buys:
+        print("MONTH BUY:", ",".join(month_buys))
