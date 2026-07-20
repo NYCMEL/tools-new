@@ -14,7 +14,7 @@ import pandas as pd
 WATCHLIST = [
     "AAPL","AMD","AMZN","BLK","JPM","META","MRVL","MSFT","MU","NVDA",
     "QQQ","SNOW","SPCX","SPY","TSLA","PYPL","GOOGL","MMM","AVGO",
-    "V","GOOG","UNH","CAT"
+    "V","GOOG","UNH","CAT","ORCL"
 ]
 
 def scalar(value):
