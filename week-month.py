@@ -12,9 +12,8 @@ import yfinance as yf
 import pandas as pd
 
 WATCHLIST = [
-    "AAPL","AMD","AMZN","BLK","JPM","META","MRVL","MSFT","MU","NVDA",
-    "QQQ","SNOW","SPCX","SPY","TSLA","PYPL","GOOGL","MMM","AVGO",
-    "V","GOOG","UNH","CAT","ORCL"
+    "AAPL","AMD","AMZN","AVGO","BLK","CAT","GOOG","GOOGL","JPM","MMM","META","MRVL",
+    "MSFT","MU","NVDA","ORCL","PYPL","QQQ","SNOW","SPCX","SPY","TSLA","UNH","V"
 ]
 
 def scalar(value):
