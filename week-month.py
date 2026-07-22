@@ -13,7 +13,7 @@ import pandas as pd
 
 WATCHLIST = [
     "AAPL","AMD","AMZN","AVGO","BLK","CAT","GOOG","GOOGL","JPM","MMM","META","MRVL",
-    "MSFT","MU","NVDA","ORCL","PYPL","QQQ","SNOW","SPCX","SPY","TSLA","UNH","V"
+    "MSFT","MU","NVDA","ORCL","PYPL","QQQ","SNOW","SPCX","SPY","TSLA","UNH","V","SKHY"
 ]
 
 def scalar(value):
@@ -79,8 +79,6 @@ if not week_buys and not month_buys:
     print("NOTHING TO REPORT!")
 else:
     if week_buys:
-        print("\n-------------------------------------------------------------------------------------------")
         print("[W]", ", ".join(week_buys))
     if month_buys:
         print("[M]", ", ".join(month_buys))
-        print("-------------------------------------------------------------------------------------------\n")
