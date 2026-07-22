@@ -1,0 +1,30 @@
+{
+  "updated_at": "2026-07-22T11:00:00+00:00",
+  "source": "Stooq",
+  "scanned": 25,
+  "signals": 3,
+  "results": [
+    {
+      "ticker": "AMD",
+      "current": 178.4,
+      "week": 180.05,
+      "month": 171.2,
+      "buy": "W"
+    },
+    {
+      "ticker": "MRVL",
+      "current": 65.11,
+      "week": 66.72,
+      "month": 68.44,
+      "buy": "WM"
+    },
+    {
+      "ticker": "SPCX",
+      "current": 33.87,
+      "week": 34.15,
+      "month": 35.02,
+      "buy": "WM"
+    }
+  ],
+  "errors": []
+}
