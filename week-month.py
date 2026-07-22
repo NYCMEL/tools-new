@@ -29,7 +29,6 @@ def scalar(value):
 
 
 def previous_week_low(df):
-    """Previous completed week's low."""
     x = df.copy()
     x.index = pd.to_datetime(x.index).tz_localize(None)
     x["Week"] = x.index.to_period("W-FRI")
@@ -44,7 +43,6 @@ def previous_week_low(df):
 
 
 def previous_month_low(df):
-    """Previous completed month's low."""
     x = df.copy()
     x.index = pd.to_datetime(x.index).tz_localize(None)
     x["Month"] = x.index.to_period("M")
@@ -59,8 +57,6 @@ def previous_month_low(df):
 
 
 results = []
-week_buys = []
-month_buys = []
 
 for symbol in WATCHLIST:
 
@@ -76,7 +72,6 @@ for symbol in WATCHLIST:
         )
 
         if h.empty:
-            print(f"{symbol}: no data")
             continue
 
         current = float(scalar(h["Close"].iloc[-1]))
@@ -91,12 +86,6 @@ for symbol in WATCHLIST:
             month_low is not None and current < month_low
         )
 
-        if week_buy:
-            week_buys.append(symbol)
-
-        if month_buy:
-            month_buys.append(symbol)
-
         buy = ""
         if week_buy:
             buy += "W"
@@ -106,38 +95,30 @@ for symbol in WATCHLIST:
         results.append({
             "Ticker": symbol,
             "Current": round(current, 2),
-            "Last-Week": round(float(week_low), 2) if week_low is not None else "",
-            "Last-Month": round(float(month_low), 2) if month_low is not None else "",
+            "Last-Week": round(float(week_low), 2) if week_low is not None else None,
+            "Last-Month": round(float(month_low), 2) if month_low is not None else None,
             "Buy": buy
         })
 
     except Exception as e:
         print(f"{symbol}: {e}")
 
-# -------------------------------------------------------
-# Results Table
-# -------------------------------------------------------
+
+# ---------------------------------------------------
+# Results
+# ---------------------------------------------------
 
 df = pd.DataFrame(results)
+
+# Show only buy signals
+df = df[df["Buy"] != ""]
+
+# Sort alphabetically
 df = df.sort_values("Ticker")
 
-print()
-print(df.to_string(index=False))
-print()
-
-# -------------------------------------------------------
-# Summary
-# -------------------------------------------------------
-
-if week_buys:
-    print("WEEK BUY")
-    print(", ".join(sorted(week_buys)))
-    print()
-
-if month_buys:
-    print("MONTH BUY")
-    print(", ".join(sorted(month_buys)))
-    print()
-
-if not week_buys and not month_buys:
+if df.empty:
     print("NOTHING TO REPORT!")
+else:
+    print()
+    print(df.to_string(index=False))
+    print()
