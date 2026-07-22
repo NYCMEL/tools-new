@@ -1,0 +1,21 @@
+{
+  "name": "stock-buy-signals",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Electron desktop app that detects weekly and monthly buy signals using Yahoo Finance data.",
+  "type": "module",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "check": "node --check main.js && node --check preload.js && node --check finance.js && node --check renderer.js"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "yahoo-finance2": "^4.0.0"
+  },
+  "devDependencies": {
+    "electron": "^43.2.0"
+  }
+}
