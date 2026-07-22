@@ -8,7 +8,7 @@ const errorPanel = document.querySelector("#errorPanel");
 const errorList = document.querySelector("#errorList");
 
 function money(value) {
-  return value === null ? "-" : value.toLocaleString("en-US", {
+  return value === null ? "-" : Number(value).toLocaleString("en-US", {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2
   });
@@ -16,14 +16,14 @@ function money(value) {
 
 function setLoading(loading) {
   refreshButton.disabled = loading;
-  refreshButton.classList.toggle("loading", loading);
+  refreshButton.setAttribute("aria-busy", String(loading));
   refreshButton.querySelector(".button-label").textContent = loading ? "Scanning" : "Refresh";
 }
 
 function renderRows(results) {
   resultsBody.replaceChildren();
 
-  if (results.length === 0) {
+  if (!Array.isArray(results) || results.length === 0) {
     const row = document.createElement("tr");
     row.className = "empty-row";
     const cell = document.createElement("td");
@@ -36,17 +36,17 @@ function renderRows(results) {
 
   for (const item of results) {
     const row = document.createElement("tr");
-    const values = [
-      { value: item.ticker, className: "ticker" },
-      { value: money(item.current), className: "numeric" },
-      { value: money(item.lastWeek), className: "numeric" },
-      { value: money(item.lastMonth), className: "numeric" }
+    const cells = [
+      [item.ticker, "ticker"],
+      [money(item.current), "numeric"],
+      [money(item.lastWeek), "numeric"],
+      [money(item.lastMonth), "numeric"]
     ];
 
-    for (const entry of values) {
+    for (const [value, className] of cells) {
       const cell = document.createElement("td");
-      cell.className = entry.className;
-      cell.textContent = entry.value;
+      cell.className = className;
+      cell.textContent = value;
       row.append(cell);
     }
 
@@ -64,36 +64,42 @@ function renderRows(results) {
 
 function renderErrors(errors) {
   errorList.replaceChildren();
-  errorPanel.hidden = errors.length === 0;
+  const safeErrors = Array.isArray(errors) ? errors : [];
+  errorPanel.hidden = safeErrors.length === 0;
 
-  for (const error of errors) {
+  for (const error of safeErrors) {
     const item = document.createElement("li");
     item.textContent = `${error.ticker}: ${error.message}`;
     errorList.append(item);
   }
 }
 
-async function scan() {
+async function runScan() {
   setLoading(true);
   statusText.textContent = "Scanning Yahoo Finance data...";
 
   try {
-    const payload = await window.stockApp.scan();
-    renderRows(payload.results);
-    renderErrors(payload.errors);
-    signalCount.textContent = String(payload.results.length);
-    scannedCount.textContent = String(payload.scanned);
-    updatedAt.textContent = new Date(payload.updatedAt).toLocaleString();
-    statusText.textContent = payload.results.length
+    if (!window.stockApp || typeof window.stockApp.runScan !== "function") {
+      throw new Error("Electron bridge failed to load. Reinstall dependencies and restart the app.");
+    }
+
+    const payload = await window.stockApp.runScan();
+    renderRows(payload?.results);
+    renderErrors(payload?.errors);
+    signalCount.textContent = String(payload?.results?.length ?? 0);
+    scannedCount.textContent = String(payload?.scanned ?? 0);
+    updatedAt.textContent = payload?.updatedAt ? new Date(payload.updatedAt).toLocaleString() : "-";
+    statusText.textContent = payload?.results?.length
       ? `${payload.results.length} buy signal${payload.results.length === 1 ? "" : "s"} found.`
       : "Scan completed. No buy signals found.";
   } catch (error) {
     renderRows([]);
+    renderErrors([]);
     statusText.textContent = `Scan failed: ${error instanceof Error ? error.message : String(error)}`;
   } finally {
     setLoading(false);
   }
 }
 
-refreshButton.addEventListener("click", scan);
-scan();
+refreshButton.addEventListener("click", runScan);
+runScan();

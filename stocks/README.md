@@ -1,36 +1,26 @@
 # Stock Buy Signals
 
-A standalone Electron desktop application that reproduces the supplied Python logic in JavaScript.
+Electron desktop application that reproduces the supplied Python logic in JavaScript.
 
 ## Requirements
 
 - Node.js 22 or newer
+- npm
 - Internet connection while scanning market data
 
 ## Install and run
 
-Open Terminal in this folder and run:
-
-```bash
-npm install
-npm start
-```
+1. Open Terminal in this folder.
+2. Run `npm install`.
+3. Run `npm start`.
 
 ## Logic
 
-For each ticker, the app downloads approximately four months of daily Yahoo Finance data and compares the latest closing price with:
+- Downloads four months of daily market data.
+- Compares the latest close with the previous completed week low.
+- Compares the latest close with the previous completed month low.
+- Displays only W, M, or WM buy signals.
 
-- the minimum low from the previous weekly period ending Friday
-- the minimum low from the previous calendar month
+## Important
 
-Signals:
-
-- `W`: current close is below the previous week's low
-- `M`: current close is below the previous month's low
-- `WM`: both conditions are true
-
-Only tickers with a buy signal are displayed. Results are sorted alphabetically.
-
-## Notes
-
-Yahoo Finance data is accessed through the unofficial `yahoo-finance2` package. Availability and data consistency are not guaranteed by Yahoo. This tool is informational and is not financial advice.
+Yahoo Finance is an unofficial data source and can occasionally throttle or reject requests. Individual ticker failures appear in the application error panel without stopping the remaining scan.

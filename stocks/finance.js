@@ -8,44 +8,47 @@ export const WATCHLIST = [
   "SPY", "TSLA", "UNH", "V", "SKHY"
 ];
 
-function startDateFourMonthsAgo() {
+function fourMonthsAgo() {
   const date = new Date();
   date.setUTCMonth(date.getUTCMonth() - 4);
   date.setUTCHours(0, 0, 0, 0);
   return date;
 }
 
-function dateOnly(value) {
+function normalizedDate(value) {
   const date = value instanceof Date ? value : new Date(value);
+  if (Number.isNaN(date.getTime())) return null;
   return new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()));
 }
 
 function weekEndingFridayKey(value) {
-  const date = dateOnly(value);
-  const day = date.getUTCDay();
-  const daysUntilFriday = (5 - day + 7) % 7;
+  const date = normalizedDate(value);
+  if (!date) return null;
+  const daysUntilFriday = (5 - date.getUTCDay() + 7) % 7;
   date.setUTCDate(date.getUTCDate() + daysUntilFriday);
   return date.toISOString().slice(0, 10);
 }
 
 function monthKey(value) {
-  const date = dateOnly(value);
+  const date = normalizedDate(value);
+  if (!date) return null;
   return `${date.getUTCFullYear()}-${String(date.getUTCMonth() + 1).padStart(2, "0")}`;
 }
 
 function previousPeriodLow(quotes, keyFunction) {
-  const grouped = new Map();
+  const lows = new Map();
 
   for (const quote of quotes) {
-    if (!quote?.date || !Number.isFinite(quote.low)) continue;
+    if (!quote || !Number.isFinite(quote.low)) continue;
     const key = keyFunction(quote.date);
-    const currentLow = grouped.get(key);
-    grouped.set(key, currentLow === undefined ? quote.low : Math.min(currentLow, quote.low));
+    if (!key) continue;
+    const existing = lows.get(key);
+    lows.set(key, existing === undefined ? quote.low : Math.min(existing, quote.low));
   }
 
-  const periods = [...grouped.keys()].sort();
+  const periods = [...lows.keys()].sort();
   if (periods.length < 2) return null;
-  return grouped.get(periods.at(-2)) ?? null;
+  return lows.get(periods[periods.length - 2]) ?? null;
 }
 
 function round2(value) {
@@ -54,26 +57,25 @@ function round2(value) {
 
 async function analyzeSymbol(symbol) {
   const chart = await yahooFinance.chart(symbol, {
-    period1: startDateFourMonthsAgo(),
+    period1: fourMonthsAgo(),
     period2: new Date(),
     interval: "1d",
     includePrePost: false,
     events: "div,splits"
   });
 
-  const quotes = (chart?.quotes ?? [])
-    .filter((quote) => quote?.date && Number.isFinite(quote.close))
-    .sort((a, b) => new Date(a.date) - new Date(b.date));
+  const quotes = Array.isArray(chart?.quotes)
+    ? chart.quotes
+        .filter((quote) => quote?.date && Number.isFinite(quote.close))
+        .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+    : [];
 
   if (quotes.length === 0) return null;
 
-  const current = quotes.at(-1).close;
+  const current = quotes[quotes.length - 1].close;
   const weekLow = previousPeriodLow(quotes, weekEndingFridayKey);
   const monthLow = previousPeriodLow(quotes, monthKey);
-
-  const weekBuy = weekLow !== null && current < weekLow;
-  const monthBuy = monthLow !== null && current < monthLow;
-  const buy = `${weekBuy ? "W" : ""}${monthBuy ? "M" : ""}`;
+  const buy = `${weekLow !== null && current < weekLow ? "W" : ""}${monthLow !== null && current < monthLow ? "M" : ""}`;
 
   return {
     ticker: symbol,

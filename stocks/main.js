@@ -15,24 +15,29 @@ function createWindow() {
     backgroundColor: "#f5f7fb",
     title: "Stock Buy Signals",
     webPreferences: {
-      preload: path.join(__dirname, "preload.js"),
+      preload: path.join(__dirname, "preload.cjs"),
       contextIsolation: true,
       nodeIntegration: false,
       sandbox: true
     }
   });
 
-  win.loadFile("index.html");
+  win.loadFile(path.join(__dirname, "index.html"));
 }
 
-ipcMain.handle("stocks:scan", async () => scanWatchlist());
+ipcMain.handle("stocks:scan", async () => {
+  try {
+    return await scanWatchlist();
+  } catch (error) {
+    throw new Error(error instanceof Error ? error.message : String(error));
+  }
+});
 
-app.whenReady().then(() => {
-  createWindow();
+await app.whenReady();
+createWindow();
 
-  app.on("activate", () => {
-    if (BrowserWindow.getAllWindows().length === 0) createWindow();
-  });
+app.on("activate", () => {
+  if (BrowserWindow.getAllWindows().length === 0) createWindow();
 });
 
 app.on("window-all-closed", () => {
