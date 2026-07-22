@@ -29,6 +29,7 @@ def scalar(value):
 
 
 def previous_week_low(df):
+    """Previous completed week's low."""
     x = df.copy()
     x.index = pd.to_datetime(x.index).tz_localize(None)
     x["Week"] = x.index.to_period("W-FRI")
@@ -43,6 +44,7 @@ def previous_week_low(df):
 
 
 def previous_month_low(df):
+    """Previous completed month's low."""
     x = df.copy()
     x.index = pd.to_datetime(x.index).tz_localize(None)
     x["Month"] = x.index.to_period("M")
@@ -56,9 +58,9 @@ def previous_month_low(df):
     )
 
 
+results = []
 week_buys = []
 month_buys = []
-results = []
 
 for symbol in WATCHLIST:
 
@@ -95,21 +97,26 @@ for symbol in WATCHLIST:
         if month_buy:
             month_buys.append(symbol)
 
+        buy = ""
+        if week_buy:
+            buy += "W"
+        if month_buy:
+            buy += "M"
+
         results.append({
             "Ticker": symbol,
             "Current": round(current, 2),
-            "Prev Week Low": round(float(week_low), 2) if week_low is not None else None,
-            "Prev Month Low": round(float(month_low), 2) if month_low is not None else None,
-            "Week Buy": "YES" if week_buy else "",
-            "Month Buy": "YES" if month_buy else ""
+            "Last-Week": round(float(week_low), 2) if week_low is not None else "",
+            "Last-Month": round(float(month_low), 2) if month_low is not None else "",
+            "Buy": buy
         })
 
     except Exception as e:
         print(f"{symbol}: {e}")
 
-# ---------------------------------------------------
+# -------------------------------------------------------
 # Results Table
-# ---------------------------------------------------
+# -------------------------------------------------------
 
 df = pd.DataFrame(results)
 df = df.sort_values("Ticker")
@@ -118,9 +125,9 @@ print()
 print(df.to_string(index=False))
 print()
 
-# ---------------------------------------------------
-# Buy Lists
-# ---------------------------------------------------
+# -------------------------------------------------------
+# Summary
+# -------------------------------------------------------
 
 if week_buys:
     print("WEEK BUY")
