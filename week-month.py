@@ -11,12 +11,15 @@ except Exception:
 import yfinance as yf
 import pandas as pd
 
+# "AAPL","AMD","AMZN","AVGO","BLK","CAT","GOOG","JPM","MMM","META","MRVL","MSFT","MU","NVDA","ORCL","PYPL","QQQ","SNOW","SPCX","SPY","TSLA","UNH","V","MA"
+
+
 WATCHLIST = [
-    "AAPL","AMD","AMZN","AVGO","BLK","CAT","GOOG","JPM","MMM","META","MRVL",
-    "MSFT","MU","NVDA","ORCL","PYPL","QQQ","SNOW","SPCX","SPY","TSLA","UNH","V","MA"
+    "AAPL","AFRM","AMD","AMZN","AVGO","AXP","BA","BLK","CAT","COIN","COP","COST","CVX","GD","GOOG","GS","HD","HOOD","JPM",
+    "LMT","MA","MCD","META","MRVL","MSFT","MU","NFLX","NOC","NVDA","ORCL","OXY","PYPL","QQQ","RTX","SHEL","SHW","SKHY",
+    "SNOW","SPCX","SPY","TSLA","UNH","V","XOM"
 ]
-
-
+    
 def scalar(value):
     """Return a native Python scalar."""
     try:
