@@ -91,11 +91,10 @@ for symbol in WATCHLIST:
 
         buy = ""
         if week_buy:
-            buy += "W"
+            buy = "W"
 
         if month_buy:
-            buy = ""
-            buy += "M"
+            buy = "M"
 
         results.append({
             "Ticker": symbol,
