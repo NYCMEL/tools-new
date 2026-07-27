@@ -94,6 +94,7 @@ for symbol in WATCHLIST:
             buy += "W"
 
         if month_buy:
+            buy = ""
             buy += "M"
 
         results.append({
@@ -118,7 +119,7 @@ df = pd.DataFrame(results)
 df = df[df["Buy"] != ""]
 
 # Sort W first, then M, then alphabetically by ticker
-buy_order = {"W": 0, "WM": 0, "M": 1}
+buy_order = {"W": 0, "M": 1}
 
 df["Sort"] = df["Buy"].map(buy_order)
 df = df.sort_values(["Sort", "Ticker"]).drop(columns=["Sort"])
