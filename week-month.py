@@ -12,7 +12,7 @@ import yfinance as yf
 import pandas as pd
 
 WATCHLIST = [
-    "AAPL","AMD","AMZN","AVGO","BLK","CAT","GOOG","GOOGL","JPM","MMM","META","MRVL",
+    "AAPL","AMD","AMZN","AVGO","BLK","CAT","GOOG","JPM","MMM","META","MRVL",
     "MSFT","MU","NVDA","ORCL","PYPL","QQQ","SNOW","SPCX","SPY","TSLA","UNH","V","SKHY"
 ]
 
