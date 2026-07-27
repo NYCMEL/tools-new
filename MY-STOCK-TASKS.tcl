@@ -242,7 +242,7 @@ foreach symbol $WATCHLIST {
 			     Last-Month $display_month \
 			     Buy $buy]
     } error_message options]} {
-        puts stderr "$symbol: $error_message"
+	#puts stderr "$symbol: $error_message"
     }
 }
 
