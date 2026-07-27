@@ -92,6 +92,7 @@ for symbol in WATCHLIST:
         buy = ""
         if week_buy:
             buy += "W"
+
         if month_buy:
             buy += "M"
 
@@ -116,8 +117,11 @@ df = pd.DataFrame(results)
 # Show only buy signals
 df = df[df["Buy"] != ""]
 
-# Sort alphabetically
-df = df.sort_values("Ticker")
+# Sort W first, then M, then alphabetically by ticker
+buy_order = {"W": 0, "WM": 0, "M": 1}
+
+df["Sort"] = df["Buy"].map(buy_order)
+df = df.sort_values(["Sort", "Ticker"]).drop(columns=["Sort"])
 
 if df.empty:
     print("NOTHING TO REPORT!")
