@@ -18,3 +18,5 @@ strategy: {
 }
 
 run s-1000
+
+create a basket from results with weights start with $5000 allocation table
