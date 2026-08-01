@@ -20,7 +20,7 @@ strategy:
 Output:
 Display only the qualifying stocks as a markdown table with these columns:
 
-| Price | Ticker | Company | Sector | Industry | 30-Day Change % |
+| Ticker | Price | Company | Sector | Industry | 30-Day Change % |
 
 Rules:
 - Use the latest available market price.
