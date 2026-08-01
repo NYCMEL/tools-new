@@ -1,8 +1,9 @@
 name: s-1000
 description: loss of 10% or more
 strategy: {
-    td = top 20 dow performers
-    tn = top 20 nsadaq performers
+
+    td = Top 20 DOW performers over the last 12 months
+    tn = Top 20 NASDAQ-100 performers over the last 12 months
 
     t = create a single list with no duplicates freom td & tn
 
