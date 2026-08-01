@@ -8,7 +8,10 @@ strategy: {
 
     r = find all tickers in t whose value dropped by 10% or more over the past month
 
-    show r
+    for each r {
+      show:
+      ticker, name, price, %loss
+    }
 }
 
 run s-1000
