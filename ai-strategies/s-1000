@@ -19,5 +19,3 @@ strategy: {
 
 run s-1000 30
 
-
-explain why do i get different results if i run s-1000 several times?
