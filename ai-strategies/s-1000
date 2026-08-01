@@ -6,6 +6,8 @@ strategy: {
 
     t = unique(tspy ∪ tqqq)
 
+    show coma separated t
+
     r = find all tickers in t whose value dropped by 10% or more over the past month
 
     for each r {
