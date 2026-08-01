@@ -9,8 +9,8 @@ strategy: {
 
     selection criteria
 
+    for each ticker in t,
     PRINT
-    each ticker in t,
     current price,
     sector,
     if in the past 30 days they lost more than 10% in value,
