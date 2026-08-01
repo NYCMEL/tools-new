@@ -4,12 +4,9 @@ strategy: {
     tspy = Top 20 SPY constituents ranked by year-to-date (YTD) performance.
     tqqq = Top 20 QQQ constituents ranked by year-to-date (YTD) performance.
 
-    show a single list of tspy & tqqq
-
     t = unique(tspy ∪ tqqq)
-    show t
 
-    find all tickers whose value dropped by 10% or more over the past month
+    find all tickers in t whose value dropped by 10% or more over the past month
 }
 
 run s-1000
