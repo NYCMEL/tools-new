@@ -6,7 +6,9 @@ strategy: {
 
     t = unique(tspy ∪ tqqq)
 
-    find all tickers in t whose value dropped by 10% or more over the past month
+    r = find all tickers in t whose value dropped by 10% or more over the past month
+
+    show r
 }
 
 run s-1000
