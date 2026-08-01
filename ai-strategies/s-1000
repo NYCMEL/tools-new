@@ -2,7 +2,7 @@ name: s-1000
 description: loss of 10% or more
 strategy: {
     td = top <n> dow performers in past year
-    tn = top <n>n nsadaq performers in past year
+    tn = top <n>n nsadaq performers in Previous 12 months
 
     t = create a single list with no duplicates freom td & tn
 
@@ -11,11 +11,13 @@ strategy: {
     PRINT
     each ticker in t,
     current price
-    industry,
-    expanded name only if in the past 30 days they lost more than 10% in value,
-    %loss,
+    sector
+    industry
+    expanded name only if in the past 30 trading days they lost more than 10% in value,
+    %loss
 }
 
-run s-1000 20
+run s-1000 30
 
-explain where the information was pulled from
+
+explain why do i get different results if i run s-1000 several times?
