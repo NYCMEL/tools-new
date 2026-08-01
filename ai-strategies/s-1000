@@ -1,21 +1,38 @@
-name: s-1000
-description: loss of 10% or more
-strategy: {
-    td = top <n> dow performers in past year
-    tn = top <n>n nsadaq performers in Previous 12 months
+name: S-1000
 
-    t = create a single list with no duplicates freom td & tn
+description:
+Find stocks that were among the strongest performers over the past year but have recently experienced a significant pullback.
 
-    selection criteria
+parameters:
+    n = number of top performers to evaluate from each index
 
-    PRINT
-    each ticker in t,
-    current price
-    sector
-    industry
-    expanded name only if in the past 30 trading days they lost more than 10% in value,
-    %loss
-}
+strategy:
 
-run s-1000 30
+1. Retrieve the Top <n> performing stocks from the Dow Jones Industrial Average over the previous 12 months.
+2. Retrieve the Top <n> performing stocks from the Nasdaq over the previous 12 months.
+3. Merge both lists into a single universe.
+4. Remove duplicate tickers.
+5. For each stock in the merged universe:
+    - Calculate the percentage change over the most recent 30 trading days.
+    - Keep only stocks whose 30-trading-day return is less than or equal to -10%.
+6. Sort the remaining stocks by largest percentage loss (largest decline first).
 
+Output:
+Display only the qualifying stocks as a markdown table with these columns:
+
+| Price | Ticker | Company | Sector | Industry | 30-Day Change % |
+
+Rules:
+- Use the latest available market price.
+- Company names must be the full legal company name.
+- Sector and Industry must use the current GICS classification.
+- Display prices with two decimal places.
+- Display percentage changes with two decimal places.
+- Do not display stocks that fail the filter.
+- If no stocks qualify, print exactly:
+
+"No qualifying stocks found."
+
+Example:
+
+run S-1000 30
