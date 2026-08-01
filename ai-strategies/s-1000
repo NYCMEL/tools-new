@@ -11,13 +11,10 @@ strategy: {
 
     PRINT
     each ticker in t,
+    current price,
     sector,
-    industry,
-    expanded name only if in the past 30 days they lost more than 10% in value,
-    %loss
-    current price
+    if in the past 30 days they lost more than 10% in value,
+    %loss,
 }
 
 run s-1000
-
-#explain where the information was pulled from
