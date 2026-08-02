@@ -1,0 +1,20 @@
+Every trading day at 9:45am & 4:15pm , scan all companies in the Nasdaq-100 and the Dow Jones Industrial Average.
+
+Rank stocks by Year-to-Date (YTD) performance.
+Select the top 5 best-performing stocks from each index.
+Remove any duplicate stocks that appear in both lists.
+From the remaining stocks, identify only those that have declined at least 10% during the last 30 calendar days.
+For each qualifying stock, provide:
+Company name
+Ticker symbol
+Current stock price
+YTD return (%)
+30-day return (%)
+Percentage below its 30-day high
+Average daily trading volume
+Market capitalization
+Brief explanation (2–3 sentences) for the recent decline
+Upcoming earnings date (if applicable)
+Whether the stock still has a bullish long-term trend based on the 50-day and 200-day moving averages
+
+Finally, rank the qualifying stocks from most attractive to least attractive as potential pullback opportunities, and explain the reasoning behind the ranking.
