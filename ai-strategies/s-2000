@@ -1,4 +1,6 @@
-TASK NAME: Market Pullback Screen
+#########################################################################################################
+TASK NAME: Market-Pullback-Screen
+#########################################################################################################
 
 Every trading day at 9:45am & 4:15pm, scan all companies in the Nasdaq-100 and the Dow Jones Industrial Average.
 
@@ -18,3 +20,55 @@ Upcoming earnings date (if applicable)
 Whether the stock still has a bullish long-term trend based on the 50-day and 200-day moving averages
 
 Finally, rank the qualifying stocks from most attractive to least attractive as potential pullback opportunities, and explain the reasoning behind the ranking.
+
+#########################################################################################################
+alias MY-STOCK-TASKS:
+#########################################################################################################
+"
+If the U.S. stock market is open:
+
+Run this task twice each trading day:
+• 9:45 AM Eastern Time
+• 4:15 PM Eastern Time
+
+Definitions
+- Current Price = latest available market price.
+- Previous Week Low = the lowest daily low from the previous completed trading week (Monday through Friday).
+- Previous Month Low = the lowest daily low from the previous completed calendar month.
+
+Watchlist
+    AAPL AFRM AMAT AMD AMZN ARM AVGO AXP BA BLK CAT COIN COP COST CSCO CVX GD
+    GOOG GS HD HOOD INTC JNJ JPM KO LMT MA MCD META MRK MRVL MSFT MU NBIS NFLX
+    NOC NVDA ORCL OXY PYPL QQQ RTX SHEL SHW SKHY SNDK SNOW SPCX SPY STX TRV
+    TSLA UNH V WDC XOM
+
+For each symbol:
+
+1. Compare the Current Price with the Previous Month Low.
+   - If Current Price is below the Previous Month Low, assign:
+     MONTH BUY
+
+2. Otherwise, compare the Current Price with the Previous Week Low.
+   - If Current Price is below the Previous Week Low, assign: WEEK BUY
+
+Output Rules
+- MONTH BUY takes precedence over WEEK BUY for the same symbol.
+- Show only symbols that generated a BUY signal.
+- Display the following columns:
+  - Ticker
+  - Current
+  - Last-Week
+  - Last-Month
+  - Buy
+- If Buy = MONTH BUY:
+  - Leave Last-Week blank.
+  - Display only Last-Month.
+- If Buy = WEEK BUY:
+  - Leave Last-Month blank.
+  - Display only Last-Week.
+- Sort the results alphabetically by ticker.
+- Round all price values to two decimal places.
+- If no symbols generate a BUY signal, output exactly: NOTHING TO REPORT!
+
+group results with 'Week Buy' followed by 'Month Buy'
+"
