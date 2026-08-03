@@ -2,7 +2,7 @@
 TASK NAME: Market-Pullback-Screen
 #########################################################################################################
 
-Every trading day at 9:45am & 4:15pm, scan all companies in the Nasdaq-100 and the Dow Jones Industrial Average.
+scan all companies in the Nasdaq-100 and the Dow Jones Industrial Average.
 
 Rank stocks by Year-to-Date (YTD) performance.
 Select the top 10 best-performing stocks from each index.
