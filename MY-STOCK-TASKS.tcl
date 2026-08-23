@@ -10,6 +10,8 @@ set WATCHLIST {
     TSLA UNH V WDC XOM
 }
 
+set MIN_DIFF_PERCENT 2.0
+
 proc require_command {name} {
     if {[auto_execok $name] eq ""} {
         error "Required command not found: $name"
@@ -21,30 +23,30 @@ proc yahoo_rows {symbol} {
     set url "https://query1.finance.yahoo.com/v8/finance/chart/${encoded}?range=4mo&interval=1d&events=history&includeAdjustedClose=false"
 
     set json [exec curl \
-		  --fail \
-		  --silent \
-		  --show-error \
-		  --location \
-		  --retry 3 \
-		  --connect-timeout 15 \
-		  --max-time 45 \
-		  --user-agent "Mozilla/5.0 MY-STOCK-TASKS/1.0" \
-		  $url]
+          --fail \
+          --silent \
+          --show-error \
+          --location \
+          --retry 3 \
+          --connect-timeout 15 \
+          --max-time 45 \
+          --user-agent "Mozilla/5.0 MY-STOCK-TASKS/1.0" \
+          $url]
 
     set jq_filter {
         .chart.result[0] as $r
         | if $r == null then empty else
-	[range(0; ($r.timestamp | length))
-	 | {
-	     timestamp: $r.timestamp[.],
-	     low: $r.indicators.quote[0].low[.],
-	     close: $r.indicators.quote[0].close[.]
-	 }
-	 | select(.timestamp != null and .low != null and .close != null)
-	 | [.timestamp, .low, .close]
-	 | @tsv]
-	| .[]
-	end
+    [range(0; ($r.timestamp | length))
+     | {
+         timestamp: $r.timestamp[.],
+         low: $r.indicators.quote[0].low[.],
+         close: $r.indicators.quote[0].close[.]
+     }
+     | select(.timestamp != null and .low != null and .close != null)
+     | [.timestamp, .low, .close]
+     | @tsv]
+    | .[]
+    end
     }
 
     set tsv [exec jq -r $jq_filter << $json]
@@ -61,16 +63,15 @@ proc yahoo_rows {symbol} {
         }
 
         lappend rows [dict create \
-			  timestamp [expr {wide($timestamp)}] \
-			  low [expr {double($low)}] \
-			  close [expr {double($close)}]]
+              timestamp [expr {wide($timestamp)}] \
+              low [expr {double($low)}] \
+              close [expr {double($close)}]]
     }
 
     return $rows
 }
 
 proc week_key {timestamp} {
-    # Monday-based trading-week key in U.S. Eastern time.
     set weekday [clock format $timestamp -timezone America/New_York -format %u]
     set monday [clock add $timestamp [expr {1 - $weekday}] days]
     return [clock format $monday -timezone America/New_York -format %Y-%m-%d]
@@ -152,14 +153,21 @@ proc format_price {value} {
     return [format %.2f $value]
 }
 
+proc percent_below {current reference} {
+    if {$reference eq "" || $reference <= 0} {
+        return 0.0
+    }
+    return [expr {(($reference - $current) / $reference) * 100.0}]
+}
+
 proc print_results {results} {
     if {[llength $results] == 0} {
         puts "NOTHING TO REPORT!"
         return
     }
 
-    set headers {Ticker Current Last-Week Last-Month Buy}
-    set widths [dict create Ticker 6 Current 7 Last-Week 9 Last-Month 10 Buy 3]
+    set headers {Ticker Current Last-Week Last-Month Diff% Buy}
+    set widths [dict create Ticker 6 Current 7 Last-Week 9 Last-Month 10 Diff% 5 Buy 3]
 
     foreach row $results {
         foreach header $headers {
@@ -171,23 +179,25 @@ proc print_results {results} {
         }
     }
 
-    set format_string [format "%%-%ds  %%%ds  %%%ds  %%%ds  %%-%ds" \
-			   [dict get $widths Ticker] \
-			   [dict get $widths Current] \
-			   [dict get $widths Last-Week] \
-			   [dict get $widths Last-Month] \
-			   [dict get $widths Buy]]
+    set format_string [format "%%-%ds  %%%ds  %%%ds  %%%ds  %%%ds  %%-%ds" \
+               [dict get $widths Ticker] \
+               [dict get $widths Current] \
+               [dict get $widths Last-Week] \
+               [dict get $widths Last-Month] \
+               [dict get $widths Diff%] \
+               [dict get $widths Buy]]
 
     puts ""
     puts [format $format_string {*}$headers]
 
     foreach row $results {
         puts [format $format_string \
-		  [dict get $row Ticker] \
-		  [dict get $row Current] \
-		  [dict get $row Last-Week] \
-		  [dict get $row Last-Month] \
-		  [dict get $row Buy]]
+          [dict get $row Ticker] \
+          [dict get $row Current] \
+          [dict get $row Last-Week] \
+          [dict get $row Last-Month] \
+          [dict get $row Diff%] \
+          [dict get $row Buy]]
     }
     puts ""
 }
@@ -223,27 +233,34 @@ foreach symbol $WATCHLIST {
         set week_buy [expr {$week_low ne "" && $current < $week_low}]
         set month_buy [expr {$month_low ne "" && $current < $month_low}]
 
-        # Month Buy takes precedence over Week Buy.
         if {$month_buy} {
             set buy M
+            set reference_price $month_low
             set display_week ""
             set display_month [format_price $month_low]
         } elseif {$week_buy} {
             set buy W
+            set reference_price $week_low
             set display_week [format_price $week_low]
             set display_month ""
         } else {
             continue
         }
 
+        set diff_percent [percent_below $current $reference_price]
+        if {$diff_percent < $MIN_DIFF_PERCENT} {
+            continue
+        }
+
         lappend results [dict create \
-			     Ticker $symbol \
-			     Current [format_price $current] \
-			     Last-Week $display_week \
-			     Last-Month $display_month \
-			     Buy $buy]
+                 Ticker $symbol \
+                 Current [format_price $current] \
+                 Last-Week $display_week \
+                 Last-Month $display_month \
+                 Diff% [format %.2f $diff_percent] \
+                 Buy $buy]
     } error_message options]} {
-	#puts stderr "$symbol: $error_message"
+        #puts stderr "$symbol: $error_message"
     }
 }
 
