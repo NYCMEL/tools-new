@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Flip Clock</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --background: #000;
+      --digit: #999;
+      --card-top: #151515;
+      --card-bottom: #0d0d0d;
+      --divider: #000;
+      --gap: clamp(0.5rem, 2vw, 2rem);
+      --radius: clamp(0.45rem, 1.1vw, 1.25rem);
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+      background: var(--background);
+    }
+
+    body {
+      display: grid;
+      place-items: center;
+      font-family: Arial, Helvetica, sans-serif;
+      user-select: none;
+    }
+
+    .clock {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--gap);
+      width: 100vw;
+      height: 100vh;
+      padding: clamp(0.75rem, 3vw, 3rem);
+    }
+
+    .pair {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: clamp(0.3rem, 1vw, 1rem);
+      width: min(39vw, 46vh);
+    }
+
+    .digit {
+      position: relative;
+      aspect-ratio: 0.58;
+      overflow: hidden;
+      border-radius: var(--radius);
+      background: linear-gradient(to bottom, var(--card-top) 0 49.7%, var(--divider) 49.7% 50.3%, var(--card-bottom) 50.3% 100%);
+      color: var(--digit);
+      box-shadow: inset 0 1px 0 rgb(255 255 255 / 7%), 0 1.2vw 3vw rgb(0 0 0 / 70%);
+      perspective: 1200px;
+    }
+
+    .number,
+    .flap {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      font-size: min(24vw, 63vh);
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+      line-height: 1;
+      letter-spacing: -0.055em;
+      padding-right: 0.055em;
+    }
+
+    .flap {
+      z-index: 3;
+      height: 50%;
+      overflow: hidden;
+      background: var(--card-top);
+      transform-origin: bottom;
+      backface-visibility: hidden;
+    }
+
+    .number { transform: scaleX(0.82); }
+
+    .flap > span {
+      position: absolute;
+      inset: 0 0 -100%;
+      display: grid;
+      place-items: center;
+      font-size: inherit;
+      font-weight: inherit;
+      line-height: inherit;
+      letter-spacing: inherit;
+      padding-right: 0.055em;
+      transform: scaleX(0.82);
+    }
+
+    .digit.flip .flap { animation: flip 620ms cubic-bezier(.35, .05, .2, 1); }
+
+    @keyframes flip {
+      0% { transform: rotateX(0); filter: brightness(1); }
+      49% { transform: rotateX(-90deg); filter: brightness(.55); }
+      50% { transform: rotateX(90deg); filter: brightness(.55); }
+      100% { transform: rotateX(0); filter: brightness(1); }
+    }
+
+    .colon {
+      color: var(--digit);
+      font-size: clamp(5rem, 12vw, 14rem);
+      font-weight: 700;
+      line-height: 1;
+      transform: translateY(-3%);
+      animation: pulse 2s steps(1) infinite;
+    }
+
+    @keyframes pulse { 50% { opacity: .28; } }
+
+    @media (orientation: portrait) {
+      .clock { gap: clamp(.35rem, 2vw, 1rem); }
+      .pair { width: 40vw; }
+      .digit { aspect-ratio: 0.68; }
+      .number, .flap { font-size: min(27vw, 31vh); }
+      .colon { font-size: clamp(4rem, 12vw, 9rem); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .digit.flip .flap, .colon { animation: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="clock" aria-label="Current time">
+    <section class="pair" aria-label="Hours">
+      <div class="digit"><span class="number">0</span><span class="flap" aria-hidden="true"><span>0</span></span></div>
+      <div class="digit"><span class="number">0</span><span class="flap" aria-hidden="true"><span>0</span></span></div>
+    </section>
+    <div class="colon" aria-hidden="true">:</div>
+    <section class="pair" aria-label="Minutes">
+      <div class="digit"><span class="number">0</span><span class="flap" aria-hidden="true"><span>0</span></span></div>
+      <div class="digit"><span class="number">0</span><span class="flap" aria-hidden="true"><span>0</span></span></div>
+    </section>
+  </main>
+
+  <script>
+    const clock = document.querySelector('.clock');
+    const digits = [...document.querySelectorAll('.digit')];
+    let shown = '';
+
+    function updateClock() {
+      const now = new Date();
+      const next = String(now.getHours()).padStart(2, '0') + String(now.getMinutes()).padStart(2, '0');
+
+      digits.forEach((digit, index) => {
+        const number = digit.querySelector('.number');
+        const flapNumber = digit.querySelector('.flap span');
+        if (shown && shown[index] !== next[index]) {
+          flapNumber.textContent = shown[index];
+          digit.classList.remove('flip');
+          void digit.offsetWidth;
+          digit.classList.add('flip');
+          setTimeout(() => { number.textContent = next[index]; }, 310);
+        } else {
+          number.textContent = next[index];
+          flapNumber.textContent = next[index];
+        }
+      });
+
+      shown = next;
+      clock.setAttribute('aria-label', `Current time ${now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`);
+    }
+
+    updateClock();
+    setInterval(updateClock, 1000);
+  </script>
+</body>
+</html>
