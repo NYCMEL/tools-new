@@ -11,9 +11,6 @@ except Exception:
 import yfinance as yf
 import pandas as pd
 
-# "AAPL","AMD","AMZN","AVGO","BLK","CAT","GOOG","JPM","MMM","META","MRVL","MSFT","MU","NVDA","ORCL","PYPL","QQQ","SNOW","SPCX","SPY","TSLA","UNH","V","MA"
-
-
 WATCHLIST = [
     "AAPL", "AFRM", "AMAT", "AMD", "AMZN", "ARM", "AVGO", "AXP", "BA", "BLK",
     "CAT", "COIN", "COP", "COST", "CSCO", "CVX", "GD", "GOOG", "GS", "HD",
