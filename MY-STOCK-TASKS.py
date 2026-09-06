@@ -15,11 +15,12 @@ import pandas as pd
 
 
 WATCHLIST = [
-    "AAPL", "AFRM", "AMAT", "AMD", "AMZN", "ARM", "AVGO", "AXP", "BA", "BLK", "CAT", "COIN", "COP", "COST", "CSCO", "CVX", "GD",
-    "GOOG", "GS", "HD", "HOOD", "INTC", "JNJ", "JPM", "KO", "LMT", "MA", "MCD", "META", "MRK", "MRVL", "MSFT", "MU", "NBIS", "NFLX",
-    "NOC", "NVDA", "ORCL", "OXY", "PYPL", "QQQ", "RTX", "SHEL", "SHW", "SKHY", "SNDK", "SNOW", "SPCX", "SPY", "STX", "TRV",
-    "TSLA", "UNH", "V", "WDC", "XOM"
-]
+    "AAPL", "AFRM", "AMAT", "AMD", "AMZN", "ARM", "AVGO", "AXP", "BA", "BLK",
+    "CAT", "COIN", "COP", "COST", "CSCO", "CVX", "GD", "GOOG", "GS", "HD",
+    "HOOD", "INTC", "JNJ", "JPM", "KO", "LMT", "MA", "MCD", "META", "MRK",
+    "MRVL", "MSFT", "MU", "NBIS", "NFLX", "NOC", "NVDA", "ORCL", "OXY", "PYPL",
+    "QQQ", "RTX", "SHEL", "SHW", "SKHY", "SNDK", "SNOW", "SPCX", "SPY", "STX",
+    "TRV", "TSLA", "UNH", "V", "WDC", "XOM"
     
 def scalar(value):
     """Return a native Python scalar."""
