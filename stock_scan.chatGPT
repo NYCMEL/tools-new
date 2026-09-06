@@ -1,0 +1,98 @@
+Act as a professional stock pullback scanner. Use current, reliable market data and adjusted daily prices.
+
+Analyze this watchlist:
+
+AAPL, ABNB, ADI, AFRM, ALAB, AMAT, AMD, AMGN, AMZN, ARM, ASML, AVGO, AXP, BA, BKR, BLK, CAT, COIN, COP, COST, CRWD, CSCO, CSX, CVX, DDOG, DXCM, FANG, FTNT, GD, GOOG, GOOGL, GS, HD, HON, HOOD, INTC, JNJ, JPM, KLAC, KO, LITE, LMT, LRCX, MA, MCD, META, MMM, MPWR, MRK, MRVL, MSFT, MU, NBIS, NFLX, NOC, NVDA, ORCL, OXY, PANW, PYPL, QQQ, RTX, SHEL, SHW, SKHY, SNDK, SNOW, SPCX, SPY, STX, TER, TRV, TSLA, TXN, UNH, V, WDC, XOM.
+
+BUY SIGNAL RULES
+
+1. WEEK BUY:
+   Flag a stock when its latest adjusted closing price is below the lowest adjusted price from the previous completed trading week.
+
+2. MONTH BUY:
+   Flag a stock when its latest adjusted closing price is below the lowest adjusted price from the previous completed calendar month.
+
+3. A stock may qualify for both WEEK BUY and MONTH BUY. Show both signals separately.
+
+4. Do not include stocks that do not qualify for either signal.
+
+RECOVERY ANALYSIS
+
+For every qualifying stock:
+
+1. Use five years of adjusted daily price history.
+
+2. Define the recovery target as the highest adjusted closing price during the most recent 20 trading sessions.
+
+3. Calculate the current drawdown:
+
+(Current Price ÷ Recovery Target − 1) × 100
+
+4. Find comparable historical pullbacks for the same stock.
+
+5. A comparable pullback should have a drawdown similar to the current drawdown. Use a tolerance equal to the greater of:
+
+* 1.5 percentage points
+* 35% of the current drawdown magnitude
+
+6. Count only the first day of each separate pullback episode. Do not count multiple days from the same decline as separate analogs.
+
+7. Determine whether each comparable decline recovered to its previous 20-session high within 40 trading days, approximately eight weeks.
+
+8. Calculate:
+
+* Estimated recovery time from 1 to 8 weeks, based on the median recovery time among successful comparable cases
+* Probability of recovery within eight weeks
+* Number of comparable historical analogs
+* Confidence level
+* Current drawdown percentage
+* Recovery target price
+
+CONFIDENCE RULES
+
+* HIGH: At least eight analogs and at least a 65% recovery probability
+* MEDIUM: At least three analogs and at least a 45% recovery probability
+* LOW: Anything below those requirements
+* INSUFFICIENT HISTORY: No usable comparable cases
+
+RESULTS TABLE
+
+Display only qualifying stocks using these columns:
+
+| Signal | Ticker | Current Price | Estimated Recovery | 8-Week Probability | Analogs | Confidence | Drawdown | Recovery Target |
+
+Sort results in this order:
+
+1. WEEK BUY
+2. MONTH BUY
+3. Within each group, highest recovery probability first
+4. If probabilities are equal, shortest estimated recovery first
+
+Use separate rows when a stock qualifies for both signals.
+
+After the table, provide a short plain-English interpretation for each qualifying stock. Clearly identify signals that are strong, moderate, or weak.
+
+PDF REQUIREMENT
+
+Create a clean, downloadable landscape PDF containing:
+
+* Report title
+* Date and time generated
+* Complete results table
+* Plain-English interpretations
+* Page numbers
+* The following disclaimer:
+
+“Historical recovery estimates are informational only. They are not guarantees, predictions, or investment advice.”
+
+If no stocks qualify, display “NOTHING TO REPORT!” and still create the PDF.
+
+DATA REQUIREMENTS
+
+* Use the most recent available completed trading-day data.
+* Use adjusted prices to account for stock splits and dividends.
+* Identify the market-data source and its latest data date.
+* Do not invent unavailable prices or estimates.
+* Clearly mark missing or insufficient data.
+* Do not describe a 52% probability as a strong signal.
+* Make clear that estimated recovery time applies only to historical cases that successfully recovered.
