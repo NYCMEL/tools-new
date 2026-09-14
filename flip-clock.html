@@ -1,180 +1,275 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Flip Clock</title>
-  <style>
-    :root {
-      color-scheme: dark;
-      --background: #000;
-      --digit: #999;
-      --card-top: #151515;
-      --card-bottom: #0d0d0d;
-      --divider: #000;
-      --gap: clamp(0.5rem, 2vw, 2rem);
-      --radius: clamp(0.45rem, 1.1vw, 1.25rem);
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+<title>Flip Clock</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    background: #000000;
+    overflow: hidden;
+    font-family: Arial, Helvetica, sans-serif;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: max(18px, env(safe-area-inset-top)) max(18px, env(safe-area-inset-right)) max(18px, env(safe-area-inset-bottom)) max(18px, env(safe-area-inset-left));
+  }
+  .clock {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3vh 3vw;
+  }
+  .time {
+    position: relative;
+    width: max-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5vw;
+  }
+  .pair {
+    display: flex;
+    gap: 1.2vw;
+  }
+  .colon {
+    color: #272323;
+    font-size: clamp(52px, 8vw, 120px);
+    font-weight: 900;
+    line-height: 1;
+    transform: translateY(-1vh);
+  }
+  .flip {
+    position: relative;
+    width: min(20vw, 260px);
+    height: min(35vw, 430px);
+    max-height: 68vh;
+    perspective: 1000px;
+  }
+  .card {
+    position: absolute;
+    inset: 0;
+    border-radius: 7%;
+    overflow: hidden;
+    background:
+      linear-gradient(to bottom, rgba(255,255,255,.03), rgba(0,0,0,.18)),
+      #252122;
+    box-shadow:
+      inset 0 0 28px rgba(255,255,255,.025),
+      inset 0 -28px 38px rgba(0,0,0,.24),
+      0 10px 24px rgba(0,0,0,.24);
+  }
+  .half {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    overflow: hidden;
+    background:
+      linear-gradient(to bottom, rgba(255,255,255,.04), rgba(0,0,0,.06)),
+      #282425;
+  }
+  .top { top: 0; border-radius: 7% 7% 0 0; }
+  .bottom { bottom: 0; border-radius: 0 0 7% 7%; }
+  .digit {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 200%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #f4f0e8;
+    font-family: "Arial Black", Impact, Arial, sans-serif;
+    font-size: min(31vw, 380px);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -0.06em;
+    text-shadow: 0 2px 0 rgba(255,255,255,.1);
+  }
+  .top .digit { top: 0; }
+  .bottom .digit { bottom: 0; }
+  .divider {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: 1.2%;
+    transform: translateY(-50%);
+    background: rgba(10,10,10,.65);
+    box-shadow: 0 -1px 0 rgba(255,255,255,.08), 0 2px 5px rgba(0,0,0,.65);
+    z-index: 5;
+  }
+  .hinge {
+    position: absolute;
+    top: 50%;
+    width: 9%;
+    height: 15%;
+    transform: translateY(-50%);
+    border-radius: 45%;
+    z-index: 6;
+    background: linear-gradient(to right, #111, #9a9696 42%, #eee 50%, #8c8889 58%, #111);
+    box-shadow: 0 3px 8px rgba(0,0,0,.65);
+  }
+  .hinge.left { left: 4.5%; }
+  .hinge.right { right: 4.5%; }
+
+  .flap {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    overflow: hidden;
+    z-index: 4;
+    backface-visibility: hidden;
+    background: #282425;
+  }
+  .flap.top {
+    top: 0;
+    transform-origin: bottom;
+    border-radius: 7% 7% 0 0;
+  }
+  .flap.bottom {
+    bottom: 0;
+    transform-origin: top;
+    border-radius: 0 0 7% 7%;
+    transform: rotateX(90deg);
+  }
+  .flap.top .digit { top: 0; }
+  .flap.bottom .digit { bottom: 0; }
+
+  .flip.animating .flap.top { animation: flipTop .28s ease-in forwards; }
+  .flip.animating .flap.bottom { animation: flipBottom .28s .28s ease-out forwards; }
+
+  @keyframes flipTop {
+    from { transform: rotateX(0deg); }
+    to { transform: rotateX(-90deg); }
+  }
+  @keyframes flipBottom {
+    from { transform: rotateX(90deg); }
+    to { transform: rotateX(0deg); }
+  }
+
+  .ampm {
+    position: absolute;
+    left: calc(100% + 3vw);
+    top: 50%;
+    transform: translateY(-50%);
+    min-width: 6ch;
+    text-align: center;
+    font-size: clamp(18px, 2vw, 30px);
+    font-weight: 700;
+    color: #262222;
+    margin-left: 1vw;
+  }
+
+  @media (orientation: portrait) {
+    .time { gap: 1vw; }
+    .pair { gap: .8vw; }
+    .flip {
+      width: 20vw;
+      height: 34vw;
     }
-
-    * { box-sizing: border-box; }
-
-    html, body {
-      width: 100%;
-      height: 100%;
-      margin: 0;
-      overflow: hidden;
-      background: var(--background);
-    }
-
-    body {
-      display: grid;
-      place-items: center;
-      font-family: Arial, Helvetica, sans-serif;
-      user-select: none;
-    }
-
-    .clock {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: var(--gap);
-      width: 100vw;
-      height: 100vh;
-      padding: clamp(0.75rem, 3vw, 3rem);
-    }
-
-    .pair {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: clamp(0.3rem, 1vw, 1rem);
-      width: min(39vw, 46vh);
-    }
-
-    .digit {
-      position: relative;
-      aspect-ratio: 0.58;
-      overflow: hidden;
-      border-radius: var(--radius);
-      background: linear-gradient(to bottom, var(--card-top) 0 49.7%, var(--divider) 49.7% 50.3%, var(--card-bottom) 50.3% 100%);
-      color: var(--digit);
-      box-shadow: inset 0 1px 0 rgb(255 255 255 / 7%), 0 1.2vw 3vw rgb(0 0 0 / 70%);
-      perspective: 1200px;
-    }
-
-    .number,
-    .flap {
-      position: absolute;
-      inset: 0;
-      display: grid;
-      place-items: center;
-      font-size: min(24vw, 63vh);
-      font-weight: 700;
-      font-variant-numeric: tabular-nums;
-      line-height: 1;
-      letter-spacing: -0.055em;
-      padding-right: 0.055em;
-    }
-
-    .flap {
-      z-index: 3;
-      height: 50%;
-      overflow: hidden;
-      background: var(--card-top);
-      transform-origin: bottom;
-      backface-visibility: hidden;
-    }
-
-    .number { transform: scaleX(0.82); }
-
-    .flap > span {
-      position: absolute;
-      inset: 0 0 -100%;
-      display: grid;
-      place-items: center;
-      font-size: inherit;
-      font-weight: inherit;
-      line-height: inherit;
-      letter-spacing: inherit;
-      padding-right: 0.055em;
-      transform: scaleX(0.82);
-    }
-
-    .digit.flip .flap { animation: flip 620ms cubic-bezier(.35, .05, .2, 1); }
-
-    @keyframes flip {
-      0% { transform: rotateX(0); filter: brightness(1); }
-      49% { transform: rotateX(-90deg); filter: brightness(.55); }
-      50% { transform: rotateX(90deg); filter: brightness(.55); }
-      100% { transform: rotateX(0); filter: brightness(1); }
-    }
-
-    .colon {
-      color: var(--digit);
-      font-size: clamp(5rem, 12vw, 14rem);
-      font-weight: 700;
-      line-height: 1;
-      transform: translateY(-3%);
-      animation: pulse 2s steps(1) infinite;
-    }
-
-    @keyframes pulse { 50% { opacity: .28; } }
-
-    @media (orientation: portrait) {
-      .clock { gap: clamp(.35rem, 2vw, 1rem); }
-      .pair { width: 40vw; }
-      .digit { aspect-ratio: 0.68; }
-      .number, .flap { font-size: min(27vw, 31vh); }
-      .colon { font-size: clamp(4rem, 12vw, 9rem); }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .digit.flip .flap, .colon { animation: none; }
-    }
-  </style>
+    .colon { font-size: 8vw; }
+  }
+</style>
 </head>
 <body>
-  <main class="clock" aria-label="Current time">
-    <section class="pair" aria-label="Hours">
-      <div class="digit"><span class="number">0</span><span class="flap" aria-hidden="true"><span>0</span></span></div>
-      <div class="digit"><span class="number">0</span><span class="flap" aria-hidden="true"><span>0</span></span></div>
-    </section>
-    <div class="colon" aria-hidden="true">:</div>
-    <section class="pair" aria-label="Minutes">
-      <div class="digit"><span class="number">0</span><span class="flap" aria-hidden="true"><span>0</span></span></div>
-      <div class="digit"><span class="number">0</span><span class="flap" aria-hidden="true"><span>0</span></span></div>
-    </section>
-  </main>
+<div class="clock">
+  <div class="time">
+    <div class="pair" id="hours"></div>
+    <div class="colon">:</div>
+    <div class="pair" id="minutes"></div>
+    <div class="ampm" id="ampm"></div>
+  </div>
+</div>
 
-  <script>
-    const clock = document.querySelector('.clock');
-    const digits = [...document.querySelectorAll('.digit')];
-    let shown = '';
+<script>
+function createFlipDigit(initial, mini=false) {
+  const root = document.createElement('div');
+  root.className = 'flip' + (mini ? ' mini' : '');
+  root.dataset.value = initial;
+  root.innerHTML = `
+    <div class="card">
+      <div class="half top static-top"><div class="digit">${initial}</div></div>
+      <div class="half bottom static-bottom"><div class="digit">${initial}</div></div>
+      <div class="flap top flip-top"><div class="digit">${initial}</div></div>
+      <div class="flap bottom flip-bottom"><div class="digit">${initial}</div></div>
+      <div class="divider"></div>
+      <div class="hinge left"></div>
+      <div class="hinge right"></div>
+    </div>`;
+  return root;
+}
 
-    function updateClock() {
-      const now = new Date();
-      const next = String(now.getHours()).padStart(2, '0') + String(now.getMinutes()).padStart(2, '0');
+function setDigit(el, next) {
+  const current = el.dataset.value;
+  if (current === next) return;
 
-      digits.forEach((digit, index) => {
-        const number = digit.querySelector('.number');
-        const flapNumber = digit.querySelector('.flap span');
-        if (shown && shown[index] !== next[index]) {
-          flapNumber.textContent = shown[index];
-          digit.classList.remove('flip');
-          void digit.offsetWidth;
-          digit.classList.add('flip');
-          setTimeout(() => { number.textContent = next[index]; }, 310);
-        } else {
-          number.textContent = next[index];
-          flapNumber.textContent = next[index];
-        }
-      });
+  const staticTop = el.querySelector('.static-top .digit');
+  const staticBottom = el.querySelector('.static-bottom .digit');
+  const flipTop = el.querySelector('.flip-top .digit');
+  const flipBottom = el.querySelector('.flip-bottom .digit');
 
-      shown = next;
-      clock.setAttribute('aria-label', `Current time ${now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`);
-    }
+  flipTop.textContent = current;
+  flipBottom.textContent = next;
+  staticTop.textContent = next;
+  staticBottom.textContent = current;
 
-    updateClock();
-    setInterval(updateClock, 1000);
-  </script>
+  el.classList.remove('animating');
+  void el.offsetWidth;
+  el.classList.add('animating');
+
+  setTimeout(() => {
+    staticBottom.textContent = next;
+    flipTop.textContent = next;
+    el.dataset.value = next;
+    el.classList.remove('animating');
+  }, 590);
+}
+
+function makeGroup(container, count, mini=false) {
+  const els = [];
+  for (let i=0; i<count; i++) {
+    const e = createFlipDigit('0', mini);
+    container.appendChild(e);
+    els.push(e);
+  }
+  return els;
+}
+
+const hourEls = makeGroup(document.getElementById('hours'), 2);
+const minuteEls = makeGroup(document.getElementById('minutes'), 2);
+
+function updateClock() {
+  const now = new Date();
+  let h = now.getHours();
+  const ampm = h >= 12 ? 'PM' : 'AM';
+  h = h % 12 || 12;
+  const m = now.getMinutes();
+
+  const hh = String(h).padStart(2, '0');
+  const mm = String(m).padStart(2, '0');
+
+  setDigit(hourEls[0], hh[0]);
+  setDigit(hourEls[1], hh[1]);
+  setDigit(minuteEls[0], mm[0]);
+  setDigit(minuteEls[1], mm[1]);
+  document.getElementById('ampm').textContent = ampm;
+}
+
+updateClock();
+setInterval(updateClock, 250);
+</script>
 </body>
 </html>
