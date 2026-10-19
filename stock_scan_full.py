@@ -19,7 +19,7 @@ WATCHLIST = [
     "HOOD", "INTC", "JNJ", "JPM", "KO", "LMT", "MA", "MCD", "META", "MRK",
     "MRVL", "MSFT", "MU", "NBIS", "NFLX", "NOC", "NVDA", "ORCL", "OXY", "PYPL",
     "QQQ", "RTX", "SHEL", "SHW", "SKHY", "SNDK", "SNOW", "SPCX", "SPY", "STX",
-    "TRV", "TSLA", "UNH", "V", "WDC", "XOM"
+    "TRV", "TSLA", "UNH", "V", "WDC", "XOM", "SMH"
 ]
 
 HISTORY_PERIOD = "5y"
