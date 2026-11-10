@@ -20,6 +20,7 @@ set WATCHLIST {
 set HISTORY_RANGE 5y
 set MAX_RECOVERY_DAYS 40
 set MIN_ANALOGS 3
+set MIN_DIFF_PERCENT 7.0
 
 proc require_command n {
     if {[auto_execok $n] eq ""} {error "Required command not found: $n"}
@@ -119,23 +120,23 @@ proc estimate_recovery rows {
 proc money v {format "\$%.2f" $v}
 proc result_values r {
     set e [dict get $r Estimate]
-    if {$e eq ""} {
-	return [list [dict get $r Signal] [dict get $r Ticker] [money [dict get $r Current]] N/A N/A 0 LOW N/A N/A]
-    }
-    return [list [dict get $r Signal] [dict get $r Ticker] [money [dict get $r Current]] \
-		"[dict get $e weeks] week(s)" "[dict get $e probability]%" [dict get $e analogs] \
-		[dict get $e confidence] "[format %.1f [dict get $e drawdown]]%" [money [dict get $e target]]]
+    set base [list [dict get $r Signal] [dict get $r Ticker] [money [dict get $r Current]] \
+        [money [dict get $r Reference]] [format "%.2f%%" [dict get $r Diff]]]
+    if {$e eq ""} {return [concat $base [list N/A N/A 0 LOW N/A N/A]]}
+    return [concat $base [list "[dict get $e weeks] wk" "[dict get $e probability]%" \
+        [dict get $e analogs] [dict get $e confidence] \
+        "[format %.1f [dict get $e drawdown]]%" [money [dict get $e target]]]]
 }
 proc compare_results {a b} {
-    set oa [expr {[dict get $a Signal] eq "WEEK BUY"?0:1}]
-    set ob [expr {[dict get $b Signal] eq "WEEK BUY"?0:1}]
-    if {$oa!=$ob} {return [expr {$oa<$ob?-1:1}]}
-    string compare [dict get $a Ticker] [dict get $b Ticker]
+    set da [dict get $a Diff]; set db [dict get $b Diff]
+    if {$da > $db} {return -1}
+    if {$da < $db} {return 1}
+    return [string compare [dict get $a Ticker] [dict get $b Ticker]]
 }
 proc print_results rows {
     if {![llength $rows]} {puts "NOTHING TO REPORT!"; return}
-    set fmt "%-9s %-7s %9s %-9s %11s %7s %-10s %9s %9s"
-    puts ""; puts [format $fmt Signal Ticker Current Recovery Probability Analogs Confidence Drawdown Target]
+    set fmt "%-9s %-7s %10s %10s %8s %-9s %11s %7s %-10s %9s %9s"
+    puts ""; puts [format $fmt Signal Ticker Current Reference Diff Recovery Probability Analogs Confidence Drawdown Target]
     foreach r $rows {puts [format $fmt {*}[result_values $r]]}
     puts ""
 }
@@ -149,16 +150,16 @@ proc pdf_text {x y size s {bold 0}} {
 proc pdf_page {rows page pages generated} {
     set s "0.09 0.20 0.30 rg\n"
     append s [pdf_text 30 570 18 "Stock Pullback and Recovery Report" 1]
-    append s "0.33 0.39 0.45 rg\n" [pdf_text 30 550 8 "Generated $generated | Recovery target: prior 20-session high | History: 5 years"]
-    set cols {{Signal 30} {Ticker 102} {Current 150} {Recovery 218} {8-Week-Prob 296} {Analogs 386} {Confidence 438} {Drawdown 514} {Target 584}}
-    append s "0.09 0.20 0.30 rg 30 508 624 26 re f\n"
+    append s "0.33 0.39 0.45 rg\n" [pdf_text 30 550 8 "Generated $generated | Diff >= $::MIN_DIFF_PERCENT% vs previous week/month low | Recovery: 20-session high"]
+    set cols {{Signal 20} {Ticker 82} {Current 128} {Reference 194} {Diff 265} {Recovery 318} {Prob 386} {Analogs 450} {Confidence 495} {Drawdown 567} {Target 635}}
+    append s "0.09 0.20 0.30 rg 20 508 752 26 re f\n"
     foreach col $cols {lassign $col label x; append s "1 1 1 rg\n" [pdf_text [expr {$x+4}] 518 7.5 $label 1]}
     set y 486; set i 0
     foreach r $rows {
-	if {$i%2} {append s "0.95 0.97 0.98 rg 30 [expr {$y-7}] 624 22 re f\n"}
+	if {$i%2} {append s "0.95 0.97 0.98 rg 20 [expr {$y-7}] 752 22 re f\n"}
 	append s "0.12 0.16 0.20 rg\n"
 	foreach col $cols val [result_values $r] {lassign $col label x; append s [pdf_text [expr {$x+4}] $y 7.5 $val]}
-	append s "0.72 0.76 0.80 RG 0.4 w 30 [expr {$y-8}] m 654 [expr {$y-8}] l S\n"
+	append s "0.72 0.76 0.80 RG 0.4 w 20 [expr {$y-8}] m 772 [expr {$y-8}] l S\n"
 	incr y -22; incr i
     }
     append s "0.33 0.39 0.45 rg\n" [pdf_text 30 36 7 "Historical estimates are informational and are not guarantees or investment advice."]
@@ -211,12 +212,15 @@ proc analyze_symbol symbol {
     set wk [previous_key $rows week_key]; set mk [previous_key $rows month_key]
     set wl [expr {$wk eq "" ? "" : [keyed_low $rows week_key $wk]}]
     set ml [expr {$mk eq "" ? "" : [keyed_low $rows month_key $mk]}]
-    set wb [expr {$wl ne "" && $current<$wl}]; set mb [expr {$ml ne "" && $current<$ml}]
-    if {!$wb && !$mb} {return {}}
-    set e [estimate_recovery $rows]
     set found {}
-    if {$wb} {lappend found [dict create Signal "WEEK BUY" Ticker $symbol Current $current Estimate $e]}
-    if {$mb} {lappend found [dict create Signal "MONTH BUY" Ticker $symbol Current $current Estimate $e]}
+    foreach {signal reference} [list "WEEK BUY" $wl "MONTH BUY" $ml] {
+        if {$reference eq "" || $reference <= 0 || $current >= $reference} continue
+        set diff [expr {100.0*($reference-$current)/$reference}]
+        if {$diff < $::MIN_DIFF_PERCENT} continue
+        set e [estimate_recovery $rows]
+        lappend found [dict create Signal $signal Ticker $symbol Current $current \
+            Reference $reference Diff $diff Estimate $e]
+    }
     return $found
 }
 
@@ -228,6 +232,7 @@ foreach symbol $WATCHLIST {
 	lappend results {*}$found
     }
 }
+
 set results [lsort -command compare_results $results]
 print_results $results
 puts "PDF CREATED: [create_pdf $results]"

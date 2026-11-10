@@ -1,272 +1,238 @@
 #!/usr/bin/env tclsh
 
-# MY-STOCK-TASKS
-# Requires: Tcl 8.6+, curl, and jq.
+# Tcl 8.6+, curl and jq. PDF generation is built in.
+
+
+# AAPL ABNB ADI AFRM ALAB AMAT AMD AMGN AMZN ARM ASML AVGO AXP BA BKR BLK
+# CAT COIN COP COST CRWD CSCO CSX CVX DDOG DXCM FANG FTNT GD GOOG GOOGL GS
+# HD HON HOOD INTC JNJ JPM KLAC KO LITE LMT LRCX MA MCD META MMM MPWR MRK
+# MRVL MSFT MU NBIS NFLX NOC NVDA ORCL OXY PANW PYPL QQQ RTX SHEL SHW SKHY
+# SNDK SNOW SPCX SPY STX TER TRV TSLA TXN UNH V WDC XOM SMH
 
 set WATCHLIST {
-    AAPL ABNB ADI AFRM ALAB AMAT AMD AMGN AMZN ARM
-    ASML AVGO AXP BA BKR BLK CAT COIN COP COST
-    CRWD CSCO CSX CVX DDOG DXCM FANG FTNT GD GOOG
-    GOOGL GS HD HON HOOD INTC JNJ JPM KLAC KO
-    LITE LMT LRCX MA MCD META MMM MPWR MRK MRVL
-    MSFT MU NBIS NFLX NOC NVDA ORCL OXY PANW PYPL
-    QQQ RTX SHEL SHW SKHY SNDK SNOW SPCX SPY STX
-    TER TRV TSLA TXN UNH V WDC XOM
+    AAPL ABBV ABNB ADI AFRM ALAB AMAT AMD AMGN AMZN ARM ASML AVGO AXP BA BAC BKR BLK CAT COIN
+    COP COST CRWD CSCO CSX CVX DDOG DELL DXCM FANG FTNT GD GE GOOG GS HD HON HOOD IBM
+    INTC JNJ JPM KLAC KO LIN LITE LLY LMT LRCX MA MCD META MMM MPWR MRK MRVL MS MSFT MU
+    NBIS NFLX NOC NVDA ORCL OXY PANW PG PLTR PM PYPL QQQ RTX SHEL SHW SKHY SMH SNDK SNOW SPCX
+    SPY STX TER TMO TRV TSLA TXN UNH V WDC WFC WMT XOM
 }
 
-set MIN_DIFF_PERCENT 2.0
+set HISTORY_RANGE 5y
+set MAX_RECOVERY_DAYS 40
+set MIN_ANALOGS 3
+set MIN_DIFF_PERCENT 7.0
 
-proc require_command {name} {
-    if {[auto_execok $name] eq ""} {
-        error "Required command not found: $name"
-    }
+proc require_command n {
+    if {[auto_execok $n] eq ""} {error "Required command not found: $n"}
 }
-
-proc yahoo_rows {symbol} {
-    set encoded [string map {% %25 ^ %5E / %2F = %3D & %26 ? %3F " " %20} $symbol]
-    set url "https://query1.finance.yahoo.com/v8/finance/chart/${encoded}?range=4mo&interval=1d&events=history&includeAdjustedClose=false"
-
-    set json [exec curl \
-          --fail \
-          --silent \
-          --show-error \
-          --location \
-          --retry 3 \
-          --connect-timeout 15 \
-          --max-time 45 \
-          --user-agent "Mozilla/5.0 MY-STOCK-TASKS/1.0" \
-          $url]
-
-    set jq_filter {
-        .chart.result[0] as $r
-        | if $r == null then empty else
-    [range(0; ($r.timestamp | length))
-     | {
-         timestamp: $r.timestamp[.],
-         low: $r.indicators.quote[0].low[.],
-         close: $r.indicators.quote[0].close[.]
-     }
-     | select(.timestamp != null and .low != null and .close != null)
-     | [.timestamp, .low, .close]
-     | @tsv]
-    | .[]
-    end
+proc yahoo_rows s {
+    set e [string map {% %25 ^ %5E / %2F " " %20} $s]
+    set u "https://query1.finance.yahoo.com/v8/finance/chart/${e}?range=$::HISTORY_RANGE&interval=1d&events=history&includeAdjustedClose=true"
+    set j [exec curl --fail --silent --show-error --location --retry 3 --connect-timeout 15 --max-time 45 --user-agent "Mozilla/5.0 MY-STOCK-TASKS/2.0" $u]
+    set f {
+	.chart.result[0] as $r | if $r == null then empty else
+	($r.indicators.quote[0]) as $q |
+	($r.indicators.adjclose[0].adjclose // $q.close) as $a |
+	[range(0;($r.timestamp|length)) |
+	 {t:$r.timestamp[.],l:$q.low[.],c:$q.close[.],a:$a[.]} |
+	 select(.t!=null and .l!=null and .c!=null and .a!=null and .c!=0) |
+	 [.t,(.l*(.a/.c)),.a] | @tsv] | .[] end
     }
-
-    set tsv [exec jq -r $jq_filter << $json]
-    set rows {}
-
-    foreach line [split [string trim $tsv] "\n"] {
-        if {$line eq ""} {
-            continue
-        }
-
-        lassign [split $line "\t"] timestamp low close
-        if {$timestamp eq "" || $low eq "" || $close eq ""} {
-            continue
-        }
-
-        lappend rows [dict create \
-              timestamp [expr {wide($timestamp)}] \
-              low [expr {double($low)}] \
-              close [expr {double($close)}]]
+    set out {}
+    foreach line [split [string trim [exec jq -r $f << $j]] "\n"] {
+	if {$line eq ""} continue
+	lassign [split $line "\t"] t l c
+	lappend out [dict create timestamp [expr {wide($t)}] low [expr {double($l)}] close [expr {double($c)}]]
     }
-
-    return $rows
+    return $out
 }
-
-proc week_key {timestamp} {
-    set weekday [clock format $timestamp -timezone America/New_York -format %u]
-    set monday [clock add $timestamp [expr {1 - $weekday}] days]
-    return [clock format $monday -timezone America/New_York -format %Y-%m-%d]
+proc week_key t {
+    set d [clock format $t -timezone America/New_York -format %u]
+    return [clock format [clock add $t [expr {1-$d}] days] -timezone America/New_York -format %Y-%m-%d]
 }
-
-proc month_key {timestamp} {
-    return [clock format $timestamp -timezone America/New_York -format %Y-%m]
-}
-
-proc minimum_low_for_key {rows key_proc target_key} {
-    set found 0
-    set minimum 0.0
-
-    foreach row $rows {
-        set timestamp [dict get $row timestamp]
-        if {[$key_proc $timestamp] ne $target_key} {
-            continue
-        }
-
-        set low [dict get $row low]
-        if {!$found || $low < $minimum} {
-            set minimum $low
-            set found 1
-        }
-    }
-
-    if {!$found} {
-        return ""
-    }
-
-    return $minimum
-}
-
-proc previous_completed_key {rows key_proc} {
-    if {[llength $rows] == 0} {
-        return ""
-    }
-
-    set latest_row [lindex $rows end]
-    set current_key [$key_proc [dict get $latest_row timestamp]]
+proc month_key t {clock format $t -timezone America/New_York -format %Y-%m}
+proc previous_key {rows keyproc} {
+    set cur [$keyproc [dict get [lindex $rows end] timestamp]]
     set keys {}
-
-    foreach row $rows {
-        set key [$key_proc [dict get $row timestamp]]
-        if {$key ne $current_key && [lsearch -exact $keys $key] < 0} {
-            lappend keys $key
-        }
+    foreach r $rows {
+	set k [$keyproc [dict get $r timestamp]]
+	if {$k ne $cur && [lsearch -exact $keys $k]<0} {lappend keys $k}
     }
-
-    if {[llength $keys] == 0} {
-        return ""
-    }
-
+    if {![llength $keys]} {return ""}
     return [lindex [lsort $keys] end]
 }
-
-proc signal_compare {a b} {
-    set order [dict create W 0 M 1]
-    set a_signal [dict get $a Buy]
-    set b_signal [dict get $b Buy]
-
-    set a_order [dict get $order $a_signal]
-    set b_order [dict get $order $b_signal]
-
-    if {$a_order < $b_order} {
-        return -1
+proc keyed_low {rows keyproc target} {
+    set found 0
+    foreach r $rows {
+	if {[$keyproc [dict get $r timestamp]] ne $target} continue
+	set v [dict get $r low]
+	if {!$found || $v<$low} {set low $v; set found 1}
     }
-    if {$a_order > $b_order} {
-        return 1
+    if {!$found} {return ""}
+    return $low
+}
+proc max_close {v a b} {
+    set m [lindex $v $a]
+    for {set i [expr {$a+1}]} {$i<=$b} {incr i} {
+	if {[lindex $v $i]>$m} {set m [lindex $v $i]}
     }
-
+    return $m
+}
+proc median v {
+    set v [lsort -real $v]; set n [llength $v]; set m [expr {$n/2}]
+    if {$n%2} {return [lindex $v $m]}
+    return [expr {([lindex $v [expr {$m-1}]]+[lindex $v $m])/2.0}]
+}
+proc estimate_recovery rows {
+    set n [llength $rows]
+    if {$n<100} {return ""}
+    set c {}
+    foreach r $rows {lappend c [dict get $r close]}
+    set h {}
+    for {set i 0} {$i<$n} {incr i} {lappend h [max_close $c [expr {max(0,$i-19)}] $i]}
+    set target [lindex $h end]; set current [lindex $c end]
+    set dd [expr {$current/$target-1.0}]
+    if {$dd>=0} {return [dict create weeks 1 probability 100 analogs 0 confidence N/A drawdown 0 target $target]}
+    set mag [expr {abs($dd)}]
+    set tol [expr {max(.015,$mag*.35)}]
+    set lo [expr {max(.01,$mag-$tol)}]; set hi [expr {$mag+$tol}]
+    set events 0; set recovered {}; set last [expr {-$::MAX_RECOVERY_DAYS}]
+    for {set i 20} {$i<$n-$::MAX_RECOVERY_DAYS-1} {incr i} {
+	set hd [expr {1.0-[lindex $c $i]/[lindex $h $i]}]
+	set pd [expr {1.0-[lindex $c [expr {$i-1}]]/[lindex $h [expr {$i-1}]]}]
+	if {$hd<$lo || $hd>$hi} continue
+	if {($pd>=$lo && $pd<=$hi)||$i-$last<$::MAX_RECOVERY_DAYS} continue
+	incr events; set last $i
+	for {set j [expr {$i+1}]} {$j<=min($n-1,$i+$::MAX_RECOVERY_DAYS)} {incr j} {
+	    if {[lindex $c $j]>=[lindex $h $i]} {lappend recovered [expr {$j-$i}]; break}
+	}
+    }
+    if {!$events} {return ""}
+    set p [expr {round(100.0*[llength $recovered]/$events)}]
+    if {[llength $recovered]} {
+	set w [expr {max(1,min(8,round([median $recovered]/5.0)))}]
+    } else {set w 8}
+    if {$events>=8 && $p>=65} {set conf HIGH
+    } elseif {$events>=$::MIN_ANALOGS && $p>=45} {set conf MEDIUM
+    } else {set conf LOW}
+    return [dict create weeks $w probability $p analogs $events confidence $conf drawdown [expr {$dd*100}] target $target]
+}
+proc money v {format "\$%.2f" $v}
+proc result_values r {
+    set e [dict get $r Estimate]
+    set base [list [dict get $r Signal] [dict get $r Ticker] [money [dict get $r Current]] \
+        [money [dict get $r Reference]] [format "%.2f%%" [dict get $r Diff]]]
+    if {$e eq ""} {return [concat $base [list N/A N/A 0 LOW N/A N/A]]}
+    return [concat $base [list "[dict get $e weeks] wk" "[dict get $e probability]%" \
+        [dict get $e analogs] [dict get $e confidence] \
+        "[format %.1f [dict get $e drawdown]]%" [money [dict get $e target]]]]
+}
+proc compare_results {a b} {
+    set da [dict get $a Diff]; set db [dict get $b Diff]
+    if {$da > $db} {return -1}
+    if {$da < $db} {return 1}
     return [string compare [dict get $a Ticker] [dict get $b Ticker]]
 }
-
-proc format_price {value} {
-    if {$value eq ""} {
-        return ""
-    }
-    return [format %.2f $value]
+proc print_results rows {
+    if {![llength $rows]} {puts "NOTHING TO REPORT!"; return}
+    set fmt "%-9s %-7s %10s %10s %8s %-9s %11s %7s %-10s %9s %9s"
+    puts ""; puts [format $fmt Signal Ticker Current Reference Diff Recovery Probability Analogs Confidence Drawdown Target]
+    foreach r $rows {puts [format $fmt {*}[result_values $r]]}
+    puts ""
 }
 
-proc percent_below {current reference} {
-    if {$reference eq "" || $reference <= 0} {
-        return 0.0
-    }
-    return [expr {(($reference - $current) / $reference) * 100.0}]
+# Small native PDF writer. Uses standard Helvetica fonts.
+proc pdf_escape s {string map [list "\\" "\\\\" "(" "\\(" ")" "\\)"] $s}
+proc pdf_text {x y size s {bold 0}} {
+    set f [expr {$bold?"F2":"F1"}]
+    format "BT /%s %.1f Tf %.1f %.1f Td (%s) Tj ET\n" $f $size $x $y [pdf_escape $s]
 }
-
-proc print_results {results} {
-    if {[llength $results] == 0} {
-        puts "NOTHING TO REPORT!"
-        return
+proc pdf_page {rows page pages generated} {
+    set s "0.09 0.20 0.30 rg\n"
+    append s [pdf_text 30 570 18 "Stock Pullback and Recovery Report" 1]
+    append s "0.33 0.39 0.45 rg\n" [pdf_text 30 550 8 "Generated $generated | Diff >= $::MIN_DIFF_PERCENT% vs previous week/month low | Recovery: 20-session high"]
+    set cols {{Signal 20} {Ticker 82} {Current 128} {Reference 194} {Diff 265} {Recovery 318} {Prob 386} {Analogs 450} {Confidence 495} {Drawdown 567} {Target 635}}
+    append s "0.09 0.20 0.30 rg 20 508 752 26 re f\n"
+    foreach col $cols {lassign $col label x; append s "1 1 1 rg\n" [pdf_text [expr {$x+4}] 518 7.5 $label 1]}
+    set y 486; set i 0
+    foreach r $rows {
+	if {$i%2} {append s "0.95 0.97 0.98 rg 20 [expr {$y-7}] 752 22 re f\n"}
+	append s "0.12 0.16 0.20 rg\n"
+	foreach col $cols val [result_values $r] {lassign $col label x; append s [pdf_text [expr {$x+4}] $y 7.5 $val]}
+	append s "0.72 0.76 0.80 RG 0.4 w 20 [expr {$y-8}] m 772 [expr {$y-8}] l S\n"
+	incr y -22; incr i
     }
-
-    set headers {Ticker Current Last-Week Last-Month Diff% Buy}
-    set widths [dict create Ticker 6 Current 7 Last-Week 9 Last-Month 10 Diff% 5 Buy 3]
-
-    foreach row $results {
-        foreach header $headers {
-            set value [dict get $row $header]
-            set length [string length $value]
-            if {$length > [dict get $widths $header]} {
-                dict set widths $header $length
-            }
-        }
+    append s "0.33 0.39 0.45 rg\n" [pdf_text 30 36 7 "Historical estimates are informational and are not guarantees or investment advice."]
+    append s [pdf_text 710 36 7 "Page $page of $pages"]
+    return $s
+}
+proc write_pdf {path streams} {
+    set n [llength $streams]; set kids {}
+    for {set i 0} {$i<$n} {incr i} {lappend kids "[expr {5+2*$i}] 0 R"}
+    set o [list "" "<< /Type /Catalog /Pages 2 0 R >>" "<< /Type /Pages /Count $n /Kids \[[join $kids " "]\] >>" \
+	       "<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>" "<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>"]
+    for {set i 0} {$i<$n} {incr i} {
+	set p [expr {5+2*$i}]; set c [expr {$p+1}]; set stream [lindex $streams $i]
+	lappend o "<< /Type /Page /Parent 2 0 R /MediaBox \[0 0 792 612\] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents $c 0 R >>"
+	lappend o "<< /Length [string bytelength $stream] >>\nstream\n${stream}endstream"
     }
-
-    set format_string [format "%%-%ds  %%%ds  %%%ds  %%%ds  %%%ds  %%-%ds" \
-               [dict get $widths Ticker] \
-               [dict get $widths Current] \
-               [dict get $widths Last-Week] \
-               [dict get $widths Last-Month] \
-               [dict get $widths Diff%] \
-               [dict get $widths Buy]]
-
-    puts ""
-    puts [format $format_string {*}$headers]
-
-    foreach row $results {
-        puts [format $format_string \
-          [dict get $row Ticker] \
-          [dict get $row Current] \
-          [dict get $row Last-Week] \
-          [dict get $row Last-Month] \
-          [dict get $row Diff%] \
-          [dict get $row Buy]]
+    set f [open $path wb]; fconfigure $f -translation binary -encoding binary
+    puts -nonewline $f "%PDF-1.4\n"; set offsets {0}
+    for {set i 1} {$i<[llength $o]} {incr i} {
+	lappend offsets [tell $f]; puts -nonewline $f "$i 0 obj\n[lindex $o $i]\nendobj\n"
     }
-    puts ""
+    set x [tell $f]; set count [llength $o]
+    puts -nonewline $f "xref\n0 $count\n0000000000 65535 f \n"
+    for {set i 1} {$i<$count} {incr i} {puts -nonewline $f [format "%010d 00000 n \n" [lindex $offsets $i]]}
+    puts -nonewline $f "trailer\n<< /Size $count /Root 1 0 R >>\nstartxref\n$x\n%%EOF\n"; close $f
+}
+proc create_pdf rows {
+    if {[info exists ::env(HOME)] && [file isdirectory [file join $::env(HOME) Downloads]]} {
+	set dir [file join $::env(HOME) Downloads]
+    } else {set dir [pwd]}
+    set stamp [clock format [clock seconds] -format %Y-%m-%d_%H%M%S]
+    set path [file join $dir "stock_scan_report_${stamp}.pdf"]
+    set per 18; set total [llength $rows]; set pages [expr {max(1,int(ceil($total/double($per))))}]
+    set streams {}; set generated [clock format [clock seconds] -format "%B %d, %Y at %I:%M %p"]
+    for {set p 0} {$p<$pages} {incr p} {
+	if {$total} {set part [lrange $rows [expr {$p*$per}] [expr {min($total-1,$p*$per+$per-1)}]]} else {set part {}}
+	lappend streams [pdf_page $part [expr {$p+1}] $pages $generated]
+    }
+    write_pdf $path $streams
+    return $path
 }
 
 require_command curl
 require_command jq
 
+proc analyze_symbol symbol {
+    set rows [yahoo_rows $symbol]
+    if {![llength $rows]} {return {}}
+    set current [dict get [lindex $rows end] close]
+    set wk [previous_key $rows week_key]; set mk [previous_key $rows month_key]
+    set wl [expr {$wk eq "" ? "" : [keyed_low $rows week_key $wk]}]
+    set ml [expr {$mk eq "" ? "" : [keyed_low $rows month_key $mk]}]
+    set found {}
+    foreach {signal reference} [list "WEEK BUY" $wl "MONTH BUY" $ml] {
+        if {$reference eq "" || $reference <= 0 || $current >= $reference} continue
+        set diff [expr {100.0*($reference-$current)/$reference}]
+        if {$diff < $::MIN_DIFF_PERCENT} continue
+        set e [estimate_recovery $rows]
+        lappend found [dict create Signal $signal Ticker $symbol Current $current \
+            Reference $reference Diff $diff Estimate $e]
+    }
+    return $found
+}
+
 set results {}
-
 foreach symbol $WATCHLIST {
-    if {[catch {
-        set rows [yahoo_rows $symbol]
-        if {[llength $rows] == 0} {
-            continue
-        }
-
-        set latest [lindex $rows end]
-        set current [dict get $latest close]
-
-        set previous_week [previous_completed_key $rows week_key]
-        set previous_month [previous_completed_key $rows month_key]
-
-        set week_low ""
-        if {$previous_week ne ""} {
-            set week_low [minimum_low_for_key $rows week_key $previous_week]
-        }
-
-        set month_low ""
-        if {$previous_month ne ""} {
-            set month_low [minimum_low_for_key $rows month_key $previous_month]
-        }
-
-        set week_buy [expr {$week_low ne "" && $current < $week_low}]
-        set month_buy [expr {$month_low ne "" && $current < $month_low}]
-
-        if {$month_buy} {
-            set buy M
-            set reference_price $month_low
-            set display_week ""
-            set display_month [format_price $month_low]
-        } elseif {$week_buy} {
-            set buy W
-            set reference_price $week_low
-            set display_week [format_price $week_low]
-            set display_month ""
-        } else {
-            continue
-        }
-
-        set diff_percent [percent_below $current $reference_price]
-        if {$diff_percent < $MIN_DIFF_PERCENT} {
-            continue
-        }
-
-        lappend results [dict create \
-                 Ticker $symbol \
-                 Current [format_price $current] \
-                 Last-Week $display_week \
-                 Last-Month $display_month \
-                 Diff% [format %.2f $diff_percent] \
-                 Buy $buy]
-    } error_message options]} {
-        #puts stderr "$symbol: $error_message"
+    if {[catch {set found [analyze_symbol $symbol]} msg opts]} {
+	puts stderr "$symbol: $msg"
+    } else {
+	lappend results {*}$found
     }
 }
 
-set results [lsort -command signal_compare $results]
+set results [lsort -command compare_results $results]
 print_results $results
+puts "PDF CREATED: [create_pdf $results]"
